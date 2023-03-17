@@ -1,0 +1,47 @@
+package com.develop.web.domain.auth.controller;
+
+import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.service.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    @Autowired
+    public AuthController(AuthService authService){
+        this.authService = authService;
+    }
+
+    @GetMapping("/signUp") // 회원가입 페이지로 이동
+    public String signUpForm() {
+        return "auth/signUpForm";
+    }
+
+    @PostMapping("/signUp")
+    public String signUp(AuthVo form) {
+        AuthVo authVo = new AuthVo(
+                form.getUserid(),
+                form.getUserPassword()
+        );
+
+        authService.SignUp(authVo);
+        return "redirect:/";
+    }
+
+    @PostMapping("/login")
+    public String login(AuthVo form) {
+        AuthVo authVo = new AuthVo(
+                form.getUserid(),
+                form.getUserPassword()
+        );
+        System.out.println(authService.login(authVo));
+        return "redirect:/";
+    }
+}

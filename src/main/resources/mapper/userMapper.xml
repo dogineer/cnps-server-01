@@ -3,12 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.develop.web.user.dao.UserDao">
+<mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
 
-    <insert id="insertUser" parameterType="UserDto">
+    <insert id="insertUser" parameterType="AuthVo">
         insert
-        into MEMBER(USERID, USERPASSWORD)
+        into user(USERID, USERPASSWORD)
         values (#{userid}, #{userPassword})
     </insert>
+    
+    <select id="selectByUser" resultType="AuthVo" parameterType="AuthVo">
+        SELECT userid, userpassword
+        FROM user
+        where userid = #{userid}
+    </select>
 
 </mapper>

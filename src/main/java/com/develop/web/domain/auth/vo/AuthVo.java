@@ -1,11 +1,11 @@
-package com.develop.web.user.dto;
+package com.develop.web.domain.auth.vo;
 
-public class UserDto {
+public class AuthVo {
 
     private String userid;
     private String userPassword;
 
-    public UserDto(String userid, String userPassword) {
+    public AuthVo(String userid, String userPassword) {
         this.userid = userid;
         this.userPassword = userPassword;
     }
@@ -28,6 +28,6 @@ public class UserDto {
 
     @Override
     public String toString() {
-        return "userid = " + userid + " userpassword = " + userPassword;
+        return "userid = " + userid + " / " + "userpassword = " + userPassword;
     }
 }
