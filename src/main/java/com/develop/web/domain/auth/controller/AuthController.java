@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(
@@ -42,9 +43,9 @@ public class AuthController {
                 form.getUserPassword()
         );
 
-        AuthVo vo = authDao.selectByUser(authVo);
+        Optional<AuthVo> vo = Optional.ofNullable(authDao.selectByUser(authVo));
 
-        if (authVo.getUserid().equals(vo.getUserid())){
+        if (vo.isPresent()){
             try {
                 ScriptUtils.alertAndBackPage(response, "아이디가 중복입니다.");
             } catch (IOException e) {
