@@ -23,12 +23,10 @@ import java.util.Optional;
 public class AuthController {
 
     private final AuthService authService;
-    private final AuthMapper authDao;
 
     @Autowired
     public AuthController(AuthService authService, AuthMapper authDao){
         this.authService = authService;
-        this.authDao = authDao;
     }
 
     @GetMapping("/signUp") // 회원가입 페이지로 이동
@@ -37,23 +35,13 @@ public class AuthController {
     }
 
     @PostMapping("/signUp/data")
-    public String signUp(AuthVo form, HttpServletResponse response, HttpServletRequest request) {
+    public String signUp(AuthVo form, HttpServletResponse response) {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getUserPassword()
         );
 
-        Optional<AuthVo> vo = Optional.ofNullable(authDao.selectByUser(authVo));
-
-        if (vo.isPresent()){
-            try {
-                ScriptUtils.alertAndBackPage(response, "아이디가 중복입니다.");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            authService.SignUp(authVo);
-        }
+        authService.SignUp(authVo, response);
         return "redirect:/";
     }
 
