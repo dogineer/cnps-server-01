@@ -8,5 +8,5 @@ import javax.servlet.http.HttpSession;
 public interface AuthService {
     void SignUp(AuthVo authVo, HttpServletResponse response);
 
-    AuthVo login(AuthVo authVo, HttpSession session);
+    boolean login(AuthVo authVo, HttpSession session) throws Exception;
 }

@@ -43,12 +43,16 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(AuthVo form, HttpSession session) {
+    public String login(AuthVo form, HttpSession session) throws Exception {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getUserPassword()
         );
-        System.out.println(authService.login(authVo, session));
+
+        if (authService.login(authVo, session)){
+            session.getAttribute("userid");
+            return "redirect:/home";
+        }
         return "redirect:/";
     }
 }

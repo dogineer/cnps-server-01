@@ -25,8 +25,9 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     @Override
-    public AuthVo login(AuthVo formUserData, HttpSession session) {
+    public boolean login(AuthVo formUserData, HttpSession session) throws Exception{
         System.out.println("\nAuthService - login");
+
 
         AuthVo dbUserData = authDao.selectByUser(formUserData); // db 조회하고 객체 담기
 
@@ -34,10 +35,11 @@ public class AuthServiceSessionImpl implements AuthService {
                 formUserData.getUserPassword(), dbUserData.getUserPassword());
 
         if (isSame) {
-            session.getAttribute(formUserData.getUserid());
+            session.setAttribute("userid",formUserData.getUserid());
+            return true;
         } else {
             System.out.println("다시 로그인해주세요.");
         }
-        return null;
+        return false;
     }
 }

@@ -32,6 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable() // post 방식으로 값을 전송할 때 token을 사용해야하는 보안 설정을 해제
             .authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
             .antMatchers("/", "/auth/signUp").permitAll()
             .antMatchers("/", "/auth/**").permitAll()
             .antMatchers("/", "/auth/create/token").permitAll()
