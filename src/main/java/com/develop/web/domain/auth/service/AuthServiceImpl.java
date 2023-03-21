@@ -36,9 +36,14 @@ public class AuthServiceImpl implements AuthService {
                 throw new RuntimeException(e);
             }
         } else {
-            String encodePassword = passwordEncoder.encode(authVo.getUserPassword());
-            authVo.setUserpassword(encodePassword);
-            authDao.insertUser(authVo);
+            try {
+                ScriptUtils.alertAndMovePage(response, "회원가입이 완료되었습니다", "../../");
+                String encodePassword = passwordEncoder.encode(authVo.getUserPassword());
+                authVo.setUserpassword(encodePassword);
+                authDao.insertUser(authVo);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
