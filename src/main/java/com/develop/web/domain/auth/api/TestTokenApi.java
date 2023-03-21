@@ -19,16 +19,16 @@ public class TestTokenApi {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-    @GetMapping("/create/token")
-    public Map<String, Object> createToken(
-            @RequestParam(value = "subject") String subject) {
-        String token = jwtTokenUtil.createToken(subject);
-
-        Map<String, Object> map = new LinkedHashMap<>();
-        map.put("result", token);
-        System.out.println("token = "+map);
-        return map;
-    }
+//    @GetMapping("/create/token")
+//    public Map<String, Object> createToken(
+//            @RequestParam(value = "subject") String subject) {
+//        String token = jwtTokenUtil.createToken(subject);
+//
+//        Map<String, Object> map = new LinkedHashMap<>();
+//        map.put("result", token);
+//        System.out.println("token = "+map);
+//        return map;
+//    }
 
     @GetMapping("/get/subject")
     public Map<String, Object> getSubject(@RequestParam(value = "token") String token) {

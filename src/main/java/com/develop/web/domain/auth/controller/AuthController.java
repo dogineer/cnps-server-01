@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(AuthVo form) {
+    public String login(AuthVo form, HttpServletResponse response) {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getUserPassword()

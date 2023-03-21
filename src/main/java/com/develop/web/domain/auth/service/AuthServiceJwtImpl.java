@@ -2,6 +2,7 @@ package com.develop.web.domain.auth.service;
 
 import com.develop.web.domain.auth.vo.AuthVo;
 import com.develop.web.domain.auth.mapper.AuthMapper;
+import com.develop.web.domain.utils.JwtTokenUtil;
 import com.develop.web.domain.utils.ScriptUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,18 +10,22 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceJwtImpl implements AuthService {
 
     private final AuthMapper authDao;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    public AuthServiceImpl(AuthMapper authDao, PasswordEncoder passwordEncoder) {
+    public AuthServiceJwtImpl(AuthMapper authDao, PasswordEncoder passwordEncoder, JwtTokenUtil jwtTokenUtil) {
         this.authDao = authDao;
         this.passwordEncoder = passwordEncoder;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     @Override
@@ -48,12 +53,22 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthVo login(AuthVo authVo) {
+    public AuthVo login(AuthVo formUserData) {
         System.out.println("\nAuthService - login");
 
-        AuthVo vo = authDao.selectByUser(authVo); // db 조회하고 객체 담기
+        AuthVo dbUserData = authDao.selectByUser(formUserData); // db 조회하고 객체 담기
 
-        boolean isSame = passwordEncoder.matches(authVo.getUserPassword(), vo.getUserPassword());
+        boolean isSame = passwordEncoder.matches(
+                formUserData.getUserPassword(), dbUserData.getUserPassword());
+
+        if (isSame) {
+            String token = jwtTokenUtil.createToken(formUserData);
+            Map<String, Object> map = new LinkedHashMap<>();
+            map.put("result", token);
+            System.out.println("token = "+ map);
+        } else {
+            System.out.println("다시 로그인해주세요.");
+        }
 
         return null;
     }
