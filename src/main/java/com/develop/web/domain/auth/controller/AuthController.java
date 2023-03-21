@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(
@@ -42,12 +43,12 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(AuthVo form, HttpServletResponse response) {
+    public String login(AuthVo form, HttpSession session) {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getUserPassword()
         );
-        System.out.println(authService.login(authVo));
+        System.out.println(authService.login(authVo, session));
         return "redirect:/";
     }
 }

@@ -14,21 +14,21 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 
-@Service
-public class AuthServiceJwtImpl implements AuthService {
+//@Service
+public class AuthServiceJwtImpl {
 
     private final AuthMapper authDao;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtil jwtTokenUtil;
 
-    @Autowired
+//    @Autowired
     public AuthServiceJwtImpl(AuthMapper authDao, PasswordEncoder passwordEncoder, JwtTokenUtil jwtTokenUtil) {
         this.authDao = authDao;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-    @Override
+//    @Override
     public void SignUp(AuthVo authVo, HttpServletResponse response) {
         System.out.println("\nAuthService - SignUp");
 
@@ -52,7 +52,7 @@ public class AuthServiceJwtImpl implements AuthService {
         }
     }
 
-    @Override
+//    @Override
     public AuthVo login(AuthVo formUserData) {
         System.out.println("\nAuthService - login");
 
