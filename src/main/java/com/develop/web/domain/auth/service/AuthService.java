@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public interface AuthService {
-    void SignUp(AuthVo authVo, HttpServletResponse response);
+    boolean SignUp(AuthVo authVo, HttpServletResponse response);
 
     boolean login(AuthVo authVo, HttpSession session) throws Exception;
 }

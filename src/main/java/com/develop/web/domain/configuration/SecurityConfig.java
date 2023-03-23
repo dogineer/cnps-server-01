@@ -2,10 +2,13 @@ package com.develop.web.domain.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 /**
  * Spring Security 사용을 위한 Configuration Class를 작성하기 위해서
@@ -30,14 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .csrf().disable() // post 방식으로 값을 전송할 때 token을 사용해야하는 보안 설정을 해제
+            .csrf()
+                .disable() // post 방식으로 값을 전송할 때 token을 사용해야하는 보안 설정을 해제
             .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-            .antMatchers("/", "/auth/signUp").permitAll()
-            .antMatchers("/", "/auth/**").permitAll()
-            .antMatchers("/", "/auth/create/token").permitAll()
-            .antMatchers("/", "/auth/get/subject").permitAll()
-            .antMatchers("/admin").hasRole("ADMIN") // '/admin'의 경우 ADMIN 권한이 있는 사용자만 접근이 가능
-            .anyRequest().authenticated();
+                .antMatchers("/", "/home").hasAnyRole("USER") // 인증된 사용자만 접근 (멤버)
+                .antMatchers("/", "/auth/**").permitAll() // 전체 접근 허용
+                .antMatchers("/admin").hasRole("ADMIN") // '/admin'의 경우 ADMIN 권한이 있는 사용자만 접근이 가능
+                .anyRequest()
+                .authenticated();
     }
 }
