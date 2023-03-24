@@ -3,21 +3,17 @@
 <body>
   <th:block th:if="${session.userInfo != null}">
     <h1>로그인 성공!</h1>
-    <span th:text="${session.userInfo.toString()}"></span>
-    <div class="header_columns">
-      <div class="header_columns_column">
-        <a th:href="@{join}">새 글 쓰기</a>
-      </div>
-      <div class="header_columns_column">
-        <a th:href="@{index}" th:text="${session['userInfo'].userid}">userId</a>
-      </div>
-      <div class="header_columns_column">
-        <form th:action="@{/auth/logout}" method="POST" sec:authorize="isAuthenticated()">
-          <button type="submit">로그아웃</button>
-        </form>
-      </div>
+        <span th:text="${session.userInfo.toString()}"></span>
+
+    <div>
+      <a th:href="@{join}">새 글 쓰기</a>
     </div>
 
+    <div>
+      <form th:action="@{/auth/logout}" method="POST" sec:authorize="isAuthenticated()">
+        <button type="submit">로그아웃</button>
+      </form>
+    </div>
   </th:block>
 </body>
 </html>
