@@ -1,6 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
-  <h1>로그인 성공!</h1>
+  <th:block th:if="${session.userInfo != null}">
+    <h1>로그인 성공!</h1>
+    <span th:text="${session.userInfo.toString()}"></span>
+    <div class="header_columns">
+      <div class="header_columns_column">
+        <a th:href="@{join}">새 글 쓰기</a>
+      </div>
+      <div class="header_columns_column">
+        <a th:href="@{index}" th:text="${session['userInfo'].userid}">userId</a>
+      </div>
+      <div class="header_columns_column">
+        <form th:action="@{/auth/logout}" method="POST" sec:authorize="isAuthenticated()">
+          <button type="submit">로그아웃</button>
+        </form>
+      </div>
+    </div>
+
+  </th:block>
 </body>
 </html>

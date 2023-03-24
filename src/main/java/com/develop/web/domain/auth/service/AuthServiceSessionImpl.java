@@ -5,7 +5,6 @@ import com.develop.web.domain.auth.vo.AuthVo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -15,11 +14,11 @@ import java.util.Optional;
 @Service
 public class AuthServiceSessionImpl implements AuthService {
 
-    private final AuthMapper authDao;
+    private final AuthMapper authMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthServiceSessionImpl(AuthMapper authDao, PasswordEncoder passwordEncoder) {
-        this.authDao = authDao;
+    public AuthServiceSessionImpl(AuthMapper authMapper, PasswordEncoder passwordEncoder) {
+        this.authMapper = authMapper;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -27,10 +26,10 @@ public class AuthServiceSessionImpl implements AuthService {
     * 회원가입 서비스
     * */
     @Override
-    public boolean SignUp(AuthVo authVo, HttpServletResponse response) {
+    public boolean SignUpService(AuthVo authVo) {
         System.out.println("\nAuthService - SignUp");
 
-        Optional<AuthVo> vo = Optional.ofNullable(authDao.selectByUser(authVo));
+        Optional<AuthVo> vo = Optional.ofNullable(authMapper.selectByUser(authVo));
 
         if (vo.isPresent()){
             System.out.println("아이디가 중복입니다.");
@@ -38,7 +37,7 @@ public class AuthServiceSessionImpl implements AuthService {
         } else {
             String encodePassword = passwordEncoder.encode(authVo.getUserPassword());
             authVo.setUserPassword(encodePassword);
-            authDao.insertUser(authVo);
+            authMapper.insertUser(authVo);
             System.out.println("회원가입이 완료되었습니다");
             return true;
         }
@@ -48,25 +47,30 @@ public class AuthServiceSessionImpl implements AuthService {
     * 로그인 서비스
     * */
     @Override
-    public boolean login(AuthVo formUserData, HttpSession session) throws Exception{
+    public boolean loginService(AuthVo formUserData, HttpSession session) throws Exception{
         System.out.println("\nAuthService - login\n");
 
-        AuthVo dbUserData = authDao.selectByUser(formUserData); // db 조회하고 객체 담기
+        AuthVo dbUserData = authMapper.selectByUser(formUserData); // db 조회하고 객체 담기
         System.out.println("db 조회하고 객체 담기 = " + dbUserData);
 
         boolean isSame = passwordEncoder.matches(
                 formUserData.getUserPassword(), dbUserData.getUserPassword());
 
-        System.out.println("암호화 일치 = " + isSame);
-
         if (isSame) {
-            session.setAttribute("userid", dbUserData.getUserid());
-            session.setAttribute("userpassword", dbUserData.getUserPassword());
-            session.setAttribute("role", dbUserData.getRole());
-            return true;
-        } else {
-            System.out.println("다시 로그인해주세요.");
-        }
+            session.setAttribute("userInfo", dbUserData);
+
+            String role = String.valueOf(dbUserData.getRole());
+        } else System.out.println("비밀번호가 일치하지 않습니다.");
+
         return isSame;
+    }
+
+    @Override
+    public String redirectPage(String url, HttpSession session){
+        if (session.getAttribute("userInfo") == null){
+            return "redirect:/";
+        }
+
+        return url;
     }
 }

@@ -1,10 +1,19 @@
 package com.develop.web.domain.home.controller;
 
+import com.develop.web.domain.auth.service.AuthServiceSessionImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
+    private final AuthServiceSessionImpl authService;
+
+    public HomeController(AuthServiceSessionImpl authService) {
+        this.authService = authService;
+    }
+
     /*
     * 최초 페이지
     * */
@@ -17,7 +26,9 @@ public class HomeController {
     * 홈화면 페이지
     * */
     @GetMapping("/home")
-    public String home() { return "home/home"; }
+    public String home(HttpSession session) {
+        return authService.redirectPage("home/home", session);
+    }
 
     /*
      * 회원가입 페이지

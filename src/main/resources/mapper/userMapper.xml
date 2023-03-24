@@ -16,5 +16,4 @@
         FROM user
         where userid = #{userid}
     </select>
-
 </mapper>
