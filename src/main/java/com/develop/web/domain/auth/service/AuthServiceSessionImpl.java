@@ -5,7 +5,6 @@ import com.develop.web.domain.auth.vo.AuthVo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 /*
@@ -62,14 +61,5 @@ public class AuthServiceSessionImpl implements AuthService {
         else {
             return null;
         }
-    }
-
-    @Override
-    public String redirectPage(String url, HttpSession session){
-        if (session.getAttribute("userid") == null){
-            return "redirect:/";
-        }
-
-        return url;
     }
 }

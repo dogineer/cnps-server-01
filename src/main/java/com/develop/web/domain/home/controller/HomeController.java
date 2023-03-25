@@ -27,7 +27,7 @@ public class HomeController {
     * */
     @GetMapping("/home")
     public String home(HttpSession session) {
-        return authService.redirectPage("home/home", session);
+        return redirectPage("home/home", session);
     }
 
     /*
@@ -36,5 +36,13 @@ public class HomeController {
     @GetMapping("/auth/signup")
     public String signUpForm() {
         return "auth/signup";
+    }
+
+    public String redirectPage(String url, HttpSession session){
+        if (session.getAttribute("userid") == null){
+            return "redirect:/";
+        }
+
+        return url;
     }
 }
