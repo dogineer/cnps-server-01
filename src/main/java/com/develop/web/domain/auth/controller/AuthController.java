@@ -59,7 +59,10 @@ public class AuthController {
 
         System.out.println("login form 데이터 가져오기 " + authVo);
 
-        if (authService.loginService(authVo, session)){
+        AuthVo authVoSerivce = authService.loginService(authVo);
+
+        if (authVoSerivce!= null){
+            session.setAttribute("userInfo", authVoSerivce);
             return "redirect:/home";
         } else {
             return "redirect:/";

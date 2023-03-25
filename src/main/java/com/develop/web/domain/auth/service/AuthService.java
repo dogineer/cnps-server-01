@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 public interface AuthService {
     boolean SignUpService(AuthVo authVo);
 
-    boolean loginService(AuthVo authVo, HttpSession session) throws Exception;
+    AuthVo loginService(AuthVo authVo) throws Exception;
 
     String redirectPage(String url, HttpSession session);
 }

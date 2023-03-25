@@ -47,7 +47,7 @@ public class AuthServiceSessionImpl implements AuthService {
     * 로그인 서비스
     * */
     @Override
-    public boolean loginService(AuthVo formUserData, HttpSession session) throws Exception{
+    public AuthVo loginService(AuthVo formUserData) throws Exception{
         System.out.println("\nAuthService - login\n");
 
         AuthVo dbUserData = authMapper.selectByUser(formUserData); // db 조회하고 객체 담기
@@ -57,12 +57,11 @@ public class AuthServiceSessionImpl implements AuthService {
                 formUserData.getUserPassword(), dbUserData.getUserPassword());
 
         if (isSame) {
-            session.setAttribute("userInfo", dbUserData);
-
-            String role = String.valueOf(dbUserData.getRole());
-        } else System.out.println("비밀번호가 일치하지 않습니다.");
-
-        return isSame;
+            return dbUserData;
+        }
+        else {
+            return null;
+        }
     }
 
     @Override
