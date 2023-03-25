@@ -66,7 +66,7 @@ public class AuthServiceSessionImpl implements AuthService {
 
     @Override
     public String redirectPage(String url, HttpSession session){
-        if (session.getAttribute("userInfo") == null){
+        if (session.getAttribute("userid") == null){
             return "redirect:/";
         }
 

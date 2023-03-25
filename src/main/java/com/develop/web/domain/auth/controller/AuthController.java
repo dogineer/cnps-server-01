@@ -62,7 +62,8 @@ public class AuthController {
         AuthVo authVoSerivce = authService.loginService(authVo);
 
         if (authVoSerivce!= null){
-            session.setAttribute("userInfo", authVoSerivce);
+            session.setAttribute("userid", authVoSerivce.getUserid());
+            session.setAttribute("role", authVoSerivce.getRole());
             return "redirect:/home";
         } else {
             return "redirect:/";

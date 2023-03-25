@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
 <body>
-  <th:block th:if="${session.userInfo != null}">
+  <th:block th:if="${session.userid != null}">
     <h1>로그인 성공!</h1>
-        <span th:text="${session.userInfo.toString()}"></span>
+        <span th:text="${session.userid}"></span>
+        <span th:text="${session.role}"></span>
 
     <div>
       <a th:href="@{join}">새 글 쓰기</a>
