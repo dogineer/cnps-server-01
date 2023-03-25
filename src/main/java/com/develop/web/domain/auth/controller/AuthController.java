@@ -29,7 +29,7 @@ public class AuthController {
     public ModelAndView signUp(AuthVo form) {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
-                form.getUserPassword(),
+                form.getPassword(),
                 form.getRole());
 
         ModelAndView mav = new ModelAndView();
@@ -54,7 +54,7 @@ public class AuthController {
     public String login(AuthVo form, Model model, HttpSession session) throws Exception {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
-                form.getUserPassword(),
+                form.getPassword(),
                 form.getRole());
 
         System.out.println("login form 데이터 가져오기 " + authVo);

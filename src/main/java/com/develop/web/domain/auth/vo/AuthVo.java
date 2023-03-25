@@ -3,12 +3,12 @@ package com.develop.web.domain.auth.vo;
 public class AuthVo {
 
     private String userid;
-    private String userPassword;
+    private String password;
     private Role role;
 
-    public AuthVo(String userid, String userPassword, Role role) {
+    public AuthVo(String userid, String password, Role role) {
         this.userid = userid;
-        this.userPassword = userPassword;
+        this.password = password;
         this.role = role;
     }
 
@@ -20,12 +20,12 @@ public class AuthVo {
         this.userid = userid;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Role getRole() {
@@ -38,6 +38,6 @@ public class AuthVo {
 
     @Override
     public String toString() {
-        return "userid = " + userid + " / " + "userPassword = " + userPassword + " / " + "role = " + role;
+        return "userid = " + userid + " / " + "password = " + password + " / " + "role = " + role;
     }
 }

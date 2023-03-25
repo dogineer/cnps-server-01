@@ -8,7 +8,7 @@
     <insert id="insertUser" parameterType="AuthVo">
         insert
         into user(USERID, USERPASSWORD, ROLE)
-        values (#{userid}, #{userPassword}, #{role})
+        values (#{userid}, #{password}, #{role})
     </insert>
     
     <select id="selectByUser" resultType="AuthVo" parameterType="AuthVo">

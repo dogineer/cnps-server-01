@@ -35,8 +35,8 @@ public class AuthServiceSessionImpl implements AuthService {
             System.out.println("아이디가 중복입니다.");
             return false;
         } else {
-            String encodePassword = passwordEncoder.encode(authVo.getUserPassword());
-            authVo.setUserPassword(encodePassword);
+            String encodePassword = passwordEncoder.encode(authVo.getPassword());
+            authVo.setPassword(encodePassword);
             authMapper.insertUser(authVo);
             System.out.println("회원가입이 완료되었습니다");
             return true;
@@ -54,7 +54,7 @@ public class AuthServiceSessionImpl implements AuthService {
         System.out.println("db 조회하고 객체 담기 = " + dbUserData);
 
         boolean isSame = passwordEncoder.matches(
-                formUserData.getUserPassword(), dbUserData.getUserPassword());
+                formUserData.getPassword(), dbUserData.getPassword());
 
         if (isSame) {
             return dbUserData;
