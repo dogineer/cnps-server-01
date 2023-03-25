@@ -3,11 +3,35 @@
 <body>
   <th:block th:if="${session.userid != null}">
     <h1>로그인 성공!</h1>
-        <span th:text="${session.userid}"></span>
-        <span th:text="${session.role}"></span>
+      <p>현재 로그인한 유저 정보</p>
+      <p th:text="${session.userid}"></p>
+      <p th:text="${session.role}"></p>
 
     <div>
-      <a th:href="@{join}">새 글 쓰기</a>
+      <p>글 작성하기</p>
+      <form action="/board/post" method="post">
+        <div class="form-group">
+          <label for="writer"></label>
+          <input hidden="hidden"
+                 type="text"
+                 id="writer"
+                 name= "writer"
+                 th:value="${session.userid}">
+
+          <label for="title">제목</label>
+          <input type="text"
+                 id="title"
+                 name= "title"
+                 placeholder="제목을 입력해주세요.">
+
+          <label for="content">내용</label>
+          <input type="text"
+                 id="content"
+                 name= "content"
+                 placeholder="내용을 입력해주세요.">
+        </div>
+        <button type="submit">등록</button>
+      </form>
     </div>
 
     <div>
