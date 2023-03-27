@@ -7,6 +7,26 @@
       <p th:text="${session.userid}"></p>
       <p th:text="${session.role}"></p>
 
+    <br>
+      <form action="/auth/changePassword" method="post">
+        <div class="form-group">
+          <label for="password">비밀번호</label>
+          <input type="password"
+                 id="password"
+                 name= "password"
+                 placeholder="현재 비밀번호를 입력하세요">
+
+          <label for="passwordChangeData">변경할 비밀번호</label>
+          <input type="password"
+                 id="passwordChangeData"
+                 name= "passwordChangeData"
+                 placeholder="변경할 비밀번호를 입력하세요">
+
+        </div>
+        <button type="submit">등록</button>
+      </form>
+    <br>
+
     <div>
       <p>글 작성하기</p>
       <form action="/board/post" method="post">

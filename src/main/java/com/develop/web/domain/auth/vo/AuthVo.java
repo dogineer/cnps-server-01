@@ -4,7 +4,22 @@ public class AuthVo {
 
     private String userid;
     private String password;
+    private String passwordChangeData;
     private Role role;
+
+    public AuthVo() {
+    }
+
+    public AuthVo(String password, String passwordChangeData) {
+        this.password = password;
+        this.passwordChangeData = passwordChangeData;
+    }
+
+    public AuthVo(String userid, String password, String passwordChangeData) {
+        this.userid = userid;
+        this.password = password;
+        this.passwordChangeData = passwordChangeData;
+    }
 
     public AuthVo(String userid, String password, Role role) {
         this.userid = userid;
@@ -28,6 +43,14 @@ public class AuthVo {
         this.password = password;
     }
 
+    public String getPasswordChangeData() {
+        return passwordChangeData;
+    }
+
+    public void setPasswordChangeData(String passwordChangeData) {
+        this.passwordChangeData = passwordChangeData;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -38,6 +61,6 @@ public class AuthVo {
 
     @Override
     public String toString() {
-        return "userid = " + userid + " / " + "password = " + password + " / " + "role = " + role;
+        return "userid = " + userid + " / " + "password = " + password + " / " + "role = " + role + " / " + "passwordChangeData = " + passwordChangeData;
     }
 }

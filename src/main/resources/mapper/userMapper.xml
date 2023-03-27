@@ -7,13 +7,17 @@
 
     <insert id="insertUser" parameterType="AuthVo">
         insert
-        into user(USERID, USERPASSWORD, ROLE)
+        into user(USERID, PASSWORD, ROLE)
         values (#{userid}, #{password}, #{role})
     </insert>
     
     <select id="selectByUser" resultType="AuthVo" parameterType="AuthVo">
-        SELECT userid, userpassword, role
+        SELECT userid, password, role
         FROM user
         where userid = #{userid}
     </select>
+
+    <update id="updateByUser" parameterType="AuthVo">
+        UPDATE USER SET PASSWORD = #{passwordChangeData} WHERE USERID = #{userid}
+    </update>
 </mapper>

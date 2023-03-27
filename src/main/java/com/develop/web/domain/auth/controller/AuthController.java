@@ -59,11 +59,36 @@ public class AuthController {
 
         System.out.println("login form 데이터 가져오기 " + authVo);
 
-        AuthVo authVoSerivce = authService.loginService(authVo);
+        boolean authVoSerivce = authService.loginService(authVo);
 
-        if (authVoSerivce!= null){
-            session.setAttribute("userid", authVoSerivce.getUserid());
-            session.setAttribute("role", authVoSerivce.getRole());
+        if (authVoSerivce){
+            session.setAttribute("userid", form.getUserid());
+            session.setAttribute("role", form.getRole());
+            return "redirect:/home";
+        } else {
+            return "redirect:/";
+        }
+    }
+
+    /*
+     * 비밀번호 변경
+     * */
+    @PostMapping("/changePassword")
+    public String changePassword(AuthVo form, Model model, HttpSession session) throws Exception {
+        AuthVo passwordData = new AuthVo(
+                (String) session.getAttribute("userid"),
+                form.getPassword(),
+                form.getPasswordChangeData()
+        );
+
+        System.out.println("changePassword form 데이터 가져오기 ");
+        System.out.println("현재 아이디 = " + passwordData.getUserid());
+        System.out.println("현재 비밀번호 = " + passwordData.getPassword());
+        System.out.println("변경할 비밀번호 = " + passwordData.getPasswordChangeData());
+
+        boolean changePasswordService = authService.changePassword(passwordData);
+
+        if (changePasswordService){
             return "redirect:/home";
         } else {
             return "redirect:/";

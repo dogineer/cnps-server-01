@@ -5,5 +5,7 @@ import com.develop.web.domain.auth.vo.AuthVo;
 public interface AuthService {
     boolean SignUpService(AuthVo authVo);
 
-    AuthVo loginService(AuthVo authVo) throws Exception;
+    boolean changePassword(AuthVo authVo);
+
+    boolean loginService(AuthVo authVo) throws Exception;
 }

@@ -11,4 +11,7 @@ public interface AuthMapper {
 
     /* 로그인 */
     AuthVo selectByUser(AuthVo authVo);
+
+    /* 비밀번호 변경*/
+    void updateByUser(AuthVo authVo);
 }
