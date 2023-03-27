@@ -39,6 +39,24 @@
         <button type="submit">로그아웃</button>
       </form>
     </div>
+
+    <div>
+      <p>현재 글 목록</p>
+      <table>
+        <tr>
+          <td>writer</td>
+          <td>writer</td>
+          <td>title</td>
+          <td>content</td>
+        </tr>
+        <tr th:each="item : ${boardList}">
+          <td th:text="${item.ID}">No</td>
+          <td th:text="${item.WRITER}">writer</td>
+          <td th:text="${item.TITLE}">title</td>
+          <td th:text="${item.CONTENT}">content</td>
+        </tr>
+      </table>
+    </div>
   </th:block>
 </body>
 </html>

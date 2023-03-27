@@ -32,4 +32,6 @@ public class BoardController {
         boardService.boardPost(boardVo);
         return "redirect:/home";
     }
+
+
 }

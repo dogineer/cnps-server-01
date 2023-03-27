@@ -10,4 +10,8 @@
         into BOARD(WRITER, TITLE, CONTENT)
         values (#{writer}, #{title}, #{content})
     </insert>
+
+    <select id="selectAllList" parameterType="BoardVo" resultType="map" >
+        SELECT * FROM BOARD
+    </select>
 </mapper>

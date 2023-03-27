@@ -4,6 +4,8 @@ import com.develop.web.domain.board.mapper.BoardMapper;
 import com.develop.web.domain.board.vo.BoardVo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BoardServiceImpl implements BoardService{
 
@@ -24,5 +26,14 @@ public class BoardServiceImpl implements BoardService{
         System.out.println("내용 " + boardVo.getContent());
 
         boardMapper.insertBoard(boardVo);
+    }
+
+    /*
+    * 글 목록 보기
+    * */
+    @Override
+    public List<BoardVo> listAll() throws Exception{
+
+        return boardMapper.selectAllList();
     }
 }
