@@ -1,11 +1,25 @@
 package com.develop.web.domain.auth.vo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
+
+@Getter
+@Setter
 public class AuthVo {
 
-    private String userid;
-    private String password;
-    private String passwordChangeData;
-    private Role role;
+    private String userid;              // 유저 아이디
+    private String password;            // 패스워드
+    private String verify_password;     // 패스워드 확인
+    private String passwordChangeData;  // 패스워드 변경
+    private Role role;                  // 역할
+
+    private String phone_number;        // 전화번호
+    private String email;               // 이메일
+    private String department;          // 부서
+    private String description;         // 신청 설명(사유)
+    private Date join_data;             // 가입 날짜
 
     public AuthVo() {
     }
@@ -25,42 +39,5 @@ public class AuthVo {
         this.userid = userid;
         this.password = password;
         this.role = role;
-    }
-
-    public String getUserid() {
-        return userid;
-    }
-
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordChangeData() {
-        return passwordChangeData;
-    }
-
-    public void setPasswordChangeData(String passwordChangeData) {
-        this.passwordChangeData = passwordChangeData;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "userid = " + userid + " / " + "password = " + password + " / " + "role = " + role + " / " + "passwordChangeData = " + passwordChangeData;
     }
 }
