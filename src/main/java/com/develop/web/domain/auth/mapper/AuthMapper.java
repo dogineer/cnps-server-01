@@ -3,6 +3,8 @@ package com.develop.web.domain.auth.mapper;
 import com.develop.web.domain.auth.vo.AuthVo;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface AuthMapper {
 
@@ -14,4 +16,6 @@ public interface AuthMapper {
 
     /* 비밀번호 변경*/
     void updateByUser(AuthVo authVo);
+
+    List<AuthVo> selectAllList();
 }

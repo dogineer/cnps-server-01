@@ -5,6 +5,7 @@ import com.develop.web.domain.auth.vo.AuthVo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /*
@@ -71,7 +72,7 @@ public class AuthServiceSessionImpl implements AuthService {
     * 로그인 서비스
     * */
     @Override
-    public boolean loginService(AuthVo formUserData) throws Exception{
+    public AuthVo loginService(AuthVo formUserData) throws Exception{
         System.out.println("\nAuthService - login\n");
 
         AuthVo dbUserData = authMapper.selectByUser(formUserData); // db 조회하고 객체 담기
@@ -80,6 +81,16 @@ public class AuthServiceSessionImpl implements AuthService {
         boolean isSame = passwordEncoder.matches(
                 formUserData.getPassword(), dbUserData.getPassword());
 
-        return isSame;
+        if(isSame){
+            return dbUserData;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<AuthVo> memberlistAll(){
+        return authMapper.selectAllList();
     }
 }
+

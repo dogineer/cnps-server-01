@@ -1,14 +1,13 @@
 package com.develop.web.domain.home.controller;
 
 import com.develop.web.domain.auth.service.AuthServiceSessionImpl;
+import com.develop.web.domain.auth.vo.Role;
 import com.develop.web.domain.board.service.BoardServiceImpl;
-import com.develop.web.domain.board.vo.BoardVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 public class HomeController {
@@ -52,5 +51,19 @@ public class HomeController {
         }
 
         return url;
+    }
+
+    /*
+     * 관리자 페이지
+     * */
+    @GetMapping("/Administrator")
+    public String Administrator(HttpSession session, Model model) throws Exception {
+        if (session.getAttribute("role") == Role.Administrator){
+            model.addAttribute("UserList", authService.memberlistAll());
+            System.out.println(model.getAttribute("UserList"));
+
+            return redirectPage("auth/Administrator", session);
+        }
+        return "redirect:/";
     }
 }

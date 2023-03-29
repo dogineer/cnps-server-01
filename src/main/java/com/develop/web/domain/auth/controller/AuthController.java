@@ -2,6 +2,7 @@ package com.develop.web.domain.auth.controller;
 
 import com.develop.web.domain.auth.service.AuthService;
 import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -55,16 +56,24 @@ public class AuthController {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getPassword(),
-                form.getRole());
+                form.getRole()
+        );
 
         System.out.println("login form 데이터 가져오기 " + authVo);
 
-        boolean authVoSerivce = authService.loginService(authVo);
+        AuthVo dbUserData = authService.loginService(authVo);
 
-        if (authVoSerivce){
+        if (dbUserData != null){
             session.setAttribute("userid", form.getUserid());
-            session.setAttribute("role", form.getRole());
-            return "redirect:/home";
+            session.setAttribute("role", dbUserData.getRole());
+
+            if (Role.Administrator.equals(session.getAttribute("role"))){
+                System.out.println("관리자 로그인");
+                return "redirect:/Administrator";
+            } else {
+                System.out.println("일반 유저 로그인");
+                return "redirect:/home";
+            }
         } else {
             return "redirect:/";
         }

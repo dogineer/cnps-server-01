@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<th:block th:if="${session.role != 'Administrator'}">
+  <div class="container">
+    <h1>관리자 페이지</h1>
+
+    <p>현재 로그인한 관리자 정보</p>
+    <p th:text="${session.userid}"></p>
+
+    <div>
+      <form th:action="@{/auth/logout}" method="POST" sec:authorize="isAuthenticated()">
+        <button type="submit">로그아웃</button>
+      </form>
+    </div>
+
+    <div>
+      <p>현재 글 목록</p>
+      <table>
+        <tr>
+          <td>No</td>
+          <td>userid</td>
+          <td>role</td>
+          <td>ACCESS</td>
+        </tr>
+        <tr th:each="item : ${UserList}">
+          <td th:text="${item.ID}">id</td>
+          <td th:text="${item.USERID}">userid</td>
+          <td th:text="${item.ROLE}">role</td>
+          <td th:text="${item.ACCESS}">access</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</th:block>
+</body>
+</html>

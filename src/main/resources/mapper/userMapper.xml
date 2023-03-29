@@ -20,4 +20,8 @@
     <update id="updateByUser" parameterType="AuthVo">
         UPDATE USER SET PASSWORD = #{passwordChangeData} WHERE USERID = #{userid}
     </update>
+
+    <select id="selectAllList" parameterType="AuthVo" resultType="map" >
+        SELECT * FROM USER
+    </select>
 </mapper>
