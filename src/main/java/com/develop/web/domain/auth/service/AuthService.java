@@ -12,4 +12,6 @@ public interface AuthService {
     AuthVo loginService(AuthVo authVo) throws Exception;
 
     List<AuthVo> memberlistAll();
+
+    void accessCheck(AuthVo vo);
 }

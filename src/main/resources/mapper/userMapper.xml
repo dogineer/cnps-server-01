@@ -12,7 +12,7 @@
     </insert>
     
     <select id="selectByUser" resultType="AuthVo" parameterType="AuthVo">
-        SELECT userid, password, role
+        SELECT userid, password, role, access
         FROM user
         where userid = #{userid}
     </select>
@@ -24,4 +24,8 @@
     <select id="selectAllList" parameterType="AuthVo" resultType="map" >
         SELECT * FROM USER
     </select>
+
+    <update id="updateByAccess" parameterType="AuthVo">
+        UPDATE USER SET ACCESS = #{access} WHERE USERID = #{userid}
+    </update>
 </mapper>

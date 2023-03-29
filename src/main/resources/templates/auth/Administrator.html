@@ -5,7 +5,7 @@
   <div class="container">
     <h1>관리자 페이지</h1>
 
-    <p>현재 로그인한 관리자 정보</p>
+    <p>현재 로그인한 관리 정보</p>
     <p th:text="${session.userid}"></p>
 
     <div>
@@ -22,12 +22,22 @@
           <td>userid</td>
           <td>role</td>
           <td>ACCESS</td>
+          <td></td>
         </tr>
         <tr th:each="item : ${UserList}">
-          <td th:text="${item.ID}">id</td>
-          <td th:text="${item.USERID}">userid</td>
-          <td th:text="${item.ROLE}">role</td>
-          <td th:text="${item.ACCESS}">access</td>
+          <form action="/auth/access" method="post">
+            <td th:text="${item.ID}">id</td>
+            <td th:text="${item.USERID}">userid</td>
+            <td th:text="${item.ROLE}">role</td>
+            <td th:text="${item.ACCESS}">access</td>
+            <input type="text"
+                   hidden="hidden"
+                   id="userid"
+                   name= "userid"
+                   th:value="${item.USERID}">
+            <label for="userid">아이디</label>
+            <td><button type="submit">승인</button></td>
+          </form>
         </tr>
       </table>
     </div>

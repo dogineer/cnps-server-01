@@ -21,7 +21,13 @@ public class AuthVo {
     private String description;         // 신청 설명(사유)
     private Date join_data;             // 가입 날짜
 
+    private Access access;         // 가입 승인 요청
+
     public AuthVo() {
+    }
+
+    public AuthVo(String userid) {
+        this.userid = userid;
     }
 
     public AuthVo(String password, String passwordChangeData) {

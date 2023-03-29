@@ -110,4 +110,16 @@ public class AuthController {
 
         return "redirect:/";
     }
+
+    /*
+     * 관리자 가입 승인
+     * */
+    @PostMapping("/access")
+    public String accessCheck(AuthVo form, Model model, HttpSession session) throws Exception {
+        AuthVo formUserData = new AuthVo(
+                form.getUserid());
+
+        authService.accessCheck(formUserData);
+        return "redirect:/Administrator";
+    }
 }

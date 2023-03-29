@@ -1,6 +1,7 @@
 package com.develop.web.domain.auth.service;
 
 import com.develop.web.domain.auth.mapper.AuthMapper;
+import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.AuthVo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -91,6 +92,16 @@ public class AuthServiceSessionImpl implements AuthService {
     @Override
     public List<AuthVo> memberlistAll(){
         return authMapper.selectAllList();
+    }
+
+    @Override
+    public void accessCheck(AuthVo formUserData){
+        System.out.println("\nAuthService - accessCheck\n");
+        AuthVo dbUserData = authMapper.selectByUser(formUserData);
+
+        dbUserData.setAccess(Access.allow);
+
+        authMapper.updateByAccess(dbUserData);
     }
 }
 
