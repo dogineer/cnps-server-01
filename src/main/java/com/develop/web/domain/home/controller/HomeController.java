@@ -1,6 +1,7 @@
 package com.develop.web.domain.home.controller;
 
 import com.develop.web.domain.auth.service.AuthServiceSessionImpl;
+import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.Role;
 import com.develop.web.domain.board.service.BoardServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -45,12 +46,22 @@ public class HomeController {
         return "auth/signup";
     }
 
+    /*
+    * 리다이렉션 페이지 컨트롤
+    * */
     public String redirectPage(String url, HttpSession session){
-        if (session.getAttribute("userid") == null){
-            return "redirect:/";
-        }
 
-        return url;
+        System.out.println("redirectPage run!");
+
+        boolean joinid = session.getAttribute("userid") == null;
+        boolean access = session.getAttribute("access") == Access.allow;
+
+        if (!joinid){
+            if (access){
+                return url;
+            }
+        }
+        return "redirect:/";
     }
 
     /*

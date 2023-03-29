@@ -1,6 +1,7 @@
 package com.develop.web.domain.auth.controller;
 
 import com.develop.web.domain.auth.service.AuthService;
+import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.AuthVo;
 import com.develop.web.domain.auth.vo.Role;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,7 @@ public class AuthController {
     * 로그인
     * */
     @PostMapping("/login")
-    public String login(AuthVo form, Model model, HttpSession session) throws Exception {
+    public ModelAndView login(AuthVo form, Model model, HttpSession session) throws Exception {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getPassword(),
@@ -63,20 +64,33 @@ public class AuthController {
 
         AuthVo dbUserData = authService.loginService(authVo);
 
+        ModelAndView mav = new ModelAndView();
+
         if (dbUserData != null){
             session.setAttribute("userid", form.getUserid());
             session.setAttribute("role", dbUserData.getRole());
+            session.setAttribute("access", dbUserData.getAccess());
+
+            boolean access = Access.allow.equals(session.getAttribute("access"));
 
             if (Role.Administrator.equals(session.getAttribute("role"))){
                 System.out.println("관리자 로그인");
-                return "redirect:/Administrator";
-            } else {
+                mav.addObject("data", "관리자 로그인");
+                mav.addObject("url", "/Administrator");
+                mav.setViewName("etc/message");
+            } else if (access){
                 System.out.println("일반 유저 로그인");
-                return "redirect:/home";
+                mav.addObject("data", "안녕히세요. " + session.getAttribute("userid") + "님");
+                mav.addObject("url", "/home");
+                mav.setViewName("etc/message");
+            } else {
+                System.out.println("승인되지 않은 유저");
+                mav.addObject("data", "승인되지 않은 아이디입니다. \n관리자에게 문의하세요.");
+                mav.addObject("url", "/");
+                mav.setViewName("etc/message");
             }
-        } else {
-            return "redirect:/";
         }
+        return mav;
     }
 
     /*
