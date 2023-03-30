@@ -14,7 +14,7 @@
       <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#ddssss"/><text x="35%" y="50%" fill="white" dy=".3em">A</text></svg>
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
-          <strong class="text-gray-dark" th:text="${session.userid}">@이름</strong>
+          <strong class="text-gray-dark" th:text="${session.name}">@이름</strong>
         </div>
         <span class="d-block" th:text="${session.userid}">@아이디</span>
       </div>
@@ -23,23 +23,47 @@
 
     <div class="my-3 p-3 bg-body rounded shadow-sm">
       <h6 class="border-bottom pb-2 mb-0">Users</h6>
-      <div th:each="item : ${UserList}" class="d-flex text-body-secondary pt-3">
-        <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text th:text="${item.ID}" x="36%" y="50%" fill="white" dy=".3em"></text></svg>
+      <div class="d-flex text-body-secondary pt-3">
         <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-          <div>
-              <div class="d-flex justify-content-between">
-                  <strong class="text-gray-dark" th:text="${item.ROLE}"></strong>
-                  <form th:if="${item.ACCESS} == 'deny'" action="/auth/access" method="post">
-                    <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
-                    <strong class="text-gray-dark" th:text="${item.ACCESS}"></strong>
-                    <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">승인</button>
-                  </form>
-                <form th:if="${item.ACCESS} == 'allow'" action="/auth/user/delete" method="post">
-                  <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
-                  <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">삭제</button>
-                </form>
-              </div>
-            <span class="d-block" th:text="${item.USERID}">@아이디</span>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm">
+              <thead>
+              <tr>
+                <th scope="col">넘버</th>
+                <th scope="col">이름</th>
+                <th scope="col">부서</th>
+                <th scope="col">권한</th>
+                <th scope="col">아이디</th>
+                <th scope="col">이메일</th>
+                <th scope="col">설명</th>
+                <th scope="col">가입날짜</th>
+                <th scope="col">요청</th>
+              </tr>
+              </thead>
+              <tbody th:each="item : ${UserList}">
+                <tr style="vertical-align: middle">
+                  <td><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text th:text="${item.ID}" x="36%" y="50%" fill="white" dy=".3em"></text></svg></td>
+                  <td th:text="${item.NAME}"></td>
+                  <td th:text="${item.DESCRIPTION}"></td>
+                  <td th:text="${item.ROLE}"></td>
+                  <td th:text="${item.USERID}"></td>
+                  <td th:text="${item.EMAIL}"></td>
+                  <td th:text="${item.DESCRIPTION}"></td>
+                  <td th:text="${item.JOIN_DATE}"></td>
+                  <td>
+                    <form th:if="${item.ACCESS} == 'deny'" action="/auth/access" method="post">
+                      <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
+                      <strong class="text-gray-dark" th:text="${item.ACCESS}"></strong>
+                      <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">승인</button>
+                    </form>
+                    <form th:if="${item.ACCESS} == 'allow'" action="/auth/user/delete" method="post">
+                      <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
+                      <button class="btn btn-warning rounded" style="font-size: smaller" type="submit">삭제</button>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

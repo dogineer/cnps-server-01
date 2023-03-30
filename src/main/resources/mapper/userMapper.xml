@@ -7,12 +7,12 @@
 
     <insert id="insertUser" parameterType="AuthVo">
         insert
-        into user(USERID, PASSWORD, ROLE)
-        values (#{userid}, #{password}, #{role})
+        into user(USERID, NAME, PHONE, EMAIL, DEPARTMENT, ROLE, DESCRIPTION, PASSWORD)
+        values (#{userid}, #{name}, #{phone}, #{email}, #{department}, #{role}, #{description}, #{password})
     </insert>
     
     <select id="selectByUser" resultType="AuthVo" parameterType="AuthVo">
-        SELECT userid, password, role, access
+        SELECT userid, name, password, role, access
         FROM user
         where userid = #{userid}
     </select>

@@ -32,7 +32,13 @@ public class AuthController {
         AuthVo authVo = new AuthVo(
                 form.getUserid(),
                 form.getPassword(),
-                form.getRole());
+                form.getName(),
+                form.getRole(),
+                form.getPhone(),
+                form.getEmail(),
+                form.getDepartment(),
+                form.getDescription()
+        );
 
         ModelAndView mav = new ModelAndView();
 
@@ -68,6 +74,7 @@ public class AuthController {
 
         if (dbUserData != null){
             session.setAttribute("userid", form.getUserid());
+            session.setAttribute("name", dbUserData.getName());
             session.setAttribute("role", dbUserData.getRole());
             session.setAttribute("access", dbUserData.getAccess());
 
