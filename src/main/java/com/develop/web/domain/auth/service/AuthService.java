@@ -14,4 +14,6 @@ public interface AuthService {
     List<AuthVo> memberlistAll();
 
     void accessCheck(AuthVo vo);
+
+    void deleteUser(AuthVo vo);
 }

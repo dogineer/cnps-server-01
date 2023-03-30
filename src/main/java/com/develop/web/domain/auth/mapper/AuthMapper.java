@@ -20,4 +20,6 @@ public interface AuthMapper {
     List<AuthVo> selectAllList();
 
     void updateByAccess(AuthVo vo);
+
+    void deleteByUser(AuthVo vo);
 }

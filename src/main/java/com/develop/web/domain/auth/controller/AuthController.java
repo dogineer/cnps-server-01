@@ -136,4 +136,16 @@ public class AuthController {
         authService.accessCheck(formUserData);
         return "redirect:/Administrator";
     }
+
+    /*
+     * 관리자 회원 삭제
+     * */
+    @PostMapping("/user/delete")
+    public String userDelete(AuthVo form, Model model, HttpSession session) throws Exception {
+        AuthVo formUserData = new AuthVo(
+                form.getUserid());
+
+        authService.deleteUser(formUserData);
+        return "redirect:/Administrator";
+    }
 }

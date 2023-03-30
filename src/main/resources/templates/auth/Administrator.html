@@ -34,6 +34,10 @@
                     <strong class="text-gray-dark" th:text="${item.ACCESS}"></strong>
                     <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">승인</button>
                   </form>
+                <form th:if="${item.ACCESS} == 'allow'" action="/auth/user/delete" method="post">
+                  <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
+                  <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">삭제</button>
+                </form>
               </div>
             <span class="d-block" th:text="${item.USERID}">@아이디</span>
           </div>
