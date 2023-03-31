@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class AuthVo {
+public class User {
 
     private String userid;              // 유저 아이디
     private String password;            // 패스워드
@@ -26,31 +26,31 @@ public class AuthVo {
 
     private Access access;         // 가입 승인 요청
 
-    public AuthVo() {
+    public User() {
     }
 
-    public AuthVo(String userid) {
+    public User(String userid) {
         this.userid = userid;
     }
 
-    public AuthVo(String password, String passwordChangeData) {
+    public User(String password, String passwordChangeData) {
         this.password = password;
         this.passwordChangeData = passwordChangeData;
     }
 
-    public AuthVo(String userid, String password, String passwordChangeData) {
+    public User(String userid, String password, String passwordChangeData) {
         this.userid = userid;
         this.password = password;
         this.passwordChangeData = passwordChangeData;
     }
 
-    public AuthVo(String userid, String password, Role role) {
+    public User(String userid, String password, Role role) {
         this.userid = userid;
         this.password = password;
         this.role = role;
     }
 
-    public AuthVo(String userid, String password, String name, Role role, String phone, String email, String department, String description) {
+    public User(String userid, String password, String name, Role role, String phone, String email, String department, String description) {
         this.userid = userid;
         this.password = password;
         this.name = name;

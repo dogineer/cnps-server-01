@@ -1,6 +1,6 @@
 package com.develop.web.domain.auth.mapper;
 
-import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -9,19 +9,19 @@ import java.util.List;
 public interface AuthMapper {
 
     /* 회원가입 */
-    void insertUser(AuthVo authVo);
+    void insertUser(User user);
 
     /* 로그인 */
-    AuthVo selectByUser(AuthVo authVo);
+    User selectByUser(User user);
 
-    AuthVo selectByUserid(String userid);
+    User selectByUserid(String userid);
 
     /* 비밀번호 변경*/
     void updatePassword(String chagepassword, String userid);
 
-    List<AuthVo> selectAllList();
+    List<User> selectAllList();
 
-    void updateByAccess(AuthVo vo);
+    void updateByAccess(User vo);
 
-    void deleteByUser(AuthVo vo);
+    void deleteByUser(User vo);
 }

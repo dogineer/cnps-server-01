@@ -2,7 +2,7 @@ package com.develop.web.domain.auth.service;
 
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.vo.Access;
-import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.User;
 import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,18 +28,18 @@ public class AuthServiceSessionImpl implements AuthService {
     * 회원가입 서비스
     * */
     @Override
-    public boolean SignUpService(AuthVo authVo) {
+    public boolean SignUpService(User user) {
         System.out.println("\nAuthService - SignUp");
 
-        Optional<AuthVo> vo = Optional.ofNullable(authMapper.selectByUser(authVo));
+        Optional<User> vo = Optional.ofNullable(authMapper.selectByUser(user));
 
         if (vo.isPresent()){
             System.out.println("아이디가 중복입니다.");
             return false;
         } else {
-            String encodePassword = passwordEncoder.encode(authVo.getPassword());
-            authVo.setPassword(encodePassword);
-            authMapper.insertUser(authVo);
+            String encodePassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodePassword);
+            authMapper.insertUser(user);
             System.out.println("회원가입이 완료되었습니다");
             return true;
         }
@@ -52,7 +52,7 @@ public class AuthServiceSessionImpl implements AuthService {
     public boolean changePassword(PasswordChangeRequest request, String userid) {
         System.out.println("\nAuthService - changePassword");
 
-        AuthVo dbUserData = authMapper.selectByUserid(userid);
+        User dbUserData = authMapper.selectByUserid(userid);
 
         boolean isSame = passwordEncoder.matches(
                 request.getPassword(), dbUserData.getPassword());
@@ -73,10 +73,10 @@ public class AuthServiceSessionImpl implements AuthService {
     * 로그인 서비스
     * */
     @Override
-    public AuthVo loginService(AuthVo formUserData) throws Exception{
+    public User loginService(User formUserData) throws Exception{
         System.out.println("\nAuthService - login\n");
 
-        AuthVo dbUserData = authMapper.selectByUser(formUserData); // db 조회하고 객체 담기
+        User dbUserData = authMapper.selectByUser(formUserData); // db 조회하고 객체 담기
         System.out.println("db 조회하고 객체 담기 = " + dbUserData);
 
         boolean isSame = passwordEncoder.matches(
@@ -90,14 +90,14 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     @Override
-    public List<AuthVo> memberlistAll(){
+    public List<User> memberlistAll(){
         return authMapper.selectAllList();
     }
 
     @Override
-    public void accessCheck(AuthVo formUserData){
+    public void accessCheck(User formUserData){
         System.out.println("\nAuthService - accessCheck\n");
-        AuthVo dbUserData = authMapper.selectByUser(formUserData);
+        User dbUserData = authMapper.selectByUser(formUserData);
 
         dbUserData.setAccess(Access.allow);
 
@@ -105,9 +105,9 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     @Override
-    public void deleteUser(AuthVo formUserData) {
+    public void deleteUser(User formUserData) {
         System.out.println("\nAuthService - deleteUser\n");
-        AuthVo dbUserData = authMapper.selectByUser(formUserData);
+        User dbUserData = authMapper.selectByUser(formUserData);
 
         dbUserData.setDelete_flag(1);
         authMapper.deleteByUser(dbUserData);

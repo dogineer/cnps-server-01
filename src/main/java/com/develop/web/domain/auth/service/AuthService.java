@@ -1,20 +1,20 @@
 package com.develop.web.domain.auth.service;
 
-import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.User;
 import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 
 import java.util.List;
 
 public interface AuthService {
-    boolean SignUpService(AuthVo authVo);
+    boolean SignUpService(User user);
 
     boolean changePassword(PasswordChangeRequest request, String userid);
 
-    AuthVo loginService(AuthVo authVo) throws Exception;
+    User loginService(User user) throws Exception;
 
-    List<AuthVo> memberlistAll();
+    List<User> memberlistAll();
 
-    void accessCheck(AuthVo vo);
+    void accessCheck(User vo);
 
-    void deleteUser(AuthVo vo);
+    void deleteUser(User vo);
 }

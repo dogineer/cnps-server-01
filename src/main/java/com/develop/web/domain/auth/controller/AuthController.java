@@ -2,7 +2,7 @@ package com.develop.web.domain.auth.controller;
 
 import com.develop.web.domain.auth.service.AuthService;
 import com.develop.web.domain.auth.vo.Access;
-import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.User;
 import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 import com.develop.web.domain.auth.vo.Role;
 import org.springframework.stereotype.Controller;
@@ -29,8 +29,8 @@ public class AuthController {
     * 회원가입 컨트롤러
     * */
     @PostMapping(value = "/signup")
-    public ModelAndView signUp(AuthVo form) {
-        AuthVo authVo = new AuthVo(
+    public ModelAndView signUp(User form) {
+        User user = new User(
                 form.getUserid(),
                 form.getPassword(),
                 form.getName(),
@@ -43,7 +43,7 @@ public class AuthController {
 
         ModelAndView mav = new ModelAndView();
 
-        if (authService.SignUpService(authVo)){
+        if (authService.SignUpService(user)){
             mav.addObject("data", "회원가입이 완료되었습니다.");
             mav.addObject("url", "/");
             mav.setViewName("etc/message");
@@ -60,16 +60,16 @@ public class AuthController {
     * 로그인
     * */
     @PostMapping("/login")
-    public ModelAndView login(AuthVo form, Model model, HttpSession session) throws Exception {
-        AuthVo authVo = new AuthVo(
+    public ModelAndView login(User form, Model model, HttpSession session) throws Exception {
+        User user = new User(
                 form.getUserid(),
                 form.getPassword(),
                 form.getRole()
         );
 
-        System.out.println("login form 데이터 가져오기 " + authVo);
+        System.out.println("login form 데이터 가져오기 " + user);
 
-        AuthVo dbUserData = authService.loginService(authVo);
+        User dbUserData = authService.loginService(user);
 
         ModelAndView mav = new ModelAndView();
 
@@ -127,8 +127,8 @@ public class AuthController {
      * 관리자 가입 승인
      * */
     @PostMapping("/access")
-    public String accessCheck(AuthVo form, Model model, HttpSession session) throws Exception {
-        AuthVo formUserData = new AuthVo(
+    public String accessCheck(User form, Model model, HttpSession session) throws Exception {
+        User formUserData = new User(
                 form.getUserid());
 
         authService.accessCheck(formUserData);
@@ -139,8 +139,8 @@ public class AuthController {
      * 관리자 회원 삭제
      * */
     @PostMapping("/user/delete")
-    public String userDelete(AuthVo form, Model model, HttpSession session) throws Exception {
-        AuthVo formUserData = new AuthVo(
+    public String userDelete(User form, Model model, HttpSession session) throws Exception {
+        User formUserData = new User(
                 form.getUserid());
 
         authService.deleteUser(formUserData);
