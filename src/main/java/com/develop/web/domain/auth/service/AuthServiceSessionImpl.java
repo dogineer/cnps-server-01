@@ -105,12 +105,10 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     @Override
-    public void deleteUser(User formUserData) {
+    public void deleteUser(String userid) {
         System.out.println("\nAuthService - deleteUser\n");
-        User dbUserData = authMapper.selectByUser(formUserData);
 
-        dbUserData.setDelete_flag(1);
-        authMapper.deleteByUser(dbUserData);
+        authMapper.deleteByUser(userid);
     }
 }
 

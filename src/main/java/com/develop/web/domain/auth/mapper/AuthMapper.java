@@ -23,5 +23,5 @@ public interface AuthMapper {
 
     void updateByAccess(User vo);
 
-    void deleteByUser(User vo);
+    void deleteByUser(String userid);
 }

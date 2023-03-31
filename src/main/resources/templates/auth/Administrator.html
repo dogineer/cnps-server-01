@@ -41,7 +41,7 @@
               </tr>
               </thead>
               <tbody th:each="item : ${UserList}">
-                <tr style="vertical-align: middle" th:if="${item.DELETE_FLAG} == '0'">
+                <tr style="vertical-align: middle">
                   <td><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text th:text="${item.ID}" x="36%" y="50%" fill="white" dy=".3em"></text></svg></td>
                   <td th:text="${item.NAME}"></td>
                   <td th:text="${item.DESCRIPTION}"></td>
@@ -56,8 +56,7 @@
                       <strong class="text-gray-dark" th:text="${item.ACCESS}"></strong>
                       <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">승인</button>
                     </form>
-                    <form th:if="${item.ACCESS} == 'allow'" action="/auth/user/delete" method="post">
-                      <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
+                    <form th:if="${item.ACCESS} == 'allow'" th:action="'/auth/user/delete/'+ ${item.USERID}" method="post">
                       <button class="btn btn-warning rounded" style="font-size: smaller" type="submit">삭제</button>
                     </form>
                   </td>

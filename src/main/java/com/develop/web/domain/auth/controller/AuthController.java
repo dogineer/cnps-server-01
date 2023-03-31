@@ -1,10 +1,7 @@
 package com.develop.web.domain.auth.controller;
 
 import com.develop.web.domain.auth.service.AuthService;
-import com.develop.web.domain.auth.vo.Access;
-import com.develop.web.domain.auth.vo.User;
-import com.develop.web.domain.auth.vo.PasswordChangeRequest;
-import com.develop.web.domain.auth.vo.Role;
+import com.develop.web.domain.auth.vo.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -138,12 +135,9 @@ public class AuthController {
     /*
      * 관리자 회원 삭제
      * */
-    @PostMapping("/user/delete")
-    public String userDelete(User form, Model model, HttpSession session) throws Exception {
-        User formUserData = new User(
-                form.getUserid());
-
-        authService.deleteUser(formUserData);
+    @PostMapping("/user/delete/{userid}")
+    public String userDelete(@PathVariable String userid) throws Exception {
+        authService.deleteUser(userid);
         return "redirect:/Administrator";
     }
 }

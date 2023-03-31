@@ -16,5 +16,5 @@ public interface AuthService {
 
     void accessCheck(User vo);
 
-    void deleteUser(User vo);
+    void deleteUser(String userid);
 }

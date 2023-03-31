@@ -5,19 +5,19 @@
 
 <mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
 
-    <insert id="insertUser" parameterType="AuthVo">
+    <insert id="insertUser" parameterType="User">
         insert
         into user(USERID, NAME, PHONE, EMAIL, DEPARTMENT, ROLE, DESCRIPTION, PASSWORD)
         values (#{userid}, #{name}, #{phone}, #{email}, #{department}, #{role}, #{description}, #{password})
     </insert>
     
-    <select id="selectByUser" resultType="AuthVo" parameterType="AuthVo">
+    <select id="selectByUser" resultType="User" parameterType="User">
         SELECT userid, name, password, role, access
         FROM user
         where userid = #{userid}
     </select>
 
-    <select id="selectByUserid" resultType="AuthVo" parameterType="String">
+    <select id="selectByUserid" resultType="User" parameterType="String">
         SELECT userid, name, phone, email, department, role, access, description, join_date as joinDate, password
         FROM user
         WHERE userid = #{userid}
@@ -27,15 +27,15 @@
         UPDATE USER SET PASSWORD = #{chagepassword} WHERE USERID = #{userid}
     </update>
 
-    <select id="selectAllList" parameterType="AuthVo" resultType="map" >
-        SELECT * FROM USER
+    <select id="selectAllList" parameterType="User" resultType="map" >
+        SELECT * FROM USER WHERE delete_flag = 0
     </select>
 
-    <update id="updateByAccess" parameterType="AuthVo">
+    <update id="updateByAccess" parameterType="User">
         UPDATE USER SET ACCESS = #{access} WHERE USERID = #{userid}
     </update>
 
-    <update id="deleteByUser" parameterType="AuthVo">
-        UPDATE USER SET DELETE_FLAG = #{delete_flag} WHERE USERID = #{userid}
+    <update id="deleteByUser" parameterType="String">
+        UPDATE USER SET DELETE_FLAG = 1 WHERE USERID = #{userid}
     </update>
 </mapper>
