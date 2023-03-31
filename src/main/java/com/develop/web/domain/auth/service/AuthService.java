@@ -1,13 +1,14 @@
 package com.develop.web.domain.auth.service;
 
 import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 
 import java.util.List;
 
 public interface AuthService {
     boolean SignUpService(AuthVo authVo);
 
-    boolean changePassword(AuthVo authVo);
+    boolean changePassword(PasswordChangeRequest request, String userid);
 
     AuthVo loginService(AuthVo authVo) throws Exception;
 

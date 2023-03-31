@@ -17,8 +17,14 @@
         where userid = #{userid}
     </select>
 
-    <update id="updateByUser" parameterType="AuthVo">
-        UPDATE USER SET PASSWORD = #{passwordChangeData} WHERE USERID = #{userid}
+    <select id="selectByUserid" resultType="AuthVo" parameterType="String">
+        SELECT userid, name, phone, email, department, role, access, description, join_date as joinDate, password
+        FROM user
+        WHERE userid = #{userid}
+    </select>
+
+    <update id="updatePassword" parameterType="String">
+        UPDATE USER SET PASSWORD = #{chagepassword} WHERE USERID = #{userid}
     </update>
 
     <select id="selectAllList" parameterType="AuthVo" resultType="map" >

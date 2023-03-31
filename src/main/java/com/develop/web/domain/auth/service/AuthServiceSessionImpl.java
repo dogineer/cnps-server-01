@@ -3,6 +3,7 @@ package com.develop.web.domain.auth.service;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,19 +49,18 @@ public class AuthServiceSessionImpl implements AuthService {
      * 비밀번호 변경 서비스
      * */
     @Override
-    public boolean changePassword(AuthVo formUserData) {
+    public boolean changePassword(PasswordChangeRequest request, String userid) {
         System.out.println("\nAuthService - changePassword");
 
-        AuthVo dbUserData = authMapper.selectByUser(formUserData);
+        AuthVo dbUserData = authMapper.selectByUserid(userid);
 
         boolean isSame = passwordEncoder.matches(
-                formUserData.getPassword(), dbUserData.getPassword());
+                request.getPassword(), dbUserData.getPassword());
 
         if (isSame) {
             System.out.println("비밀번호가 변경되었습니다.");
-            formUserData.setPasswordChangeData(passwordEncoder.encode(formUserData.getPasswordChangeData()));
-            System.out.println(formUserData);
-            authMapper.updateByUser(formUserData);
+            String chagepassword = passwordEncoder.encode(request.getPasswordChangeData());
+            authMapper.updatePassword(chagepassword, userid);
         }
         else {
             System.out.println("입력된 비밀번호가 맞지 않습니다.");

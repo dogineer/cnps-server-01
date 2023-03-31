@@ -3,6 +3,7 @@ package com.develop.web.domain.auth.controller;
 import com.develop.web.domain.auth.service.AuthService;
 import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.AuthVo;
+import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 import com.develop.web.domain.auth.vo.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,19 +105,9 @@ public class AuthController {
      * 비밀번호 변경
      * */
     @PostMapping("/changePassword")
-    public String changePassword(AuthVo form, Model model, HttpSession session) throws Exception {
-        AuthVo passwordData = new AuthVo(
-                (String) session.getAttribute("userid"),
-                form.getPassword(),
-                form.getPasswordChangeData()
-        );
+    public String changePassword(PasswordChangeRequest request, Model model, HttpSession session) throws Exception {
 
-        System.out.println("changePassword form 데이터 가져오기 ");
-        System.out.println("현재 아이디 = " + passwordData.getUserid());
-        System.out.println("현재 비밀번호 = " + passwordData.getPassword());
-        System.out.println("변경할 비밀번호 = " + passwordData.getPasswordChangeData());
-
-        boolean changePasswordService = authService.changePassword(passwordData);
+        boolean changePasswordService = authService.changePassword(request, (String) session.getAttribute("userid"));
 
         if (changePasswordService){
             return "redirect:/home";

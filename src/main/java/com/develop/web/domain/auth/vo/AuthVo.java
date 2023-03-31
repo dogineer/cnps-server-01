@@ -3,7 +3,7 @@ package com.develop.web.domain.auth.vo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,7 +20,7 @@ public class AuthVo {
     private String email;               // 이메일
     private String department;          // 부서
     private String description;         // 신청 설명(사유)
-    private Date join_date;             // 가입 날짜
+    private LocalDateTime joinDate;    // 가입 날짜
 
     private int delete_flag;            // 유저 삭제 플래그
 

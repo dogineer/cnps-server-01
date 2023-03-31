@@ -14,8 +14,10 @@ public interface AuthMapper {
     /* 로그인 */
     AuthVo selectByUser(AuthVo authVo);
 
+    AuthVo selectByUserid(String userid);
+
     /* 비밀번호 변경*/
-    void updateByUser(AuthVo authVo);
+    void updatePassword(String chagepassword, String userid);
 
     List<AuthVo> selectAllList();
 
