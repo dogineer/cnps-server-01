@@ -109,6 +109,7 @@ public class AuthServiceSessionImpl implements AuthService {
         System.out.println("\nAuthService - deleteUser\n");
         AuthVo dbUserData = authMapper.selectByUser(formUserData);
 
+        dbUserData.setDelete_flag(1);
         authMapper.deleteByUser(dbUserData);
     }
 }

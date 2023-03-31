@@ -22,6 +22,8 @@ public class AuthVo {
     private String description;         // 신청 설명(사유)
     private Date join_date;             // 가입 날짜
 
+    private int delete_flag;            // 유저 삭제 플래그
+
     private Access access;         // 가입 승인 요청
 
     public AuthVo() {
