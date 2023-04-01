@@ -21,7 +21,7 @@ public interface AuthMapper {
 
     List<User> selectAllList();
 
-    void updateByAccess(User vo);
+    void updateAccess(String userid, String access);
 
     void deleteByUser(String userid);
 }

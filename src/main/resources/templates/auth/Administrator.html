@@ -51,12 +51,10 @@
                   <td th:text="${item.DESCRIPTION}"></td>
                   <td th:text="${item.JOIN_DATE}"></td>
                   <td>
-                    <form th:if="${item.ACCESS} == 'deny'" action="/auth/access" method="post">
-                      <input type="text" hidden="hidden" id="userid" name= "userid" th:value="${item.USERID}">
-                      <strong class="text-gray-dark" th:text="${item.ACCESS}"></strong>
+                    <form th:if="${item.ACCESS} == 'deny'" th:action="'/auth/user/access/' + ${item.USERID} +'/' + ${item.ACCESS}" method="post">
                       <button class="btn btn-primary rounded" style="font-size: smaller" type="submit">승인</button>
                     </form>
-                    <form th:if="${item.ACCESS} == 'allow'" th:action="'/auth/user/delete/'+ ${item.USERID}" method="post">
+                    <form th:if="${item.ACCESS} == 'allow'" th:action="'/auth/user/delete/' + ${item.USERID}" method="post">
                       <button class="btn btn-warning rounded" style="font-size: smaller" type="submit">삭제</button>
                     </form>
                   </td>

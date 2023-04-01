@@ -1,7 +1,6 @@
 package com.develop.web.domain.auth.service;
 
 import com.develop.web.domain.auth.mapper.AuthMapper;
-import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.User;
 import com.develop.web.domain.auth.vo.PasswordChangeRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -95,13 +94,14 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     @Override
-    public void accessCheck(User formUserData){
+    public void accessChange(String userid, String access){
         System.out.println("\nAuthService - accessCheck\n");
-        User dbUserData = authMapper.selectByUser(formUserData);
 
-        dbUserData.setAccess(Access.allow);
+        if (access.equals("deny")){
+            access = "allow";
+        }
 
-        authMapper.updateByAccess(dbUserData);
+        authMapper.updateAccess(userid, access);
     }
 
     @Override

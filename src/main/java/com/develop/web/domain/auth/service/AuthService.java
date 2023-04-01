@@ -14,7 +14,7 @@ public interface AuthService {
 
     List<User> memberlistAll();
 
-    void accessCheck(User vo);
+    void accessChange(String userid, String access);
 
     void deleteUser(String userid);
 }

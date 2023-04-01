@@ -123,12 +123,12 @@ public class AuthController {
     /*
      * 관리자 가입 승인
      * */
-    @PostMapping("/access")
-    public String accessCheck(User form, Model model, HttpSession session) throws Exception {
-        User formUserData = new User(
-                form.getUserid());
+    @PostMapping("user/access/{userid}/{access}")
+    public String accessCheck(
+            @PathVariable String userid,
+            @PathVariable String access) throws Exception {
 
-        authService.accessCheck(formUserData);
+        authService.accessChange(userid, access);
         return "redirect:/Administrator";
     }
 
