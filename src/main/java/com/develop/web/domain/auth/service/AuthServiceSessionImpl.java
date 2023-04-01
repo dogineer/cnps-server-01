@@ -3,45 +3,43 @@ package com.develop.web.domain.auth.service;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.vo.User;
 import com.develop.web.domain.auth.vo.PasswordChangeRequest;
+import com.develop.web.domain.auth.vo.UserLoginRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Optional;
 
-/*
-* AuthServiceSessionImpl
-* */
 @Service
+@Slf4j
 public class AuthServiceSessionImpl implements AuthService {
 
     private final AuthMapper authMapper;
     private final PasswordEncoder passwordEncoder;
+    private final UserChecker userChecker;
 
-    public AuthServiceSessionImpl(AuthMapper authMapper, PasswordEncoder passwordEncoder) {
+    public AuthServiceSessionImpl(AuthMapper authMapper, PasswordEncoder passwordEncoder, UserChecker userChecker) {
         this.authMapper = authMapper;
         this.passwordEncoder = passwordEncoder;
+        this.userChecker = userChecker;
     }
 
     /*
     * 회원가입 서비스
     * */
     @Override
-    public boolean SignUpService(User user) {
-        System.out.println("\nAuthService - SignUp");
+    public void signUp(User userData) {
+        log.info("AuthService - SignUp {}", userData);
 
-        Optional<User> vo = Optional.ofNullable(authMapper.selectByUser(user));
+        userChecker.overlap(userData.getUserid());
 
-        if (vo.isPresent()){
-            System.out.println("아이디가 중복입니다.");
-            return false;
-        } else {
-            String encodePassword = passwordEncoder.encode(user.getPassword());
-            user.setPassword(encodePassword);
-            authMapper.insertUser(user);
-            System.out.println("회원가입이 완료되었습니다");
-            return true;
-        }
+        String encodePassword = passwordEncoder.encode(userData.getPassword());
+
+        userData.setPassword(encodePassword);
+        authMapper.insertUser(userData);
+
+        log.info("회원가입이 완료되었습니다. {}", userData.getUserid());
     }
 
     /*
@@ -72,20 +70,22 @@ public class AuthServiceSessionImpl implements AuthService {
     * 로그인 서비스
     * */
     @Override
-    public User loginService(User formUserData) throws Exception{
+    public boolean signIn(UserLoginRequest request, HttpSession session) throws Exception{
         System.out.println("\nAuthService - login\n");
 
-        User dbUserData = authMapper.selectByUser(formUserData); // db 조회하고 객체 담기
-        System.out.println("db 조회하고 객체 담기 = " + dbUserData);
+        User dbUserData = authMapper.selectByUserid(request.getUserid());
 
         boolean isSame = passwordEncoder.matches(
-                formUserData.getPassword(), dbUserData.getPassword());
+                request.getPassword(), dbUserData.getPassword());
 
-        if(isSame){
-            return dbUserData;
-        }else {
-            return null;
-        }
+        if (isSame){
+            session.setAttribute("userid", dbUserData.getUserid());
+            session.setAttribute("name",   dbUserData.getName());
+            session.setAttribute("role",   dbUserData.getRole());
+            session.setAttribute("access", dbUserData.getAccess());
+        } else System.out.println("비밀번호가 맞지 않음");
+
+        return isSame;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     @Override
-    public void accessChange(String userid, String access){
+    public void changeAccess(String userid, String access){
         System.out.println("\nAuthService - accessCheck\n");
 
         if (access.equals("deny")){

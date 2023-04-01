@@ -12,8 +12,6 @@ public interface AuthMapper {
     void insertUser(User user);
 
     /* 로그인 */
-    User selectByUser(User user);
-
     User selectByUserid(String userid);
 
     /* 비밀번호 변경*/

@@ -2,11 +2,13 @@ package com.develop.web.domain.auth.vo;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 public class User {
 
     private String userid;              // 유저 아이디
@@ -31,23 +33,6 @@ public class User {
 
     public User(String userid) {
         this.userid = userid;
-    }
-
-    public User(String password, String passwordChangeData) {
-        this.password = password;
-        this.passwordChangeData = passwordChangeData;
-    }
-
-    public User(String userid, String password, String passwordChangeData) {
-        this.userid = userid;
-        this.password = password;
-        this.passwordChangeData = passwordChangeData;
-    }
-
-    public User(String userid, String password, Role role) {
-        this.userid = userid;
-        this.password = password;
-        this.role = role;
     }
 
     public User(String userid, String password, String name, Role role, String phone, String email, String department, String description) {

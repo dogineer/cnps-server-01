@@ -10,12 +10,6 @@
         into user(USERID, NAME, PHONE, EMAIL, DEPARTMENT, ROLE, DESCRIPTION, PASSWORD)
         values (#{userid}, #{name}, #{phone}, #{email}, #{department}, #{role}, #{description}, #{password})
     </insert>
-    
-    <select id="selectByUser" resultType="User" parameterType="User">
-        SELECT userid, name, password, role, access
-        FROM user
-        where userid = #{userid}
-    </select>
 
     <select id="selectByUserid" resultType="User" parameterType="String">
         SELECT userid, name, phone, email, department, role, access, description, join_date as joinDate, password
