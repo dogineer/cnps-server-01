@@ -1,9 +1,9 @@
-package com.develop.web.domain.home.controller;
+package com.develop.web.domain.page.controller;
 
 import com.develop.web.domain.auth.service.AuthServiceSessionImpl;
-import com.develop.web.domain.auth.vo.Access;
 import com.develop.web.domain.auth.vo.Role;
 import com.develop.web.domain.board.service.BoardServiceImpl;
+import com.develop.web.domain.page.service.PageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +14,12 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
     private final AuthServiceSessionImpl authService;
     private final BoardServiceImpl boardService;
+    private final PageService pageService;
 
-    public HomeController(AuthServiceSessionImpl authService, BoardServiceImpl boardService) {
+    public HomeController(AuthServiceSessionImpl authService, BoardServiceImpl boardService, PageService pageService) {
         this.authService = authService;
         this.boardService = boardService;
+        this.pageService = pageService;
     }
 
     /*
@@ -35,7 +37,7 @@ public class HomeController {
     public String home(HttpSession session, Model model) throws Exception {
         model.addAttribute("boardList", boardService.listAll());
 
-        return redirectPage("home/home", session);
+        return pageService.redirectPage("/home/home", session);
     }
 
     /*
@@ -43,25 +45,7 @@ public class HomeController {
      * */
     @GetMapping("/auth/signup")
     public String signUpForm() {
-        return "auth/signup";
-    }
-
-    /*
-    * 리다이렉션 페이지 컨트롤
-    * */
-    public String redirectPage(String url, HttpSession session){
-
-        System.out.println("redirectPage run!");
-
-        boolean joinid = session.getAttribute("userid") == null;
-        boolean access = session.getAttribute("access") == Access.allow;
-
-        if (!joinid){
-            if (access){
-                return url;
-            }
-        }
-        return "redirect:/";
+        return "/auth/signup";
     }
 
     /*
@@ -73,7 +57,7 @@ public class HomeController {
             model.addAttribute("UserList", authService.memberlistAll());
             System.out.println(model.getAttribute("UserList"));
 
-            return redirectPage("auth/Administrator", session);
+            return pageService.redirectPage("auth/Administrator", session);
         }
         return "redirect:/";
     }
