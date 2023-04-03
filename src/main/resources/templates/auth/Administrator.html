@@ -11,7 +11,7 @@
     <h1>관리자 페이지</h1>
 
     <div class="d-flex text-body-secondary pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#ddssss"/><text x="35%" y="50%" fill="white" dy=".3em">A</text></svg>
+      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"><rect width="100%" height="100%" fill="#ddssss"/><text x="36%" y="50%" fill="white" dy=".3em">A</text></svg>
       <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
         <div class="d-flex justify-content-between">
           <strong class="text-gray-dark" th:text="${session.name}">@이름</strong>
@@ -29,24 +29,32 @@
             <table class="table table-striped table-sm">
               <thead>
               <tr>
-                <th scope="col">넘버</th>
+                <th scope="col">No</th>
                 <th scope="col">이름</th>
+                <th scope="col">전화번호</th>
                 <th scope="col">부서</th>
-                <th scope="col">권한</th>
                 <th scope="col">아이디</th>
+                <th scope="col">권한</th>
                 <th scope="col">이메일</th>
                 <th scope="col">설명</th>
                 <th scope="col">가입날짜</th>
                 <th scope="col">요청</th>
               </tr>
               </thead>
+
               <tbody th:each="item : ${UserList}">
                 <tr style="vertical-align: middle">
-                  <td><svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text th:text="${item.ID}" x="36%" y="50%" fill="white" dy=".3em"></text></svg></td>
+                  <td th:text="${item.ID}"></td>
                   <td th:text="${item.NAME}"></td>
-                  <td th:text="${item.DESCRIPTION}"></td>
-                  <td th:text="${item.ROLE}"></td>
+                  <td th:text="${item.PHONE}"></td>
+                  <td th:text="${item.DEPARTMENT}"></td>
                   <td th:text="${item.USERID}"></td>
+                  <td th:if="${item.ROLE} == 'Administrator'">
+                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"><rect width="100%" height="100%" fill="#ddssss"/><text x="36%" y="50%" fill="white" dy=".3em">A</text></svg>
+                  </td>
+                  <td th:if="${item.ROLE} == 'USER'">
+                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"><rect width="100%" height="100%" fill="#007bff"/><text x="35%" y="53%" fill="white" dy=".3em">U</text></svg>
+                  </td>
                   <td th:text="${item.EMAIL}"></td>
                   <td th:text="${item.DESCRIPTION}"></td>
                   <td th:text="${item.JOIN_DATE}"></td>

@@ -1,66 +1,69 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org/">
+<script src="../js/signupFormAlarm.js" ></script>
 <body>
-<div class="container">
-    <form action="/auth/signup" method="post">
+<div th:fragment="signup" class="container">
+    <form action="/auth/signup" name="signupForm" method="post">
         <div class="form-group">
-            <label for="userid">아이디</label>
-            <input type="text"
+            <label class="col-form-label" for="userid">아이디</label>
+            <input class="form-control" type="text"
                    id="userid"
                    name= "userid"
-                   placeholder="아이디를 입력하세요.">
+                   placeholder="아이디를 입력하세요." required>
 
-            <label for="password">비밀번호</label>
-            <input type="password"
+            <label class="col-form-label" for="password">비밀번호</label>
+            <input class="form-control" type="password"
                    id="password"
                    name= "password"
-                   placeholder="비밀번호를 입력하세요".>
+                   placeholder="비밀번호를 입력하세요" required>
 
-            <label for="name">이름</label>
-            <input type="text"
+            <hr>
+
+            <label class="col-form-label" for="name">이름</label>
+            <input class="form-control" type="text"
                    id="name"
                    name= "name"
-                   placeholder="이름을 입력하세요.">
+                   placeholder="이름을 입력하세요." required>
 
-            <label for="phone_number">전화번호</label>
-            <input type="text"
-                   id="phone_number"
-                   name= "phone_number"
-                   placeholder="전화번호를 입력하세요.">
+            <label class="col-form-label" for="phone">전화번호</label>
+            <input class="form-control" type="text"
+                   id="phone"
+                   name= "phone"
+                   placeholder="전화번호를 입력하세요." required>
 
-            <label for="email">이메일</label>
-            <input type="email"
+            <label class="col-form-label" for="email">이메일</label>
+            <input class="form-control" type="email"
                    id="email"
                    name= "email"
-                   placeholder="이메일을 입력하세요.">
+                   placeholder="이메일을 입력하세요." required>
 
-            <label for="department">부서</label>서
-            <input type="text"
+            <label class="col-form-label" for="department">부서</label>
+            <input class="form-control" type="text"
                    id="department"
                    name= "department"
-                   placeholder="부서를 입력하세요.">
+                   placeholder="부서를 입력하세요." required>
 
-            <label for="description">신청사유</label>
-            <input type="text"
+            <hr>
+
+            <label class="col-form-label" for="description">신청사유</label>
+            <input class="form-control" type="text"
                    id="description"
                    name= "description"
-                   placeholder="신청사유를 입력하세요.">
+                   placeholder="신청사유를 입력하세요." required>
 
-            <label for="role">일반 사용자</label>
-            <input type="radio"
-                   checked="checked"
-                   id="role"
-                   name="role"
-                   value="USER">
+            <hr>
 
-            <label for="role">관리자</label>
-            <input type="radio"
-                   id="role"
-                   name="role"
-                   value="Administrator">
+            <label class="col-form-label" for="role">권한</label>
+            <select class="form-select" name="role">
+                <option selected id="role" name="role" value="USER">USER</option>
+                <option id="role" name="role" value="Administrator">ADMIN</option>
+            </select>
         </div>
-
-        <button type="submit">등록</button>
+        <br>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            <button type="submit" class="btn btn-primary">신청</button>
+        </div>
     </form>
 </div>
 </body>
