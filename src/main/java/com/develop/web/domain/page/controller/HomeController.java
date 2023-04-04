@@ -57,7 +57,7 @@ public class HomeController {
             model.addAttribute("UserList", authService.memberlistAll());
             System.out.println(model.getAttribute("UserList"));
 
-            return pageService.redirectPage("auth/Administrator", session);
+            return pageService.redirectPage("admin/Administrator", session);
         }
         return "redirect:/";
     }
