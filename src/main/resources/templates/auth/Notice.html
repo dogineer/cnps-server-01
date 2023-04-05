@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<body>
+<div th:fragment="Notice" class="container">
+    <div class="modal fade" id="Notice" tabindex="-1" aria-labelledby="NoticeLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="NoticeModalLabel">공지사항</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>작성자</td>
+                                <td>제목</td>
+                                <td>내용</td>
+                            </tr>
+                        </thead>
+                        <tbody th:each="item : ${boardList}">
+                            <tr style="vertical-align: middle">
+                                <td th:text="${item.ID}">No</td>
+                                <td th:text="${item.WRITER}">writer</td>
+                                <td th:text="${item.TITLE}">title</td>
+                                <td th:text="${item.CONTENT}">content</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

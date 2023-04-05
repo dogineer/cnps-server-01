@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</head>
+<body>
+<!--headerFragment 선언-->
+  <div th:fragment="headerFragment">
+    <header class="py-3 mb-3 border-bottom">
+      <div class="container-fluid d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="rounded-circle" width="32" height="32" src="img/archive_logo.png" />
+            &nbsp;
+            <strong>NPS browser</strong>
+          </a>
+          <ul class="dropdown-menu text-small shadow">
+            <li><a class="dropdown-item active" href="#" aria-current="page">Overview</a></li>
+            <li th:if="${session.role != 'Administrator'}"><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#NoticeWrite">공지사항 작성</button></li>
+            <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#Notice">공지사항</button></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">info</a></li>
+          </ul>
+        </div>
+
+        <div class="d-flex align-items-center">
+          <form class="w-100 me-3" role="search">
+            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+          </form>
+
+          <div class="flex-shrink-0 dropdown">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#007bff" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+              </svg>
+            </a>
+            <ul class="dropdown-menu text-small shadow">
+              <li><strong class="dropdown-item " th:text="${session.name} + '님'"></strong></li>
+              <li><button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#passwordChange">비밀번호 변경하기</button></li>
+              <li>
+                <form th:action="@{/auth/logout}" method="POST" sec:authorize="isAuthenticated()">
+                  <button class="dropdown-item" type="submit">로그아웃</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+  </div>
+</body>
+</html>

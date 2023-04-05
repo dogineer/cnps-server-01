@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org/">
+<body th:fragment="NoticeWrite" class="container">
+<div class="modal fade" id="NoticeWrite" tabindex="-1" aria-labelledby="NoticeWriteLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="NoticeWriteModalLabel">비밀번호 변경하기</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/board/post" method="post">
+                    <div class="form-group">
+                        <label for="writer"></label>
+                        <input hidden="hidden"
+                               type="text"
+                               id="writer"
+                               name= "writer"
+                               th:value="${session.userid}">
+
+                        <label class="col-form-label" for="title">제목</label>
+                        <input class="form-control" type="text"
+                               id="title"
+                               name= "title"
+                               placeholder="제목을 입력해주세요.">
+
+                        <label class="col-form-label" for="content">내용</label>
+                        <textarea rows=10 cols=100 class="form-control"
+                               id="content"
+                               name= "content"
+                               placeholder="내용을 입력해주세요."> </textarea>
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">등록</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
