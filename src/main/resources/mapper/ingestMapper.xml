@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.develop.web.domain.media.mapper.IngestMapper">
+
+    <insert id="insertIngestRequest" parameterType="IngestRequestData">
+        insert
+        into INGEST(TITLE, PROGRAM, NAME, PHONE, CODEC)
+        values (#{title}, #{program}, #{name}, #{phone}, #{codec})
+    </insert>
+
+    <insert id="insertMetadata" parameterType="Metadata">
+        insert
+        into METADATA(FILE_NAME, WIDTH, HEIGHT, FORMAT_NAME, FORMAT_LONG_NAME, TAGS, DURATION, SIZE)
+        values (#{filename}, #{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
+    </insert>
+</mapper>
