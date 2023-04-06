@@ -15,6 +15,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
 
@@ -29,6 +30,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	implementation 'javax.xml.bind:jaxb-api'
+
+
+	implementation 'commons-io:commons-io:2.11.0'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
