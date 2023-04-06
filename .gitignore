@@ -1,5 +1,4 @@
-src/main/resources/templates/test/**
-src/main/java/com/develop/web/domain/auth/test/**
+.DS_Store
 HELP.md
 README.md
 sql/
