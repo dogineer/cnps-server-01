@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class HomeController {
+public class PageController {
     private final AuthServiceSessionImpl authService;
     private final BoardServiceImpl boardService;
     private final PageService pageService;
 
-    public HomeController(AuthServiceSessionImpl authService, BoardServiceImpl boardService, PageService pageService) {
+    public PageController(AuthServiceSessionImpl authService, BoardServiceImpl boardService, PageService pageService) {
         this.authService = authService;
         this.boardService = boardService;
         this.pageService = pageService;
@@ -37,7 +37,7 @@ public class HomeController {
     public String home(HttpSession session, Model model) throws Exception {
         model.addAttribute("boardList", boardService.listAll());
 
-        return pageService.redirectPage("/home/home", session);
+        return pageService.redirectPage("/pages/home", session);
     }
 
     /*
@@ -45,7 +45,7 @@ public class HomeController {
      * */
     @GetMapping("/auth/signup")
     public String signUpForm() {
-        return "/auth/signup";
+        return "/resources/templates/modal/modals/signup.html";
     }
 
     /*
@@ -55,9 +55,10 @@ public class HomeController {
     public String Administrator(HttpSession session, Model model) throws Exception {
         if (session.getAttribute("role") == Role.Administrator){
             model.addAttribute("UserList", authService.memberlistAll());
+            model.addAttribute("boardList", boardService.listAll());
             System.out.println(model.getAttribute("UserList"));
 
-            return pageService.redirectPage("admin/Administrator", session);
+            return pageService.redirectPage("pages/Administrator", session);
         }
         return "redirect:/";
     }
