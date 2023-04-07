@@ -28,7 +28,7 @@ public class AuthController {
         try {
             authService.signUp(userData);
         } catch (RuntimeException e){
-            return "redirect:/auth/signup";
+            return "redirect:/error";
         }
         return "redirect:/";
     }
@@ -37,24 +37,29 @@ public class AuthController {
     * 로그인
     * */
     @PostMapping("/login")
-    public String login(UserLoginRequest request, HttpSession session) throws Exception {
+    public String login(User request, HttpSession session) throws Exception {
 
-         boolean loginCheck = authService.signIn(request, session);
-         String url = null;
+        String url = "redirect:/";
 
-        if (loginCheck){
-            boolean access = Access.allow.equals(session.getAttribute("access"));
+        try {
+            User response = authService.signIn(request);
 
-            if (Role.Administrator.equals(session.getAttribute("role"))){
+            session.setAttribute("userid", response.getUserid());
+            session.setAttribute("name",   response.getName());
+            session.setAttribute("role",   response.getRole());
+            session.setAttribute("access", response.getAccess());
+
+            Object userRole = session.getAttribute("role");
+
+            if (Role.Administrator.equals(userRole)){
                 System.out.println("관리자 로그인");
                 url = "redirect:/Administrator";
-            } else if (access){
+            } else if (Role.USER.equals(userRole)){
                 System.out.println("일반 유저 로그인");
                 url = "redirect:/home";
-            } else {
-                System.out.println("승인되지 않은 유저");
-                url = "redirect:/";
             }
+        } catch (RuntimeException e){
+            return url;
         }
         return url;
     }

@@ -10,7 +10,7 @@ import java.util.List;
 public interface AuthService {
     void signUp(User user);
 
-    boolean signIn(UserLoginRequest request, HttpSession session) throws Exception;
+    User signIn(User request) throws Exception;
 
     boolean changePassword(PasswordChangeRequest request, String userid);
 

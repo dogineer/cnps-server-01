@@ -3,7 +3,6 @@ package com.develop.web.domain.auth.service;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.vo.User;
 import com.develop.web.domain.auth.vo.PasswordChangeRequest;
-import com.develop.web.domain.auth.vo.UserLoginRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,9 @@ public class AuthServiceSessionImpl implements AuthService {
     }
 
     /*
-    * 회원가입 서비스
-    * */
+     * @description 회원가입 서비스
+     * @param userData
+     * */
     @Override
     public void signUp(User userData) {
         log.info("AuthService - SignUp {}", userData);
@@ -40,6 +40,21 @@ public class AuthServiceSessionImpl implements AuthService {
         authMapper.insertUser(userData);
 
         log.info("회원가입이 완료되었습니다. {}", userData.getUserid());
+    }
+
+    /*
+    * @description 로그인 서비스
+    * @param User request
+    * @return User
+    * */
+    @Override
+    public User signIn(User request){
+        System.out.println("\nAuthService - login\n");
+
+        userChecker.userid(request.getUserid());
+        userChecker.password(request);
+
+        return userChecker.access(request);
     }
 
     /*
@@ -62,28 +77,6 @@ public class AuthServiceSessionImpl implements AuthService {
         else {
             System.out.println("입력된 비밀번호가 맞지 않습니다.");
         }
-
-        return isSame;
-    }
-
-    /*
-    * 로그인 서비스
-    * */
-    @Override
-    public boolean signIn(UserLoginRequest request, HttpSession session) throws Exception{
-        System.out.println("\nAuthService - login\n");
-
-        User dbUserData = authMapper.selectByUserid(request.getUserid());
-
-        boolean isSame = passwordEncoder.matches(
-                request.getPassword(), dbUserData.getPassword());
-
-        if (isSame){
-            session.setAttribute("userid", dbUserData.getUserid());
-            session.setAttribute("name",   dbUserData.getName());
-            session.setAttribute("role",   dbUserData.getRole());
-            session.setAttribute("access", dbUserData.getAccess());
-        } else System.out.println("비밀번호가 맞지 않음");
 
         return isSame;
     }
