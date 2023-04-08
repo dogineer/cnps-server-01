@@ -1,20 +1,21 @@
 package com.develop.web.domain.auth.service;
 
-import com.develop.web.domain.auth.vo.User;
-import com.develop.web.domain.auth.vo.PasswordChangeRequest;
-import com.develop.web.domain.auth.vo.UserLoginRequest;
+import com.develop.web.domain.auth.dto.SignInRequest;
+import com.develop.web.domain.auth.dto.User;
+import com.develop.web.domain.auth.dto.PasswordChangeRequest;
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 
-import javax.servlet.http.HttpSession;
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 public interface AuthService {
-    void signUp(User user);
+    void signUp(User user) throws DuplicateMemberException;
 
-    User signIn(User request) throws Exception;
+    User signIn(SignInRequest request) throws AccessDeniedException;
 
-    boolean changePassword(PasswordChangeRequest request, String userid);
+    void changePassword(String userid, PasswordChangeRequest request);
 
-    void changeAccess(String userid, String access);
+    void changeAccess(String userid);
 
     void deleteUser(String userid);
 

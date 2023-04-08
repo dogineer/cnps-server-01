@@ -1,13 +1,16 @@
 package com.develop.web.domain.auth.service;
 
+import com.develop.web.domain.auth.dto.Access;
+import com.develop.web.domain.auth.dto.SignInRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
-import com.develop.web.domain.auth.vo.User;
-import com.develop.web.domain.auth.vo.PasswordChangeRequest;
+import com.develop.web.domain.auth.dto.User;
+import com.develop.web.domain.auth.dto.PasswordChangeRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 
 @Service
@@ -29,7 +32,7 @@ public class AuthServiceSessionImpl implements AuthService {
      * @param userData
      * */
     @Override
-    public void signUp(User userData) {
+    public void signUp(User userData) throws DuplicateMemberException {
         log.info("AuthService - SignUp {}", userData);
 
         userChecker.overlap(userData.getUserid());
@@ -48,53 +51,42 @@ public class AuthServiceSessionImpl implements AuthService {
     * @return User
     * */
     @Override
-    public User signIn(User request){
+    public User signIn(SignInRequest request) throws AccessDeniedException {
         System.out.println("\nAuthService - login\n");
 
         userChecker.userid(request.getUserid());
-        userChecker.password(request);
+        userChecker.password(request.getUserid(), request.getPassword());
 
-        return userChecker.access(request);
+        return userChecker.access(request.getUserid());
     }
 
     /*
-     * 비밀번호 변경 서비스
+     * @description 비밀번호 변경 서비스
+     * @param
      * */
     @Override
-    public boolean changePassword(PasswordChangeRequest request, String userid) {
+    public void changePassword(String userid, PasswordChangeRequest request) {
         System.out.println("\nAuthService - changePassword");
 
-        User dbUserData = authMapper.selectByUserid(userid);
+        userChecker.password(userid, request.getPassword());
 
-        boolean isSame = passwordEncoder.matches(
-                request.getPassword(), dbUserData.getPassword());
-
-        if (isSame) {
-            System.out.println("비밀번호가 변경되었습니다.");
-            String chagepassword = passwordEncoder.encode(request.getPasswordChangeData());
-            authMapper.updatePassword(chagepassword, userid);
-        }
-        else {
-            System.out.println("입력된 비밀번호가 맞지 않습니다.");
-        }
-
-        return isSame;
+        String chagepassword = passwordEncoder.encode(request.getPasswordChangeData());
+        authMapper.updatePassword(userid, chagepassword);
     }
 
+    /*
+     * @description 멤버 리스트
+     * */
     @Override
     public List<User> memberlistAll(){
         return authMapper.selectAllList();
     }
 
     @Override
-    public void changeAccess(String userid, String access){
+    public void changeAccess(String userid){
         System.out.println("\nAuthService - accessCheck\n");
 
-        if (access.equals("deny")){
-            access = "allow";
-        }
-
-        authMapper.updateAccess(userid, access);
+        authMapper.updateAccess(userid, String.valueOf(Access.allow));
     }
 
     @Override

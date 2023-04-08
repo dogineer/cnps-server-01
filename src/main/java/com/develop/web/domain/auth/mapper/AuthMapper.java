@@ -1,6 +1,7 @@
 package com.develop.web.domain.auth.mapper;
 
-import com.develop.web.domain.auth.vo.User;
+import com.develop.web.domain.auth.dto.SignInRequest;
+import com.develop.web.domain.auth.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
