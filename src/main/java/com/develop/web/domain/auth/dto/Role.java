@@ -1,4 +1,4 @@
-package com.develop.web.domain.auth.vo;
+package com.develop.web.domain.auth.dto;
 
 public enum Role {
 

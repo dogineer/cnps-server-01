@@ -1,14 +1,13 @@
-package com.develop.web.domain.auth.vo;
+package com.develop.web.domain.auth.dto;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@ToString
+@Data
 public class User {
 
     private String userid;              // 유저 아이디
@@ -27,22 +26,4 @@ public class User {
     private int delete_flag;            // 유저 삭제 플래그
 
     private Access access;         // 가입 승인 요청
-
-    public User() {
-    }
-
-    public User(String userid) {
-        this.userid = userid;
-    }
-
-    public User(String userid, String password, String name, Role role, String phone, String email, String department, String description) {
-        this.userid = userid;
-        this.password = password;
-        this.name = name;
-        this.role = role;
-        this.phone = phone;
-        this.email = email;
-        this.department = department;
-        this.description = description;
-    }
 }
