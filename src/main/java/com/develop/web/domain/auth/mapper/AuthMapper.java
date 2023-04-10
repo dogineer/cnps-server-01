@@ -1,6 +1,5 @@
 package com.develop.web.domain.auth.mapper;
 
-import com.develop.web.domain.auth.dto.SignInRequest;
 import com.develop.web.domain.auth.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,14 +12,14 @@ public interface AuthMapper {
     void insertUser(User user);
 
     /* 로그인 */
-    User selectByUserid(String userid);
+    User selectByUserid(String account);
 
     /* 비밀번호 변경*/
-    void updatePassword(String chagepassword, String userid);
+    void updatePassword(String account, String changePassword);
 
     List<User> selectAllList();
 
-    void updateAccess(String userid, String access);
+    void updateAccess(String account);
 
-    void deleteByUser(String userid);
+    void deleteByUser(String account);
 }

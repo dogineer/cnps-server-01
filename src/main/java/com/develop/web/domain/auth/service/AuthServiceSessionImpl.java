@@ -1,6 +1,5 @@
 package com.develop.web.domain.auth.service;
 
-import com.develop.web.domain.auth.dto.Access;
 import com.develop.web.domain.auth.dto.SignInRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.dto.User;
@@ -32,17 +31,15 @@ public class AuthServiceSessionImpl implements AuthService {
      * @param userData
      * */
     @Override
-    public void signUp(User userData) throws DuplicateMemberException {
-        log.info("AuthService - SignUp {}", userData);
+    public void signUp(User user) throws DuplicateMemberException {
+        userChecker.overlap(user.getAccount());
 
-        userChecker.overlap(userData.getUserid());
+        String encodePassword = passwordEncoder.encode(user.getPassword());
 
-        String encodePassword = passwordEncoder.encode(userData.getPassword());
+        user.setPassword(encodePassword);
+        authMapper.insertUser(user);
 
-        userData.setPassword(encodePassword);
-        authMapper.insertUser(userData);
-
-        log.info("회원가입이 완료되었습니다. {}", userData.getUserid());
+        log.info("회원가입이 완료되었습니다. {}", user.getAccount());
     }
 
     /*
@@ -52,12 +49,10 @@ public class AuthServiceSessionImpl implements AuthService {
     * */
     @Override
     public User signIn(SignInRequest request) throws AccessDeniedException {
-        System.out.println("\nAuthService - login\n");
+        userChecker.userid(request.getAccount());
+        userChecker.password(request.getAccount(), request.getPassword());
 
-        userChecker.userid(request.getUserid());
-        userChecker.password(request.getUserid(), request.getPassword());
-
-        return userChecker.access(request.getUserid());
+        return userChecker.access(request.getAccount());
     }
 
     /*
@@ -65,35 +60,35 @@ public class AuthServiceSessionImpl implements AuthService {
      * @param
      * */
     @Override
-    public void changePassword(String userid, PasswordChangeRequest request) {
-        System.out.println("\nAuthService - changePassword");
+    public void changePassword(String account, PasswordChangeRequest request) {
+        userChecker.password(account, request.getPassword());
 
-        userChecker.password(userid, request.getPassword());
-
-        String chagepassword = passwordEncoder.encode(request.getPasswordChangeData());
-        authMapper.updatePassword(userid, chagepassword);
+        String changePassword = passwordEncoder.encode(request.getChangePassword());
+        authMapper.updatePassword(account, changePassword);
     }
 
     /*
      * @description 멤버 리스트
      * */
     @Override
-    public List<User> memberlistAll(){
+    public List<User> memberListAll(){
         return authMapper.selectAllList();
     }
 
+    /*
+     * @description 가입 승인
+     * */
     @Override
-    public void changeAccess(String userid){
-        System.out.println("\nAuthService - accessCheck\n");
-
-        authMapper.updateAccess(userid, String.valueOf(Access.allow));
+    public void changeAccess(String account){
+        authMapper.updateAccess(account);
     }
 
+    /*
+     * @description 유저 삭제
+     * */
     @Override
-    public void deleteUser(String userid) {
-        System.out.println("\nAuthService - deleteUser\n");
-
-        authMapper.deleteByUser(userid);
+    public void deleteUser(String account) {
+        authMapper.deleteByUser(account);
     }
 }
 

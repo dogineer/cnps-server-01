@@ -29,9 +29,9 @@ public class AuthController {
     * 회원가입 컨트롤러
     * */
     @PostMapping(value = "/signup")
-    public String signUp(User userData) {
+    public String signUp(User user) {
         try {
-            authService.signUp(userData);
+            authService.signUp(user);
         } catch (DuplicateMemberException e){
             log.error("이미 회원가입된 아이디입니다. 다른 아이디를 입력해주세요.");
             return "redirect:/";
@@ -42,22 +42,22 @@ public class AuthController {
     /*
     * 로그인
     * */
-    @PostMapping("/login")
-    public String login(SignInRequest request, HttpSession session) {
+    @PostMapping("/signin")
+    public String signIn(SignInRequest signInRequest, HttpSession session) {
 
         String url = "redirect:/";
 
         try {
-            User response = authService.signIn(request);
+            User response = authService.signIn(signInRequest);
 
-            session.setAttribute("userid", response.getUserid());
-            session.setAttribute("name",   response.getName());
+            session.setAttribute("account", response.getAccount());
+            session.setAttribute("name", response.getName());
             session.setAttribute("role",   response.getRole());
-            session.setAttribute("access", response.getAccess());
+            session.setAttribute("access",response.getAccess());
 
             Object userRole = session.getAttribute("role");
 
-            if (Role.Administrator.equals(userRole)){
+            if (Role.ADMIN.equals(userRole)){
                 System.out.println("관리자 로그인");
                 url = "redirect:/Administrator";
             } else if (Role.USER.equals(userRole)){
@@ -79,15 +79,18 @@ public class AuthController {
      * */
     @PostMapping("/changePassword")
     public String changePassword(PasswordChangeRequest passwordChangeRequest, HttpSession session) {
-        String userid = (String) session.getAttribute("userid");
+        String account = (String) session.getAttribute("account");
 
         try {
-            authService.changePassword(userid, passwordChangeRequest);
+            authService.changePassword(account, passwordChangeRequest);
+
+            session.invalidate();
+            log.info("비밀번호 변경이 완료됐습니다. 다시 로그인 해주세요.");
         } catch (BadCredentialsException e) {
             log.error("비밀번호가 맞지 않음");
         }
 
-        return "redirect:/home";
+        return "redirect:/";
     }
 
     /*
@@ -102,18 +105,18 @@ public class AuthController {
     /*
      * 관리자 가입 승인
      * */
-    @PostMapping("user/access/{userid}")
-    public String accessCheck(@PathVariable String userid){
-        authService.changeAccess(userid);
+    @PostMapping("user/access/{account}")
+    public String accessCheck(@PathVariable String account){
+        authService.changeAccess(account);
         return "redirect:/Administrator";
     }
 
     /*
      * 관리자 회원 삭제
      * */
-    @PostMapping("/user/delete/{userid}")
-    public String userDelete(@PathVariable String userid){
-        authService.deleteUser(userid);
+    @PostMapping("/user/delete/{account}")
+    public String userDelete(@PathVariable String account){
+        authService.deleteUser(account);
         return "redirect:/Administrator";
     }
 }

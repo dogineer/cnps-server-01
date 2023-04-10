@@ -13,11 +13,11 @@ public interface AuthService {
 
     User signIn(SignInRequest request) throws AccessDeniedException;
 
-    void changePassword(String userid, PasswordChangeRequest request);
+    void changePassword(String account, PasswordChangeRequest request);
 
-    void changeAccess(String userid);
+    void changeAccess(String account);
 
-    void deleteUser(String userid);
+    void deleteUser(String account);
 
-    List<User> memberlistAll();
+    List<User> memberListAll();
 }
