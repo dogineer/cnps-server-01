@@ -1,0 +1,8 @@
+CREATE TABLE `rank` (
+      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '직급 ID',
+      name VARCHAR(36) DEFAULT 'name' NOT NULL COMMENT '직급, 직책 이름',
+      p_id INT NOT NULL DEFAULT '0' COMMENT '직책 ID'
+) COMMENT '직급';
+
+ALTER TABLE `rank` ADD FOREIGN KEY (p_id) REFERENCES `rank`(id)
+

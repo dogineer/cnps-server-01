@@ -1,0 +1,7 @@
+CREATE TABLE `dept` (
+      id INT NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '부서 ID',
+      name VARCHAR(36) DEFAULT 'name' NOT NULL COMMENT '부서, 팀 이름',
+      p_id INT NOT NULL DEFAULT '0' COMMENT '상위 부서 ID'
+) COMMENT '부서';
+
+ALTER TABLE `dept` ADD FOREIGN KEY (p_id) REFERENCES `dept`(id)
