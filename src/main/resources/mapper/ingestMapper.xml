@@ -7,8 +7,8 @@
 
     <insert id="insertIngestRequest" parameterType="IngestRequestData">
         insert
-        into INGEST(TITLE, PROGRAM, NAME, PHONE, CODEC)
-        values (#{title}, #{program}, #{name}, #{phone}, #{codec})
+        into INGEST(USER_PK, TITLE, PROGRAM, NAME, PHONE, CODEC)
+        values (#{user_pk}, #{title}, #{program}, #{name}, #{phone}, #{codec})
     </insert>
 
     <insert id="insertMetadata" parameterType="Metadata">
@@ -16,4 +16,8 @@
         into METADATA(FILE_NAME, WIDTH, HEIGHT, FORMAT_NAME, FORMAT_LONG_NAME, TAGS, DURATION, SIZE)
         values (#{filename}, #{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
     </insert>
+
+    <select id="selectAllList" parameterType="IngestRequestData" resultType="map" >
+        SELECT * FROM INGEST
+    </select>
 </mapper>

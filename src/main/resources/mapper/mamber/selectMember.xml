@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
+    <select id="lookup_employee" resultType="Member" parameterType="String">
+        SELECT * FROM emp WHERE account = #{account}
+    </select>
+
+    <select id="query_list_employee" resultType="map" >
+        SELECT account,
+           e.name as name,
+           r.name as `rank`,
+           d.name as dept,
+           birth,
+           gender,
+           email,
+           access,
+           approved_at,
+        FROM emp e
+        JOIN dept d on d.id = e.dept_id
+        JOIN `rank` r on r.id = e.rank_id
+        WHERE access = 1
+    </select>
+
+    <select id="not_access_list_employee" resultType="map" >
+        SELECT account,
+           e.name as name,
+           phone,
+           r.name as `rank`,
+           d.name as dept,
+           birth,
+           gender,
+           email,
+           e.des as des,
+           joined_at,
+           access
+        FROM emp e
+        JOIN dept d on d.id = e.dept_id
+        JOIN `rank` r on r.id = e.rank_id
+        WHERE access = 0
+    </select>
+</mapper>
