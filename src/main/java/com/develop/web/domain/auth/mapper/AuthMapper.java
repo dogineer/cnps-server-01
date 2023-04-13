@@ -1,6 +1,7 @@
 package com.develop.web.domain.auth.mapper;
 
-import com.develop.web.domain.auth.dto.User;
+import com.develop.web.domain.member.dto.Member;
+import com.develop.web.domain.auth.dto.ViewInfoListMember;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -8,18 +9,21 @@ import java.util.List;
 @Mapper
 public interface AuthMapper {
 
-    /* 회원가입 */
-    void insertUser(User user);
+    /** @description 멤버 데이터 인서트 (회원가입)*/
+    void insertMemberInfo(Member member);
 
-    /* 로그인 */
-    User selectByUserid(String account);
+    /** @description 멤버 데이터 조회 (로그인)*/
+    Member lookupMember(String account);
 
-    /* 비밀번호 변경*/
-    void updatePassword(String account, String changePassword);
+    /** @description 직원 비밀번호 업데이트 (비밀번호 변경)*/
+    void changePassword(String account, String changePassword);
 
-    List<User> selectAllList();
+    /** @description 직원 리스트 데이터 조회 (직원 리스트) */
+    List<ViewInfoListMember> queryListMember();
 
-    void updateAccess(String account);
+    /** @description 권한 승인 업데이트 (권한 승인)*/
+    void joinMember(String account);
 
-    void deleteByUser(String account);
+    /** @description 직원 삭제 업데이트 (직원 삭제 플래그)*/
+    void deleteMember(String account);
 }
