@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface DeptMapper {
     /** @description 부서 데이터 불러오기 */
-    List<DeptDto> queryListDept();
+    List<DeptDto> selectDeptList();
 
+    String selectDetailDept(String account);
 }
