@@ -39,7 +39,7 @@ public class AccountController {
         return "redirect:/";
     }
 
-    /**
+    /*
      * @description 비밀번호 변경 서비스
      * @return "redirect:/ 최초 페이지로 이동"
      * */
@@ -57,16 +57,6 @@ public class AccountController {
         }
 
         return "redirect:/";
-    }
-
-    /**
-     * @description 직원 승인 서비스
-     * @return "redirect:/ 관리자 페이지"
-     * */
-    @PostMapping("user/access/{account}")
-    public String accessCheck(@PathVariable String account){
-
-        return "redirect:/Administrator";
     }
 
     /**

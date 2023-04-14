@@ -4,9 +4,12 @@ import com.develop.web.domain.account.dto.Member;
 import com.develop.web.domain.auth.dto.LoginRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.service.Login;
+import com.develop.web.domain.auth.service.UpdateAccess;
+import com.develop.web.domain.auth.service.UpdateApprovedAt;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,10 +21,14 @@ import javax.servlet.http.HttpSession;
 public class AuthController {
     private final Login login;
     private final AuthMapper authMapper;
+    private final UpdateAccess updateAccess;
+    private final UpdateApprovedAt updateApprovedAt;
 
-    public AuthController(Login login, AuthMapper authMapper) {
+    public AuthController(Login login, AuthMapper authMapper, UpdateAccess updateAccess, UpdateApprovedAt updateApprovedAt) {
         this.login = login;
         this.authMapper = authMapper;
+        this.updateAccess = updateAccess;
+        this.updateApprovedAt = updateApprovedAt;
     }
 
     /**
@@ -40,9 +47,9 @@ public class AuthController {
 
             session.setAttribute("account", dbMemberInfoData.getAccount());
             session.setAttribute("name",    dbMemberInfoData.getName());
-            session.setAttribute("rank", dbMemberInfoData.getRank_id());
+            session.setAttribute("rank",    dbMemberInfoData.getRankId());
 
-            Integer rank = dbMemberInfoData.getRank_id();
+            Integer rank = dbMemberInfoData.getRankId();
 
             if (12 == rank){
                 System.out.println("관리자 로그인");
@@ -65,5 +72,17 @@ public class AuthController {
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/";
+    }
+
+        /**
+     * @description 직원 승인 서비스
+     * @return "redirect:/ 관리자 페이지"
+     * */
+    @PostMapping("member/access/{account}")
+    public String accessCheck(@PathVariable String account){
+        updateAccess.setAccess(account);
+        updateApprovedAt.setApprovedAt(account);
+
+        return "redirect:/management/employee";
     }
 }
