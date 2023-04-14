@@ -13,7 +13,7 @@ public class JoinMemberOk {
 
     /** @description 가입 승인 */
     public void ok(String account){
-        authMapper.joinMember(account);
+        authMapper.updateAccess(account);
     }
 
     /** @description 가입 떠남 */

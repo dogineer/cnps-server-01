@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Service
-public class MemberAuthSupport {
+public class AuthChecker {
     /**
      * @description 멤버 권한 체크 서비스
      * */

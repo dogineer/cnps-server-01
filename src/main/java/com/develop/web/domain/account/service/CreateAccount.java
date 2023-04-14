@@ -1,6 +1,7 @@
-package com.develop.web.domain.auth.service;
+package com.develop.web.domain.account.service;
 
-import com.develop.web.domain.member.dto.Member;
+import com.develop.web.domain.auth.service.MemberChecker;
+import com.develop.web.domain.account.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
@@ -9,24 +10,24 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class SignUp {
-    private final UserChecker userChecker;
+public class CreateAccount {
+    private final MemberChecker memberChecker;
     private final PasswordEncoder passwordEncoder;
     private final AuthMapper authMapper;
 
-    public SignUp(UserChecker userChecker, PasswordEncoder passwordEncoder, AuthMapper authMapper) {
-        this.userChecker = userChecker;
+    public CreateAccount(MemberChecker memberChecker, PasswordEncoder passwordEncoder, AuthMapper authMapper) {
+        this.memberChecker = memberChecker;
         this.passwordEncoder = passwordEncoder;
         this.authMapper = authMapper;
     }
 
-    public void registerMember(Member member) throws DuplicateMemberException {
-        userChecker.overlap(member.getAccount());
+    public void addMember(Member member) throws DuplicateMemberException {
+        memberChecker.overlap(member.getAccount());
 
         String encodePassword = passwordEncoder.encode(member.getPassword());
         member.setPassword(encodePassword);
 
-        authMapper.insertMemberInfo(member);
+        authMapper.insertMember(member);
 
         log.info("회원가입이 완료되었습니다. {}", member.getAccount());
     }

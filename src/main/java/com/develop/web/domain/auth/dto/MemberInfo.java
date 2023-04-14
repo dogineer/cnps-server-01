@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-public class ViewInfoListMember {
+public class MemberInfo {
     private String account;
     private String name;
     private String rank;
