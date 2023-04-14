@@ -4,41 +4,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
-    <select id="lookup_employee" resultType="Member" parameterType="String">
-        SELECT * FROM emp WHERE account = #{account}
+    <select id="selectMember" resultType="Member" parameterType="String">
+        SELECT     id,
+            dept_id AS deptId,
+            rank_id AS rankId,
+            account,
+            name,
+            birth,
+            gender,
+            phone,
+            email,
+            des,
+            joined_at,
+            approved_at,
+            access,
+            del_fl,
+            password FROM emp WHERE account = #{account}
     </select>
 
-    <select id="query_list_employee" resultType="map" >
+    <select id="selectMemberInfoList" resultType="MemberInfo" >
         SELECT account,
            e.name as name,
-           r.name as `rank`,
-           d.name as dept,
+           r.name as rankId,
+           d.name as deptId,
            birth,
            gender,
            email,
            access,
-           approved_at,
+           approved_at
         FROM emp e
         JOIN dept d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
-        WHERE access = 1
     </select>
 
-    <select id="not_access_list_employee" resultType="map" >
+    <select id="selectMemberInfo" resultType="MemberInfo" parameterType="String">
         SELECT account,
            e.name as name,
-           phone,
-           r.name as `rank`,
-           d.name as dept,
+           r.name as rankId,
+           d.name as deptId,
            birth,
            gender,
            email,
-           e.des as des,
-           joined_at,
-           access
+           access,
+           approved_at
         FROM emp e
         JOIN dept d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
-        WHERE access = 0
+        WHERE access = 1 AND account = #{account}
     </select>
 </mapper>

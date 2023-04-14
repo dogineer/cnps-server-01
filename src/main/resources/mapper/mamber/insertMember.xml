@@ -4,9 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
-    <insert id="sign_up" parameterType="Member">
+    <insert id="insertMember" parameterType="Member">
         INSERT
-        INTO emp(account, name, phone, email, dep, role, des, password)
-        VALUES (#{account}, #{name}, #{phone}, #{email}, #{dep}, #{role}, #{des}, #{password})
+        INTO emp(account,
+                 name,
+                 gender,
+                 phone,
+                 email,
+                 dept_id,
+                 rank_id,
+                 des,
+                 password)
+        VALUES (#{account},
+                #{name},
+                #{gender},
+                #{phone},
+                #{email},
+                #{deptId},
+                #{rankId},
+                #{des},
+                #{password})
     </insert>
 </mapper>
