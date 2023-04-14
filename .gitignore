@@ -4,6 +4,7 @@ README.md
 sql/
 .gradle
 build/
+src/main/resources/templates
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

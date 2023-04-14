@@ -1,10 +1,8 @@
 package com.develop.web.domain.account.service;
 
-import com.develop.web.domain.account.dto.MemberInfo;
+import com.develop.web.domain.account.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class DetailMemberFetcher {
@@ -14,7 +12,7 @@ public class DetailMemberFetcher {
         this.authMapper = authMapper;
     }
 
-    public List<MemberInfo> getMember(String account) {
-        return authMapper.selectMemberInfo(account);
+    public Member getMember(String account) {
+        return authMapper.selectMember(account);
     }
 }

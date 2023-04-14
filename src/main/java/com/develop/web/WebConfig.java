@@ -1,4 +1,4 @@
-package com.develop.web.domain.configuration;
+package com.develop.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter {
-    /**
-     * PasswordEncoder를 Bean으로 등록
-     */
+    /* PasswordEncoder를 Bean으로 등록 */
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

@@ -1,7 +1,7 @@
 package com.develop.web.domain.auth.mapper;
 
 import com.develop.web.domain.account.dto.Member;
-import com.develop.web.domain.auth.dto.MemberInfo;
+import com.develop.web.domain.account.dto.MemberInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,4 +26,6 @@ public interface AuthMapper {
 
     /** @description 직원 삭제 (삭제 플래그)*/
     void deleteMember(String account);
+
+    void updateApprovedAt(String account);
 }

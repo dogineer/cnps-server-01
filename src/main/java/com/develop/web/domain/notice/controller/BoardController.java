@@ -1,7 +1,7 @@
-package com.develop.web.domain.board.controller;
+package com.develop.web.domain.notice.controller;
 
-import com.develop.web.domain.board.service.BoardService;
-import com.develop.web.domain.board.vo.BoardVo;
+import com.develop.web.domain.notice.service.BoardService;
+import com.develop.web.domain.notice.vo.BoardVo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

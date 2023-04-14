@@ -9,17 +9,18 @@
 
 <body class="container">
   <main class="form-signin text-center">
+     <th:block th:replace="~{modal/index :: Modal('signup', '사용자 요청')}"></th:block>
     <form action="/auth/login" method="post">
       <h1 class="h3 mb-3 fw-normal"><strong>NPS browser</strong></h1>
 
       <div class="form-floating">
         <input class="form-control"
                type="text"
-               id="userid"
-               name= "userid"
+               id="account"
+               name= "account"
                placeholder="아이디를 입력하세요"
                required><br>
-        <label for="userid">아이디</label>
+        <label for="account">아이디</label>
       </div>
 
       <div class="form-floating">
@@ -45,23 +46,9 @@
 
     <p class="mt-5 mb-3 text-muted">solarpark7346@gmail.com</p>
 
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signup">
       사용자 신청
     </button>
   </main>
-
-  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="signupModalLabel">사용자 요청</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <th:block th:replace="~{/auth/signup :: signup}"></th:block>
-        </div>
-      </div>
-    </div>
-  </div>
 </body>
 </html>

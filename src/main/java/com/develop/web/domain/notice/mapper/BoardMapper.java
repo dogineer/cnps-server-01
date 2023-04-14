@@ -1,6 +1,6 @@
-package com.develop.web.domain.board.mapper;
+package com.develop.web.domain.notice.mapper;
 
-import com.develop.web.domain.board.vo.BoardVo;
+import com.develop.web.domain.notice.vo.BoardVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

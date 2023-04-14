@@ -1,4 +1,4 @@
-package com.develop.web.domain.board.vo;
+package com.develop.web.domain.notice.vo;
 
 public class BoardVo {
 

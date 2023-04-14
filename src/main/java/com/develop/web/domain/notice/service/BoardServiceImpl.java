@@ -1,7 +1,7 @@
-package com.develop.web.domain.board.service;
+package com.develop.web.domain.notice.service;
 
-import com.develop.web.domain.board.mapper.BoardMapper;
-import com.develop.web.domain.board.vo.BoardVo;
+import com.develop.web.domain.notice.mapper.BoardMapper;
+import com.develop.web.domain.notice.vo.BoardVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +20,6 @@ public class BoardServiceImpl implements BoardService{
     * */
     @Override
     public void boardPost(BoardVo boardVo) {
-        System.out.println("\nBoardService - POST");
-        System.out.println("유저 " + boardVo.getWriter());
-        System.out.println("제목 " + boardVo.getTitle());
-        System.out.println("내용 " + boardVo.getContent());
-
         boardMapper.insertBoard(boardVo);
     }
 
@@ -32,8 +27,7 @@ public class BoardServiceImpl implements BoardService{
     * 글 목록 보기
     * */
     @Override
-    public List<BoardVo> listAll() throws Exception{
-
+    public List<BoardVo> listAll(){
         return boardMapper.selectAllList();
     }
 }

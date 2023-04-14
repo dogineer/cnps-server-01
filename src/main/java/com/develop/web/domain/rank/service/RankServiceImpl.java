@@ -16,6 +16,6 @@ public class RankServiceImpl implements RankService {
 
     @Override
     public List<Map<Integer, String>> getList() {
-        return rankMapper.queryListRank();
+        return rankMapper.selectListRank();
     }
 }

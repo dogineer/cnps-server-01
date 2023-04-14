@@ -5,7 +5,7 @@
 
 <mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
     <select id="selectMember" resultType="Member" parameterType="String">
-        SELECT     id,
+        SELECT id,
             dept_id AS deptId,
             rank_id AS rankId,
             account,

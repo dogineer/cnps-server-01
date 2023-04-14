@@ -1,6 +1,6 @@
-package com.develop.web.domain.board.service;
+package com.develop.web.domain.notice.service;
 
-import com.develop.web.domain.board.vo.BoardVo;
+import com.develop.web.domain.notice.vo.BoardVo;
 
 import java.util.List;
 
