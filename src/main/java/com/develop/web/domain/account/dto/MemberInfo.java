@@ -16,5 +16,6 @@ public class MemberInfo {
     private String email;
     private String des;
     private Byte access;
+    private LocalDateTime joined_at;
     private LocalDateTime approved_at;
 }
