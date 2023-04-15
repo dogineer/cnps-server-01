@@ -45,6 +45,7 @@ public class AuthController {
             String account = request.getAccount();
             Member dbMemberInfoData = authMapper.selectMember(account);
 
+            session.setAttribute("empId",   dbMemberInfoData.getId());
             session.setAttribute("account", dbMemberInfoData.getAccount());
             session.setAttribute("name",    dbMemberInfoData.getName());
             session.setAttribute("rank",    dbMemberInfoData.getRankId());
