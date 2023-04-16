@@ -31,10 +31,13 @@
            gender,
            email,
            access,
-           approved_at
+           joined_at,
+           approved_at,
+           del_fl WH
         FROM emp e
         JOIN dept d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
+        WHERE del_fl = false
     </select>
 
     <select id="selectMemberInfo" resultType="MemberInfo" parameterType="String">

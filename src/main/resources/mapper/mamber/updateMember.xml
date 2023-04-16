@@ -8,7 +8,7 @@
         UPDATE emp SET password = #{changePassword} WHERE account = #{account}
     </update>
 
-    <update id="deleteMember" parameterType="String">
+    <update id="updateMemberDeleteFlag" parameterType="String">
         UPDATE emp SET del_fl = 1 WHERE account = #{account}
     </update>
 </mapper>

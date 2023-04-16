@@ -3,7 +3,9 @@ package com.develop.web.domain.account.controller;
 import com.develop.web.domain.account.dto.PasswordChangeRequest;
 import com.develop.web.domain.account.service.CreateAccount;
 import com.develop.web.domain.account.dto.Member;
+import com.develop.web.domain.account.service.DeleteMember;
 import com.develop.web.domain.account.service.ModifyPassword;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -14,16 +16,12 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class AccountController {
     private final CreateAccount createAccount;
     private final ModifyPassword modifyPassword;
-
-    public AccountController(CreateAccount createAccount, ModifyPassword modifyPassword) {
-        this.createAccount = createAccount;
-        this.modifyPassword = modifyPassword;
-    }
-
+    private final DeleteMember deleteMember;
     /**
      * @description 회원가입 서비스
      * @return "redirect:/ 최초 페이지로 이동"
@@ -63,9 +61,10 @@ public class AccountController {
      * @description 직원 삭제 서비스
      * @return "redirect:/ 관리자 페이지"
      * */
-    @PostMapping("/user/delete/{account}")
+    @PostMapping("/member/delete/{account}")
     public String userDelete(@PathVariable String account){
+        deleteMember.updateMemberDeleteFlag(account);
 
-        return "redirect:/Administrator";
+        return "redirect:/management/employee";
     }
 }
