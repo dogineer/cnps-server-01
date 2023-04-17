@@ -8,6 +8,7 @@
         SELECT id,
             dept_id AS deptId,
             rank_id AS rankId,
+            team_id AS teamId,
             account,
             name,
             birth,
@@ -27,6 +28,7 @@
            e.name as name,
            r.name as rankId,
            d.name as deptId,
+           t.name as teamId,
            birth,
            gender,
            email,
@@ -35,8 +37,9 @@
            approved_at,
            del_fl WH
         FROM emp e
-        JOIN dept d on d.id = e.dept_id
+        JOIN `dept` d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
+        JOIN `team` t on t.id = e.team_id
         WHERE del_fl = false
     </select>
 
@@ -45,6 +48,7 @@
            e.name as name,
            r.name as rankId,
            d.name as deptId,
+           t.name as teamId,
            birth,
            gender,
            email,
@@ -53,6 +57,7 @@
         FROM emp e
         JOIN dept d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
+        JOIN `team` t on t.id = e.team_id
         WHERE access = 1 AND account = #{account}
     </select>
 </mapper>

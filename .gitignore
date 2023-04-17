@@ -1,7 +1,6 @@
 .DS_Store
 HELP.md
 README.md
-sql/
 .gradle
 build/
 src/main/resources/templates

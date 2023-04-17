@@ -11,4 +11,8 @@
     <update id="updateMemberDeleteFlag" parameterType="String">
         UPDATE emp SET del_fl = 1 WHERE account = #{account}
     </update>
+
+    <update id="updateMemberTeamId" parameterType="TeamUpdateParam">
+        UPDATE emp SET team_id = #{teamId} WHERE account = #{account}
+    </update>
 </mapper>

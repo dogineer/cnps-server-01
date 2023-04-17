@@ -6,6 +6,7 @@ import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.service.Login;
 import com.develop.web.domain.auth.service.UpdateAccess;
 import com.develop.web.domain.auth.service.UpdateApprovedAt;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
@@ -17,19 +18,13 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class AuthController {
     private final Login login;
     private final AuthMapper authMapper;
     private final UpdateAccess updateAccess;
     private final UpdateApprovedAt updateApprovedAt;
-
-    public AuthController(Login login, AuthMapper authMapper, UpdateAccess updateAccess, UpdateApprovedAt updateApprovedAt) {
-        this.login = login;
-        this.authMapper = authMapper;
-        this.updateAccess = updateAccess;
-        this.updateApprovedAt = updateApprovedAt;
-    }
 
     /**
      * @description 세션 로그인 서비스
@@ -49,6 +44,7 @@ public class AuthController {
             session.setAttribute("account", dbMemberInfoData.getAccount());
             session.setAttribute("name",    dbMemberInfoData.getName());
             session.setAttribute("rank",    dbMemberInfoData.getRankId());
+            session.setAttribute("teamId",  dbMemberInfoData.getTeamId());
 
             Integer rank = dbMemberInfoData.getRankId();
 

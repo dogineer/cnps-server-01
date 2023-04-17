@@ -2,6 +2,7 @@ package com.develop.web.domain.auth.mapper;
 
 import com.develop.web.domain.account.dto.Member;
 import com.develop.web.domain.account.dto.MemberInfo;
+import com.develop.web.domain.account.dto.TeamUpdateParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -25,7 +26,11 @@ public interface AuthMapper {
     void updateAccess(String account);
 
     /** @description 직원 삭제 (삭제 플래그)*/
-    void deleteMember(String account);
+    void updateMemberDeleteFlag(String account);
 
+    /** @description 직원 승인 날짜 넣기 (승인 날짜)*/
     void updateApprovedAt(String account);
+
+    /** @description 직원 팀 배정 (직원 팀 업데이트,)*/
+    void updateMemberTeamId(TeamUpdateParam param);
 }

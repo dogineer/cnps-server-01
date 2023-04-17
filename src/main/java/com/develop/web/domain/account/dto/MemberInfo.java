@@ -11,6 +11,7 @@ public class MemberInfo {
     private String name;
     private String rankId;
     private String deptId;
+    private String teamId;
     private LocalDateTime birth;
     private Byte gender;
     private String email;

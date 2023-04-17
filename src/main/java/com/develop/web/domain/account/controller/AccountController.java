@@ -1,10 +1,12 @@
 package com.develop.web.domain.account.controller;
 
 import com.develop.web.domain.account.dto.PasswordChangeRequest;
+import com.develop.web.domain.account.dto.TeamUpdateParam;
 import com.develop.web.domain.account.service.CreateAccount;
 import com.develop.web.domain.account.dto.Member;
 import com.develop.web.domain.account.service.DeleteMember;
 import com.develop.web.domain.account.service.ModifyPassword;
+import com.develop.web.domain.account.service.ModifyTeam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
@@ -22,6 +24,8 @@ public class AccountController {
     private final CreateAccount createAccount;
     private final ModifyPassword modifyPassword;
     private final DeleteMember deleteMember;
+    private final ModifyTeam modifyTeam;
+
     /**
      * @description 회원가입 서비스
      * @return "redirect:/ 최초 페이지로 이동"
@@ -66,5 +70,18 @@ public class AccountController {
         deleteMember.updateMemberDeleteFlag(account);
 
         return "redirect:/management/employee";
+    }
+
+    /**
+     * @description 직원 팀 업데이트
+     * */
+    @PostMapping("/member/team/update")
+    public String updateTeam(TeamUpdateParam param,  HttpSession session){
+        String account = (String) session.getAttribute("account");
+        param.setAccount(account);
+        System.out.println(param);
+        modifyTeam.setTeam(param);
+        session.invalidate();
+        return "redirect:/";
     }
 }
