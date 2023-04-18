@@ -16,6 +16,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
 
@@ -27,14 +28,9 @@ dependencies {
 
 	implementation group: 'org.bgee.log4jdbc-log4j2', name:'log4jdbc-log4j2-jdbc4.1', version: '1.16'
 
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-
 	implementation 'javax.xml.bind:jaxb-api'
 
-
 	implementation 'commons-io:commons-io:2.11.0'
-
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	runtimeOnly 'mysql:mysql-connector-java:8.0.28'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
