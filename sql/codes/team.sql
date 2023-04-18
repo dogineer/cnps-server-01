@@ -1,8 +1,0 @@
-CREATE TABLE `team` (
-     id BIGINT NOT NULL AUTO_INCREMENT COMMENT '팀 ID',
-     name VARCHAR(30) NOT NULL COMMENT '팀 이름',
-     emp_id BIGINT NOT NULL COMMENT '고용주 코드',
-     PRIMARY KEY (id)
-) COMMENT '팀';
-
-ALTER TABLE emp ADD FOREIGN KEY (emp_id) REFERENCES `emp`(id)
