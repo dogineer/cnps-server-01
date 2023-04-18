@@ -1,4 +1,4 @@
-package com.develop.web.domain.media.vo;
+package com.develop.web.domain.ingest.dto;
 
 public enum Codec {
     XDCAMHD422("XDCAMHD422"),

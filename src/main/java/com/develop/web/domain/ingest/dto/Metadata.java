@@ -1,4 +1,4 @@
-package com.develop.web.domain.media.vo;
+package com.develop.web.domain.ingest.dto;
 
 import lombok.Data;
 
@@ -6,7 +6,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class Metadata {
-    private LocalDateTime createDate;   // 생성 날짜
     public String filename;
     public int width;
     public int height;

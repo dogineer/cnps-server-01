@@ -1,7 +1,7 @@
-package com.develop.web.domain.media.mapper;
+package com.develop.web.domain.ingest.mapper;
 
-import com.develop.web.domain.media.vo.IngestRequestData;
-import com.develop.web.domain.media.vo.Metadata;
+import com.develop.web.domain.ingest.dto.IngestRequestData;
+import com.develop.web.domain.ingest.dto.Metadata;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

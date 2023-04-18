@@ -7,13 +7,13 @@
 
     <insert id="insertIngestRequest" parameterType="IngestRequestData">
         insert
-        into INGEST(USER_PK, TITLE, PROGRAM, NAME, PHONE, CODEC)
-        values (#{user_pk}, #{title}, #{program}, #{name}, #{phone}, #{codec})
+        into ingest(f_member_id, title, program, name, phone, codec)
+        values (#{memberId}, #{title}, #{program}, #{name}, #{phone}, #{codec})
     </insert>
 
     <insert id="insertMetadata" parameterType="Metadata">
         insert
-        into METADATA(FILE_NAME, WIDTH, HEIGHT, FORMAT_NAME, FORMAT_LONG_NAME, TAGS, DURATION, SIZE)
+        into metadata(file_name, width, height, format_name, format_long_name, tags, duration, size)
         values (#{filename}, #{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
     </insert>
 
