@@ -25,8 +25,4 @@
                       size)
         values (#{id}, #{filename}, #{ext},#{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
     </insert>
-
-    <select id="selectAllList" parameterType="IngestRequestData" resultType="map" >
-        SELECT * FROM INGEST
-    </select>
 </mapper>

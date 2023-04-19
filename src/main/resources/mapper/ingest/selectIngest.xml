@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.develop.web.domain.ingest.mapper.IngestMapper">
+    <select id="selectIngestList" resultType="IngestRequestData">
+        SELECT
+            id,
+            f_member_id,
+            create_at as createAt,
+            title,
+            program,
+            name,
+            phone,
+            codec,
+            del_fl
+            FROM ingest
+    </select>
+</mapper>

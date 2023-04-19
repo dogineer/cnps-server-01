@@ -12,3 +12,4 @@ CREATE TABLE ingest (
 ) COMMENT '인제스트 목록';
 
 ALTER TABLE `ingest` ADD FOREIGN KEY (f_member_id) REFERENCES `emp`(id)
+ALTER TABLE `ingest` ADD FOREIGN KEY (f_media_uuid) REFERENCES `metadata`(id)
