@@ -13,8 +13,17 @@
 
     <insert id="insertMetadata" parameterType="Metadata">
         insert
-        into metadata(file_name, width, height, format_name, format_long_name, tags, duration, size)
-        values (#{filename}, #{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
+        into metadata(id,
+                      file_name,
+                      ext,
+                      width,
+                      height,
+                      format_name,
+                      format_long_name,
+                      tags,
+                      duration,
+                      size)
+        values (#{id}, #{filename}, #{ext},#{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
     </insert>
 
     <select id="selectAllList" parameterType="IngestRequestData" resultType="map" >
