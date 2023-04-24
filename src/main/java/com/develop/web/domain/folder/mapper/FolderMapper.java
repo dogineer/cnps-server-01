@@ -7,6 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface FolderMapper {
-    List<FolderDto> selectFolderList();
+    List<FolderDto> selectFolderRootList();
+    List<FolderDto> selectFolderChildrenList(Integer num);
     void insertNewFolder(String name);
 }

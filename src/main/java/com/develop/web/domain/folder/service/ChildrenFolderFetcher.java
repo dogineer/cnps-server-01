@@ -9,10 +9,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RootFolderListFetcher {
+public class ChildrenFolderFetcher {
     private final FolderMapper folderMapper;
 
-    public List<FolderDto> getFolder() {
-        return folderMapper.selectFolderRootList();
+    public List<FolderDto> getChildrenFolder(Integer num){
+        return folderMapper.selectFolderChildrenList(num);
     }
 }
