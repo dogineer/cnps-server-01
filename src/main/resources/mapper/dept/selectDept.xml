@@ -15,6 +15,6 @@
             INNER JOIN emp e ON d.id = e.dept_id
             LEFT JOIN dept d2 ON d.p_id = d2.id
             LEFT JOIN dept d3 ON d2.p_id = d3.id
-        ) SELECT C.path FROM C WHERE C.account = 'admin';
+        ) SELECT C.path FROM C WHERE C.account = #{account};
     </select>
 </mapper>
