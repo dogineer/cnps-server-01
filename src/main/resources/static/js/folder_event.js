@@ -9,11 +9,27 @@ function toggleFolder(folder) {
         .then(data => {
           data.forEach(item => {
             var listItem = document.createElement('li');
-            listItem.textContent = `${item.name}`;
-            listItem.id = `F${item.id}`;
+            listItem.ariaLevel = '2'
+            listItem.ariaLabel =  `${item.id}`+'_anchor'
+            listItem.id = `${item.id}`;
+            listItem.className = 'folder-node'
+
+            var listFolder = document.createElement('i');
+            listFolder.textContent = 'folder';
+            listFolder.className = 'inline-icon material-symbols-outlined'
+
+            var listAnchor = document.createElement('a');
+            listAnchor.ariaLabel =  `${item.id}`+'_anchor'
+            listAnchor.textContent = `${item.name}`
+            listAnchor.id = `F${item.id}`;
+            listAnchor.className = 'folder-anchor'
 
             var Info = document.getElementById(`F${folder}`);
             Info.appendChild(listItem);
+
+            var Anchor = document.getElementById(`${item.id}`);
+            Anchor.appendChild(listFolder);
+            Anchor.appendChild(listAnchor);
           });
         })
         .catch(error => console.log(error, "fetch 에러!"));

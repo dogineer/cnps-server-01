@@ -1,0 +1,27 @@
+.inline-icon {
+    vertical-align: middle;
+}
+
+.folder-container {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    align-items: center;
+    font-size: 14px;
+}
+
+.folder-treeitem {
+    padding-left: 5px;
+    display: none;
+}
+
+.folder-node {
+
+}
+
+.folder-anchor{
+    padding-left: 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
