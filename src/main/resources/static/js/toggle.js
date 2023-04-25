@@ -1,8 +1,28 @@
-function toggleFolder(folder) {
+window.oncontextmenu = function () {
+  return false;
+};
+
+function sidebarToggle(){
+    var sidebar = document.getElementsByClassName('sidebar')[0];
+    sidebar.classList.toggle('collapsed');
+}
+
+function openRightClickMenu(event, folder){
+  if (event.button === 2) {
+    var folderMenu = document.getElementById(folder);
+    if (folderMenu.style.display === 'none' || folderMenu.style.display === '') {
+      folderMenu.style.display = 'block';
+    } else {
+      folderMenu.style.display = 'none';
+    }
+  }
+}
+
+function folderToggle(folder) {
   var folderP = document.getElementById('F'+folder);
 
-    if (folderP.style.display === 'none' || folderP.style.display === '') {
-      folderP.style.display = 'block';
+  if (folderP.style.display === 'none' || folderP.style.display === '') {
+    folderP.style.display = 'block';
 
       fetch('/folder/show/' + folder)
         .then(response => response.json())
@@ -43,5 +63,6 @@ function toggleFolder(folder) {
           Info.removeChild(Info.firstChild);
         }
       }
-    }
+  }
 }
+

@@ -21,10 +21,9 @@ public class FolderController {
     private final ChildrenFolderFetcher childrenFolderFetcher;
 
     @PostMapping("/create")
-    @Operation(summary = "상위 폴더 조회", description = "상위 폴더에 해당하는 폴더만 조회합니다.")
-    public String createNewFolder(String name){
-        createNewFolder.addFolder(name);
-        return "redirect:/home";
+    @Operation(summary = "폴더 생성", description = "폴더를 생성합니다.")
+    public void createNewFolder(@RequestBody FolderDto folderDto){
+        createNewFolder.addFolder(folderDto);
     }
 
     @GetMapping("/show/{num}")

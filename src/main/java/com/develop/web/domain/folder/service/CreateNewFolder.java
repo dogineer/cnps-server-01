@@ -1,5 +1,6 @@
 package com.develop.web.domain.folder.service;
 
+import com.develop.web.domain.folder.dto.FolderDto;
 import com.develop.web.domain.folder.mapper.FolderMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class CreateNewFolder {
     private final FolderMapper folderMapper;
 
-    public void addFolder(String name) {
-        folderMapper.insertNewFolder(name);
+    public void addFolder(FolderDto folderDto) {
+        folderMapper.insertNewFolder(folderDto);
     }
 }

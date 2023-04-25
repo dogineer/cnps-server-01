@@ -9,5 +9,5 @@ import java.util.List;
 public interface FolderMapper {
     List<FolderDto> selectFolderRootList();
     List<FolderDto> selectFolderChildrenList(Integer num);
-    void insertNewFolder(String name);
+    void insertNewFolder(FolderDto folderDto);
 }
