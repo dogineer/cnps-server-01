@@ -1,4 +1,4 @@
-package com.develop.web.domain.media.ingest.service;
+package com.develop.web.domain.media.upload.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;

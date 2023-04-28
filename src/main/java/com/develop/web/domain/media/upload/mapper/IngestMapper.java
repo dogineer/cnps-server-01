@@ -1,7 +1,7 @@
-package com.develop.web.domain.media.ingest.mapper;
+package com.develop.web.domain.media.upload.mapper;
 
-import com.develop.web.domain.media.ingest.dto.IngestRequestData;
-import com.develop.web.domain.media.ingest.dto.Metadata;
+import com.develop.web.domain.media.upload.dto.IngestRequestData;
+import com.develop.web.domain.media.upload.dto.Metadata;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

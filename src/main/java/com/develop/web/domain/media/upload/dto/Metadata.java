@@ -1,8 +1,6 @@
-package com.develop.web.domain.media.ingest.dto;
+package com.develop.web.domain.media.upload.dto;
 
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 @Data
 public class Metadata {

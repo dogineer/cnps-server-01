@@ -1,7 +1,7 @@
 package com.develop.web.domain.media.ingest.service;
 
-import com.develop.web.domain.media.ingest.dto.IngestRequestData;
-import com.develop.web.domain.media.ingest.mapper.IngestMapper;
+import com.develop.web.domain.media.upload.dto.IngestRequestData;
+import com.develop.web.domain.media.upload.mapper.IngestMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.develop.web.domain.media.ingest.service;
+package com.develop.web.domain.media.upload.service;
 
-import com.develop.web.domain.media.ingest.dto.Metadata;
-import com.develop.web.domain.media.ingest.mapper.IngestMapper;
+import com.develop.web.domain.media.upload.dto.Metadata;
+import com.develop.web.domain.media.upload.mapper.IngestMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;

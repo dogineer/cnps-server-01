@@ -1,4 +1,4 @@
-package com.develop.web.domain.media.ingest.dto;
+package com.develop.web.domain.media.upload.dto;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

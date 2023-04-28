@@ -1,6 +1,6 @@
 package com.develop.web.domain.media.groupclip.mapper;
 
-import com.develop.web.domain.media.ingest.dto.IngestRequestData;
+import com.develop.web.domain.media.upload.dto.IngestRequestData;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
