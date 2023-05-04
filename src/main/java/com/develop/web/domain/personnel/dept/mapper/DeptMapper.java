@@ -10,6 +10,9 @@ import java.util.List;
 public interface DeptMapper {
     void insertDept(NewDeptDto deptDto);
     void deleteDept(Integer deptId);
+
     List<DeptDto> selectDeptList();
+    List<DeptDto> selectTopDept();
+
     String selectDetailDept(String account);
 }

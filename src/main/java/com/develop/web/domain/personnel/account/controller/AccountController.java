@@ -6,6 +6,8 @@ import com.develop.web.domain.personnel.account.service.CreateAccount;
 import com.develop.web.domain.personnel.account.dto.Member;
 import com.develop.web.domain.personnel.account.service.ModifyPassword;
 import com.develop.web.domain.personnel.account.service.ModifyTeam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
+@Tag(name = "사용자 > 인사 관리", description = "사용자 권한 인사 관리")
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class AccountController {
@@ -24,11 +27,8 @@ public class AccountController {
     private final ModifyPassword modifyPassword;
     private final ModifyTeam modifyTeam;
 
-    /**
-     * @description 회원가입 서비스
-     * @return "redirect:/ 최초 페이지로 이동"
-     * */
     @PostMapping(value = "/signup")
+    @Operation(summary = "회원가입", description = "회원가입에 양식의 데이터를 서버에 저장합니다.")
     public String createAccount(Member member) {
         try {
             createAccount.addMember(member);
@@ -39,11 +39,8 @@ public class AccountController {
         return "redirect:/";
     }
 
-    /*
-     * @description 비밀번호 변경 서비스
-     * @return "redirect:/ 최초 페이지로 이동"
-     * */
-    @PostMapping("/changePassword")
+    @PutMapping("/changePassword")
+    @Operation(summary = "비밀번호 변경", description = "새로운 비밀번호로 변경합니다.")
     public String changePassword(PasswordChangeRequest passwordChangeRequest, HttpSession session) {
         String account = (String) session.getAttribute("account");
 
@@ -59,10 +56,8 @@ public class AccountController {
         return "redirect:/";
     }
 
-    /**
-     * @description 직원 팀 업데이트
-     * */
-    @PostMapping("/member/team/update")
+    @PutMapping("/member/team/update")
+    @Operation(summary = "처음 사용자 팀 변경", description = "처음 사용자의 팀을 변경합니다.")
     public String updateTeam(TeamUpdateParam param,  HttpSession session){
         String account = (String) session.getAttribute("account");
         param.setAccount(account);
