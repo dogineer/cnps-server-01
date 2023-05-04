@@ -1,7 +1,6 @@
 package com.develop.web.domain.media.upload.controller;
 
-import com.develop.web.domain.media.ingest.service.CreateIngestPost;
-import com.develop.web.domain.media.upload.dto.IngestRequestData;
+import com.develop.web.domain.media.ingest.dto.IngestRequestData;
 import com.develop.web.domain.media.upload.service.FileChecker;
 import com.develop.web.domain.media.upload.service.UploadFileToServer;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,8 +11,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,23 +22,21 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @RequestMapping(value = "/archive")
 public class UploadController {
-    private final CreateIngestPost createIngestPost;
     private final UploadFileToServer uploadFileToServer;
     private final FileChecker fileChecker;
 
     @PostMapping(value = "/upload")
-    @Operation(summary = "업로드", description = "영상을 업로드 합니다.")
-    public String MediaUpload(IngestRequestData data){
-
-        Resource mediaFiles = data.getFiles().getResource();
+    @Operation(summary = "업로드", description = "컨버팅을 거치지 않고 영상을 업로드 합니다.")
+    public void MediaUpload(MultipartFile files, HttpServletResponse response) throws IOException {
+        String redirect_uri="redirect:/";
+        Resource mediaFiles = files.getResource();
 
         try{
             fileChecker.fileNull(mediaFiles);
             uploadFileToServer.upload(mediaFiles);
+    	    response.sendRedirect(redirect_uri);
         }catch (NullPointerException e){
             log.error(e.getMessage());
         }
-
-        return "redirect:/home";
     }
 }

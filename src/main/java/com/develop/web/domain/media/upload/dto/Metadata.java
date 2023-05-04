@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class Metadata {
-    public String id;
-    public Integer p_id;
+    public String clip_uuid;
+    public String file_path;
     public String filename;
     public String ext;
     public int width;

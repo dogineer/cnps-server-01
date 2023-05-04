@@ -1,21 +1,21 @@
 package com.develop.web.domain.media.ingest.service;
 
-import com.develop.web.domain.media.upload.mapper.IngestMapper;
-import com.develop.web.domain.media.upload.dto.IngestRequestData;
+import com.develop.web.domain.media.upload.mapper.UploadMapper;
+import com.develop.web.domain.media.ingest.dto.IngestRequestData;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CreateIngestPost {
 
-    private final IngestMapper ingestMapper;
+    private final UploadMapper uploadMapper;
 
-    public CreateIngestPost(IngestMapper ingestMapper) {
-        this.ingestMapper = ingestMapper;
+    public CreateIngestPost(UploadMapper uploadMapper) {
+        this.uploadMapper = uploadMapper;
     }
 
     /** @description 인제스트 요청 글 작성 */
     public void addIngestRequest(IngestRequestData requestData) {
 
-        ingestMapper.insertIngestRequest(requestData); // 글 작성
+        uploadMapper.insertIngestRequest(requestData); // 글 작성
     }
 }
