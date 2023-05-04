@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.develop.web.domain.media.clip.mapper.ClipMapper">
+    <select id="selectClipList" resultType="ClipDto">
+        select
+            c.id as clip_id,
+            c.ingest_id,
+            i.title as `ingest_name`,
+            c.team_id,
+            t.name as `team_name`,
+            c.folder_id,
+            f.name as `folder_name`,
+            c.a_metadata_id,
+            a.* from clip c
+        left join ingest i on i.id = c.ingest_id
+        left join team t on t.id = c.team_id
+        left join folder f on f.id = c.folder_id
+        left join a_metadata a on a.id = c.a_metadata_id
+    </select>
+</mapper>

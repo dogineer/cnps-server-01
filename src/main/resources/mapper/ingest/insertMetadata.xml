@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.develop.web.domain.media.upload.mapper.UploadMapper">
+
+    <insert id="insertMetadata" parameterType="Metadata">
+        insert
+        into a_metadata(
+                      clip_uuid,
+                      file_path,
+                      file_name,
+                      ext,
+                      width,
+                      height,
+                      format_name,
+                      format_long_name,
+                      tags,
+                      duration,
+                      size)
+        values (#{clip_uuid},#{file_path}, #{filename}, #{ext},#{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
+    </insert>
+
+    <insert id="insertEditMetadata" parameterType="Metadata">
+        insert
+        into e_metadata(id,
+                      file_name,
+                      ext,
+                      width,
+                      height,
+                      format_name,
+                      format_long_name,
+                      tags,
+                      duration,
+                      size)
+        values (#{id}, #{filename}, #{ext},#{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
+    </insert>
+</mapper>

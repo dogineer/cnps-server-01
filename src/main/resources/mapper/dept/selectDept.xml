@@ -9,12 +9,16 @@
     </select>
 
     <select id="selectDetailDept" parameterType="String" resultType="String">
-        WITH RECURSIVE C AS (
-            SELECT e.account, d.id, d.p_id, d.name, e.name AS member, CONCAT_WS(' > ',d3.name, d2.name, d.name, e.name) AS path
+         WITH RECURSIVE C AS (
+            SELECT e.account, d.id, d.p_id, d.name, CONCAT_WS(' > ',d3.name, d2.name, d.name) AS path
             FROM dept d
             INNER JOIN emp e ON d.id = e.dept_id
             LEFT JOIN dept d2 ON d.p_id = d2.id
             LEFT JOIN dept d3 ON d2.p_id = d3.id
-        ) SELECT C.path FROM C WHERE C.account = #{account};
+        ) SELECT C.path FROM C WHERE C.account = #{account}
+    </select>
+
+    <select id="selectTopDept" resultType="DeptDto">
+        SELECT id, name FROM dept WHERE p_id = 1 AND id != 1
     </select>
 </mapper>
