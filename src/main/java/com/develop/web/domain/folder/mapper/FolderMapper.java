@@ -1,5 +1,6 @@
 package com.develop.web.domain.folder.mapper;
 
+import com.develop.web.domain.folder.dto.FolderClipDto;
 import com.develop.web.domain.folder.dto.FolderDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,5 +10,6 @@ import java.util.List;
 public interface FolderMapper {
     List<FolderDto> selectFolderRootList();
     List<FolderDto> selectFolderChildrenList(Integer num);
+    List<FolderClipDto> selectFolderClipData(Integer folderId);
     void insertNewFolder(FolderDto folderDto);
 }

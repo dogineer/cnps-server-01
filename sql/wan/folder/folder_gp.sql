@@ -5,3 +5,20 @@ CREATE TABLE `folder_gp` (
 ) COMMENT '폴더 팀 그룹';
 
 ALTER TABLE `folder` ADD FOREIGN KEY (p_id) REFERENCES `folder`(id)
+
+select
+    c.id as clip_id,
+    c.ingest_id,
+    i.title as `ingest_name`,
+    c.team_id,
+    t.name as `team_name`,
+    c.folder_id,
+    f.name as `folder_name`,
+    c.a_metadata_id,
+    a.* from clip c
+left join ingest i on i.id = c.ingest_id
+left join team t on t.id = c.team_id
+left join folder f on f.id = c.folder_id
+left join a_metadata a on a.id = c.a_metadata_id
+
+where c.folder_id = 4

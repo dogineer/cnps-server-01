@@ -18,6 +18,61 @@ function openRightClickMenu(event, folder){
   }
 }
 
+function getClipElementById(id_name) {
+  return document.getElementById(`clip-${id_name}`);
+}
+
+function clearClipFields() {
+  const clipFields =
+      [
+          'ingest_name',
+          'team_id',
+          'team_name',
+          'folder_name',
+          'file_name',
+          'file_path',
+          'file_format',
+          'file_size'
+      ];
+
+  clipFields.forEach((id_name) => {
+    getClipElementById(id_name).innerHTML = "";
+  });
+}
+
+function clickFolder(folderId){
+  fetch('/folder/select/' + folderId,{
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+      })
+      .then(function(response){
+            if(response.ok){
+                console.log('GET success. folder id = ', folderId);
+                return response.json()
+            }
+            throw new Error('GET failed.');
+            })
+      .then(item => {
+        console.log(item)
+        clearClipFields()
+
+        item.forEach(item => {
+            getClipElementById('ingest_name').innerHTML = item.ingest_name;
+            getClipElementById('team_id').innerHTML = item.team_id;
+            getClipElementById('team_name').innerHTML = item.team_name;
+            getClipElementById('folder_name').innerHTML = item.folder_name;
+            getClipElementById('file_name').innerHTML = item.file_name;
+            getClipElementById('file_path').innerHTML = item.file_path;
+            getClipElementById('file_format').innerHTML = item.format_long_name;
+            getClipElementById('file_size').innerHTML = item.file_size;
+        })
+      })
+  .catch(error => {
+      console.log(error, "폴더 정보를 가져오지 못했습니다.")
+      alert('폴더 정보를 가져오지 못했습니다.');
+  });
+}
+
 function folderToggle(folder) {
   var folderP = document.getElementById('F'+folder);
 
@@ -43,6 +98,8 @@ function folderToggle(folder) {
             listAnchor.textContent = `${item.name}`
             listAnchor.id = `F${item.id}`;
             listAnchor.className = 'folder-anchor'
+            listAnchor.setAttribute('onclick',`clickFolder(${item.id})`)
+
 
             var Info = document.getElementById(`F${folder}`);
             Info.appendChild(listItem);
