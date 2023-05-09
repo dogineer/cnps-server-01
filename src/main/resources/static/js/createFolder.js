@@ -1,23 +1,26 @@
-function createFolder(name, p_id) {
-    console.log("create folder", name, p_id);
+function createFolder(folderId) {
 
-    const folderDto = {
-        name: name,
-        p_id: p_id
-    };
+    const folderName = document.querySelector('input[name="folder_name"]').value;
+    console.log("create folder", folderName, folderId);
 
-    console.log("folderDto \n", folderDto);
+    if (folderName === "" || folderId === null){
+        alert("값이 정상적으로 입력 되지 않았습니다.")
+    } else {
+        const folderDto = {
+            name: folderName,
+            p_id: folderId
+        };
 
-    fetch('folder/create', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(folderDto)})
-        .then(response => response.json())
-        .then(data => {
-            console.log('성공이요:', data);
-        }).catch((error) => {
-            console.error('나가죽으세여ㅛ:', error);
-        });
+        fetch('folder/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(folderDto)})
+            .then(data => {
+                console.log('폴더 DB에 저장되었습니다. :', data);
+            }).catch((error) => {
+                console.error('데이터 값이 잘못됐습니다. :', error);
+            });
+    }
 }
