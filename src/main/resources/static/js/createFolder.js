@@ -1,6 +1,6 @@
 function createFolder(folderId) {
 
-    const folderName = document.querySelector('input[name="folder_name"]').value;
+    const folderName = document.querySelector('input[name="folder_name_' + folderId + '"]').value;
     console.log("create folder", folderName, folderId);
 
     if (folderName === "" || folderId === null){
@@ -23,4 +23,8 @@ function createFolder(folderId) {
                 console.error('데이터 값이 잘못됐습니다. :', error);
             });
     }
+}
+
+function deleteFolder() {
+
 }
