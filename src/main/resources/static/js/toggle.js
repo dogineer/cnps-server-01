@@ -18,13 +18,14 @@ function openRightClickMenu(event, folder){
   }
 }
 
-function getClipElementById(id_name) {
-  return document.getElementById(`clip-${id_name}`);
+function getElementsByClassName(id_name) {
+  return document.getElementsByClassName(`clip-${id_name}`);
 }
 
 function clearClipFields() {
   const clipFields =
       [
+          'count',
           'ingest_name',
           'team_id',
           'team_name',
@@ -36,41 +37,23 @@ function clearClipFields() {
       ];
 
   clipFields.forEach((id_name) => {
-    getClipElementById(id_name).innerHTML = "";
+    const elements = getElementsByClassName(id_name);
+
+    for (let i = 0; i < elements.length; i++) {
+      // elements[i].innerHTML = '';
+        elements[i].remove()
+    }
   });
 }
 
-function clickFolder(folderId){
-  fetch('/folder/select/' + folderId,{
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-      })
-      .then(function(response){
-            if(response.ok){
-                console.log('GET success. folder id = ', folderId);
-                return response.json()
-            }
-            throw new Error('GET failed.');
-            })
-      .then(item => {
-        console.log(item)
-        clearClipFields()
+function clearClipTrField(){
+    const elements = document.getElementById('clipListBody')
 
-        item.forEach(item => {
-            getClipElementById('ingest_name').innerHTML = item.ingest_name;
-            getClipElementById('team_id').innerHTML = item.team_id;
-            getClipElementById('team_name').innerHTML = item.team_name;
-            getClipElementById('folder_name').innerHTML = item.folder_name;
-            getClipElementById('file_name').innerHTML = item.file_name;
-            getClipElementById('file_path').innerHTML = item.file_path;
-            getClipElementById('file_format').innerHTML = item.format_long_name;
-            getClipElementById('file_size').innerHTML = item.file_size;
-        })
-      })
-  .catch(error => {
-      console.log(error, "폴더 정보를 가져오지 못했습니다.")
-      alert('폴더 정보를 가져오지 못했습니다.');
-  });
+    if (elements !== null){
+        elements.replaceChildren()
+    }
+
+    return elements
 }
 
 function folderToggle(folder) {
@@ -121,5 +104,84 @@ function folderToggle(folder) {
         }
       }
   }
+}
+
+function clickFolder(folderId){
+  fetch('/folder/select/' + folderId,{
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+      })
+      .then(function(response){
+        if(response.ok){
+          console.log('GET success. folder id = ', folderId);
+          return response.json()
+          }
+          throw new Error('GET failed.');
+          })
+      .then(item => {
+        console.log(item)
+        var parent = clearClipTrField()
+
+        item.forEach((item, index) => {
+          var tr = document.createElement('tr')
+          parent.appendChild(tr)
+
+          tr.className = 'clip-edit'
+          tr.setAttribute('data-clip-id',    item.clip_id)
+          tr.setAttribute('data-clip-title', item.file_name)
+          tr.setAttribute('onClick', 'evalScript(\'$._PPP_.importCustomFiles("' + item.file_path + '")\')')
+
+          var count = document.createElement('td')
+          var ingestName = document.createElement('td')
+          var teamId = document.createElement('td')
+          var teamName = document.createElement('td')
+          var folderName = document.createElement('td')
+          var fileName = document.createElement('td')
+          var filePath = document.createElement('td')
+          var fileFormat = document.createElement('td')
+          var fileSize = document.createElement('td')
+
+          tr.appendChild(count)
+          tr.appendChild(ingestName)
+          tr.appendChild(teamId)
+          tr.appendChild(teamName)
+          tr.appendChild(folderName)
+          tr.appendChild(fileName)
+          tr.appendChild(filePath)
+          tr.appendChild(fileFormat)
+          tr.appendChild(fileSize)
+
+          count.className = 'clip-count'
+          count.innerText = index+1
+
+          ingestName.className = 'clip-ingest_name'
+          ingestName.innerText = item.ingest_name
+
+          teamId.className = 'clip-team_id'
+          teamId.innerText = item.team_id
+
+          teamName.className = 'clip-team_name'
+          teamName.innerText = item.team_name
+
+          folderName.className = 'clip-folder_name'
+          folderName.innerText = item.folder_name
+
+          fileName.className = 'clip-file_name'
+          fileName.innerText = item.file_name
+
+          filePath.className = 'clip-file_path'
+          filePath.innerText = item.file_path
+
+          fileFormat.className = 'clip-file_format'
+          fileFormat.innerText = item.format_long_name
+
+          fileSize.className = 'clip-file_size'
+          fileSize.innerText = item.size
+        })
+      })
+  .catch(error => {
+      console.log(error, "폴더 정보를 가져오지 못했습니다.")
+      alert('폴더 정보를 가져오지 못했습니다.');
+  });
 }
 
