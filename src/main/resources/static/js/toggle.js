@@ -22,29 +22,29 @@ function getElementsByClassName(id_name) {
   return document.getElementsByClassName(`clip-${id_name}`);
 }
 
-function clearClipFields() {
-  const clipFields =
-      [
-          'count',
-          'ingest_name',
-          'team_id',
-          'team_name',
-          'folder_name',
-          'file_name',
-          'file_path',
-          'file_format',
-          'file_size'
-      ];
-
-  clipFields.forEach((id_name) => {
-    const elements = getElementsByClassName(id_name);
-
-    for (let i = 0; i < elements.length; i++) {
-      // elements[i].innerHTML = '';
-        elements[i].remove()
-    }
-  });
-}
+// function clearClipFields() {
+//   const clipFields =
+//       [
+//           'count',
+//           'ingest_name',
+//           'team_id',
+//           'team_name',
+//           'folder_name',
+//           'file_name',
+//           'file_path',
+//           'file_format',
+//           'file_size'
+//       ];
+//
+//   clipFields.forEach((id_name) => {
+//     const elements = getElementsByClassName(id_name);
+//
+//     for (let i = 0; i < elements.length; i++) {
+//       // elements[i].innerHTML = '';
+//         elements[i].remove()
+//     }
+//   });
+// }
 
 function clearClipTrField(){
     const elements = document.getElementById('clipListBody')
@@ -132,6 +132,7 @@ function clickFolder(folderId){
           tr.setAttribute('onClick', 'evalScript(\'$._PPP_.importCustomFiles("' + item.file_path + '")\')')
 
           var count = document.createElement('td')
+          var preview = document.createElement('td')
           var ingestName = document.createElement('td')
           var teamId = document.createElement('td')
           var teamName = document.createElement('td')
@@ -141,7 +142,11 @@ function clickFolder(folderId){
           var fileFormat = document.createElement('td')
           var fileSize = document.createElement('td')
 
+          var previewAtag = document.createElement('a')
+          var previewSpanIcon = document.createElement('span')
+
           tr.appendChild(count)
+          tr.appendChild(preview)
           tr.appendChild(ingestName)
           tr.appendChild(teamId)
           tr.appendChild(teamName)
@@ -153,6 +158,18 @@ function clickFolder(folderId){
 
           count.className = 'clip-count'
           count.innerText = index+1
+
+          preview.className = 'clip-preview'
+          preview.appendChild(previewAtag)
+          previewAtag.setAttribute("type", "button")
+          previewAtag.setAttribute("data-clip-id", item.clip_id)
+          previewAtag.setAttribute("data-clip-title", item.file_name)
+          previewAtag.setAttribute("data-clip-path", item.file_path)
+          previewAtag.setAttribute("onclick","clipPreview(this)")
+
+          previewAtag.appendChild(previewSpanIcon)
+          previewSpanIcon.setAttribute("class", "span-icon material-symbols-outlined")
+          previewSpanIcon.innerText = "youtube_activity"
 
           ingestName.className = 'clip-ingest_name'
           ingestName.innerText = item.ingest_name
