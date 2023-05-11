@@ -1,27 +1,27 @@
 function clipPreview(clip) {
-    var clipId = clip.getAttribute('data-clip-id')
-    var clipTitle = clip.getAttribute('data-clip-title')
-    var clipPath = clip.getAttribute('data-clip-path')
+  var clipId = clip.getAttribute('data-clip-id')
+  var clipTitle = clip.getAttribute('data-clip-title')
+  var clipPath = clip.getAttribute('data-clip-path')
 
-    var clipData = {
-        "clip":{
-         "id": clipId,
-         "title": clipTitle,
-         "path": clipPath
-        }
+  var clipData = {
+    "clip": {
+      "id": clipId,
+      "title": clipTitle,
+      "path": clipPath
     }
+  }
 
-    var modal = document.getElementById("modal")
-    var modalClipPreview = document.createElement("div")
-    var videoTag = document.createElement("video")
-    var source = document.createElement("source")
+  var modal = document.getElementById("modal")
+  var modalClipPreview = document.createElement("div")
+  var videoTag = document.createElement("video")
+  var source = document.createElement("source")
 
-    modal.appendChild(modalClipPreview)
-    modalClipPreview.appendChild(videoTag)
-    videoTag.appendChild(source)
+  modal.appendChild(modalClipPreview)
+  modalClipPreview.appendChild(videoTag)
+  videoTag.appendChild(source)
 
-    modalClipPreview.setAttribute("class", "clip-preview")
-    source.setAttribute("type", "video/mp4")
-    source.setAttribute("src", "http://localhost:8081/streaming/"+clipData.clip.title)
+  modalClipPreview.setAttribute("class", "clip-preview")
+  source.setAttribute("type", "video/mp4")
+  source.setAttribute("src", "http://localhost:8081/streaming/" + clipData.clip.title)
 
 }

@@ -2,12 +2,12 @@ window.oncontextmenu = function () {
   return false;
 };
 
-function sidebarToggle(){
-    var sidebar = document.getElementsByClassName('sidebar')[0];
-    sidebar.classList.toggle('collapsed');
+function sidebarToggle() {
+  var sidebar = document.getElementsByClassName('sidebar')[0];
+  sidebar.classList.toggle('collapsed');
 }
 
-function openRightClickMenu(event, folder){
+function openRightClickMenu(event, folder) {
   if (event.button === 2) {
     var folderMenu = document.getElementById(folder);
     if (folderMenu.style.display === 'none' || folderMenu.style.display === '') {
@@ -46,29 +46,29 @@ function getElementsByClassName(id_name) {
 //   });
 // }
 
-function clearClipTrField(){
-    const elements = document.getElementById('clipListBody')
+function clearClipTrField() {
+  const elements = document.getElementById('clipListBody')
 
-    if (elements !== null){
-        elements.replaceChildren()
-    }
+  if (elements !== null) {
+    elements.replaceChildren()
+  }
 
-    return elements
+  return elements
 }
 
 function folderToggle(folder) {
-  var folderP = document.getElementById('F'+folder);
+  var folderP = document.getElementById('F' + folder);
 
   if (folderP.style.display === 'none' || folderP.style.display === '') {
     folderP.style.display = 'block';
 
-      fetch('/folder/show/' + folder)
+    fetch('/folder/show/' + folder)
         .then(response => response.json())
         .then(data => {
           data.forEach(item => {
             var listItem = document.createElement('li');
             listItem.ariaLevel = '2'
-            listItem.ariaLabel =  `${item.id}`+'_anchor'
+            listItem.ariaLabel = `${item.id}` + '_anchor'
             listItem.id = `${item.id}`;
             listItem.className = 'folder-node'
 
@@ -77,11 +77,11 @@ function folderToggle(folder) {
             listFolder.className = 'inline-icon material-symbols-outlined'
 
             var listAnchor = document.createElement('a');
-            listAnchor.ariaLabel =  `${item.id}`+'_anchor'
+            listAnchor.ariaLabel = `${item.id}` + '_anchor'
             listAnchor.textContent = `${item.name}`
             listAnchor.id = `F${item.id}`;
             listAnchor.className = 'folder-anchor'
-            listAnchor.setAttribute('onclick',`clickFolder(${item.id})`)
+            listAnchor.setAttribute('onclick', `clickFolder(${item.id})`)
 
 
             var Info = document.getElementById(`F${folder}`);
@@ -93,31 +93,31 @@ function folderToggle(folder) {
           });
         })
         .catch(error => console.log(error, "fetch 에러!"));
-    } else {
-      folderP.style.display = 'none';
+  } else {
+    folderP.style.display = 'none';
 
-      var Info = document.getElementById(`F${folder}`);
+    var Info = document.getElementById(`F${folder}`);
 
-      if (Info) {
-        while (Info.firstChild) {
-          Info.removeChild(Info.firstChild);
-        }
+    if (Info) {
+      while (Info.firstChild) {
+        Info.removeChild(Info.firstChild);
       }
+    }
   }
 }
 
-function clickFolder(folderId){
-  fetch('/folder/select/' + folderId,{
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-      })
-      .then(function(response){
-        if(response.ok){
+function clickFolder(folderId) {
+  fetch('/folder/select/' + folderId, {
+    method: 'GET',
+    headers: {'Content-Type': 'application/json'},
+  })
+      .then(function (response) {
+        if (response.ok) {
           console.log('GET success. folder id = ', folderId);
           return response.json()
-          }
-          throw new Error('GET failed.');
-          })
+        }
+        throw new Error('GET failed.');
+      })
       .then(item => {
         console.log(item)
         var parent = clearClipTrField()
@@ -127,7 +127,7 @@ function clickFolder(folderId){
           parent.appendChild(tr)
 
           tr.className = 'clip-edit'
-          tr.setAttribute('data-clip-id',    item.clip_id)
+          tr.setAttribute('data-clip-id', item.clip_id)
           tr.setAttribute('data-clip-title', item.file_name)
           tr.setAttribute('onClick', 'evalScript(\'$._PPP_.importCustomFiles("' + item.file_path + '")\')')
 
@@ -157,7 +157,7 @@ function clickFolder(folderId){
           tr.appendChild(fileSize)
 
           count.className = 'clip-count'
-          count.innerText = index+1
+          count.innerText = index + 1
 
           preview.className = 'clip-preview'
           preview.appendChild(previewAtag)
@@ -165,7 +165,7 @@ function clickFolder(folderId){
           previewAtag.setAttribute("data-clip-id", item.clip_id)
           previewAtag.setAttribute("data-clip-title", item.file_name)
           previewAtag.setAttribute("data-clip-path", item.file_path)
-          previewAtag.setAttribute("onclick","clipPreview(this)")
+          previewAtag.setAttribute("onclick", "clipPreview(this)")
 
           previewAtag.appendChild(previewSpanIcon)
           previewSpanIcon.setAttribute("class", "span-icon material-symbols-outlined")
@@ -196,9 +196,9 @@ function clickFolder(folderId){
           fileSize.innerText = item.size
         })
       })
-  .catch(error => {
-      console.log(error, "폴더 정보를 가져오지 못했습니다.")
-      alert('폴더 정보를 가져오지 못했습니다.');
-  });
+      .catch(error => {
+        console.log(error, "폴더 정보를 가져오지 못했습니다.")
+        alert('폴더 정보를 가져오지 못했습니다.');
+      });
 }
 
