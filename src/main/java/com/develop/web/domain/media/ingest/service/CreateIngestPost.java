@@ -16,6 +16,6 @@ public class CreateIngestPost {
     /** @description 인제스트 요청 글 작성 */
     public void addIngestRequest(IngestRequestData requestData) {
 
-        uploadMapper.insertIngestRequest(requestData); // 글 작성
+        uploadMapper.insertIngestRequest(requestData);
     }
 }

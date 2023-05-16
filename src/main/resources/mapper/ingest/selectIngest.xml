@@ -14,7 +14,8 @@
             name,
             phone,
             codec,
-            del_fl
+            del_fl,
+            success
             FROM ingest
     </select>
 </mapper>

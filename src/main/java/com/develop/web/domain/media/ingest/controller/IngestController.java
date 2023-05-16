@@ -33,7 +33,7 @@ public class IngestController {
 
     @PostMapping(value = "/ingest/add")
     @Operation(summary = "인제스트", description = "인제스트를 추가합니다.")
-    public void ingestRequset(IngestRequestData ingestRequestData,  HttpSession session){
+    public String ingestRequset(IngestRequestData ingestRequestData,  HttpSession session){
         Integer memberId = session.getAttribute("empId").hashCode();
 
         ingestRequestData.setMemberId(memberId);
@@ -41,13 +41,15 @@ public class IngestController {
 
         Resource mediaFiles = ingestRequestData.getFiles().getResource();
 
+        Integer ingestId = ingestRequestData.getId();
+
         try{
             fileChecker.fileNull(mediaFiles);
-            uploadFileToServer.upload(mediaFiles);
+            uploadFileToServer.upload(mediaFiles, ingestId);
 
             ResultRequestData requestData = new ResultRequestData();
 
-            requestData.ingest_id = 1;
+            requestData.ingest_id = ingestRequestData.getId();
             requestData.team_id = 1;
             requestData.folder_id = 1;
             requestData.e_metadata_id = 1;
@@ -58,6 +60,8 @@ public class IngestController {
         }catch (NullPointerException e){
             log.error(e.getMessage());
         }
+
+        return "pages/ingest";
     }
 
     @GetMapping(value = "/ingest/list")

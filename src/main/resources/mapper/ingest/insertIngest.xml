@@ -9,5 +9,8 @@
         insert
         into ingest(member_id, title, program, name, phone, codec)
         values (#{memberId}, #{title}, #{program}, #{name}, #{phone}, #{codec})
+        <selectKey resultType="Int" keyProperty="id" keyColumn="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 </mapper>
