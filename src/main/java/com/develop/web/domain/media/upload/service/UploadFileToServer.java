@@ -7,6 +7,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -18,21 +20,25 @@ public class UploadFileToServer {
 
     public WebClient webClient() {
         return WebClient
-                .builder()
-                .baseUrl("http://localhost:8081")
-                .build();
-        }
+              .builder()
+              .baseUrl("http://localhost:8081")
+              .build();
+    }
 
-    public void upload(Resource file){
+    public void upload(Resource files, Integer ingestId) {
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("files", files);
+        body.add("ingestId", ingestId);
+
         webClient()
-            .method(HttpMethod.POST)
-            .uri("/api/upload/")
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromMultipartData("files", file))
-            .retrieve()
-            .bodyToMono(Metadata.class)
-            .doOnSuccess(uploadMapper::insertMetadata)
-            .block();
+              .method(HttpMethod.POST)
+              .uri("/api/upload/")
+              .accept(MediaType.APPLICATION_JSON)
+              .contentType(MediaType.APPLICATION_JSON)
+              .body(BodyInserters.fromMultipartData(body))
+              .retrieve()
+              .bodyToMono(Metadata.class)
+              .doOnSuccess(uploadMapper::insertMetadata)
+              .block();
     }
 }
