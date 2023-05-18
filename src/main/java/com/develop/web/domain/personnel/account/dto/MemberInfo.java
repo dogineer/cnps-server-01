@@ -9,9 +9,12 @@ import java.util.Date;
 public class MemberInfo {
     private String account;
     private String name;
-    private String rankId;
-    private String deptId;
-    private String teamId;
+    private String rankName;
+    private String deptName;
+    private String teamName;
+    private Integer rankId;
+    private Integer deptId;
+    private Integer teamId;
     private String birth;
     private Byte gender;
     private String email;
