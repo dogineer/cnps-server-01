@@ -25,12 +25,12 @@ public class UploadFileToServer {
               .build();
     }
 
-    public void upload(Resource files, Integer ingestId) {
+    public Metadata upload(Resource files, Integer ingestId) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
         body.add("ingestId", ingestId);
 
-        webClient()
+        return webClient()
               .method(HttpMethod.POST)
               .uri("/api/upload/")
               .accept(MediaType.APPLICATION_JSON)

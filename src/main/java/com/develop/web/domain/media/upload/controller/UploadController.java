@@ -32,7 +32,7 @@ public class UploadController {
 
     try {
       fileChecker.fileNull(mediaFiles);
-      uploadFileToServer.upload(mediaFiles);
+      uploadFileToServer.upload(mediaFiles, 1);
       response.sendRedirect(redirect_uri);
     } catch (NullPointerException e) {
       log.error(e.getMessage());
