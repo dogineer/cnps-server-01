@@ -20,6 +20,9 @@
                       duration,
                       size)
         values (#{clip_uuid},#{file_path}, #{filename}, #{ext},#{width}, #{height}, #{format_name}, #{format_long_name}, #{tags}, #{duration}, #{size})
+        <selectKey resultType="Int" keyProperty="id" keyColumn="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     </insert>
 
     <insert id="insertEditMetadata" parameterType="Metadata">
