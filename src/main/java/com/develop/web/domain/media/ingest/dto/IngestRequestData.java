@@ -13,7 +13,9 @@ public class IngestRequestData {
     private LocalDateTime createAt;     // 생성 날짜
     private Integer memberId;           // 멤버 ID
     private String title;               // 제목
-    private String program;             // 프로그램명
+    private String program;             // 프로그램명 (팀명)
+    private Integer program_code;       // 프로그램명 (팀명)
+    private Integer folder;             // 폴더
     private String name;                // 요청자
     private String phone;               // 전화번호
     private Codec codec;                // 요청코덱

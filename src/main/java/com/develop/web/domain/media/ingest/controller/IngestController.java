@@ -5,6 +5,7 @@ import com.develop.web.domain.media.ingest.service.CreateClipPost;
 import com.develop.web.domain.media.ingest.service.CreateIngestPost;
 import com.develop.web.domain.media.ingest.service.IngestListFetcher;
 import com.develop.web.domain.media.ingest.dto.IngestRequestData;
+import com.develop.web.domain.media.upload.dto.Metadata;
 import com.develop.web.domain.media.upload.service.FileChecker;
 import com.develop.web.domain.media.upload.service.UploadFileToServer;
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,17 +46,18 @@ public class IngestController {
 
         try{
             fileChecker.fileNull(mediaFiles);
-            uploadFileToServer.upload(mediaFiles, ingestId);
+            Metadata resultMetadata = uploadFileToServer.upload(mediaFiles, ingestId);
 
             ResultRequestData requestData = new ResultRequestData();
 
             requestData.ingest_id = ingestRequestData.getId();
-            requestData.team_id = 1;
-            requestData.folder_id = 1;
-            requestData.e_metadata_id = 1;
-            requestData.a_metadata_id = 1;
+            requestData.team_id = (Integer) session.getAttribute("teamId");
+            requestData.folder_id = ingestRequestData.getFolder();
+            requestData.e_metadata_id = resultMetadata.id;
+            requestData.a_metadata_id = resultMetadata.id;
 
             createClipPost.addClipPost(requestData);
+            return "pages/ingest";
 
         }catch (NullPointerException e){
             log.error(e.getMessage());
