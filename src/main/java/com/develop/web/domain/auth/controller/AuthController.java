@@ -4,6 +4,8 @@ import com.develop.web.domain.personnel.account.dto.Member;
 import com.develop.web.domain.auth.dto.LoginRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.service.Login;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
+@Tag(name = "인증", description = "로그인 로그아웃")
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class AuthController {
@@ -26,9 +29,10 @@ public class AuthController {
      * @return "redirect:/ 최초 페이지로 이동"
      * */
     @PostMapping("/login")
+    @Operation(summary = "로그인", description = "세션 등록")
     public String login(LoginRequest request, HttpSession session) {
 
-        String url = "redirect:/home";
+        String url = "redirect:/clip";
 
         try {
             login.getAccount(request);
@@ -45,7 +49,7 @@ public class AuthController {
 
             if (12 == rank){
                 System.out.println("관리자 로그인");
-                url = "redirect:/management/employee";
+                url = "redirect:/admin/management/user";
             }
         } catch (NullPointerException e){
             log.error("서버에 아이디가 존재하지 않습니다.");
@@ -61,6 +65,7 @@ public class AuthController {
      * @return "redirect:/ 최초 페이지로 이동"
      * */
     @PostMapping("/logout")
+    @Operation(summary = "로그아웃", description = "세션 삭제")
     public String logout(HttpSession session){
         session.invalidate();
         return "redirect:/";
