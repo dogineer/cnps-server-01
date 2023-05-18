@@ -1,20 +1,24 @@
 var socket = new WebSocket("ws://localhost:8081/websocket");
 
-socket.onopen = function() {
-    console.log("WebSocket 연결이 열렸습니다.");
+socket.onopen = function () {
+  console.log("WebSocket 연결이 열렸습니다.");
 };
 
-socket.onmessage = function(event) {
-    var percentage = parseFloat(event.data);
-    // console.log("진행률: " + percentage);
+socket.onmessage = function (event) {
+  var json = JSON.parse(event.data);
+  console.log(json);
 
-    updateProgress(percentage);
+  var percentage = json.percentage;
+  var ingestId = json.ingestId;
+
+  updateProgress(percentage, ingestId);
 };
 
-socket.onclose = function(event) {
-    console.log("WebSocket 연결이 닫혔습니다.");
+socket.onclose = function (event) {
+  console.log("WebSocket 연결이 닫혔습니다.");
 };
 
-function updateProgress(percentage) {
-    document.getElementById("progressText").textContent = "진행률: " + percentage + "%";
+function updateProgress(percentage, ingestId) {
+  var ingestNumber = document.getElementById("#P"+ingestId)
+      ingestNumber.textContent = "진행률: " + percentage + "%";
 }
