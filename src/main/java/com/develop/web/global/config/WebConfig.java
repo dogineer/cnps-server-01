@@ -1,4 +1,4 @@
-package com.develop.web;
+package com.develop.web.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
