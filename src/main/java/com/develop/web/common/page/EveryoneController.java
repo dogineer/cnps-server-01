@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 public class EveryoneController {
     private final RankListFetcher rankListFetcher;
     private final FindDeptList findDeptList;
+
     /**
      * @description 권한 없는 모든 유저가 접근 가능한 페이지
      * */
@@ -30,6 +31,6 @@ public class EveryoneController {
         if (login){
             return "index";
         }
-        return "pages/home";
+        return "redirect:/";
     }
 }
