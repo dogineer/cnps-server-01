@@ -1,6 +1,6 @@
-package com.develop.web.domain.auth.service;
+package com.develop.web.domain.auth.exception;
 
-import com.develop.web.domain.personnel.account.dto.Member;
+import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;

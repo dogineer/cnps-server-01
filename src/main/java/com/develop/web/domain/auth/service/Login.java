@@ -1,6 +1,7 @@
 package com.develop.web.domain.auth.service;
 
 import com.develop.web.domain.auth.dto.LoginRequest;
+import com.develop.web.domain.auth.exception.MemberChecker;
 import org.springframework.stereotype.Service;
 
 @Service

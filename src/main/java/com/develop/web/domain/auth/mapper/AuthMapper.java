@@ -1,8 +1,8 @@
 package com.develop.web.domain.auth.mapper;
 
-import com.develop.web.domain.personnel.account.dto.Member;
-import com.develop.web.domain.personnel.account.dto.MemberInfo;
-import com.develop.web.domain.personnel.account.dto.TeamUpdateParam;
+import com.develop.web.domain.personnel.member.dto.Member;
+import com.develop.web.domain.personnel.member.dto.MemberInfo;
+import com.develop.web.domain.personnel.member.dto.TeamUpdateParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

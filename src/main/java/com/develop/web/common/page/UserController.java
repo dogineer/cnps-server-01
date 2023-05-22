@@ -11,15 +11,19 @@ import com.develop.web.domain.notice.service.PostListFetcher;
 import com.develop.web.domain.personnel.team.service.TeamListFetcher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
+@RequestMapping(value = "/user")
 public class UserController {
     private final PostListFetcher postListFetcher;
     private final AuthChecker authChecker;
@@ -40,6 +44,7 @@ public class UserController {
 
         try {
             authChecker.blockOutsiders(session);
+
             String account = session.getAttribute("account").toString();
             Integer teamId = (Integer) session.getAttribute("teamId");
 
@@ -51,11 +56,10 @@ public class UserController {
             model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
 
             return "pages/ingest";
-        } catch (NullPointerException e) {
+        } catch (RuntimeException e) {
             log.error("외부인 접근 불가");
+            return "redirect:/";
         }
-
-        return "redirect:/";
     }
 
     @GetMapping("/clip")
@@ -63,6 +67,7 @@ public class UserController {
 
         try {
             authChecker.blockOutsiders(session);
+
             String account = session.getAttribute("account").toString();
 
             model.addAttribute("NoticeList", postListFetcher.getPost());
@@ -73,10 +78,10 @@ public class UserController {
             model.addAttribute("clips", clipDataListFetcher.getClipList());
 
             return "pages/clip";
-        } catch (NullPointerException e) {
-            log.error("외부인 접근 불가");
+        } catch (NullPointerException | UsernameNotFoundException | AccessDeniedException e) {
+            log.error(e.getMessage());
+            session.invalidate();
+            return "redirect:/";
         }
-
-        return "redirect:/";
     }
 }

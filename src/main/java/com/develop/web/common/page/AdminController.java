@@ -32,6 +32,7 @@ public class AdminController {
 
         try {
             authChecker.blockOutsiders(session);
+
             String account = session.getAttribute("account").toString();
 
             model.addAttribute("UserList", memberListFetcher.getMemberList());
@@ -51,6 +52,7 @@ public class AdminController {
 
         try {
             authChecker.blockOutsiders(session);
+
             String account = session.getAttribute("account").toString();
 
             model.addAttribute("UserList", memberListFetcher.getMemberList());
@@ -71,6 +73,7 @@ public class AdminController {
 
         try {
             authChecker.blockOutsiders(session);
+
             String account = session.getAttribute("account").toString();
 
             model.addAttribute("UserList", memberListFetcher.getMemberList());

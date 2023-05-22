@@ -1,6 +1,6 @@
 package com.develop.web.domain.auth.controller;
 
-import com.develop.web.domain.personnel.account.dto.Member;
+import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.dto.LoginRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.domain.auth.service.Login;
@@ -25,48 +25,49 @@ public class AuthController {
     private final AuthMapper authMapper;
 
     /**
-     * @description 세션 로그인 서비스
      * @return "redirect:/ 최초 페이지로 이동"
-     * */
+     * @description 세션 로그인 서비스
+     */
     @PostMapping("/login")
     @Operation(summary = "로그인", description = "세션 등록")
     public String login(LoginRequest request, HttpSession session) {
 
-        String url = "redirect:/clip";
-
         try {
             login.getAccount(request);
+
             String account = request.getAccount();
             Member dbMemberInfoData = authMapper.selectMember(account);
 
-            session.setAttribute("empId",   dbMemberInfoData.getId());
+            session.setAttribute("access", dbMemberInfoData.getAccess());
+            session.setAttribute("empId", dbMemberInfoData.getId());
             session.setAttribute("account", dbMemberInfoData.getAccount());
-            session.setAttribute("name",    dbMemberInfoData.getName());
-            session.setAttribute("rank",    dbMemberInfoData.getRankId());
-            session.setAttribute("teamId",  dbMemberInfoData.getTeamId());
+            session.setAttribute("name", dbMemberInfoData.getName());
+            session.setAttribute("rank", dbMemberInfoData.getRankId());
+            session.setAttribute("teamId", dbMemberInfoData.getTeamId());
 
             Integer rank = dbMemberInfoData.getRankId();
 
-            if (12 == rank){
+            if (rank == 12) {
                 System.out.println("관리자 로그인");
-                url = "redirect:/admin/management/user";
+                return "redirect:/admin/management/user";
             }
-        } catch (NullPointerException e){
+            return "redirect:/user/clip";
+        } catch (NullPointerException e) {
             log.error("서버에 아이디가 존재하지 않습니다.");
-        } catch (BadCredentialsException e){
+        } catch (BadCredentialsException e) {
             log.error("비밀번호가 맞지 않습니다.");
-            }
+        }
 
-        return url;
+        return "redirect:/";
     }
 
     /**
-     * @description 로그아웃 서비스
      * @return "redirect:/ 최초 페이지로 이동"
-     * */
+     * @description 로그아웃 서비스
+     */
     @PostMapping("/logout")
     @Operation(summary = "로그아웃", description = "세션 삭제")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/";
     }

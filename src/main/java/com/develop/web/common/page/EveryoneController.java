@@ -17,7 +17,7 @@ public class EveryoneController {
 
     /**
      * @description 권한 없는 모든 유저가 접근 가능한 페이지
-     * */
+     */
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
         String version = "ALPHA VERSION";
@@ -26,11 +26,18 @@ public class EveryoneController {
         model.addAttribute("Depts", findDeptList.getDeptList());
         model.addAttribute("version", version);
 
-        boolean login = session.getAttribute("account") == null;
+        boolean isLogin = session.getAttribute("account") != null;
 
-        if (login){
+        if (isLogin) {
+            boolean isAdmin = session.getAttribute("rank") != null && (int) session.getAttribute("rank") == 12;
+
+            if (isAdmin) {
+                return "redirect:/admin/management/user";
+            } else {
+                return "redirect:/user/clip";
+            }
+        } else {
             return "index";
         }
-        return "redirect:/";
     }
 }
