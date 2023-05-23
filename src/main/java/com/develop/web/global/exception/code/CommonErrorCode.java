@@ -1,21 +1,20 @@
-package com.develop.web.global.exception;
+package com.develop.web.global.exception.code;
 
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 
 @Getter
-public enum ErrorCode {
+@RequiredArgsConstructor
+public enum CommonErrorCode implements ErrorCode {
 
-    INVALID_PARAMETER(400, null, "잘못된 요청 데이터"),
-    PAGE_NOT_FOUND(404, "PAGE-000 ", "페이지가 없습니다.");
+    INVALID_PARAMETER(HttpStatus.BAD_REQUEST, "잘못된 요청 데이터가 포함되어 있습니다."),
+    RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND, "자원이 존재하지 않습니다."),
+    INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "인터넷 서버 오류"),
+    ;
 
-    private final int status;
-    private final String code;
+    private final HttpStatus httpStatus;
     private final String message;
 
-    ErrorCode(int status, String code, String message) {
-        this.status = status;
-        this.code = code;
-        this.message = message;
-    }
 }
