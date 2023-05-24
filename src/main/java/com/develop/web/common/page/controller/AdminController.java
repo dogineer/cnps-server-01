@@ -1,4 +1,4 @@
-package com.develop.web.common.page;
+package com.develop.web.common.page.controller;
 
 import com.develop.web.domain.personnel.member.service.DetailMemberFetcher;
 import com.develop.web.domain.auth.service.AuthChecker;
