@@ -3,6 +3,7 @@ package com.develop.web.common.page.controller;
 import com.develop.web.common.page.dto.AccountDto;
 import com.develop.web.common.page.service.PageFetcher;
 import com.develop.web.domain.auth.service.AuthChecker;
+import com.develop.web.global.exception.exception.AuthApiException;
 import com.develop.web.global.exception.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,14 +25,7 @@ public class UserController {
         clipPageFetcher,
         ingestPageFetcher;
 
-    /**
-     * @return "redirect:/ 최초 페이지로 이동"
-     * @description 직원만 접근 가능한 홈화면 페이지
-     */
-    @GetMapping("/ingest")
-    public String ingestPage(HttpSession session, Model model) {
-        authChecker.blockOutsiders(session);
-
+    private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
         AccountDto accountDto = new AccountDto();
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
@@ -39,28 +33,19 @@ public class UserController {
         accountDto.setAccount(account);
         accountDto.setTeamId(teamId);
 
-        try {
-            ingestPageFetcher.fetchPage(accountDto, model);
+        pageFetcher.fetchPage(accountDto, model);
+    }
 
-            return "pages/ingest";
-        } catch (RestApiException e) {
-            log.error("외부인 접근 불가");
-            return "redirect:/";
-        }
+    @GetMapping("/ingest")
+    public String ingestPage(HttpSession session, Model model) throws AuthApiException {
+        initPageService(session, model, ingestPageFetcher);
+        return "pages/ingest";
     }
 
     @GetMapping("/clip")
-    public String editPage(HttpSession session, Model model) {
+    public String editPage(HttpSession session, Model model) throws AuthApiException {
         authChecker.blockOutsiders(session);
-
-        AccountDto accountDto = new AccountDto();
-        String account = session.getAttribute("account").toString();
-        Integer teamId = (Integer) session.getAttribute("teamId");
-
-        accountDto.setAccount(account);
-        accountDto.setTeamId(teamId);
-
-        clipPageFetcher.fetchPage(accountDto, model);
+        initPageService(session, model, clipPageFetcher);
         return "pages/clip";
     }
 }
