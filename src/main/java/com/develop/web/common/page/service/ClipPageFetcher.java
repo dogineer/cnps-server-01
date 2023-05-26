@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
 @RequiredArgsConstructor
-@Component
+@Component("clipPageFetcher")
 public class ClipPageFetcher implements PageFetcher {
     private final PostListFetcher postListFetcher;
     private final DetailDeptFetcher detailDeptFetcher;

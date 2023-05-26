@@ -1,13 +1,14 @@
 package com.develop.web.common.page.controller;
 
-import com.develop.web.domain.personnel.member.service.DetailMemberFetcher;
+import com.develop.web.common.page.dto.AccountDto;
+import com.develop.web.common.page.service.PageFetcher;
+import com.develop.web.domain.auth.service.AdminChecker;
 import com.develop.web.domain.auth.service.AuthChecker;
-import com.develop.web.domain.personnel.member.service.MemberListFetcher;
-import com.develop.web.domain.personnel.dept.service.DetailDeptFetcher;
-import com.develop.web.domain.personnel.dept.service.FindDeptList;
-import com.develop.web.domain.personnel.team.service.TeamListFetcher;
+import com.develop.web.global.exception.exception.AuthApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,72 +22,50 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/admin/management")
 public class AdminController {
     private final AuthChecker authChecker;
-    private final MemberListFetcher memberListFetcher;
-    private final DetailMemberFetcher detailMemberFetcher;
-    private final DetailDeptFetcher detailDeptFetcher;
-    private final FindDeptList findDeptList;
-    private final TeamListFetcher teamListFetcher;
+    private final AdminChecker adminChecker;;
+
+    private final PageFetcher userPageFetcher;
+    private final PageFetcher deptPageFetcher;
+    private final PageFetcher teamPageFetcher;
+
+    private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
+        AccountDto accountDto = new AccountDto();
+        String account = session.getAttribute("account").toString();
+        Integer teamId = (Integer) session.getAttribute("teamId");
+
+        accountDto.setAccount(account);
+        accountDto.setTeamId(teamId);
+
+        pageFetcher.fetchPage(accountDto, model);
+    }
 
     @GetMapping("/user")
-    public String userPage(HttpSession session, Model model) {
+    public String userPage(HttpSession session, Model model) throws AuthApiException {
+        authChecker.blockOutsiders(session);
+        adminChecker.rankPermissionCheck(session);
+        initPageService(session, model, userPageFetcher);
 
-        try {
-            authChecker.blockOutsiders(session);
-
-            String account = session.getAttribute("account").toString();
-
-            model.addAttribute("UserList", memberListFetcher.getMemberList());
-            model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
-            model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
-
-            return "pages/admin/management/user";
-        } catch (NullPointerException e) {
-            log.error("외부인 접근 불가");
-        }
-
-        return "redirect:/";
+        return "pages/admin/management/user";
     }
 
     @GetMapping("/dept")
-    public String deptPage(HttpSession session, Model model) {
+    public String deptPage(HttpSession session, Model model) throws AuthApiException {
 
-        try {
-            authChecker.blockOutsiders(session);
+        authChecker.blockOutsiders(session);
+        adminChecker.rankPermissionCheck(session);
+        initPageService(session, model, deptPageFetcher);
 
-            String account = session.getAttribute("account").toString();
+        return "pages/admin/management/dept";
 
-            model.addAttribute("UserList", memberListFetcher.getMemberList());
-            model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
-            model.addAttribute("Depts", findDeptList.getDeptList());
-            model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
-
-            return "pages/admin/management/dept";
-        } catch (NullPointerException e) {
-            log.error("외부인 접근 불가");
-        }
-
-        return "redirect:/";
     }
 
     @GetMapping("/team")
-    public String teamPage(HttpSession session, Model model) {
+    public String teamPage(HttpSession session, Model model) throws AuthApiException {
 
-        try {
-            authChecker.blockOutsiders(session);
+        authChecker.blockOutsiders(session);
+        adminChecker.rankPermissionCheck(session);
+        initPageService(session, model, teamPageFetcher);
 
-            String account = session.getAttribute("account").toString();
-
-            model.addAttribute("UserList", memberListFetcher.getMemberList());
-            model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
-            model.addAttribute("TeamList", teamListFetcher.getTeam());
-            model.addAttribute("Depts", findDeptList.getDeptList());
-            model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
-
-            return "pages/admin/management/team";
-        } catch (NullPointerException e) {
-            log.error("외부인 접근 불가");
-        }
-
-        return "redirect:/";
+        return "pages/admin/management/team";
     }
 }

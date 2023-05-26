@@ -4,7 +4,6 @@ import com.develop.web.common.page.dto.AccountDto;
 import com.develop.web.common.page.service.PageFetcher;
 import com.develop.web.domain.auth.service.AuthChecker;
 import com.develop.web.global.exception.exception.AuthApiException;
-import com.develop.web.global.exception.exception.RestApiException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -38,6 +37,7 @@ public class UserController {
 
     @GetMapping("/ingest")
     public String ingestPage(HttpSession session, Model model) throws AuthApiException {
+        authChecker.blockOutsiders(session);
         initPageService(session, model, ingestPageFetcher);
         return "pages/ingest";
     }
