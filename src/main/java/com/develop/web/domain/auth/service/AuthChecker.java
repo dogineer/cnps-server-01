@@ -1,6 +1,6 @@
 package com.develop.web.domain.auth.service;
 
-import com.develop.web.global.exception.exception.RestApiException;
+import com.develop.web.global.exception.exception.AuthApiException;
 import com.develop.web.global.exception.code.AuthErrorCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,13 +14,10 @@ public class AuthChecker {
      * */
     public void blockOutsiders(HttpSession session){
 
-        boolean account = session.getAttribute("account") == null;
-        boolean access = session.getAttribute("access").hashCode() == 0;
-
-        if (account){
-            throw new RestApiException(AuthErrorCode.ACCOUNT_NOT_FOUND);
-        } else if (access) {
-            throw new RestApiException(AuthErrorCode.AUTH_ACCESS_NOT_FOUND);
+        if (session.getAttribute("account") == null){
+            throw new AuthApiException(AuthErrorCode.ACCOUNT_NOT_FOUND);
+        } else if (session.getAttribute("access").hashCode() == 0) {
+            throw new AuthApiException(AuthErrorCode.AUTH_ACCESS_NOT_FOUND);
             }
     }
 }
