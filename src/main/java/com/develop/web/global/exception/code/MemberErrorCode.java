@@ -6,11 +6,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum AuthErrorCode implements ErrorCode {
+public enum MemberErrorCode implements ErrorCode {
 
-    NO_ACCESS("A0000", "권한이 없습니다."),
-    ACCOUNT_NOT_FOUND("A0001", "등록된 계정이 없거나 비정상적인 접근입니다."),
-    AUTH_ACCESS_NOT_FOUND("A0002", "승인된 계정이 아닙니다.")
+    DUPLICATE_MEMBER("M0001", "아이디가 중복입니다."),
+    PASSWORD_NOW_MATCH("M0002", "비밀번호가 맞지않습니다.")
     ;
 
     private final String code;
