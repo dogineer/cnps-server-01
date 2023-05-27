@@ -6,11 +6,11 @@ import com.develop.web.global.exception.exception.CustomException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginCheck {
+public class Login {
 
     private final MemberChecker memberChecker;
 
-    public LoginCheck(MemberChecker memberChecker) {
+    public Login(MemberChecker memberChecker) {
         this.memberChecker = memberChecker;
     }
 
