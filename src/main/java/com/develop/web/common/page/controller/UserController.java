@@ -3,7 +3,7 @@ package com.develop.web.common.page.controller;
 import com.develop.web.common.page.dto.AccountDto;
 import com.develop.web.common.page.service.PageFetcher;
 import com.develop.web.domain.auth.service.AuthChecker;
-import com.develop.web.global.exception.exception.AuthApiException;
+import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -36,14 +36,14 @@ public class UserController {
     }
 
     @GetMapping("/ingest")
-    public String ingestPage(HttpSession session, Model model) throws AuthApiException {
+    public String ingestPage(HttpSession session, Model model) throws CustomException {
         authChecker.blockOutsiders(session);
         initPageService(session, model, ingestPageFetcher);
         return "pages/ingest";
     }
 
     @GetMapping("/clip")
-    public String editPage(HttpSession session, Model model) throws AuthApiException {
+    public String editPage(HttpSession session, Model model) throws CustomException {
         authChecker.blockOutsiders(session);
         initPageService(session, model, clipPageFetcher);
         return "pages/clip";

@@ -4,11 +4,9 @@ import com.develop.web.common.page.dto.AccountDto;
 import com.develop.web.common.page.service.PageFetcher;
 import com.develop.web.domain.auth.service.AdminChecker;
 import com.develop.web.domain.auth.service.AuthChecker;
-import com.develop.web.global.exception.exception.AuthApiException;
+import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +38,7 @@ public class AdminController {
     }
 
     @GetMapping("/user")
-    public String userPage(HttpSession session, Model model) throws AuthApiException {
+    public String userPage(HttpSession session, Model model) throws CustomException {
         authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
         initPageService(session, model, userPageFetcher);
@@ -49,7 +47,7 @@ public class AdminController {
     }
 
     @GetMapping("/dept")
-    public String deptPage(HttpSession session, Model model) throws AuthApiException {
+    public String deptPage(HttpSession session, Model model) throws CustomException {
 
         authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
@@ -60,7 +58,7 @@ public class AdminController {
     }
 
     @GetMapping("/team")
-    public String teamPage(HttpSession session, Model model) throws AuthApiException {
+    public String teamPage(HttpSession session, Model model) throws CustomException {
 
         authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
