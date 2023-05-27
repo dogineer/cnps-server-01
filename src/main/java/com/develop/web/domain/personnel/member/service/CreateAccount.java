@@ -3,6 +3,7 @@ package com.develop.web.domain.personnel.member.service;
 import com.develop.web.domain.auth.exception.MemberChecker;
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
+import com.develop.web.global.exception.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +22,7 @@ public class CreateAccount {
         this.authMapper = authMapper;
     }
 
-    public void addMember(Member member) throws DuplicateMemberException {
+    public void addMember(Member member) throws CustomException {
         memberChecker.overlap(member.getAccount());
 
         String encodePassword = passwordEncoder.encode(member.getPassword());
