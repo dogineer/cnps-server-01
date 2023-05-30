@@ -32,33 +32,25 @@ public class AuthController {
     @Operation(summary = "로그인", description = "세션 등록")
     public String login(LoginRequest request, HttpSession session) {
 
-        try {
-            login.getAccount(request);
+        login.getAccount(request);
 
-            String account = request.getAccount();
-            Member dbMemberInfoData = authMapper.selectMember(account);
+        String account = request.getAccount();
+        Member dbMemberInfoData = authMapper.selectMember(account);
 
-            session.setAttribute("access", dbMemberInfoData.getAccess());
-            session.setAttribute("empId", dbMemberInfoData.getId());
-            session.setAttribute("account", dbMemberInfoData.getAccount());
-            session.setAttribute("name", dbMemberInfoData.getName());
-            session.setAttribute("rank", dbMemberInfoData.getRankId());
-            session.setAttribute("teamId", dbMemberInfoData.getTeamId());
+        session.setAttribute("access", dbMemberInfoData.getAccess());
+        session.setAttribute("empId", dbMemberInfoData.getId());
+        session.setAttribute("account", dbMemberInfoData.getAccount());
+        session.setAttribute("name", dbMemberInfoData.getName());
+        session.setAttribute("rank", dbMemberInfoData.getRankId());
+        session.setAttribute("teamId", dbMemberInfoData.getTeamId());
 
-            Integer rank = dbMemberInfoData.getRankId();
+        Integer rank = dbMemberInfoData.getRankId();
 
-            if (rank == 12) {
-                System.out.println("관리자 로그인");
-                return "redirect:/admin/management/user";
-            }
-            return "redirect:/user/clip";
-        } catch (NullPointerException e) {
-            log.error("서버에 아이디가 존재하지 않습니다.");
-        } catch (BadCredentialsException e) {
-            log.error("비밀번호가 맞지 않습니다.");
+        if (rank == 12) {
+            System.out.println("관리자 로그인");
+            return "redirect:/admin/management/user";
         }
-
-        return "redirect:/";
+        return "redirect:/user/clip";
     }
 
     /**

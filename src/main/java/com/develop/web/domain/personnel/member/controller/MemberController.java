@@ -11,8 +11,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.javassist.bytecode.DuplicateMemberException;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +39,7 @@ public class MemberController {
     public String changePassword(PasswordChangeRequest passwordChangeRequest, HttpSession session) {
 
         String account = (String) session.getAttribute("account");
-        modifyPassword.setPassword(account, passwordChangeRequest);
+        modifyPassword.change(account, passwordChangeRequest);
         session.invalidate();
 
         return "redirect:/";

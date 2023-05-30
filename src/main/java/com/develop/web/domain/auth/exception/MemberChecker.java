@@ -24,12 +24,12 @@ public class MemberChecker {
         Member dbMemberDataParam = authMapper.selectMember(account);
 
         if (dbMemberDataParam != null){
-            throw new CustomException(MemberErrorCode.PASSWORD_NOW_MATCH);
+            throw new CustomException(MemberErrorCode.DUPLICATE_MEMBER);
         }
     }
 
     public void userid(String account) throws CustomException {
-        String dbUseridData = authMapper.selectMember(account).getAccount();
+        String dbUseridData = authMapper.selectMemberAccount(account);
 
         if (dbUseridData == null){
             throw new CustomException(AuthErrorCode.ACCOUNT_NOT_FOUND);

@@ -27,12 +27,11 @@ public class AdminController {
     private final PageFetcher teamPageFetcher;
 
     private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
-        AccountDto accountDto = new AccountDto();
+
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
 
-        accountDto.setAccount(account);
-        accountDto.setTeamId(teamId);
+        AccountDto accountDto = new AccountDto(account, teamId);
 
         pageFetcher.fetchPage(accountDto, model);
     }

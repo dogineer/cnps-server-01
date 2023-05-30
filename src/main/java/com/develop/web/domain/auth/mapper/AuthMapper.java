@@ -13,6 +13,9 @@ public interface AuthMapper {
     /** @description 멤버 데이터 인서트 (회원가입)*/
     void insertMember(Member member);
 
+    /** @description 멤버 계정 아이디 조회*/
+    String selectMemberAccount(String account);
+
     /** @description 멤버 데이터 조회 (로그인)*/
     Member selectMember(String account);
 

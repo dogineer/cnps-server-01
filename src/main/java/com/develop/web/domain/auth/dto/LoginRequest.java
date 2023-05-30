@@ -1,9 +1,11 @@
 package com.develop.web.domain.auth.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
+@Getter
+@RequiredArgsConstructor
 public class LoginRequest {
-    private String account;
-    private String password;
+    private final String account;
+    private final String password;
 }

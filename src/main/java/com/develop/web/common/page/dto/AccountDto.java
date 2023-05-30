@@ -1,9 +1,11 @@
 package com.develop.web.common.page.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
+@Getter
+@RequiredArgsConstructor
 public class AccountDto {
-    private String account;
-    private Integer teamId;
+    private final String account;
+    private final Integer teamId;
 }

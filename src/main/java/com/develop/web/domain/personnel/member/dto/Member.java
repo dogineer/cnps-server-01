@@ -1,6 +1,7 @@
 package com.develop.web.domain.personnel.member.dto;
 
 import lombok.Data;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -26,4 +27,8 @@ public class Member {
     private String password;            // 패스워드
     private String verifyPassword;      // 패스워드 확인
     private String changePassword;      // 패스워드 변경
+
+    public void encodePassword(PasswordEncoder passwordEncoder) {
+        this.password = passwordEncoder.encode(this.password);
+    }
 }

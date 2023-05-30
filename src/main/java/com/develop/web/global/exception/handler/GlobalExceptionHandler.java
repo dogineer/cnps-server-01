@@ -23,6 +23,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public String handleAllException(Exception e, Model model) {
         model.addAttribute("error", e.toString());
         model.addAttribute("message", e.getMessage());
+        log.error(e.getMessage());
 
         return "error/view";
     }
@@ -34,6 +35,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         model.addAttribute("error", e.getErrorCode().name());
         model.addAttribute("code", e.getErrorCode().code());
         model.addAttribute("message", e.getErrorCode().getMessage());
+        log.error(e.getMessage());
 
         if (e.getErrorCode() == AuthErrorCode.AUTH_ACCESS_NOT_FOUND){
             session.invalidate();

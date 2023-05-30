@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 public enum MemberErrorCode implements ErrorCode {
 
     DUPLICATE_MEMBER("M0001", "아이디가 중복입니다."),
-    PASSWORD_NOW_MATCH("M0002", "비밀번호가 맞지않습니다.")
+    PASSWORD_NOW_MATCH("M0002", "비밀번호가 맞지 않습니다.")
     ;
 
     private final String code;

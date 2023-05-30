@@ -20,7 +20,7 @@ public class ModifyPassword {
 
     /** @description 비밀번호 변경 서비스
      * */
-    public void setPassword(String account, PasswordChangeRequest request) {
+    public void change(String account, PasswordChangeRequest request) {
         memberChecker.password(account, request.getPassword());
 
         String changePassword = passwordEncoder.encode(request.getChangePassword());
