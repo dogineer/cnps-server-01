@@ -5,6 +5,7 @@ import com.develop.web.domain.media.ingest.service.CreateClipPost;
 import com.develop.web.domain.media.ingest.service.CreateIngestPost;
 import com.develop.web.domain.media.ingest.service.IngestListFetcher;
 import com.develop.web.domain.media.ingest.dto.IngestRequestData;
+import com.develop.web.domain.page.dto.CriteriaDto;
 import com.develop.web.domain.media.upload.dto.Metadata;
 import com.develop.web.domain.media.upload.service.FileChecker;
 import com.develop.web.domain.media.upload.service.UploadFileToServer;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -68,7 +70,8 @@ public class IngestController {
 
     @GetMapping(value = "/ingest/list")
     @Operation(summary = "인제스트 목록", description = "인제스트 목록 현황을 가져옵니다.")
-    public void ingestList(){
-        ingestListFetcher.getIngestRequestList();
+    public List<IngestRequestData> ingestList(){
+        CriteriaDto criteriaDto = new CriteriaDto();
+        return ingestListFetcher.getIngestRequestList(criteriaDto);
     }
 }

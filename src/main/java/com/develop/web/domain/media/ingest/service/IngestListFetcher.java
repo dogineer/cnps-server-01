@@ -1,6 +1,7 @@
 package com.develop.web.domain.media.ingest.service;
 
 import com.develop.web.domain.media.ingest.dto.IngestRequestData;
+import com.develop.web.domain.page.dto.CriteriaDto;
 import com.develop.web.domain.media.upload.mapper.UploadMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,9 @@ import java.util.List;
 public class IngestListFetcher {
     private final UploadMapper uploadMapper;
 
-    public List<IngestRequestData> getIngestRequestList() {
-        return uploadMapper.selectIngestList();
+    public List<IngestRequestData> getIngestRequestList(CriteriaDto cri) {
+        System.out.println(cri.toString());
+        System.out.println(uploadMapper.selectGetIngestList(cri));
+        return uploadMapper.selectGetIngestList(cri);
     }
 }
