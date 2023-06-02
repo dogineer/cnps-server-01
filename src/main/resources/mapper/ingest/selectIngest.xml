@@ -18,4 +18,15 @@
             success
             FROM ingest
     </select>
+
+    <select id="selectIngestCount" resultType="int">
+        SELECT COUNT(*) FROM ingest
+    </select>
+
+    <select id="selectGetIngestList" resultType="IngestRequestData">
+        SELECT id, member_id AS memberId, create_at AS createAt, title, program, name, phone, codec, del_fl, success
+        FROM ingest
+        ORDER BY create_at DESC
+        LIMIT ${limit} OFFSET ${offset}
+    </select>
 </mapper>
