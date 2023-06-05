@@ -51,7 +51,7 @@ public class UserController {
 
         AccountDto accountDto = new AccountDto(account, teamId);
 
-        ingestPageFetcher.fetchPage(criteriaDto, accountDto, model);
+        ingestPageFetcher.fetchPageing(criteriaDto, accountDto, model);
         return "pages/ingest";
     }
 

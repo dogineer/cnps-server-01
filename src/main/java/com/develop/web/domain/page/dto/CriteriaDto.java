@@ -24,7 +24,7 @@ public class CriteriaDto {
     }
 
     public String getListLink(int page){
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUri(URI.create("/user/ingest"))
+        UriComponentsBuilder builder = UriComponentsBuilder.fromUri(URI.create(""))
             .queryParam("page", page)
             .queryParam("limit", limit);
 

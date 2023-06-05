@@ -16,7 +16,7 @@ import org.springframework.ui.Model;
 
 @RequiredArgsConstructor
 @Component("ingestPageFetcher")
-public class IngestPageFetcher {
+public class IngestPageFetcher implements PageingService{
     private final PostListFetcher postListFetcher;
     private final DetailDeptFetcher detailDeptFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
@@ -26,7 +26,8 @@ public class IngestPageFetcher {
 
     private final UploadMapper uploadMapper;
 
-    public void fetchPage(CriteriaDto criteriaDto, AccountDto accountDto, Model model) {
+    @Override
+    public void fetchPageing(CriteriaDto criteriaDto, AccountDto accountDto, Model model) {
 
         String account = accountDto.getAccount();
         Integer teamId = accountDto.getTeamId();
@@ -40,7 +41,6 @@ public class IngestPageFetcher {
         model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
         model.addAttribute("IngestRequestList", ingestListFetcher.getIngestRequestList(criteriaDto));
         model.addAttribute("pageMaker", pageDto);
-        model.addAttribute("test", criteriaDto);
 
     }
 }
