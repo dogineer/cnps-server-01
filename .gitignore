@@ -1,8 +1,10 @@
 .DS_Store
+lib
 HELP.md
-README.md
 .gradle
 build/
+src/main/resources/static/img
+src/main/resources/static/css
 src/main/resources/templates
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
