@@ -4,8 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.auth.mapper.AuthMapper">
+
     <select id="selectMemberAccount" resultType="String" parameterType="String">
         SELECT account FROM emp WHERE account = #{account}
+    </select>
+
+    <select id="selectEmpCount" resultType="int">
+        SELECT COUNT(*) FROM emp
     </select>
 
     <select id="selectMember" resultType="Member" parameterType="String">
@@ -25,6 +30,28 @@
             access,
             del_fl,
             password FROM emp WHERE account = #{account}
+    </select>
+
+    <select id="selectMemberGetList" resultType="MemberInfo">
+       SELECT account,
+           e.name as name,
+           r.name as rankName,
+           d.name as deptName,
+           t.name as teamName,
+           birth,
+           gender,
+           email,
+           access,
+           joined_at,
+           approved_at,
+           del_fl WH
+        FROM emp e
+        JOIN `dept` d on d.id = e.dept_id
+        JOIN `rank` r on r.id = e.rank_id
+        JOIN `team` t on t.id = e.team_id
+        WHERE del_fl = false
+        ORDER BY joined_at DESC
+        LIMIT ${limit} OFFSET ${offset}
     </select>
 
     <select id="selectMemberInfoList" resultType="MemberInfo" >

@@ -1,5 +1,6 @@
 package com.develop.web.domain.auth.mapper;
 
+import com.develop.web.domain.page.dto.CriteriaDto;
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.personnel.member.dto.MemberInfo;
 import com.develop.web.domain.personnel.member.dto.TeamUpdateParam;
@@ -13,6 +14,9 @@ public interface AuthMapper {
     /** @description 멤버 데이터 인서트 (회원가입)*/
     void insertMember(Member member);
 
+    /** @description 멤버 데이터 카운트*/
+    int selectEmpCount();
+
     /** @description 멤버 계정 아이디 조회*/
     String selectMemberAccount(String account);
 
@@ -24,6 +28,9 @@ public interface AuthMapper {
 
     /** @description 직원 리스트 데이터 조회 (직원 리스트) */
     List<MemberInfo> selectMemberInfoList();
+
+    /** @description 직원 리스트 데이터 조회 (직원 리스트 - 가입날짜로 부터) */
+    List<MemberInfo> selectMemberGetList(CriteriaDto cri);
 
     /** @description 직원 팀 배정 (직원 팀 업데이트,)*/
     void updateMemberTeamId(TeamUpdateParam param);
