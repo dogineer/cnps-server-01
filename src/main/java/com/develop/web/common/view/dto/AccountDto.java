@@ -1,4 +1,4 @@
-package com.develop.web.common.page.dto;
+package com.develop.web.common.view.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

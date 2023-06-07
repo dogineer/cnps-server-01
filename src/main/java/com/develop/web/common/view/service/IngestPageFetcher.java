@@ -1,6 +1,6 @@
-package com.develop.web.common.page.service;
+package com.develop.web.common.view.service;
 
-import com.develop.web.common.page.dto.AccountDto;
+import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.domain.folder.service.TeamFolderGroupFetcher;
 import com.develop.web.domain.media.ingest.service.IngestListFetcher;
 import com.develop.web.domain.page.dto.CriteriaDto;

@@ -1,4 +1,4 @@
-package com.develop.web.common.page.controller;
+package com.develop.web.common.view.controller;
 
 import com.develop.web.domain.personnel.dept.service.FindDeptList;
 import com.develop.web.domain.personnel.rank.service.RankListFetcher;

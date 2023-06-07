@@ -1,8 +1,8 @@
-package com.develop.web.common.page.controller;
+package com.develop.web.common.view.controller;
 
-import com.develop.web.common.page.dto.AccountDto;
-import com.develop.web.common.page.service.PageFetcher;
-import com.develop.web.common.page.service.PageingService;
+import com.develop.web.common.view.dto.AccountDto;
+import com.develop.web.common.view.service.PageFetcher;
+import com.develop.web.common.view.service.PageingService;
 import com.develop.web.domain.auth.service.AdminChecker;
 import com.develop.web.domain.auth.service.AuthChecker;
 import com.develop.web.domain.page.dto.CriteriaDto;
