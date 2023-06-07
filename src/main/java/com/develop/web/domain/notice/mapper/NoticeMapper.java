@@ -1,13 +1,17 @@
 package com.develop.web.domain.notice.mapper;
 
-import com.develop.web.domain.notice.dto.PostDto;
+import com.develop.web.domain.notice.dto.NoticeDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 @Mapper
 public interface NoticeMapper {
-    void insertNotice(PostDto vo);
+    void insertNotice(NoticeDto vo);
 
-    List<PostDto> selectNoticeList();
+    NoticeDto selectNotice(Integer NoticeId);
+
+    List<NoticeDto> selectNoticeList();
+
+    void deleteNotice(Integer noticeId);
 }

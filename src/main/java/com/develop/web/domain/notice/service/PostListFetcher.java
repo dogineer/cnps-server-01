@@ -1,7 +1,7 @@
 package com.develop.web.domain.notice.service;
 
 import com.develop.web.domain.notice.mapper.NoticeMapper;
-import com.develop.web.domain.notice.dto.PostDto;
+import com.develop.web.domain.notice.dto.NoticeDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public class PostListFetcher {
         this.noticeMapper = noticeMapper;
     }
 
-    public void setPost(PostDto postDto){
-        noticeMapper.insertNotice(postDto);
+    public void setPost(NoticeDto noticeDto){
+        noticeMapper.insertNotice(noticeDto);
     }
 
-    public List<PostDto> getPost(){
+    public List<NoticeDto> getPost(){
         return noticeMapper.selectNoticeList();
     }
 }

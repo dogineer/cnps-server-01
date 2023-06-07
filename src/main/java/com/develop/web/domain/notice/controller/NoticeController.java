@@ -1,14 +1,12 @@
 package com.develop.web.domain.notice.controller;
 
+import com.develop.web.domain.notice.service.DeleteNotice;
 import com.develop.web.domain.notice.service.PostListFetcher;
-import com.develop.web.domain.notice.dto.PostDto;
+import com.develop.web.domain.notice.dto.NoticeDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -20,10 +18,11 @@ import java.util.List;
 public class NoticeController {
 
     private final PostListFetcher postListFetcher;
+    private final DeleteNotice deleteNotice;
 
     @PostMapping(value = "/create")
     @Operation(summary = "공지사항 작성", description = "공지사항을 작성합니다.")
-    public String createNotice(PostDto writer, HttpSession session){
+    public String createNotice(NoticeDto writer, HttpSession session){
         Integer empId = session.getAttribute("empId").hashCode();
         writer.setEmpId(empId);
 
@@ -33,7 +32,13 @@ public class NoticeController {
 
     @GetMapping(value = "/list")
     @Operation(summary = "공지사항 목록", description = "공지사항 데이터를 받아옵니다.")
-    public List<PostDto> Post(){
+    public List<NoticeDto> Post(){
         return postListFetcher.getPost();
+    }
+
+    @DeleteMapping("/delete/{noticeId}")
+    @Operation(summary = "공지사항 삭제", description = "공지사항 id를 입력하여 삭제합니다.")
+    public void deleteDept(@PathVariable Integer noticeId){
+        deleteNotice.noticeId(noticeId);
     }
 }
