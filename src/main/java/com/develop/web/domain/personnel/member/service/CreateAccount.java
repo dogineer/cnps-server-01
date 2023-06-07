@@ -1,6 +1,6 @@
 package com.develop.web.domain.personnel.member.service;
 
-import com.develop.web.domain.auth.exception.MemberChecker;
+import com.develop.web.domain.auth.validation.MemberChecker;
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.global.exception.exception.CustomException;

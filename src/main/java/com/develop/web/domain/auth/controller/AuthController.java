@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,7 +47,7 @@ public class AuthController {
 
         if (rank == 12) {
             System.out.println("관리자 로그인");
-            return "redirect:/admin/management/user";
+            return "redirect:/admin/management/user?page=1&limit=10";
         }
         return "redirect:/user/clip";
     }

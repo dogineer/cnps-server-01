@@ -1,4 +1,4 @@
-package com.develop.web.domain.auth.exception;
+package com.develop.web.domain.auth.validation;
 
 public class PasswordChecker {
 }

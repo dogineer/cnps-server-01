@@ -1,4 +1,4 @@
-package com.develop.web.domain.auth.exception;
+package com.develop.web.domain.auth.validation;
 
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;

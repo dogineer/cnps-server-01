@@ -2,7 +2,7 @@ package com.develop.web.domain.personnel.member.service;
 
 import com.develop.web.domain.personnel.member.dto.PasswordChangeRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
-import com.develop.web.domain.auth.exception.MemberChecker;
+import com.develop.web.domain.auth.validation.MemberChecker;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
