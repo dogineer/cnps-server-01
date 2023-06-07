@@ -5,7 +5,7 @@
 
 <mapper namespace="com.develop.web.domain.personnel.dept.mapper.DeptMapper">
     <select id="selectDeptList" resultType="DeptDto">
-        SELECT id, name, p_id FROM dept
+        SELECT id, name, p_id FROM dept WHERE id NOT IN (1) AND p_id NOT IN (1, 8)
     </select>
 
     <select id="selectDetailDept" parameterType="String" resultType="String">

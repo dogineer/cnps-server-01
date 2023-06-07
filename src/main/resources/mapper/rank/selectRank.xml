@@ -5,7 +5,7 @@
 
 <mapper namespace="com.develop.web.domain.personnel.rank.mapper.RankMapper">
     <select id="selectListRank" resultType="RankDto">
-        SELECT * FROM `rank` WHERE p_id = 0
+        SELECT * FROM `rank` WHERE p_id = 0 AND id NOT IN (0)
     </select>
 
     <select id="selectListRankEmployee" parameterType="Integer">
