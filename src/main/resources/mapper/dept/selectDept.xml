@@ -21,4 +21,23 @@
     <select id="selectTopDept" resultType="DeptDto">
         SELECT id, name FROM dept WHERE p_id = 1 AND id != 1
     </select>
+
+    <select id="selectDeptMembers" resultType="Member" parameterType="Integer">
+        SELECT id,
+            dept_id AS deptId,
+            rank_id AS rankId,
+            team_id AS teamId,
+            account,
+            name,
+            birth,
+            gender,
+            phone,
+            email,
+            des,
+            joined_at,
+            approved_at,
+            access,
+            del_fl,
+            password FROM emp WHERE dept_id = ${deptid}
+    </select>
 </mapper>
