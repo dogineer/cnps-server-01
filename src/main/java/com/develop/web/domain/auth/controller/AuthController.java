@@ -31,7 +31,7 @@ public class AuthController {
     @Operation(summary = "로그인", description = "세션 등록")
     public String login(LoginRequest request, HttpSession session) {
 
-        login.getAccount(request);
+        login.checkAccount(request);
 
         String account = request.getAccount();
         Member dbMemberInfoData = authMapper.selectMember(account);

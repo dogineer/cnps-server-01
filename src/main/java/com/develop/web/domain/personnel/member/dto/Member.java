@@ -27,8 +27,4 @@ public class Member {
     private String password;            // 패스워드
     private String verifyPassword;      // 패스워드 확인
     private String changePassword;      // 패스워드 변경
-
-    public void encodePassword(PasswordEncoder passwordEncoder) {
-        this.password = passwordEncoder.encode(this.password);
-    }
 }

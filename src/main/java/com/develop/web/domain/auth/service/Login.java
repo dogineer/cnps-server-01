@@ -15,7 +15,7 @@ public class Login {
     }
 
     /** @description 아이디와 비밀번호 검사 */
-    public void getAccount(LoginRequest request) throws CustomException {
+    public void checkAccount(LoginRequest request) throws CustomException {
         String account = request.getAccount();
         String password = request.getPassword();
 

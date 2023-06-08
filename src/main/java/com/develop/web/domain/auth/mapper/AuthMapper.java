@@ -1,6 +1,7 @@
 package com.develop.web.domain.auth.mapper;
 
 import com.develop.web.domain.page.dto.CriteriaDto;
+import com.develop.web.domain.personnel.member.dto.JoinedMember;
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.personnel.member.dto.MemberInfo;
 import com.develop.web.domain.personnel.member.dto.TeamUpdateParam;
@@ -12,7 +13,7 @@ import java.util.List;
 public interface AuthMapper {
 
     /** @description 멤버 데이터 인서트 (회원가입)*/
-    void insertMember(Member member);
+    void insertMember(JoinedMember member);
 
     /** @description 멤버 데이터 카운트*/
     int selectEmpCount();

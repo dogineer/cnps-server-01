@@ -1,6 +1,7 @@
 package com.develop.web.domain.personnel.member.service;
 
 import com.develop.web.domain.auth.validation.MemberChecker;
+import com.develop.web.domain.personnel.member.dto.JoinedMember;
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
 import com.develop.web.global.exception.exception.CustomException;
@@ -18,7 +19,7 @@ public class CreateAccount {
     private final PasswordEncoder passwordEncoder;
     private final AuthMapper authMapper;
 
-    public void addMember(Member member) throws CustomException {
+    public void addMember(JoinedMember member) throws CustomException {
         memberChecker.overlap(member.getAccount());
         member.encodePassword(passwordEncoder);
         authMapper.insertMember(member);
