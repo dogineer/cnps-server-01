@@ -2,11 +2,14 @@ package com.develop.web.domain.media.upload.dto;
 
 public enum Codec {
     XDCAMHD422("XDCAMHD422"),
-    ProResLT("ProResLT");
+    ProResLT("ProResLT"),
+    H264("libx264"),
+    DNxHD("dnxhd"),
+    ;
 
-    private String description;
+    private String id;
 
-    Codec(String description) {
-        this.description = description;
+    Codec(String id) {
+        this.id = id;
     }
 }
