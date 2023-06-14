@@ -23,8 +23,7 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private final AuthChecker authChecker;
-    private final PageFetcher
-        clipPageFetcher;
+    private final PageFetcher clipPageFetcher;
     private final IngestPageFetcher ingestPageFetcher;
 
     private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
@@ -38,8 +37,8 @@ public class UserController {
 
     @GetMapping("ingest")
     public String ingestPage(
-        @RequestParam("page") int page,
-        @RequestParam("limit") int limit,
+        @RequestParam(value = "page", defaultValue = "1") int page,
+        @RequestParam(value = "limit", defaultValue = "20") int limit,
         CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
 
         authChecker.blockOutsiders(session);
