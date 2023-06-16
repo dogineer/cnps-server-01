@@ -14,4 +14,16 @@ WITH RECURSIVE C AS (
     LEFT JOIN dept d3 ON d2.p_id = d3.id
 ) SELECT C.path FROM C WHERE C.account = #{account};
 
+WITH RECURSIVE C AS (
+  SELECT d.id, d.p_id, d.name, d.name AS path
+  FROM dept d
+  WHERE d.name = '방송본부'
+
+  UNION ALL
+
+  SELECT d.id, d.p_id, d.name, CONCAT(C.path, ' > ', d.name)
+  FROM dept d
+  INNER JOIN C ON d.p_id = C.id
+)
+SELECT path FROM C;
 
