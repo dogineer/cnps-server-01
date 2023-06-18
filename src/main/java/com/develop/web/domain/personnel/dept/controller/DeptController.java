@@ -21,6 +21,7 @@ public class DeptController {
     private final FindDeptList findDeptList;
     private final TopDeptFetcher topDeptFetcher;
     private final FindDeptMemberChecker findDeptMemberChecker;
+    private final FindDeptChartList findDeptChartList;
 
     @PostMapping("/dept/new/")
     @Operation(summary = "부서 생성", description = "부서를 생성합니다.")
@@ -48,4 +49,12 @@ public class DeptController {
     public List<DeptDto> getTopDept(){
         return topDeptFetcher.getTopDept();
     }
+
+    @GetMapping("/dept/find/{deptId}")
+    @Operation(summary = "부서 조직도 리스트", description = "상위 부서를 통해 하위 부서 리스트를 조회합니다.")
+    public List<String> getFindNameDept(@PathVariable Integer deptId){
+        return findDeptChartList.getDeptChartList(deptId);
+    }
+
+
 }
