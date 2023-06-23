@@ -17,7 +17,7 @@ WITH RECURSIVE C AS (
 WITH RECURSIVE C AS (
   SELECT d.id, d.p_id, d.name, d.name AS path
   FROM dept d
-  WHERE d.name = '방송본부'
+  WHERE d.id = #{id}
 
   UNION ALL
 

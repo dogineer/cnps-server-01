@@ -38,7 +38,7 @@ public class UserController {
     @GetMapping("ingest")
     public String ingestPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
-        @RequestParam(value = "limit", defaultValue = "20") int limit,
+        @RequestParam(value = "limit", defaultValue = "30") int limit,
         CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
 
         authChecker.blockOutsiders(session);

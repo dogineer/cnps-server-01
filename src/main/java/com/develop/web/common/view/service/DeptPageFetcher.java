@@ -3,6 +3,7 @@ package com.develop.web.common.view.service;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.domain.personnel.dept.service.DetailDeptFetcher;
 import com.develop.web.domain.personnel.dept.service.FindDeptList;
+import com.develop.web.domain.personnel.dept.service.TopDeptFetcher;
 import com.develop.web.domain.personnel.member.service.DetailMemberFetcher;
 import com.develop.web.domain.personnel.member.service.MemberListFetcher;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ public class DeptPageFetcher implements PageFetcher {
     private final DetailMemberFetcher detailMemberFetcher;
     private final MemberListFetcher memberListFetcher;
     private final FindDeptList findDeptList;
+    private final TopDeptFetcher topDeptFetcher;
 
     @Override
     public void fetchPage(AccountDto accountDto, Model model) {
@@ -24,6 +26,7 @@ public class DeptPageFetcher implements PageFetcher {
         model.addAttribute("UserList", memberListFetcher.getMemberList());
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
         model.addAttribute("Depts", findDeptList.getDeptList());
+        model.addAttribute("TopDepts", topDeptFetcher.getTopDept());
         model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
     }
 }

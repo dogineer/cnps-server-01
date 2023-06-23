@@ -1,5 +1,44 @@
 html,
 body {
-    height: 100%;
-    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  height: 100%;
+  color: whitesmoke;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: rgba(32, 38, 52);
+  /*color: rgba(173,184,196);*/
+}
+
+.form-login {
+  width: 100%;
+  max-width: 30rem;
+  padding: 3rem;
+  margin: auto;
+  background-color: rgba(41, 48, 66);
+  border-radius: 0.5rem;
+}
+
+.trans {
+  background-color: transparent;
+}
+
+.black {
+  color: black;
+}
+
+.white {
+  color: rgba(173, 184, 196);
+}
+
+.form-control-trans {
+  width: 100%;
+  padding: 0.5rem;
+  color: rgba(192, 193, 199);
+  border: solid darkgrey;
+  border-radius: 0.5rem;
+  background-color: transparent;
 }

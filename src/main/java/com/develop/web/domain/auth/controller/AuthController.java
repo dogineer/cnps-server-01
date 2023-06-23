@@ -47,7 +47,7 @@ public class AuthController {
 
         if (rank == 12) {
             System.out.println("관리자 로그인");
-            return "redirect:/admin/management/user?page=1&limit=10";
+            return "redirect:/admin/management/user";
         }
         return "redirect:/user/clip";
     }
