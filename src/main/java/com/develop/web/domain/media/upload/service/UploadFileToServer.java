@@ -3,6 +3,7 @@ package com.develop.web.domain.media.upload.service;
 import com.develop.web.domain.media.upload.dto.Metadata;
 import com.develop.web.domain.media.upload.mapper.UploadMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -16,12 +17,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 @RequiredArgsConstructor
 public class UploadFileToServer {
 
+    @Value("${CNPS.MC.URL}")
+    private String mc;
     private final UploadMapper uploadMapper;
 
     public WebClient webClient() {
         return WebClient
               .builder()
-              .baseUrl("http://localhost:8081")
+              .baseUrl(mc)
               .build();
     }
 
