@@ -1,25 +1,64 @@
+/*
+  main color : #2F3336
+  back color : #F9FAFF
+  form color : #FFFFFF
+  white color : #F2F2F2
+*/
+
 html,
 body {
   height: 100%;
-  color: whitesmoke;
+  color: #2F3336;
 }
 
 body {
   display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: rgba(32, 38, 52);
-  /*color: rgba(173,184,196);*/
+  flex-direction: column;
+  background-color: #F9FAFF;
+}
+
+@media ( min-width: 768px ) {
+  .main-L-box{
+    display: none;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  border-radius: 1rem;
+  background-color: #FFFFFF;
+  box-shadow: 1px 10px 50px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  min-width: 75%;
+  min-height: 60%;
+
+}
+
+.main-L-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 75%;
+  padding: 3rem 3rem;
+  color: #F2F2F2;
+  text-align: left;
+  border-radius: 1rem 0 0 1rem;
+  background-color: #2F3336;
+}
+
+.main-R-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  padding: 3rem 3rem;
 }
 
 .form-login {
   width: 100%;
   max-width: 30rem;
-  padding: 3rem;
-  margin: auto;
-  background-color: rgba(41, 48, 66);
-  border-radius: 0.5rem;
+  margin: 3rem auto;
 }
 
 .trans {
@@ -31,7 +70,7 @@ body {
 }
 
 .white {
-  color: rgba(173, 184, 196);
+  color: #F2F2F2;
 }
 
 .form-control-trans {
@@ -41,4 +80,54 @@ body {
   border: solid darkgrey;
   border-radius: 0.5rem;
   background-color: transparent;
+}
+.logo-box{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.logo{
+  border-radius: 10px;
+  box-shadow: 1px 10px 50px rgba(0, 0, 0, 0.1);
+}
+
+.contect-us{
+
+}
+
+.button{
+  color: #F2F2F2;
+  background-color: #2F3336;
+  transition: background-color 0.15s ease;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  width: 100%;
+}
+
+.button:hover {
+  color: #2F3336;
+  background-color: #F2F2F2;
+}
+
+.abutton{
+  transition: background-color 0.15s ease;
+  color: #2F3336;
+  text-decoration: none;
+}
+
+.abutton:hover{
+  color: #939393;
+}
+
+.abutton-red{
+  transition: background-color 0.15s ease;
+  color: #939393;
+  text-decoration: none;
+}
+
+.abutton-red:hover{
+  color: orangered;
 }
