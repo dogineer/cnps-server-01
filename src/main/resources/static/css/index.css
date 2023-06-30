@@ -1,25 +1,25 @@
-/*
-  main color : #2F3336
-  back color : #F9FAFF
-  form color : #FFFFFF
-  white color : #F2F2F2
-*/
+@import "color.css";
 
 html,
 body {
   height: 100%;
-  color: #2F3336;
+  color: var(--cnps-black);
 }
 
 body {
   display: flex;
   flex-direction: column;
-  background-color: #F9FAFF;
+  background-color: var(--cnps-background-color);
 }
 
-@media ( min-width: 768px ) {
-  .main-L-box{
-    display: none;
+@media (min-width: 1px)and (max-width: 991.98px) {
+  body:not([data-sidebar-position=right]) .main-L-box {
+    margin-right: -290px;
+  }
+
+  body:not([data-sidebar-position=right]) .main-R-box {
+    width: auto;
+    border-radius: 1rem 1rem 1rem 1rem;
   }
 }
 
@@ -27,32 +27,35 @@ body {
   display: flex;
   flex-direction: row;
   border-radius: 1rem;
-  background-color: #FFFFFF;
+  background-color: var(--cnps-black);
   box-shadow: 1px 10px 50px rgba(0, 0, 0, 0.1);
   margin: auto;
-  min-width: 75%;
-  min-height: 60%;
-
+  white-space: nowrap;
 }
 
 .main-L-box{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: var(--cnps-real-white);
   width: 75%;
   padding: 3rem 3rem;
-  color: #F2F2F2;
   text-align: left;
-  border-radius: 1rem 0 0 1rem;
-  background-color: #2F3336;
+  direction: ltr;
+  transition: margin-left .35s ease-in-out, left .35s ease-in-out, margin-right .35s ease-in-out, right .35s ease-in-out;
 }
 
 .main-R-box{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: var(--cnps-black);
+  background-color: var(--cnps-real-white);
+  border-radius: 0 1rem 1rem 0;
   width: 60%;
+  height: 100%;
   padding: 3rem 3rem;
+  transition: border-radius .35s
 }
 
 .form-login {

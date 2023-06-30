@@ -1,14 +1,18 @@
+@import "color.css";
+
 .folder-content {
   -webkit-touch-callout: none;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  color: rgba(170, 172, 179);
+
+  color: var(--cnps-black);
+  transition: background-color 0.15s ease;
 }
 
 .folder-content:hover {
-  color: white;
+  color: var(--cnps-red);
 }
 
 .inline-icon {
