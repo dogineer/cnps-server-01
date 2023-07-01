@@ -19,6 +19,16 @@
   vertical-align: middle;
 }
 
+.folder-box {
+  height: 50%;
+  width: 100%;
+  border-collapse: separate;
+  background-color: var(--cnps-real-white);
+  box-shadow: 1px 10px 50px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
 .folder-container {
   display: inline-block;
   margin: 0;
