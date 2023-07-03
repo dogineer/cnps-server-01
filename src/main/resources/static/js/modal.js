@@ -1,7 +1,9 @@
-function clipPreview(clip) {
-  var clipId = clip.getAttribute('data-clip-id')
-  var clipTitle = clip.getAttribute('data-clip-title')
-  var clipPath = clip.getAttribute('data-clip-path')
+function clipPreview(data) {
+  var clip = data.parentElement;
+
+  var clipId = clip.parentElement.getAttribute('data-clip-id')
+  var clipTitle = clip.parentElement.getAttribute('data-clip-title')
+  var clipPath = clip.parentElement.getAttribute('data-clip-path')
 
   var clipData = {
     "clip": {

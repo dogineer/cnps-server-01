@@ -1,6 +1,7 @@
 function deptChartLoad() {
     const selectElement = document.getElementById('deptChartSelect');
     selectElement.addEventListener('change', fetchDataByTeam);
+    fetchDataByTeam();
 }
 
 function fetchDataByTeam() {
@@ -23,9 +24,17 @@ function fetchDataByTeam() {
             listItem.innerHTML = '';
 
             data.forEach(item => {
-                var itemElement = document.createElement('tr');
-                itemElement.textContent = item;
-                listItem.appendChild(itemElement);
+                var itemTrElement = document.createElement('tr');
+                var itemTd1Element = document.createElement('td');
+                var itemTd2Element = document.createElement('td');
+
+                listItem.appendChild(itemTrElement);
+
+                itemTd1Element.textContent = item;
+                itemTrElement.appendChild(itemTd1Element);
+
+                itemTd2Element.textContent = "삭제";
+                itemTrElement.appendChild(itemTd2Element);
             });
         })
         .catch(error => {
