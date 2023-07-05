@@ -1,6 +1,7 @@
 package com.develop.web.common.view.controller;
 
 import com.develop.web.common.view.dto.AccountDto;
+import com.develop.web.common.view.service.ClipPageFetcher;
 import com.develop.web.common.view.service.IngestPageFetcher;
 import com.develop.web.common.view.service.PageFetcher;
 import com.develop.web.domain.auth.service.AuthChecker;
@@ -23,42 +24,37 @@ import javax.servlet.http.HttpSession;
 public class UserController {
 
     private final AuthChecker authChecker;
-    private final PageFetcher clipPageFetcher;
+    private final ClipPageFetcher clipPageFetcher;
     private final IngestPageFetcher ingestPageFetcher;
 
-    private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
+    private AccountDto initPageService(HttpSession session) {
+
+        authChecker.blockOutsiders(session);
+
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
 
-        AccountDto accountDto = new AccountDto(account, teamId);
-
-        pageFetcher.fetchPage(accountDto, model);
+        return new AccountDto(account, teamId);
     }
 
     @GetMapping("ingest")
     public String ingestPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
-        @RequestParam(value = "limit", defaultValue = "30") int limit,
-        CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
-
-        authChecker.blockOutsiders(session);
-
-        String account = session.getAttribute("account").toString();
-        Integer teamId = (Integer) session.getAttribute("teamId");
-
-        criteriaDto = new CriteriaDto(page, limit);
-
-        AccountDto accountDto = new AccountDto(account, teamId);
-
-        ingestPageFetcher.fetchPageing(criteriaDto, accountDto, model);
+        @RequestParam(value = "limit", defaultValue = "50") int limit,
+        HttpSession session, Model model) throws CustomException {
+        AccountDto accountDto = initPageService(session);
+        ingestPageFetcher.fetchPageing(new CriteriaDto(page, limit), accountDto, model);
         return "pages/ingest";
     }
 
 
     @GetMapping("clip")
-    public String editPage(HttpSession session, Model model) throws CustomException {
-        authChecker.blockOutsiders(session);
-        initPageService(session, model, clipPageFetcher);
+    public String editPage(
+        @RequestParam(value = "page", defaultValue = "1") int page,
+        @RequestParam(value = "limit", defaultValue = "50") int limit,
+        HttpSession session, Model model) throws CustomException {
+        AccountDto accountDto = initPageService(session);
+        clipPageFetcher.fetchPageing(new CriteriaDto(page, limit), accountDto, model);
         return "pages/clip";
     }
 }

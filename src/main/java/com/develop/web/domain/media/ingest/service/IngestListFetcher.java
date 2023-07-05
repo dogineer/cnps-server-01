@@ -14,8 +14,6 @@ public class IngestListFetcher {
     private final UploadMapper uploadMapper;
 
     public List<IngestRequestData> getIngestRequestList(CriteriaDto cri) {
-        System.out.println(cri.toString());
-        System.out.println(uploadMapper.selectGetIngestList(cri));
         return uploadMapper.selectGetIngestList(cri);
     }
 }

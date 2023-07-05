@@ -42,7 +42,7 @@ public class AdminController {
     @GetMapping("user")
     public String userPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
-        @RequestParam(value = "limit", defaultValue = "20") int limit,
+        @RequestParam(value = "limit", defaultValue = "50") int limit,
         CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
 
         authChecker.blockOutsiders(session);

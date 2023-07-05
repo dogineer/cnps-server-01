@@ -31,6 +31,7 @@ public class IngestPageFetcher implements PageingService{
 
         String account = accountDto.getAccount();
         Integer teamId = accountDto.getTeamId();
+
         int countTotal = uploadMapper.selectIngestCount();
         PageDto pageDto = new PageDto(countTotal, 10, criteriaDto);
 
@@ -40,6 +41,7 @@ public class IngestPageFetcher implements PageingService{
         model.addAttribute("TeamFolderList", teamFolderGroupFetcher.getTeamFolder(teamId));
         model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
         model.addAttribute("IngestRequestList", ingestListFetcher.getIngestRequestList(criteriaDto));
+
         model.addAttribute("pageMaker", pageDto);
 
     }

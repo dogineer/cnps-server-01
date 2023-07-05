@@ -3,6 +3,7 @@ package com.develop.web.domain.media.clip.controller;
 import com.develop.web.domain.media.clip.dto.ClipDto;
 import com.develop.web.domain.media.clip.service.ClipDataListFetcher;
 import com.develop.web.domain.media.clip.service.XmlShow;
+import com.develop.web.domain.page.dto.CriteriaDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +28,8 @@ public class ClipController {
     @GetMapping("/list")
     @Operation(summary = "클립 리스트 확인", description = "서버에 저장된 클립 데이터 목록 확인")
     public List<ClipDto> showClipDataList(){
-        return clipDataListFetcher.getClipList();
+        CriteriaDto criteriaDto = new CriteriaDto();
+        return clipDataListFetcher.getClipList(criteriaDto);
     }
 
     @GetMapping("/xml")
