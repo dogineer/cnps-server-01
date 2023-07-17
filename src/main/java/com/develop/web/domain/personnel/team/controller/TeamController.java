@@ -33,4 +33,10 @@ public class TeamController {
     public List<TeamDto> fetcherTeamList() {
         return teamListFetcher.getTeam();
     }
+
+    @GetMapping("/list/Type")
+    @Operation(summary = "팀 타입 가져오기", description = "팀 타입 정보를 가져옵니다.")
+    public List<TeamDto> fetcherTeamTypeList() {
+        return teamListFetcher.getTeamType();
+    }
 }

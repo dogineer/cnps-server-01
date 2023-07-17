@@ -26,6 +26,7 @@ public class TeamPageFetcher implements PageFetcher {
         model.addAttribute("UserList", memberListFetcher.getMemberList());
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
         model.addAttribute("TeamList", teamListFetcher.getTeam());
+        model.addAttribute("TeamTypeList", teamListFetcher.getTeamType());
         model.addAttribute("Depts", findDeptList.getDeptList());
         model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
     }

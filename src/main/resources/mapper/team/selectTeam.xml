@@ -7,4 +7,8 @@
     <select id="selectTeamList" resultType="TeamDto" >
         select id, name from team where p_id != 1
     </select>
+
+    <select id="selectTeamTypeList" resultType="TeamDto" >
+        select id, name from team where p_id = 1 and id != 1
+    </select>
 </mapper>
