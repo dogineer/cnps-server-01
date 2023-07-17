@@ -1,13 +1,14 @@
 package com.develop.web.domain.media.ingest.dto;
 
 import com.develop.web.domain.media.upload.dto.Codec;
-import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Data
+@Getter
+@RequiredArgsConstructor
 public class IngestRequestData {
     private Integer id;                 // 인제스트 ID
     private LocalDateTime createAt;     // 생성 날짜
@@ -22,4 +23,8 @@ public class IngestRequestData {
     private LocalDateTime success;      // 성공 유무
 
     private MultipartFile files;        // 영상 데이타
+
+    public void setMemberId(Integer memberId) {
+        this.memberId = memberId;
+    }
 }

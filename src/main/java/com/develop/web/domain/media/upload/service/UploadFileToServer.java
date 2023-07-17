@@ -12,6 +12,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
@@ -23,25 +24,24 @@ public class UploadFileToServer {
 
     public WebClient webClient() {
         return WebClient
-              .builder()
-              .baseUrl(mc)
-              .build();
+            .builder()
+            .baseUrl(mc)
+            .build();
     }
 
-    public Metadata upload(Resource files, Integer ingestId) {
+    public Mono<Metadata> upload(Resource files, Integer ingestId) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
         body.add("ingestId", ingestId);
 
         return webClient()
-              .method(HttpMethod.POST)
-              .uri("/api/upload/")
-              .accept(MediaType.APPLICATION_JSON)
-              .contentType(MediaType.APPLICATION_JSON)
-              .body(BodyInserters.fromMultipartData(body))
-              .retrieve()
-              .bodyToMono(Metadata.class)
-              .doOnSuccess(uploadMapper::insertMetadata)
-              .block();
+            .method(HttpMethod.POST)
+            .uri("/api/upload/")
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.MULTIPART_FORM_DATA)
+            .body(BodyInserters.fromMultipartData(body))
+            .retrieve()
+            .bodyToMono(Metadata.class)
+            .doOnSuccess(uploadMapper::insertMetadata);
     }
 }
