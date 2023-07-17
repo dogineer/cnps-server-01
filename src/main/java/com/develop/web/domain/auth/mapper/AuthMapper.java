@@ -24,6 +24,9 @@ public interface AuthMapper {
     /** @description 멤버 데이터 조회 (로그인)*/
     Member selectMember(String account);
 
+    /** @description 멤버 정보 조회 (내정보)*/
+    MemberInfo selectMemberInfo(String account);
+
     /** @description 직원 비밀번호 업데이트 (비밀번호 변경)*/
     void updatePassword(String account, String changePassword);
 

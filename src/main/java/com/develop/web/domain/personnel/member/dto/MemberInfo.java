@@ -6,16 +6,18 @@ import java.time.LocalDateTime;
 
 @Data
 public class MemberInfo {
+    private Integer id;
     private String account;
     private String name;
-    private String rankName;
-    private String deptName;
-    private String teamName;
     private Integer rankId;
+    private String rankName;
     private Integer deptId;
+    private String deptName;
     private Integer teamId;
+    private String teamName;
     private String birth;
     private Byte gender;
+    private String phone;
     private String email;
     private String des;
     private Byte access;

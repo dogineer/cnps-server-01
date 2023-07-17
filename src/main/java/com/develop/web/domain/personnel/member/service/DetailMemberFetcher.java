@@ -1,7 +1,7 @@
 package com.develop.web.domain.personnel.member.service;
 
-import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.mapper.AuthMapper;
+import com.develop.web.domain.personnel.member.dto.MemberInfo;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +12,7 @@ public class DetailMemberFetcher {
         this.authMapper = authMapper;
     }
 
-    public Member getMember(String account) {
-        return authMapper.selectMember(account);
+    public MemberInfo getMember(String account) {
+        return authMapper.selectMemberInfo(account);
     }
 }
