@@ -1,5 +1,7 @@
 package com.develop.web.domain.media.upload.service;
 
+import com.develop.web.domain.media.ingest.dto.ResultRequestData;
+import com.develop.web.domain.media.ingest.service.CreateClipPost;
 import com.develop.web.domain.media.upload.dto.Metadata;
 import com.develop.web.domain.media.upload.mapper.UploadMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,6 @@ public class UploadFileToServer {
     @Value("${CNPS.MC.URL}")
     private String mc;
     private final UploadMapper uploadMapper;
-
     public WebClient webClient() {
         return WebClient
             .builder()

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Mono;
 
 import javax.servlet.http.HttpSession;
@@ -38,43 +39,37 @@ public class IngestController {
     private final CreateIngestPost createIngestPost;
     private final UploadFileToServer uploadFileToServer;
     private final FileChecker fileChecker;
-    private final CreateClipPost createClipPost;
     private final CreateFileFromMultipartFile createFileFromMultipartFile;
+    private final CreateClipPost createClipPost;
 
     @Value("${app.upload.dir:${user.home}/movies/mam/temp/}")
     private String TempDir;
 
     @PostMapping(value = "/ingest/add")
-    @Operation(summary = "인제스트",
-        description = "업로드 -> temp 임시 파일 생성 -> 미디어센터 서버로 이동 -> 영상 아카이브 저장 및 변환 -> 컨버팅 저장 -> 완료 )")
-
+    @Operation(summary = "인제스트", description = "업로드 -> temp 임시 파일 생성 -> 미디어센터 서버로 이동 -> 영상 아카이브 저장 및 변환 -> 컨버팅 저장 -> 완료 )")
     public void ingestRequset(IngestRequestData ingestRequestData, HttpSession session) throws IOException {
-        Resource mediaFiles = createFileFromMultipartFile.run(ingestRequestData.getFiles(), TempDir);;
-
         Integer memberId = session.getAttribute("empId").hashCode();
-        Integer ingestId = ingestRequestData.getId();
+
         ingestRequestData.setMemberId(memberId);
         createIngestPost.addIngestRequest(ingestRequestData);
 
-        try {
-            fileChecker.fileNull(mediaFiles);
-            ResultRequestData requestData = new ResultRequestData();
+        MultipartFile file = ingestRequestData.getFiles();
+        Resource mediaFiles = createFileFromMultipartFile.run(file, TempDir);
+        fileChecker.fileNull(mediaFiles);
+        Integer ingestId = ingestRequestData.getId();
 
-            uploadFileToServer
-                .upload(mediaFiles, ingestId)
-                .subscribe(resultMetadata -> {
-                    requestData.ingest_id = ingestRequestData.getId();
-                    requestData.team_id = (Integer) session.getAttribute("teamId");
-                    requestData.folder_id = ingestRequestData.getFolder();
-                    requestData.e_metadata_id = resultMetadata.id;
-                    requestData.a_metadata_id = resultMetadata.id;
+        ResultRequestData requestData = new ResultRequestData();
 
-                    createClipPost.addClipPost(requestData);
-                });
+        uploadFileToServer
+            .upload(mediaFiles, ingestId)
+            .subscribe(metadata -> {
+                requestData.ingest_id = ingestRequestData.getId();
+                requestData.team_id = (Integer) session.getAttribute("teamId");
+                requestData.folder_id = ingestRequestData.getFolder();
+                requestData.a_metadata_id = metadata.id;
 
-        } catch (NullPointerException e) {
-            log.error(e.getMessage());
-        }
+                createClipPost.addClipPost(requestData);
+            });
     }
 
     @GetMapping(value = "/ingest/list")
