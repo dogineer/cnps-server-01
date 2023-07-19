@@ -16,7 +16,9 @@ function importFile(file_path) {
     if (file_path) {
         var script = "$._PPP_.importCustomFiles('" + file_path + "')";
 
-        evalScript(script);
+        try {
+            evalScript(script);
+        } catch (e) {}
     } else {
         console.error("file_path is null or undefined");
     }
