@@ -49,9 +49,17 @@ public class IngestController {
     @Operation(summary = "인제스트", description = "업로드 -> temp 임시 파일 생성 -> 미디어센터 서버로 이동 -> 영상 아카이브 저장 및 변환 -> 컨버팅 저장 -> 완료 )")
     public void ingestRequset(IngestRequestData ingestRequestData, HttpSession session) throws IOException {
         Integer memberId = session.getAttribute("empId").hashCode();
+        Integer teamId = session.getAttribute("teamId").hashCode();
 
         ingestRequestData.setMemberId(memberId);
-        createIngestPost.addIngestRequest(ingestRequestData);
+        ingestRequestData.setTeamId(teamId);
+
+        if (ingestRequestData.getFiles() == null) {
+            System.out.println(ingestRequestData.toString());
+            log.error("영상이 없습니다.");
+        } else {
+            createIngestPost.addIngestRequest(ingestRequestData);
+        }
 
         MultipartFile file = ingestRequestData.getFiles();
         Resource mediaFiles = createFileFromMultipartFile.run(file, TempDir);
@@ -64,7 +72,7 @@ public class IngestController {
             .upload(mediaFiles, ingestId)
             .subscribe(metadata -> {
                 requestData.ingest_id = ingestRequestData.getId();
-                requestData.team_id = (Integer) session.getAttribute("teamId");
+                requestData.team_id = ingestRequestData.getTeamId();
                 requestData.folder_id = ingestRequestData.getFolder();
                 requestData.a_metadata_id = metadata.id;
 
