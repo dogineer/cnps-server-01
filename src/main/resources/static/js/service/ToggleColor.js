@@ -17,7 +17,7 @@ function setBlackColors() {
     document.documentElement.style.setProperty('--cnps-white', '#262626');
     document.documentElement.style.setProperty('--cnps-red', 'orangered');
     document.documentElement.style.setProperty('--cnps-dark-red', '#e13c00');
-    document.documentElement.style.setProperty('--cnps-sidebar', '#212121');
+    document.documentElement.style.setProperty('--cnps-sidebar', '#262626');
 
     localStorage.setItem('darkMode', 'enabled');
 }
