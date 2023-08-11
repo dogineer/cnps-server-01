@@ -3,7 +3,6 @@ package com.develop.web.domain.folder.controller;
 import com.develop.web.domain.folder.dto.FolderClipDto;
 import com.develop.web.domain.folder.dto.FolderDto;
 import com.develop.web.domain.folder.service.*;
-import com.develop.web.domain.folder.dto.GFolderDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ public class FolderController {
   private final ChildrenFolderFetcher childrenFolderFetcher;
   private final FolderClipDataFetcher folderClipDataFetcher;
   private final RootFolderListFetcher rootFolderListFetcher;
-  private final TeamFolderGroupFetcher teamFolderGroupFetcher;
 
   @PostMapping("/create")
   @Operation(summary = "폴더 생성", description = "폴더를 생성합니다.")
@@ -39,12 +37,6 @@ public class FolderController {
   @Operation(summary = "폴더 전체 조회", description = "폴더 전체를 조회합니다.")
   public List<FolderDto> ShowAllFolder() {
     return rootFolderListFetcher.getFolder();
-  }
-
-  @GetMapping("/show/team/{teamId}")
-  @Operation(summary = "팀 폴더 전체 조회", description = "폴더 전체를 조회합니다.")
-  public List<GFolderDto> ShowTeamFolder(@PathVariable Integer teamId) {
-    return teamFolderGroupFetcher.getTeamFolder(teamId);
   }
 
   @GetMapping("/show/{num}")
