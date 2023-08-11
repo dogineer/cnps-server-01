@@ -1,5 +1,6 @@
 package com.develop.web.domain.auth.controller;
 
+import com.develop.web.domain.connect.service.ClientInfoChecker;
 import com.develop.web.domain.personnel.member.dto.Member;
 import com.develop.web.domain.auth.dto.LoginRequest;
 import com.develop.web.domain.auth.mapper.AuthMapper;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpSession;
 public class AuthController {
     private final Login login;
     private final AuthMapper authMapper;
+    private final ClientInfoChecker clientInfoChecker;
 
     /**
      * @return "redirect:/ 최초 페이지로 이동"
@@ -29,12 +32,14 @@ public class AuthController {
      */
     @PostMapping("/login")
     @Operation(summary = "로그인", description = "세션 등록")
-    public String login(LoginRequest request, HttpSession session) {
+    public String login(LoginRequest request, HttpSession session, HttpServletRequest httpServletRequest) {
 
         login.checkAccount(request);
 
         String account = request.getAccount();
         Member dbMemberInfoData = authMapper.selectMember(account);
+
+        clientInfoChecker.clientInfo(account, httpServletRequest);
 
         session.setAttribute("access", dbMemberInfoData.getAccess());
         session.setAttribute("empId", dbMemberInfoData.getId());
@@ -43,12 +48,6 @@ public class AuthController {
         session.setAttribute("rank", dbMemberInfoData.getRankId());
         session.setAttribute("teamId", dbMemberInfoData.getTeamId());
 
-        Integer rank = dbMemberInfoData.getRankId();
-
-        if (rank == 12) {
-            System.out.println("관리자 로그인");
-            return "redirect:/admin/management/user";
-        }
         return "redirect:/user/clip";
     }
 
