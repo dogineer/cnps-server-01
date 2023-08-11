@@ -3,7 +3,7 @@ package com.develop.web.domain.folder.controller;
 import com.develop.web.domain.folder.dto.FolderClipDto;
 import com.develop.web.domain.folder.dto.FolderDto;
 import com.develop.web.domain.folder.service.*;
-import com.develop.web.domain.media.groupclip.dto.GFolderDto;
+import com.develop.web.domain.folder.dto.GFolderDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
