@@ -1,7 +1,7 @@
 package com.develop.web.domain.folder.service;
 
 import com.develop.web.domain.folder.mapper.FolderMapper;
-import com.develop.web.domain.media.groupclip.dto.GFolderDto;
+import com.develop.web.domain.folder.dto.GFolderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

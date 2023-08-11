@@ -1,4 +1,4 @@
-package com.develop.web.domain.media.groupclip.dto;
+package com.develop.web.domain.folder.dto;
 
 import lombok.Data;
 

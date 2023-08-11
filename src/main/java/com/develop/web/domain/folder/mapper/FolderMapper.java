@@ -2,7 +2,7 @@ package com.develop.web.domain.folder.mapper;
 
 import com.develop.web.domain.folder.dto.FolderClipDto;
 import com.develop.web.domain.folder.dto.FolderDto;
-import com.develop.web.domain.media.groupclip.dto.GFolderDto;
+import com.develop.web.domain.folder.dto.GFolderDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
