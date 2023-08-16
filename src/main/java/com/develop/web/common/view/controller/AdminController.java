@@ -3,9 +3,9 @@ package com.develop.web.common.view.controller;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.PageFetcher;
 import com.develop.web.common.view.service.PageingService;
-import com.develop.web.domain.auth.service.AdminChecker;
-import com.develop.web.domain.auth.service.AuthChecker;
-import com.develop.web.domain.page.dto.CriteriaDto;
+import com.develop.web.domain.users.auth.service.AdminChecker;
+import com.develop.web.domain.users.auth.service.AuthChecker;
+import com.develop.web.domain.service.page.dto.CriteriaDto;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +28,7 @@ public class AdminController {
     private final PageingService userPageFetcher;
     private final PageFetcher deptPageFetcher;
     private final PageFetcher teamPageFetcher;
+    private final PageFetcher rankPageFetcher;
 
     private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
 
@@ -56,7 +57,7 @@ public class AdminController {
         AccountDto accountDto = new AccountDto(account, teamId);
 
         userPageFetcher.fetchPageing(criteriaDto, accountDto, model);
-        return "pages/admin/management/user";
+        return "pages/admin/management/AdminUserPage";
     }
 
     @GetMapping("dept")
@@ -66,7 +67,7 @@ public class AdminController {
         adminChecker.rankPermissionCheck(session);
         initPageService(session, model, deptPageFetcher);
 
-        return "pages/admin/management/dept";
+        return "pages/admin/management/AdminDeptPage";
 
     }
 
@@ -77,6 +78,16 @@ public class AdminController {
         adminChecker.rankPermissionCheck(session);
         initPageService(session, model, teamPageFetcher);
 
-        return "pages/admin/management/team";
+        return "pages/admin/management/AdminTeamPage";
+    }
+
+    @GetMapping("rank")
+    public String rankPage(HttpSession session, Model model) throws CustomException {
+
+        authChecker.blockOutsiders(session);
+        adminChecker.rankPermissionCheck(session);
+        initPageService(session, model, rankPageFetcher);
+
+        return "pages/admin/management/AdminRankPage";
     }
 }

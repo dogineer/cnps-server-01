@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData(form);
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "/media/ingest/add");
+        xhr.open("POST", "/ingest/add");
 
         xhr.upload.addEventListener("progress", (e) => {
             if (e.lengthComputable) {

@@ -1,7 +1,7 @@
 package com.develop.web.common.view.controller;
 
-import com.develop.web.domain.personnel.dept.service.FindDeptList;
-import com.develop.web.domain.personnel.rank.service.RankListFetcher;
+import com.develop.web.domain.admin.dept.service.FindDeptList;
+import com.develop.web.domain.admin.rank.service.RankListFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

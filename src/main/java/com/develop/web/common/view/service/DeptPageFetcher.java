@@ -1,11 +1,11 @@
 package com.develop.web.common.view.service;
 
 import com.develop.web.common.view.dto.AccountDto;
-import com.develop.web.domain.personnel.dept.service.DetailDeptFetcher;
-import com.develop.web.domain.personnel.dept.service.FindDeptList;
-import com.develop.web.domain.personnel.dept.service.TopDeptFetcher;
-import com.develop.web.domain.personnel.member.service.DetailMemberFetcher;
-import com.develop.web.domain.personnel.member.service.MemberListFetcher;
+import com.develop.web.domain.admin.dept.service.DetailDeptFetcher;
+import com.develop.web.domain.admin.dept.service.FindDeptList;
+import com.develop.web.domain.admin.dept.service.TopDeptFetcher;
+import com.develop.web.domain.users.user.service.DetailMemberFetcher;
+import com.develop.web.domain.users.user.service.MemberListFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
