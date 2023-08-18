@@ -1,5 +1,6 @@
 package com.develop.web.domain.admin.user.mapper;
 
+import com.develop.web.domain.admin.user.dto.UpdateUserInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
@@ -10,4 +11,6 @@ public interface AdminMapper {
 
     /** @description 직원 삭제 (삭제 플래그)*/
     void updateUserDeleteFlag(String account);
+
+    void updateUserInfo(UpdateUserInfoDto userInfo);
 }

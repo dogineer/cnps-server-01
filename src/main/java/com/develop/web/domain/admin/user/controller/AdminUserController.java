@@ -1,7 +1,9 @@
 package com.develop.web.domain.admin.user.controller;
 
+import com.develop.web.domain.admin.user.dto.UpdateUserInfoDto;
 import com.develop.web.domain.admin.user.service.DeleteUser;
 import com.develop.web.domain.admin.user.service.UpdateUserAccess;
+import com.develop.web.domain.admin.user.service.UpdateUserInfoService;
 import com.develop.web.domain.users.user.dto.MemberInfo;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
 import io.swagger.v3.oas.annotations.Operation;
@@ -19,11 +21,18 @@ public class AdminUserController {
     private final UpdateUserAccess updateUserAccess;
     private final DeleteUser deleteUser;
     private final DetailMemberFetcher detailMemberFetcher;
+    private final UpdateUserInfoService updateUserInfoService;
 
     @GetMapping("/account-info/{account}")
     @Operation(summary = "개인정보값", description = "재 개발해야할 부분")
     public MemberInfo userInfo(@PathVariable String account) {
         return detailMemberFetcher.getMember(account);
+    }
+
+    @PutMapping("/account-info/update")
+    @Operation(summary = "개인정보값", description = "재 개발해야할 부분")
+    public void updateUserInfoService(@RequestBody UpdateUserInfoDto userInfo) {
+        updateUserInfoService.updateUserInfo(userInfo);
     }
 
     @PutMapping("/access/apply/{account}")
