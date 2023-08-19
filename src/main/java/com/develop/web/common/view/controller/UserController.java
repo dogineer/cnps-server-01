@@ -28,8 +28,6 @@ public class UserController {
 
     private AccountDto initPageService(HttpSession session) {
 
-        authChecker.blockOutsiders(session);
-
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
 

@@ -46,7 +46,6 @@ public class AdminController {
         @RequestParam(value = "limit", defaultValue = "50") int limit,
         CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
 
-        authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
 
         String account = session.getAttribute("account").toString();
@@ -63,7 +62,6 @@ public class AdminController {
     @GetMapping("dept")
     public String deptPage(HttpSession session, Model model) throws CustomException {
 
-        authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
         initPageService(session, model, deptPageFetcher);
 
@@ -74,7 +72,6 @@ public class AdminController {
     @GetMapping("team")
     public String teamPage(HttpSession session, Model model) throws CustomException {
 
-        authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
         initPageService(session, model, teamPageFetcher);
 
@@ -84,7 +81,6 @@ public class AdminController {
     @GetMapping("rank")
     public String rankPage(HttpSession session, Model model) throws CustomException {
 
-        authChecker.blockOutsiders(session);
         adminChecker.rankPermissionCheck(session);
         initPageService(session, model, rankPageFetcher);
 
