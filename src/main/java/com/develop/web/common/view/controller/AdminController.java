@@ -3,8 +3,6 @@ package com.develop.web.common.view.controller;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.PageFetcher;
 import com.develop.web.common.view.service.PageingService;
-import com.develop.web.domain.users.auth.service.AdminChecker;
-import com.develop.web.domain.users.auth.service.AuthChecker;
 import com.develop.web.domain.service.page.dto.CriteriaDto;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +20,6 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping(value = "/admin/management/*")
 public class AdminController {
-    private final AuthChecker authChecker;
-    private final AdminChecker adminChecker;;
-
     private final PageingService userPageFetcher;
     private final PageFetcher deptPageFetcher;
     private final PageFetcher teamPageFetcher;
@@ -46,8 +41,6 @@ public class AdminController {
         @RequestParam(value = "limit", defaultValue = "50") int limit,
         CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
 
-        adminChecker.rankPermissionCheck(session);
-
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
 
@@ -61,29 +54,20 @@ public class AdminController {
 
     @GetMapping("dept")
     public String deptPage(HttpSession session, Model model) throws CustomException {
-
-        adminChecker.rankPermissionCheck(session);
         initPageService(session, model, deptPageFetcher);
-
         return "pages/admin/management/AdminDeptPage";
 
     }
 
     @GetMapping("team")
     public String teamPage(HttpSession session, Model model) throws CustomException {
-
-        adminChecker.rankPermissionCheck(session);
         initPageService(session, model, teamPageFetcher);
-
         return "pages/admin/management/AdminTeamPage";
     }
 
     @GetMapping("rank")
     public String rankPage(HttpSession session, Model model) throws CustomException {
-
-        adminChecker.rankPermissionCheck(session);
         initPageService(session, model, rankPageFetcher);
-
         return "pages/admin/management/AdminRankPage";
     }
 }

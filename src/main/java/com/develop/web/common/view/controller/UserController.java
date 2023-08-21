@@ -3,7 +3,6 @@ package com.develop.web.common.view.controller;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.ClipPageFetcher;
 import com.develop.web.common.view.service.IngestPageFetcher;
-import com.develop.web.domain.users.auth.service.AuthChecker;
 import com.develop.web.domain.service.page.dto.CriteriaDto;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,6 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping(value = "/user/*")
 public class UserController {
-
-    private final AuthChecker authChecker;
     private final ClipPageFetcher clipPageFetcher;
     private final IngestPageFetcher ingestPageFetcher;
 
