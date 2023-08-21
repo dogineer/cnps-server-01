@@ -1,6 +1,8 @@
 package com.develop.web.global.config;
 
-import com.develop.web.global.filter.ApiRequestAuthFilter;
+import com.develop.web.global.exception.exception.CustomException;
+import com.develop.web.global.filter.AdminPageRequestRankFilter;
+import com.develop.web.global.filter.PageRequestAuthFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,13 +21,21 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class WebConfig extends WebSecurityConfigurerAdapter {
-
     @Bean
-    public FilterRegistrationBean<ApiRequestAuthFilter> apiRequestAuthFilterRegistration() {
-        FilterRegistrationBean<ApiRequestAuthFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new ApiRequestAuthFilter());
+    public FilterRegistrationBean<PageRequestAuthFilter> pageRequestAuthFilterRegistrationBean() {
+        FilterRegistrationBean<PageRequestAuthFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new PageRequestAuthFilter());
         registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         registrationBean.addUrlPatterns("/admin/*", "/user/*");
+        return registrationBean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<AdminPageRequestRankFilter> adminPageRequestRankFilterRegistrationBean() {
+        FilterRegistrationBean<AdminPageRequestRankFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new AdminPageRequestRankFilter());
+        registrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
+        registrationBean.addUrlPatterns("/admin/*");
         return registrationBean;
     }
 
