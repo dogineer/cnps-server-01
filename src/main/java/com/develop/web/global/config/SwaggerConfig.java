@@ -18,7 +18,8 @@ public class SwaggerConfig {
                 "/user/**",
                 "/folder/**",
                 "/team/**",
-                "/media/**",
+                "/ingest/**",
+                "/clip/**",
                 "/notice/**",
                 "/check/**",
                 "/auth/**")
