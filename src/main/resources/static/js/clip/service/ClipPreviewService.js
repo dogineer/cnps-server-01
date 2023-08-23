@@ -1,32 +1,61 @@
 export class ClipPreviewService {
     static clipPreview(event) {
-        var clip = event.target.parentElement.parentElement;
+        const clip = event.target.closest("#clip");
 
-        console.log(clip)
-
-        var clipId = clip.getAttribute('data-clip-id')
-        var clipTitle = clip.getAttribute('data-clip-title')
-        var clipPath = clip.getAttribute('data-clip-path')
-
-        var clipData = {
-            "clip": {
-                "id": clipId,
-                "title": clipTitle,
-                "path": clipPath
-            }
+        if (!clip) {
+            console.error("clip 요소를 찾을 수 없음");
+            return;
         }
 
-        var modal = document.getElementById("modal")
-        var modalClipPreview = document.createElement("div")
-        var videoTag = document.createElement("video")
-        var source = document.createElement("source")
+        const clipId = clip.getAttribute("data-clip-id");
+        const clipTitle = clip.getAttribute("data-clip-title");
+        const clipPath = clip.getAttribute("data-clip-path");
 
-        modal.appendChild(modalClipPreview)
-        modalClipPreview.appendChild(videoTag)
-        videoTag.appendChild(source)
+        this.openClipModal(clipId, clipTitle, clipPath);
+    }
 
-        modalClipPreview.setAttribute("class", "clip-preview")
-        source.setAttribute("type", "video/mp4")
-        source.setAttribute("src", "http://localhost:8080/streaming/" + clipData.clip.title)
+    static openClipModal(clipId, clipTitle, clipPath) {
+        const modal = new bootstrap.Modal(document.getElementById("clipPreview"));
+        const modalDialogElement = document.querySelector("#clipPreview .modal-dialog");
+        modalDialogElement.classList.add("modal-xl");
+
+        const clipPreviewBodyElement = document.getElementById("clip-preview-body");
+        this.removeVideoElement(clipPreviewBodyElement);
+        this.setModalContent(clipPreviewBodyElement, clipTitle, clipId, clipPath);
+
+        modal.show();
+    }
+
+    static setModalContent(clipPreviewBodyElement, clipTitle, clipId, clipPath) {
+        const titleElement = document.getElementById("clip-title");
+        const idElement = document.getElementById("clip-id");
+
+        titleElement.innerText = clipTitle;
+        idElement.innerText = clipId;
+
+        const newClipPreviewElement = document.createElement("video");
+        newClipPreviewElement.setAttribute("controls", "");
+
+        const newSourceElement = document.createElement("source");
+        newSourceElement.setAttribute("id", "clip-source");
+
+        const queryParams = new URLSearchParams({filename: clipPath});
+        const encodedClipPath = queryParams.toString();
+
+        newSourceElement.setAttribute(
+            "src",
+            `http://localhost:8080/clip/display?${encodedClipPath}`
+        );
+        newSourceElement.setAttribute("type", "video/mp4");
+
+        newClipPreviewElement.appendChild(newSourceElement);
+        clipPreviewBodyElement.appendChild(newClipPreviewElement);
+    }
+
+    static removeVideoElement(clipPreviewBodyElement) {
+        const existingVideoElement = clipPreviewBodyElement.querySelector("video");
+        if (existingVideoElement) {
+            clipPreviewBodyElement.removeChild(existingVideoElement);
+        }
     }
 }

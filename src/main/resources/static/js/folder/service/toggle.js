@@ -169,7 +169,7 @@ function clickFolder(folderId) {
 
           previewAtag.appendChild(previewSpanIcon)
           previewSpanIcon.setAttribute("class", "span-icon material-symbols-outlined")
-          previewSpanIcon.innerText = "youtube_activity"
+          previewSpanIcon.innerText = "preview"
 
           ingestName.className = 'clip-ingest_name'
           ingestName.innerText = item.ingest_name
