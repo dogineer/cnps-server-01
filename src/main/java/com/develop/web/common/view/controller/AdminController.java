@@ -49,25 +49,25 @@ public class AdminController {
         AccountDto accountDto = new AccountDto(account, teamId);
 
         userPageFetcher.fetchPageing(criteriaDto, accountDto, model);
-        return "pages/admin/management/AdminUserPage";
+        return "admin/user/admin_user_page";
     }
 
     @GetMapping("dept")
     public String deptPage(HttpSession session, Model model) throws CustomException {
         initPageService(session, model, deptPageFetcher);
-        return "pages/admin/management/AdminDeptPage";
+        return "admin/dept/admin_dept_page";
 
     }
 
     @GetMapping("team")
     public String teamPage(HttpSession session, Model model) throws CustomException {
         initPageService(session, model, teamPageFetcher);
-        return "pages/admin/management/AdminTeamPage";
+        return "admin/team/admin_team_page";
     }
 
     @GetMapping("rank")
     public String rankPage(HttpSession session, Model model) throws CustomException {
         initPageService(session, model, rankPageFetcher);
-        return "pages/admin/management/AdminRankPage";
+        return "admin/rank/admin_rank_page";
     }
 }

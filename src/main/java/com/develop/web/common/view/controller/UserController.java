@@ -38,7 +38,7 @@ public class UserController {
         HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initPageService(session);
         ingestPageFetcher.fetchPageing(new CriteriaDto(page, limit), accountDto, model);
-        return "pages/ingest";
+        return "user/ingest/ingest_page";
     }
 
 
@@ -49,6 +49,6 @@ public class UserController {
         HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initPageService(session);
         clipPageFetcher.fetchPageing(new CriteriaDto(page, limit), accountDto, model);
-        return "pages/clip";
+        return "user/clip/clip_page";
     }
 }
