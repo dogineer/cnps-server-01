@@ -1,7 +1,7 @@
-package com.develop.web.domain.service.upload.service;
+package com.develop.web.domain.service.ingest.service;
 
-import com.develop.web.domain.service.upload.dto.Metadata;
-import com.develop.web.domain.service.upload.mapper.UploadMapper;
+import com.develop.web.domain.service.ingest.dto.Metadata;
+import com.develop.web.domain.service.ingest.mapper.UploadMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class UploadFileToServer {
+public class ServerFileUploader {
 
     @Value("${CNPS.MC.URL}")
     private String mc;
@@ -28,7 +28,7 @@ public class UploadFileToServer {
             .build();
     }
 
-    public Mono<Metadata> upload(Resource files, Integer ingestId) {
+    public Mono<Metadata> uploadFileAndIngestId(Resource files, Integer ingestId) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
         body.add("ingestId", ingestId);

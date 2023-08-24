@@ -1,4 +1,4 @@
-package com.develop.web.domain.service.upload.service;
+package com.develop.web.domain.service.ingest.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,7 +16,7 @@ import java.nio.file.Path;
 
 @Service
 @Slf4j
-public class CreateFileFromMultipartFile {
+public class CreateFileFromMultipartFileService {
     public Resource run(MultipartFile multipartFile, String path) throws IOException {
         String randomString = RandomStringUtils.random(10, "0123456789abcdef");
         String fileName = path + randomString + File.separator + multipartFile.getOriginalFilename();

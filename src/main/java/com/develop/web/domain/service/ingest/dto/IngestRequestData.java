@@ -1,6 +1,5 @@
 package com.develop.web.domain.service.ingest.dto;
 
-import com.develop.web.domain.service.upload.dto.Codec;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 

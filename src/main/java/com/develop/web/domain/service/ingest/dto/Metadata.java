@@ -1,4 +1,4 @@
-package com.develop.web.domain.service.upload.dto;
+package com.develop.web.domain.service.ingest.dto;
 
 import lombok.Data;
 

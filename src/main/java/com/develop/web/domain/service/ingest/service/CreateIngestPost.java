@@ -1,6 +1,6 @@
 package com.develop.web.domain.service.ingest.service;
 
-import com.develop.web.domain.service.upload.mapper.UploadMapper;
+import com.develop.web.domain.service.ingest.mapper.UploadMapper;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
 import org.springframework.stereotype.Service;
 
