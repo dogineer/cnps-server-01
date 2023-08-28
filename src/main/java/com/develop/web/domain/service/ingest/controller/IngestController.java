@@ -7,7 +7,7 @@ import com.develop.web.domain.service.ingest.service.FileCheckerService;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
 import com.develop.web.domain.service.ingest.service.CreateFileFromMultipartFileService;
-import com.develop.web.domain.service.page.dto.CriteriaDto;
+import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.service.ingest.service.ServerFileUploader;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
