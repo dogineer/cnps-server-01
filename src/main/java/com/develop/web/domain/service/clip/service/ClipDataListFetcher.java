@@ -2,7 +2,7 @@ package com.develop.web.domain.service.clip.service;
 
 import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.clip.mapper.ClipMapper;
-import com.develop.web.domain.service.page.dto.CriteriaDto;
+import com.develop.web.common.view.dto.CriteriaDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
