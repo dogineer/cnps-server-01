@@ -1,14 +1,56 @@
-function deptChartLoad() {
-    const selectElement = document.getElementById('deptChartSelect');
-    selectElement.addEventListener('change', fetchDataByTeam);
-    fetchDataByTeam();
+document.addEventListener('DOMContentLoaded', () => {
+    const deptButtons = document.querySelectorAll('#dept-high-select');
+    fetchDataByMidDeptList();
+
+    deptButtons.forEach(function (button) {
+        button.addEventListener('change', (e) => {
+            fetchDataByMidDeptList();
+        });
+    });
+});
+
+function fetchDataByMidDeptList() {
+    const deptElement = document.getElementById('dept-high-select');
+    const deptId = deptElement.value;
+
+    fetch('/admin/dept/find/type/' + deptId, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+    })
+        .then(function (response) {
+            if (response.ok) {
+                console.log('GET success. fetchDataByMidDeptList');
+                return response.json();
+            }
+            throw new Error('GET failed.');
+        })
+        .then(data => {
+            const listItem = document.getElementById('dept-mid-select');
+            listItem.innerHTML = '';
+
+            data.forEach(item => {
+                const itemOptionElement = document.createElement('option');
+                listItem.appendChild(itemOptionElement)
+                itemOptionElement.text = item.name
+                itemOptionElement.value = item.id
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
 }
 
-function fetchDataByTeam() {
+function deptChartLoad() {
+    const selectElement = document.getElementById('deptChartSelect');
+    selectElement.addEventListener('change', fetchDataByDeptChart);
+    fetchDataByDeptChart();
+}
+
+function fetchDataByDeptChart() {
     const deptChart = document.getElementById('deptChartSelect');
     const deptId = deptChart.value;
 
-    fetch('/admin/dept/find/' + deptId, {
+    fetch('/admin/dept/find/tree/' + deptId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
@@ -20,13 +62,13 @@ function fetchDataByTeam() {
             throw new Error('GET failed.');
         })
         .then(data => {
-            var listItem = document.getElementById('deptChartBody');
+            const listItem = document.getElementById('deptChartBody');
             listItem.innerHTML = '';
 
             data.forEach(item => {
-                var itemTrElement = document.createElement('tr');
-                var itemTd1Element = document.createElement('td');
-                var itemTd2Element = document.createElement('td');
+                const itemTrElement = document.createElement('tr');
+                const itemTd1Element = document.createElement('td');
+                const itemTd2Element = document.createElement('td');
 
                 listItem.appendChild(itemTrElement);
 
@@ -34,6 +76,7 @@ function fetchDataByTeam() {
                 itemTrElement.appendChild(itemTd1Element);
 
                 itemTd2Element.textContent = "삭제";
+                itemTd2Element.id = "delete-dept-button";
                 itemTrElement.appendChild(itemTd2Element);
             });
         })

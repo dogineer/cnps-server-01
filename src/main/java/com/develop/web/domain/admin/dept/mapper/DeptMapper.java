@@ -1,7 +1,7 @@
 package com.develop.web.domain.admin.dept.mapper;
 
 import com.develop.web.domain.admin.dept.dto.DeptDto;
-import com.develop.web.domain.admin.dept.dto.NewDeptDto;
+import com.develop.web.domain.admin.dept.dto.PdeptDto;
 import com.develop.web.domain.users.user.dto.Member;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,12 +9,18 @@ import java.util.List;
 
 @Mapper
 public interface DeptMapper {
-    void insertDept(NewDeptDto deptDto);
+    void insertDept(PdeptDto pdeptDto);
+
     void deleteDept(Integer deptId);
 
-    List<Member> selectDeptMembers(Integer deptId);
     List<DeptDto> selectDeptList();
-    List<DeptDto> selectTopDept();
+
+    List<DeptDto> selectHighDept();
+
+    List<DeptDto> selectDeptMidList(Integer p_id);
+
+    List<Member> selectDeptMembers(Integer deptId);
+
     List<String> selectFindDeptChart(Integer deptId);
 
     String selectDetailDept(String account);
