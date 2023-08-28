@@ -45,7 +45,7 @@ public class AuthController {
         session.setAttribute("empId", dbMemberInfoData.getId());
         session.setAttribute("account", dbMemberInfoData.getAccount());
         session.setAttribute("name", dbMemberInfoData.getName());
-        session.setAttribute("rank", dbMemberInfoData.getRankId());
+        session.setAttribute("rankId", dbMemberInfoData.getRankId());
         session.setAttribute("teamId", dbMemberInfoData.getTeamId());
 
         return "redirect:/user/clip";
