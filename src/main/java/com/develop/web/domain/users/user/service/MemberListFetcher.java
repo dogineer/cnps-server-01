@@ -1,6 +1,6 @@
 package com.develop.web.domain.users.user.service;
 
-import com.develop.web.domain.service.page.dto.CriteriaDto;
+import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.users.user.dto.MemberInfo;
 import com.develop.web.domain.users.auth.mapper.AuthMapper;
 import org.springframework.stereotype.Service;

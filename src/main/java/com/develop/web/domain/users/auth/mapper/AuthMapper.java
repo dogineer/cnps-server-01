@@ -1,6 +1,6 @@
 package com.develop.web.domain.users.auth.mapper;
 
-import com.develop.web.domain.service.page.dto.CriteriaDto;
+import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.users.user.dto.JoinedMember;
 import com.develop.web.domain.users.user.dto.Member;
 import com.develop.web.domain.users.user.dto.MemberInfo;
