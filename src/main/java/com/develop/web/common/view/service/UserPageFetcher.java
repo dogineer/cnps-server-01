@@ -2,8 +2,8 @@ package com.develop.web.common.view.service;
 
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.domain.users.auth.mapper.AuthMapper;
-import com.develop.web.domain.service.page.dto.CriteriaDto;
-import com.develop.web.domain.service.page.dto.PageDto;
+import com.develop.web.common.view.dto.CriteriaDto;
+import com.develop.web.common.view.dto.PageDto;
 import com.develop.web.domain.admin.dept.service.DetailDeptFetcher;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
 import com.develop.web.domain.users.user.service.MemberListFetcher;

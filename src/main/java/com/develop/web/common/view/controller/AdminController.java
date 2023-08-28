@@ -1,9 +1,8 @@
 package com.develop.web.common.view.controller;
 
 import com.develop.web.common.view.dto.AccountDto;
-import com.develop.web.common.view.service.PageFetcher;
-import com.develop.web.common.view.service.PageingService;
-import com.develop.web.domain.service.page.dto.CriteriaDto;
+import com.develop.web.common.view.service.*;
+import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,17 +19,18 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping(value = "/admin/management/*")
 public class AdminController {
-    private final PageingService userPageFetcher;
-    private final PageFetcher deptPageFetcher;
-    private final PageFetcher teamPageFetcher;
-    private final PageFetcher rankPageFetcher;
+    private final UserPageFetcher userPageFetcher;
+    private final DeptPageFetcher deptPageFetcher;
+    private final TeamPageFetcher teamPageFetcher;
+    private final RankPageFetcher rankPageFetcher;
 
     private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
 
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
+        Integer rankId = (Integer) session.getAttribute("rankId");
 
-        AccountDto accountDto = new AccountDto(account, teamId);
+        AccountDto accountDto = new AccountDto(account, teamId, rankId);
 
         pageFetcher.fetchPage(accountDto, model);
     }
@@ -43,10 +43,11 @@ public class AdminController {
 
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
+        Integer rankId = (Integer) session.getAttribute("rankId");
 
         criteriaDto = new CriteriaDto(page, limit);
 
-        AccountDto accountDto = new AccountDto(account, teamId);
+        AccountDto accountDto = new AccountDto(account, teamId, rankId);
 
         userPageFetcher.fetchPageing(criteriaDto, accountDto, model);
         return "admin/user/admin_user_page";

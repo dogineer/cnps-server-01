@@ -1,4 +1,4 @@
-package com.develop.web.domain.service.page.dto;
+package com.develop.web.common.view.dto;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;

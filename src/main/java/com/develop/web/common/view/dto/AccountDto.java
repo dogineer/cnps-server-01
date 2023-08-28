@@ -8,4 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class AccountDto {
     private final String account;
     private final Integer teamId;
+    private final Integer rankId;
 }

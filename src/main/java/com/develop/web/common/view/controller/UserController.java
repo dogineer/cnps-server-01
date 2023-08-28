@@ -3,7 +3,7 @@ package com.develop.web.common.view.controller;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.ClipPageFetcher;
 import com.develop.web.common.view.service.IngestPageFetcher;
-import com.develop.web.domain.service.page.dto.CriteriaDto;
+import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +27,9 @@ public class UserController {
 
         String account = session.getAttribute("account").toString();
         Integer teamId = (Integer) session.getAttribute("teamId");
+        Integer rank = (Integer) session.getAttribute("rankId");
 
-        return new AccountDto(account, teamId);
+        return new AccountDto(account, teamId, rank);
     }
 
     @GetMapping("ingest")
