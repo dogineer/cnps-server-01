@@ -34,7 +34,7 @@ public class AdminPageRequestRankFilter extends OncePerRequestFilter {
 
     private void doRankFilter(HttpSession session) {
         log.info("[R] 사용자 권한 필터 실행");
-        boolean isAdmin = Objects.equals(session.getAttribute("rank").toString(), "12");
+        boolean isAdmin = Objects.equals(session.getAttribute("rankId").toString(), "12");
 
         if (isAdmin) {
             log.info("[!] 관리자 인증 성공!");

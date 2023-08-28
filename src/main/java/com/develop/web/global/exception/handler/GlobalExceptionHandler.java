@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 
 @Slf4j
@@ -42,5 +44,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         return "error/view";
+    }
+
+    @ExceptionHandler(IOException.class)
+    public void handleIOException(IOException e) {
+        log.error(e.getMessage());
     }
 }

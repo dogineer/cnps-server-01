@@ -1,8 +1,8 @@
 package com.develop.web.global.config;
 
-import com.develop.web.global.exception.exception.CustomException;
 import com.develop.web.global.filter.AdminPageRequestRankFilter;
 import com.develop.web.global.filter.PageRequestAuthFilter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,10 +44,13 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Value("${CNPS.MC.URL}")
+    private String mc;
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3001");
+        configuration.addAllowedOrigin(mc);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

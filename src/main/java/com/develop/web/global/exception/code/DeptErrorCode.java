@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum DeptErrorCode implements ErrorCode {
 
-    JOIND_MEMEBER("D0001", "삭제할려는 부서에 가입된 멤버가 존재합니다."),
+    JOIND_MEMEBER("D0001", "삭제하고자 하는 부서에 유저가 존재합니다."),
     ;
 
     private final String code;
