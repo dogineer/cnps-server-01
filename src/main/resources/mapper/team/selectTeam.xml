@@ -18,4 +18,10 @@
         where p_id = 1
           and id != 1
     </select>
+
+    <select id="selectTeamTypeListForOnlyAdmin" resultType="TeamDto">
+        select id, name
+        from team
+        where id != 1
+    </select>
 </mapper>
