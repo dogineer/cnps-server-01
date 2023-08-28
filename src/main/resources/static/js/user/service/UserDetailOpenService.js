@@ -60,7 +60,7 @@ export class UserDetailOpenService {
                         }
                     });
 
-                    fetchDataSelectOptions('/admin/dept/list', data, userDept, 'deptId');
+                    fetchDataSelectOptions('/admin/dept/list/all', data, userDept, 'deptId');
                     fetchDataSelectOptions('/admin/rank/list', data, userRank, 'rankId');
                     fetchDataSelectOptions('/team/list', data, userTeam, 'teamId');
 

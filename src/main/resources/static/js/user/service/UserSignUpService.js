@@ -5,7 +5,7 @@ function signup() {
 
     fetch('auth/signup', {
         method: 'POST',
-        headers: { 
+        headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)

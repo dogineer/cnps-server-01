@@ -22,30 +22,6 @@ function getElementsByClassName(id_name) {
   return document.getElementsByClassName(`clip-${id_name}`);
 }
 
-// function clearClipFields() {
-//   const clipFields =
-//       [
-//           'count',
-//           'ingest_name',
-//           'team_id',
-//           'team_name',
-//           'folder_name',
-//           'file_name',
-//           'file_path',
-//           'file_format',
-//           'file_size'
-//       ];
-//
-//   clipFields.forEach((id_name) => {
-//     const elements = getElementsByClassName(id_name);
-//
-//     for (let i = 0; i < elements.length; i++) {
-//       // elements[i].innerHTML = '';
-//         elements[i].remove()
-//     }
-//   });
-// }
-
 function clearClipTrField() {
   const elements = document.getElementById('clipListBody')
 
