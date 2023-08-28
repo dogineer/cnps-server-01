@@ -5,6 +5,8 @@ import com.develop.web.domain.service.folder.dto.GFolderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -12,7 +14,11 @@ import java.util.List;
 public class TeamFolderGroupFetcher {
         private final FolderMapper folderMapper;
 
-    public List<GFolderDto> getTeamFolder(Integer teamId) {
+    public List<GFolderDto> getTeamFolder(Integer teamId, Integer rankId) {
+        System.out.println(rankId);
+        if (rankId == 12){
+            return folderMapper.selectTeamFolderListForOnlyAdmin();
+        }
         return folderMapper.selectTeamFolderList(teamId);
     }
 }

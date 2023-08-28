@@ -15,6 +15,7 @@ public interface FolderMapper {
     void insertNewFolder(FolderDto folderDto);
 
     List<GFolderDto> selectTeamFolderList(Integer teamId);
+    List<GFolderDto> selectTeamFolderListForOnlyAdmin();
 
 
 }

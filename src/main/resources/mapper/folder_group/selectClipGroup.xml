@@ -11,4 +11,11 @@
         join team t on fg.team_id = t.id
         where team_id = #{teamId} and f.p_id != 1
     </select>
+
+    <select id="selectTeamFolderListForOnlyAdmin" resultType="GFolderDto">
+        select t.id as teamId, t.name as teamName, f.id as folderId, f.name as folderName
+        from folder_gp fg
+        join folder f on fg.folder_id = f.id
+        join team t on fg.team_id = t.id
+    </select>
 </mapper>
