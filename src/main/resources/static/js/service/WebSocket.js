@@ -1,49 +1,53 @@
-async function getServerURL() {
-  try {
-    const response = await fetch('/clip/get-server02-url');
-    if (response.ok) {
-      return await response.text();
-    } else {
-      console.error('\n' + '서버 URL을 가져오지 못했습니다.');
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        await setupWebSocket();
+    } catch (error) {
+        console.error('웹 소켓 설정 중 에러 발생:', error);
     }
-  } catch (error) {
-    console.error('서버 URL을 가져오는 중 에러 발생 :', error);
-  }
-  return null;
-}
+});
 
 async function initWebSocket() {
-  const currentProtocol = window.location.protocol;
-  const websocketProtocol = currentProtocol === "https:" ? "wss" : "ws";
-  const websocketURL = (await getServerURL()).replace(/^http/, websocketProtocol) + '/websocket';
+    const currentProtocol = window.location.protocol;
+    const websocketProtocol = currentProtocol === "https:" ? "wss" : "ws";
+    const serverURL = (await getServerURL()).replace(/^http/, websocketProtocol);
+    return serverURL + '/websocket';
+}
 
-  if (websocketURL) {
-    const socket = new WebSocket(websocketURL);
+async function setupWebSocket() {
+    const SOCKET_URL = await initWebSocket();
+    const SOCKET = new WebSocket(SOCKET_URL);
 
-    socket.onopen = function () {
-      console.log("server02 연결이 열렸습니다.");
-    };
+    SOCKET.addEventListener('open', () => {
+        console.log("server02 연결이 열렸습니다.");
+    });
 
-    socket.onmessage = function (event) {
-      var json = JSON.parse(event.data);
+    SOCKET.addEventListener('message', (message) => {
+        const {percentage, ingestId} = JSON.parse(message.data);
+        updateProgress(percentage, ingestId);
+    });
 
-      var percentage = json.percentage;
-      var ingestId = json.ingestId;
+    SOCKET.addEventListener('close', () => {
+        console.log("server02 연결이 닫혔습니다.");
+    });
+}
 
-      updateProgress(percentage, ingestId);
-    };
-
-    socket.onclose = function (event) {
-      console.log("server02 연결이 닫혔습니다.");
-    };
-  }
+async function getServerURL() {
+    try {
+        const response = await fetch('/clip/get-server02-url');
+        if (response.ok) {
+            return await response.text();
+        } else {
+            console.error('\n' + '서버 URL을 가져오지 못했습니다.');
+        }
+    } catch (error) {
+        console.error('서버 URL을 가져오는 중 에러 발생:', error);
+    }
+    return null;
 }
 
 function updateProgress(percentage, ingestId) {
-  var ingestNumber = document.getElementById("P" + ingestId);
-  if (ingestNumber) {
-    ingestNumber.textContent = "진행률: " + percentage + "%";
-  }
+    const ingestPerventageElement = document.getElementById("#P" + ingestId);
+    if (ingestPerventageElement) {
+        ingestPerventageElement.textContent = `진행률: ${percentage}%`;
+    }
 }
-
-window.addEventListener('load', initWebSocket);
