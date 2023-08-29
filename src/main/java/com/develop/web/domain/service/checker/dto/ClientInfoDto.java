@@ -1,4 +1,4 @@
-package com.develop.web.domain.service.checker.connect;
+package com.develop.web.domain.service.checker.dto;
 
 import lombok.Getter;
 

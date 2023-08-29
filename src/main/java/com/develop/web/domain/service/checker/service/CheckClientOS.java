@@ -1,4 +1,4 @@
-package com.develop.web.domain.service.checker.connect.service;
+package com.develop.web.domain.service.checker.service;
 
 import org.springframework.stereotype.Service;
 

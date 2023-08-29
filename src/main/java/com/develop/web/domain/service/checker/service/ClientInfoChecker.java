@@ -1,6 +1,6 @@
-package com.develop.web.domain.service.checker.connect.service;
+package com.develop.web.domain.service.checker.service;
 
-import com.develop.web.domain.service.checker.connect.ClientInfoDto;
+import com.develop.web.domain.service.checker.dto.ClientInfoDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
