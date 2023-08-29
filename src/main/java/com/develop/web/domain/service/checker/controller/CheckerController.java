@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 @RequiredArgsConstructor
 @Tag(name = "체크", description = "Swagger 테스트용 API")
 @RequestMapping(value = "/check")
-public class ConnectController {
+public class CheckerController {
     private final ClientInfoChecker clientInfoChecker;
 
     @Value("${app.upload.dir:${user.home}}")

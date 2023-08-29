@@ -1,6 +1,6 @@
 package com.develop.web.domain.users.auth.controller;
 
-import com.develop.web.domain.service.checker.connect.service.ClientInfoChecker;
+import com.develop.web.domain.service.checker.service.ClientInfoChecker;
 import com.develop.web.domain.users.auth.dto.LoginRequest;
 import com.develop.web.domain.users.auth.service.Login;
 import com.develop.web.domain.users.user.dto.Member;
