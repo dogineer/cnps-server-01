@@ -57,15 +57,9 @@ public class ClipController {
 
     @GetMapping("/checkFileExistence")
     @Operation(summary = "클립 존재 확인", description = "서버에 저장된 클립 메타데이터로 존재 유무 확인합니다.")
-    public Byte checkFileExistenceCheck(@RequestParam String filePath) {
-
+    public boolean checkFileExistenceCheck(@RequestParam String filePath) {
         File file = new File(filePath);
-
-        if (file.exists()) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return file.exists();
     }
 
     @GetMapping("/xml")

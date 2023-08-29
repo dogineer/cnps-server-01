@@ -4,23 +4,25 @@ function evalScript(script, callback) {
 
 function import_res(element) {
     if (element) {
-        var file_path = element.getAttribute("data-clip-path");
-        importFile(file_path);
+        const file_path = element.getAttribute("data-clip-path");
+        checkFileExistence(file_path);
     } else {
-        alert("element is undefined")
+        alert("요소가 없습니다.")
     }
 
 }
 
-function importFile(file_path) {
-    if (file_path) {
-        var script = "$._PPP_.importCustomFiles('" + file_path + "')";
-
-        try {
-            evalScript(script);
-        } catch (e) {}
-    } else {
-        console.error("file_path is null or undefined");
-    }
-
+function checkFileExistence(filePath) {
+    fetch(`/clip/checkFileExistence?filePath=${encodeURIComponent(filePath)}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data === true) {
+                evalScript("$._PPP_.importCustomFiles('" + filePath + "')");
+            } else {
+                evalScript("alert('파일을 찾을 수 없습니다. \\n' + '" + filePath + "')");
+            }
+        })
+        .catch(() => {
+            throw new Error("프리미어에서 사용해주세요.")
+        });
 }
