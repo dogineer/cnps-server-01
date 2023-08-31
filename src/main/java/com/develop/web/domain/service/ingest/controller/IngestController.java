@@ -39,7 +39,7 @@ public class IngestController {
     private final CreateIngestPost createIngestPost;
     private final FileCheckerService fileCheckerService;
 
-    @Value("${app.uploadFileAndIngestId.dir:${user.home}/movies/mam/temp/}")
+    @Value("${app.temp.dir:${user.home}/media-buddies/temp/}")
     private String TempDir;
 
     @Transactional
@@ -68,8 +68,8 @@ public class IngestController {
                 requestData.team_id = ingestRequestData.getTeamId();
                 requestData.folder_id = ingestRequestData.getFolder();
                 requestData.a_metadata_id = metadata.id;
-
                 createClipPost.addClipPost(requestData);
+                log.info("[!] 인제스트를 마쳤습니다. \n" + requestData.toString());
             });
     }
 

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +28,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -41,6 +43,9 @@ public class ClipController {
 
     @Value("${CNPS.MC.URL}")
     private String mc;
+
+    @Value("${app.thumbnail.dir:${user.home}/media-buddies/thumbnail/}")
+    private String thumbnailDir;
 
     @GetMapping("/get-server02-url")
     @Operation(summary = "서버2", description = "서버 URL 가져오기")
@@ -75,6 +80,25 @@ public class ClipController {
 
         return ResponseEntity.ok()
             .body(contentType);
+    }
+
+    @GetMapping("/thumbnail")
+    @Operation(summary = "썸네일", description = "로컬에 저장된 썸네일을 찾습니다.")
+    public ResponseEntity<Resource> findThumbnail(@RequestParam("filename") String filename){
+        try {
+            LocalDate now = LocalDate.now();
+            String thumbnailPath = thumbnailDir + now + "/" + filename;
+            File thumbnail = new File(thumbnailPath);
+            Resource resource = new FileSystemResource(thumbnail);
+
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok().body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @GetMapping("/streaming")
