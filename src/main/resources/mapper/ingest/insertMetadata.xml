@@ -7,7 +7,7 @@
 
     <insert id="insertMetadata" parameterType="Metadata">
         insert
-        into a_metadata(
+        into archive_metadata(
                       clip_uuid,
                       file_path,
                       file_name,

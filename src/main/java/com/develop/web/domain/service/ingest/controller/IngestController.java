@@ -1,9 +1,6 @@
 package com.develop.web.domain.service.ingest.controller;
 
-import com.develop.web.domain.service.ingest.dto.ResultRequestData;
-import com.develop.web.domain.service.ingest.service.CreateClipPost;
 import com.develop.web.domain.service.ingest.service.CreateIngestPost;
-import com.develop.web.domain.service.ingest.service.FileCheckerService;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
 import com.develop.web.domain.service.ingest.service.CreateFileFromMultipartFileService;
@@ -20,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -35,9 +31,7 @@ public class IngestController {
     private final IngestListFetcher ingestListFetcher;
     private final ServerFileUploader serverFileUploader;
     private final CreateFileFromMultipartFileService createFileFromMultipartFileService;
-    private final CreateClipPost createClipPost;
     private final CreateIngestPost createIngestPost;
-    private final FileCheckerService fileCheckerService;
 
     @Value("${app.temp.dir:${user.home}/media-buddies/temp/}")
     private String TempDir;
@@ -51,26 +45,10 @@ public class IngestController {
 
         ingestRequestData.setMemberId(memberId);
         ingestRequestData.setTeamId(teamId);
-
-        fileCheckerService.isFileNull(ingestRequestData);
         createIngestPost.addIngestRequest(ingestRequestData);
 
-        MultipartFile file = ingestRequestData.getFiles();
-        Resource mediaFiles = createFileFromMultipartFileService.run(file, TempDir);
-        Integer ingestId = ingestRequestData.getId();
-
-        ResultRequestData requestData = new ResultRequestData();
-
-        serverFileUploader
-            .uploadFileAndIngestId(mediaFiles, ingestId)
-            .subscribe(metadata -> {
-                requestData.ingest_id = ingestRequestData.getId();
-                requestData.team_id = ingestRequestData.getTeamId();
-                requestData.folder_id = ingestRequestData.getFolder();
-                requestData.a_metadata_id = metadata.id;
-                createClipPost.addClipPost(requestData);
-                log.info("[!] 인제스트를 마쳤습니다. \n" + requestData.toString());
-            });
+        Resource mediaFiles = createFileFromMultipartFileService.run(ingestRequestData.getFiles(), TempDir);
+        serverFileUploader.uploadFileAndIngestId(mediaFiles, ingestRequestData);
     }
 
     @GetMapping(value = "/list")

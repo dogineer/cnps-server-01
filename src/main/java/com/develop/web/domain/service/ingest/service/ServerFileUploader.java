@@ -1,7 +1,6 @@
 package com.develop.web.domain.service.ingest.service;
 
-import com.develop.web.domain.service.ingest.dto.Metadata;
-import com.develop.web.domain.service.ingest.mapper.UploadMapper;
+import com.develop.web.domain.service.ingest.dto.IngestRequestData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -12,7 +11,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +20,6 @@ public class ServerFileUploader {
 
     @Value("${CNPS.MC.URL}")
     private String mc;
-    private final UploadMapper uploadMapper;
     public WebClient webClient() {
         return WebClient
             .builder()
@@ -28,19 +27,22 @@ public class ServerFileUploader {
             .build();
     }
 
-    public Mono<Metadata> uploadFileAndIngestId(Resource files, Integer ingestId) {
+    public void uploadFileAndIngestId(Resource files, IngestRequestData ingestRequestData) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
-        body.add("ingestId", ingestId);
+        body.add("ingestId", ingestRequestData.getId());
+        body.add("teamId", ingestRequestData.getTeamId());
+        body.add("folderId", ingestRequestData.getFolder());
+        body.add("ingestAt", LocalDateTime.now());
 
-        return webClient()
+        webClient()
             .method(HttpMethod.POST)
             .uri("/api/upload/")
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.MULTIPART_FORM_DATA)
             .body(BodyInserters.fromMultipartData(body))
             .retrieve()
-            .bodyToMono(Metadata.class)
-            .doOnSuccess(uploadMapper::insertMetadata);
+            .bodyToMono(void.class)
+            .subscribe();
     }
 }
