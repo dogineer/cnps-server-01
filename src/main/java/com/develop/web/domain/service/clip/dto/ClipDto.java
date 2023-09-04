@@ -2,6 +2,7 @@ package com.develop.web.domain.service.clip.dto;
 
 import lombok.Data;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
@@ -10,7 +11,7 @@ public class ClipDto {
     public Integer ingest_id;
     public Integer team_id;
     public Integer folder_id;
-    public Integer a_metadata_id;
+    public Integer archive_metadata_id;
 
     public String ingest_name;
     public String team_name;
@@ -29,7 +30,7 @@ public class ClipDto {
     public double duration;
     public Long size;
 
-    public LocalDateTime ingest_at;
+    public Date ingest_at;
     public LocalDateTime end_at;
     public Byte del_fl;
 }

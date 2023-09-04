@@ -13,12 +13,12 @@
             t.name as `team_name`,
             c.folder_id,
             f.name as `folder_name`,
-            c.a_metadata_id,
+            c.archive_metadata_id,
             a.* from clip c
         left join ingest i on i.id = c.ingest_id
         left join team t on t.id = c.team_id
         left join folder f on f.id = c.folder_id
-        left join a_metadata a on a.id = c.a_metadata_id
+        left join archive_metadata a on a.id = c.archive_metadata_id
     </select>
 
     <select id="selectClipCount" resultType="int">
@@ -34,12 +34,13 @@
             t.name as `team_name`,
             c.folder_id,
             f.name as `folder_name`,
-            c.a_metadata_id,
+            c.convert_metadata_id,
+            DATE(c.ingest_at) as ingest_at,
             a.* from clip c
         left join ingest i on i.id = c.ingest_id
         left join team t on t.id = c.team_id
         left join folder f on f.id = c.folder_id
-        left join a_metadata a on a.id = c.a_metadata_id
+        left join convert_metadata a on a.id = c.convert_metadata_id
         ORDER BY create_at DESC
         LIMIT ${limit} OFFSET ${offset}
     </select>

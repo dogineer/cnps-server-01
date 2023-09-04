@@ -86,8 +86,7 @@ public class ClipController {
     @Operation(summary = "썸네일", description = "로컬에 저장된 썸네일을 찾습니다.")
     public ResponseEntity<Resource> findThumbnail(@RequestParam("filename") String filename){
         try {
-            LocalDate now = LocalDate.now();
-            String thumbnailPath = thumbnailDir + now + "/" + filename;
+            String thumbnailPath = thumbnailDir + "/" + filename;
             File thumbnail = new File(thumbnailPath);
             Resource resource = new FileSystemResource(thumbnail);
 
