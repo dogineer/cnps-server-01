@@ -28,7 +28,7 @@ public class AdminPageRequestRankFilter extends OncePerRequestFilter {
             doRankFilter(session);
             filterChain.doFilter(request, response);
         } catch (CustomException e) {
-            FilterHandleException.filterException(e, response);
+            FilterHandleException.filterException(e, response, session);
         }
     }
 

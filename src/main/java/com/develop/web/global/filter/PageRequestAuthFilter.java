@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-@WebFilter(urlPatterns = {"/admin/*", "/user/*"})
+@WebFilter(urlPatterns = {"/admin/management/*", "/user/*"})
 public class PageRequestAuthFilter extends OncePerRequestFilter {
 
     @Override
@@ -26,7 +26,7 @@ public class PageRequestAuthFilter extends OncePerRequestFilter {
             doAuthFilter(session);
             filterChain.doFilter(request, response);
         } catch (CustomException e) {
-            FilterHandleException.filterException(e, response);
+            FilterHandleException.filterException(e, response, session);
         }
     }
 
