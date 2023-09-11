@@ -9,15 +9,16 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Slf4j
-@Controller
+@RestController
 @Tag(name = "인증", description = "로그인 로그아웃")
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
@@ -27,12 +28,13 @@ public class AuthController {
     private final ClientInfoChecker clientInfoChecker;
 
     /**
-     * @return "redirect:/ 최초 페이지로 이동"
      * @description 세션 로그인 서비스
      */
     @PostMapping("/login")
     @Operation(summary = "로그인", description = "세션 등록")
-    public String login(LoginRequest request, HttpSession session, HttpServletRequest httpServletRequest) {
+    public void login(@RequestBody LoginRequest request,
+                      HttpSession session,
+                      HttpServletRequest httpServletRequest) {
 
         login.checkAccount(request);
 
@@ -47,18 +49,14 @@ public class AuthController {
         session.setAttribute("name", dbMemberInfoData.getName());
         session.setAttribute("rankId", dbMemberInfoData.getRankId());
         session.setAttribute("teamId", dbMemberInfoData.getTeamId());
-
-        return "redirect:/user/clip";
     }
 
     /**
-     * @return "redirect:/ 최초 페이지로 이동"
      * @description 로그아웃 서비스
      */
     @PostMapping("/logout")
     @Operation(summary = "로그아웃", description = "세션 삭제")
-    public String logout(HttpSession session) {
+    public void logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
     }
 }

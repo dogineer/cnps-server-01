@@ -94,6 +94,6 @@
         JOIN `dept` d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
         JOIN `team` t on t.id = e.team_id
-        WHERE access = 1 AND account = #{account}
+        WHERE account = #{account}
     </select>
 </mapper>
