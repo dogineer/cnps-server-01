@@ -1,4 +1,4 @@
-import {handleException} from "../../error/IssueService.js";
+import {handleException} from "../../issue/service/IssueService.js"
 import {validateFormData} from "../../module/validateFormData.js";
 
 export const signup = () => {

@@ -1,26 +1,15 @@
 import {ClipPreviewService} from "../service/ClipPreviewService.js";
 
-document.addEventListener('DOMContentLoaded', clipPreviewContoller);
+export class ClipController {
+    static showPreview(e) {
+        ClipPreviewService.clipPreview(e);
+    }
 
-export function clipPreviewContoller() {
-    const clipPreviewBtn = document.querySelectorAll('#clip-preview-btn');
+    static importPremierPro() {
 
-    clipPreviewBtn.forEach(function (button) {
-        button.addEventListener('click', function (event) {
-            ClipPreviewService.clipPreview(event);
-        });
-    });
+    }
 
-    const modalDialogElement = document.querySelector("#clipPreview .modal-dialog");
-    modalDialogElement.classList.add("modal-xl");
-
-    const modalBodyElement = modalDialogElement.querySelector(".modal-body");
-    modalBodyElement.style.padding = "0";
+    static removeVideoElement(clipPreviewBodyElement){
+        ClipPreviewService.removeVideoElement(clipPreviewBodyElement)
+    }
 }
-
-const modalElement = document.getElementById('clipPreview');
-
-modalElement.addEventListener('hidden.bs.modal', () => {
-    const clipPreviewBodyElement = document.getElementById("clip-preview-body");
-    ClipPreviewService.removeVideoElement(clipPreviewBodyElement)
-});

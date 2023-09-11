@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+export const setupDragAndDrop = () => {
     const fileInput = document.getElementById("file-input");
     const fileListDisplay = document.getElementById("file-list");
     const fileUpload = document.querySelector(".file-upload");
@@ -51,4 +51,4 @@ document.addEventListener("DOMContentLoaded", () => {
             fileListDisplay.textContent = "";
         }
     });
-});
+}

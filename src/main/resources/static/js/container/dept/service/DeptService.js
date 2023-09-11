@@ -1,4 +1,4 @@
-import {handleFormData} from "../../container/module/handleFormData.js";
+import {handleFormData} from "../../module/handleFormData.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const deptButtons = document.querySelectorAll('#dept-body #form-button');

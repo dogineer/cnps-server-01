@@ -1,4 +1,3 @@
-import {createFolderService} from "../service/createFolderService.js";
 import {folderToggle} from "../service/ToggleFolder.js";
 import {fetchFolderData} from "../service/fetchFolderData.js";
 
@@ -37,6 +36,6 @@ export class FolderController {
     }
 
     static createFolder(folderId) {
-        createFolderService(folderId);
+
     }
 }

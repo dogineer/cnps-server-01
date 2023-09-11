@@ -18,6 +18,7 @@ const generateThumbnailUrl = (ingestAt, clipUuid) => {
 
 const createClipData = (parentElement, item, index) => {
     const tr = document.createElement('tr')
+    parentElement.appendChild(tr)
 
     tr.id = 'clip'
     tr.className = 'clip-edit'
@@ -50,8 +51,6 @@ const createClipData = (parentElement, item, index) => {
     tr.appendChild(filePath)
     tr.appendChild(fileFormat)
     tr.appendChild(fileSize)
-
-    parentElement.appendChild(tr)
 
     count.className = 'clip-count'
     count.innerText = index + 1

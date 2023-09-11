@@ -28,9 +28,10 @@ export class UserDetailOpenService {
     }
 
     static userDetailOpen(e) {
-        let account = this.getUserAccount(e);
+        const account = this.getUserAccount(e);
+        console.log(account)
 
-        if (account == null) {
+        if (account === null) {
             throw new Error('account가 null 데이터 입니다.');
         }
 

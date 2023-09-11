@@ -1,6 +1,6 @@
 import {loginService} from "../service/loginService.js";
-import {signUpService} from "../service/signUpService.js";
-import {rememberMeAccountService} from "../service/rememberMeAccount.js";
+import {signup} from "../service/signUpService.js";
+import {rememberMeAccount} from "../service/rememberMeAccount.js";
 import {validateFormData} from "../../module/validateFormData.js";
 
 export class AuthContoller {
@@ -11,11 +11,11 @@ export class AuthContoller {
 
     static signup(signupForm) {
         const formData = validateFormData(signupForm);
-        signUpService(formData);
+        signup(formData);
     }
 
     static rememberMeAccount(isChecked, account) {
-        rememberMeAccountService(isChecked, account);
+        rememberMeAccount(isChecked, account);
     }
 
     static logout() {
