@@ -5,28 +5,56 @@
 
 <mapper namespace="com.develop.web.domain.service.folder.mapper.FolderMapper">
     <select id="selectFolderRootList" resultType="FolderDto">
-        select id, name, p_id from folder where id != 1 and p_id = 1
+        SELECT id, name, p_id
+        FROM folder
+        WHERE id != 1 AND p_id = 1
     </select>
 
     <select id="selectFolderChildrenList" parameterType="Integer" resultType="FolderDto">
-        select id, name, p_id from folder where p_id = #{p_id}
+        SELECT id, name, p_id
+        FROM folder
+        WHERE p_id = #{p_id}
     </select>
 
     <select id="selectFolderClipData" parameterType="Integer" resultType="FolderClipDto">
-        select
-            c.id as clip_id,
-            c.ingest_id,
-            i.title as `ingest_name`,
-            c.team_id,
-            t.name as `team_name`,
-            c.folder_id,
-            f.name as `folder_name`,
-            c.a_metadata_id,
-            a.* from clip c
-        left join ingest i on i.id = c.ingest_id
-        left join team t on t.id = c.team_id
-        left join folder f on f.id = c.folder_id
-        left join a_metadata a on a.id = c.a_metadata_id
-        where c.folder_id = #{folderId}
+       WITH RECURSIVE C AS
+             (SELECT c.id     AS clip_id,
+                 c.ingest_id,
+                 i.title  AS `ingest_name`,
+                 c.team_id,
+                 t.name   AS `team_name`,
+                 c.folder_id,
+                 f.name   AS `folder_name`,
+                 c.convert_metadata_id,
+                 c.end_at AS ingest_at,
+                 a.*
+              FROM clip c
+                  LEFT JOIN ingest i
+                       ON i.id = c.ingest_id
+                  LEFT JOIN team t ON t.id = c.team_id
+                  LEFT JOIN folder f ON f.id = c.folder_id
+                  LEFT JOIN convert_metadata a ON a.id = c.convert_metadata_id
+              WHERE c.folder_id = ${folderId}
+              UNION ALL
+              SELECT c.id     AS clip_id,
+                 c.ingest_id,
+                 i.title  AS `ingest_name`,
+                 c.team_id,
+                 t.name   AS `team_name`,
+                 c.folder_id,
+                 f.name   AS `folder_name`,
+                 c.convert_metadata_id,
+                 c.end_at AS ingest_at,
+                 a.*
+              FROM clip c
+                  LEFT JOIN ingest i
+                       ON i.id = c.ingest_id
+                  LEFT JOIN team t ON t.id = c.team_id
+                  LEFT JOIN folder f ON f.id = c.folder_id
+                  LEFT JOIN convert_metadata a ON a.id = c.convert_metadata_id
+              WHERE c.folder_id IN (SELECT f.id FROM folder f WHERE f.p_id = ${folderId}))
+    SELECT C.*
+    FROM C
+    ORDER BY c.ingest_at DESC;
     </select>
 </mapper>

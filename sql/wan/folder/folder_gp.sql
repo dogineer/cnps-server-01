@@ -14,11 +14,11 @@ select
     t.name as `team_name`,
     c.folder_id,
     f.name as `folder_name`,
-    c.archive_metadata_id,
+    c.convert_metadata_id,
     a.* from clip c
 left join ingest i on i.id = c.ingest_id
 left join team t on t.id = c.team_id
 left join folder f on f.id = c.folder_id
-left join archive_metadata a on a.id = c.archive_metadata_id
+left join convert_metadata a on a.id = c.convert_metadata_id
 
 where c.folder_id = 4
