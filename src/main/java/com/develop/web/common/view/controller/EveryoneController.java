@@ -37,7 +37,7 @@ public class EveryoneController {
                 return "redirect:/user/clip";
             }
         } else {
-            return "common/index";
+            return "index";
         }
     }
 }
