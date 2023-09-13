@@ -21,9 +21,32 @@ document.addEventListener('DOMContentLoaded', () => {
         AuthContoller.logout();
     })
 
+
+    const currentUrl = window.location.pathname;
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    sidebarLinks.forEach(link => {
+        const linkUrl = link.getAttribute('href');
+
+        if (linkUrl === currentUrl) {
+            link.classList.add("current")
+            link.setAttribute('aria-current', 'page');
+
+            const collapseElement = link.closest('.collapse');
+            if (collapseElement) {
+                collapseElement.classList.add('show');
+            }
+        }
+    });
+
+
     const issueForm = document.getElementById("errorIssue");
     const issueClose = issueForm.querySelector('#issue-close');
     issueClose.addEventListener('click', () => {
+        IssueController.errorModalClose(issueForm)
+    });
+
+    issueForm.addEventListener('click', () => {
         IssueController.errorModalClose(issueForm)
     });
 });

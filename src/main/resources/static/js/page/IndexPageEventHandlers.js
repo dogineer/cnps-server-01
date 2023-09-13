@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         rememberMeCheckbox.checked = true;
     }
 
-    loginButton.addEventListener('click', () => {
+    loginButton.addEventListener('click', (e) => {
+        e.preventDefault();
         AuthContoller.login(loginForm);
         AuthContoller.rememberMeAccount(rememberMeCheckbox.checked, inputAccount.value);
     });
@@ -29,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const issueForm = document.getElementById("errorIssue");
     const issueClose = issueForm.querySelector('#issue-close');
     issueClose.addEventListener('click', (e) => {
+        IssueController.errorModalClose(issueForm)
+    });
+
+    issueForm.addEventListener('click', () => {
         IssueController.errorModalClose(issueForm)
     });
 });
