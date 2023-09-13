@@ -1,6 +1,7 @@
 package com.develop.web.common.view.service;
 
 import com.develop.web.common.view.dto.AccountDto;
+import com.develop.web.domain.service.folder.service.RootFolderListFetcher;
 import com.develop.web.domain.service.folder.service.TeamFolderGroupFetcher;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
 import com.develop.web.common.view.dto.CriteriaDto;
@@ -25,6 +26,7 @@ public class IngestPageFetcher implements PageingService{
     private final TeamListFetcher teamListFetcher;
     private final TeamFolderGroupFetcher teamFolderGroupFetcher;
     private final IngestListFetcher ingestListFetcher;
+    private final RootFolderListFetcher rootFolderListFetcher;
 
     private final UploadMapper uploadMapper;
 
@@ -38,8 +40,9 @@ public class IngestPageFetcher implements PageingService{
         PageDto pageDto = new PageDto(countTotal, 10, criteriaDto);
 
         model.addAttribute("NoticeList", postListFetcher.getPost());
-        model.addAttribute("TeamList", teamListFetcher.getTeam());
+        model.addAttribute("TeamList", teamListFetcher.getBelongTeam(teamId, rankId));
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
+        model.addAttribute("folderRootList", rootFolderListFetcher.getFolder());
         model.addAttribute("TeamFolderList", teamFolderGroupFetcher.getTeamFolder(teamId, rankId));
         model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
         model.addAttribute("IngestRequestList", ingestListFetcher.getIngestRequestList(criteriaDto));

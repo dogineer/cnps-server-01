@@ -13,6 +13,9 @@ public class TeamListFetcher {
 
     private final TeamMapper teamMapper;
 
+    public List<TeamDto> getBelongTeam(Integer teamId, Integer rankId) {
+        return teamMapper.selectBelongTeamList(teamId, rankId);
+    }
     public List<TeamDto> getTeam() {
         return teamMapper.selectTeamList();
     }
