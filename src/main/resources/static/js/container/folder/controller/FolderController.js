@@ -1,5 +1,6 @@
-import {folderToggle} from "../service/ToggleFolder.js";
+import {folderToggle, folderToggleSelector} from "../service/ToggleFolder.js";
 import {fetchFolderData} from "../service/fetchFolderData.js";
+import {sandFolderData} from "../service/createFolderService.js";
 
 export class FolderController {
     static currentFolder(target) {
@@ -16,6 +17,10 @@ export class FolderController {
             image.src = src;
             image.alt = alt;
         }
+    }
+
+    static clickFolderToggleSelect(folderId) {
+        folderToggleSelector(folderId);
     }
 
     static clickFolderToggle(folderId) {
@@ -36,6 +41,6 @@ export class FolderController {
     }
 
     static createFolder(folderId) {
-
+        sandFolderData(folderId);
     }
 }

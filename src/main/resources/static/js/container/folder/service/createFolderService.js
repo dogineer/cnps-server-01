@@ -1,4 +1,4 @@
-export const createFolder = (folderId) => {
+export const sandFolderData = (folderId) => {
 
   const folderName = document.querySelector('input[name="folder_name_' + folderId + '"]').value;
   console.log("create folder", folderName, folderId);
