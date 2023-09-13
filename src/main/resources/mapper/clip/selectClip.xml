@@ -36,6 +36,7 @@
             f.name as `folder_name`,
             c.convert_metadata_id,
             DATE(c.ingest_at) as ingest_at,
+            ROUND(a.size / (1024 * 1024), 2) AS size,
             a.* from clip c
         left join ingest i on i.id = c.ingest_id
         left join team t on t.id = c.team_id

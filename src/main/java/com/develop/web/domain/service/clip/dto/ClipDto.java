@@ -28,7 +28,7 @@ public class ClipDto {
     public String format_long_name;
     public String tags;
     public double duration;
-    public Long size;
+    public double size;
 
     public Date ingest_at;
     public LocalDateTime end_at;
