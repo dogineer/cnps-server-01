@@ -1,8 +1,5 @@
-export const rememberMeAccount = () => {
-    const rememberMe = document.getElementById("rememberMe").checked;
-
-    if (rememberMe) {
-        const account = this.querySelector("#account").value;
+export const rememberMeAccountService = (isChecked, account) => {
+    if (isChecked) {
         localStorage.setItem("savedAccount", account);
     } else {
         localStorage.removeItem("savedAccount");
