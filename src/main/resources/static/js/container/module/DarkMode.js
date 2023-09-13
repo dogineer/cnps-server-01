@@ -1,27 +1,29 @@
 export class DarkMode {
     static setBlackColors() {
-        document.documentElement.style.setProperty('--cnps-background-color', '#1c1c1c');
-        document.documentElement.style.setProperty('--cnps-black', '#c0bebe');
-        document.documentElement.style.setProperty('--cnps-real-white', '#212121');
+        document.documentElement.style.setProperty('--cnps-background-color', '#2E3440');
+        document.documentElement.style.setProperty('--cnps-black', '#FFFFFF');
+        document.documentElement.style.setProperty('--cnps-real-white', '#4C566A');
         document.documentElement.style.setProperty('--cnps-white', '#262626');
-        document.documentElement.style.setProperty('--cnps-heavy-white', '#2a2a2a');
-        document.documentElement.style.setProperty('--cnps-red', 'orangered');
-        document.documentElement.style.setProperty('--cnps-dark-red', '#e13c00');
-        document.documentElement.style.setProperty('--cnps-sidebar', '#262626');
+        document.documentElement.style.setProperty('--cnps-heavy-white', '#3B4252');
+        document.documentElement.style.setProperty('--cnps-red', '#BF616A');
+        document.documentElement.style.setProperty('--cnps-dark-red', '#BF616A');
+        document.documentElement.style.setProperty('--cnps-sidebar', '#3B4252');
         document.documentElement.style.setProperty('--cnps-black-shadow', '#353535');
+        document.documentElement.style.setProperty('--cnps-hover', '#c0bebe');
     }
 
 // #e4e6ed
     static setWhiteColors() {
-        document.documentElement.style.setProperty('--cnps-background-color', '#e4e6ed');
-        document.documentElement.style.setProperty('--cnps-black', '#2F3336');
+        document.documentElement.style.setProperty('--cnps-background-color', '#E5E9F0');
+        document.documentElement.style.setProperty('--cnps-black', '#2E3440');
         document.documentElement.style.setProperty('--cnps-real-white', '#FFFFFF');
-        document.documentElement.style.setProperty('--cnps-white', '#F2F2F2');
-        document.documentElement.style.setProperty('--cnps-heavy-white', '#f0f2f6');
-        document.documentElement.style.setProperty('--cnps-red', 'orangered');
-        document.documentElement.style.setProperty('--cnps-dark-red', '#e13c00');
-        document.documentElement.style.setProperty('--cnps-sidebar', 'linear-gradient(60deg, #29323c 0%, #485563 100%)');
-        document.documentElement.style.setProperty('--cnps-black-shadow', '#ececec');
+        document.documentElement.style.setProperty('--cnps-white', '#E5E9F0');
+        document.documentElement.style.setProperty('--cnps-heavy-white', '#ECEFF4');
+        document.documentElement.style.setProperty('--cnps-red', '#BF616A');
+        document.documentElement.style.setProperty('--cnps-dark-red', '#BF616A');
+        document.documentElement.style.setProperty('--cnps-sidebar', '#4C566A');
+        document.documentElement.style.setProperty('--cnps-black-shadow', '#E5E9F0');
+        document.documentElement.style.setProperty('--cnps-hover', '#4C566A');
     }
 
     static darkModeValidate() {
