@@ -1,4 +1,5 @@
 import {ClipController} from "../../clip/controller/ClipController.js";
+import {handleException} from "../../issue/service/IssueService.js";
 
 const clearClipTrField = () => {
     const elements = document.getElementById('clipListBody')
@@ -115,6 +116,12 @@ export const fetchFolderData = (folderId) => {
         })
         .catch(error => {
             console.log(error, "폴더 정보를 가져오지 못했습니다.")
-            alert('폴더 정보를 가져오지 못했습니다.');
+
+            const errorData = {
+                errorCode: "SERVER ERROR",
+                errorMessage: "폴더 정보를 가져오지 못했습니다."
+            };
+
+            handleException(errorData)
         });
 }
