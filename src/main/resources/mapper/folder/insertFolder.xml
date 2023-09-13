@@ -6,6 +6,7 @@
 <mapper namespace="com.develop.web.domain.service.folder.mapper.FolderMapper">
 
     <insert id="insertNewFolder" parameterType="FolderDto">
-        insert into folder(name, p_id) values (#{name}, #{p_id})
+        INSERT INTO folder(name, p_id, team_id)
+        VALUES (#{name}, #{p_id}, #{team_id})
     </insert>
 </mapper>

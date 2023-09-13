@@ -5,13 +5,17 @@
 
 <mapper namespace="com.develop.web.domain.service.folder.mapper.FolderMapper">
     <select id="selectFolderRootList" resultType="FolderDto">
-        SELECT id, name, p_id
+        SELECT id,
+               name,
+               p_id
         FROM folder
         WHERE id != 1 AND p_id = 1
     </select>
 
     <select id="selectFolderChildrenList" parameterType="Integer" resultType="FolderDto">
-        SELECT id, name, p_id
+        SELECT id,
+               name,
+               p_id
         FROM folder
         WHERE p_id = #{p_id}
     </select>
