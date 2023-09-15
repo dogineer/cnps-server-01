@@ -26,14 +26,13 @@ public class ClientInfoChecker {
 
         ClientInfoDto clientInfo = new ClientInfoDto(agent, os, browser, ip);
 
-        log.info(
-            "[+] Connect log" + "\n" +
-            "account: " + account + "\n" +
-            "ip: " + clientInfo.getIp() + "\n" +
-            "header: " + clientInfo.getHeader() + "\n" +
-            "os: " + clientInfo.getOs() + "\n" +
-            "browser: " + clientInfo.getBrowser()
-        );
+        log.info("[+] ⌜ ⎺ ⎺ ⎺ ⎺ ⎺ ⎺ ⌝");
+        log.info("[|] '" + account + "' 님이 접속했습니다.");
+        log.info("[|] ip: " + clientInfo.getIp());
+        log.info("[|] header: " + clientInfo.getHeader());
+        log.info("[|] os: " + clientInfo.getOs());
+        log.info("[|] browser: " + clientInfo.getBrowser());
+        log.info("[+] ⌞ _ _ _ _ _ _ ⌟");
 
         return clientInfo;
     }
