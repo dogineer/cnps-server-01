@@ -1,17 +1,21 @@
 package com.develop.web.domain.users.auth.validation;
 
+import com.develop.web.domain.users.token.dto.AuthMember;
 import com.develop.web.domain.users.user.dto.Member;
 import com.develop.web.domain.users.auth.mapper.AuthMapper;
 import com.develop.web.global.exception.code.AuthErrorCode;
 import com.develop.web.global.exception.code.MemberErrorCode;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-public class MemberChecker {
+public class MemberChecker implements UserDetailsService {
     private final AuthMapper authMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -44,5 +48,16 @@ public class MemberChecker {
         if (!isSame){
             throw new CustomException(MemberErrorCode.PASSWORD_NOW_MATCH);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
+        AuthMember user = authMapper.selectJoinedMember(account);
+
+        if (user == null) {
+            throw new CustomException(AuthErrorCode.ACCOUNT_NOT_FOUND);
+        }
+
+        return user;
     }
 }

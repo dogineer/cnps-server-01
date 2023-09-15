@@ -1,6 +1,7 @@
 package com.develop.web.domain.users.auth.mapper;
 
 import com.develop.web.common.view.dto.CriteriaDto;
+import com.develop.web.domain.users.token.dto.AuthMember;
 import com.develop.web.domain.users.user.dto.JoinedMember;
 import com.develop.web.domain.users.user.dto.Member;
 import com.develop.web.domain.users.user.dto.MemberInfo;
@@ -38,4 +39,7 @@ public interface AuthMapper {
 
     /** @description 직원 팀 배정 (직원 팀 업데이트,)*/
     void updateMemberTeamId(TeamUpdateParam param);
+
+    /** @description JWT를 위한 멤버 데이터 조회 (로그인)*/
+    AuthMember selectJoinedMember(String account);
 }

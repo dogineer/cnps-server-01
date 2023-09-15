@@ -4,7 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.users.auth.mapper.AuthMapper">
-
     <select id="selectMemberAccount" resultType="String" parameterType="String">
         SELECT account FROM emp WHERE account = #{account}
     </select>
@@ -94,6 +93,17 @@
         JOIN `dept` d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
         JOIN `team` t on t.id = e.team_id
+        WHERE account = #{account}
+    </select>
+
+    <select id="selectJoinedMember" resultType="AuthMember" parameterType="String">
+        SELECT
+            account,
+            r.name as role,
+            access,
+            password
+        FROM emp e
+        JOIN `rank` r ON e.rank_id = r.id
         WHERE account = #{account}
     </select>
 </mapper>
