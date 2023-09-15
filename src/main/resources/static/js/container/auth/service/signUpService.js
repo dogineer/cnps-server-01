@@ -1,4 +1,4 @@
-import {handleException} from "../../issue/service/IssueService.js"
+import {handleException, serverError} from "../../issue/service/IssueService.js"
 import {validateFormData} from "../../module/validateFormData.js";
 
 export const signup = () => {
@@ -18,21 +18,12 @@ export const signup = () => {
                 alert("회원 가입을 마쳤습니다. 관리자의 승인을 기다려주새요.")
                 location.replace("/");
             } else {
-                res.json()
-                    .then(errorData => {
-                        handleException(errorData)
-                        console.error('서버 응답이 실패했습니다.');
-                    });
+                res.json().then(errorData => {
+                    handleException(errorData)
+                });
             }
         })
         .catch(error => {
-            console.error('데이터 전송 중 오류가 발생했습니다.', error);
-
-            const errorData = {
-                errorCode: "SERVER ERROR",
-                errorMessage: "서버에 오류가 발생했습니다."
-            };
-
-            handleException(errorData)
+            serverError(error);
         });
 }

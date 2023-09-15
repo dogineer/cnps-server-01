@@ -1,18 +1,25 @@
+import {handleException} from "../../issue/service/IssueService.js";
+
 function evalScript(script, callback) {
     new CSInterface().evalScript(script, callback);
 }
 
-function import_res(element) {
+export const import_res = (element) => {
     if (element) {
-        const file_path = element.getAttribute("data-clip-path");
-        checkFileExistence(file_path);
+        const filePath = element.getAttribute("data-clip-path");
+        checkFileExistence(filePath);
     } else {
-        alert("요소가 없습니다.")
+        const errorData = {
+            errorCode: "NOT ELEMENT",
+            errorMessage: "요소가 없습니다."
+        };
+
+        handleException(errorData);
     }
 
 }
 
-function checkFileExistence(filePath) {
+const checkFileExistence = (filePath) => {
     const result = "/Volumes/mediabuddies.kro.kr" + filePath;
 
     fetch(`/clip/checkFileExistence?filePath=${encodeURIComponent(filePath)}`)
@@ -26,6 +33,11 @@ function checkFileExistence(filePath) {
             }
         })
         .catch(() => {
-            throw new Error("프리미어에서 사용해주세요.")
+            const errorData = {
+                errorCode: "NOT CLIP IMPORT",
+                errorMessage: "프리미어에서 사용해주세요."
+            };
+
+            handleException(errorData)
         });
 }

@@ -3,7 +3,7 @@ export class ClipPreviewService {
         const clip = event.target.closest("#clip");
 
         if (!clip) {
-            console.error("clip 요소를 찾을 수 없음");
+            console.error("[!] clip 요소를 찾을 수 없음");
             return;
         }
 
@@ -15,10 +15,9 @@ export class ClipPreviewService {
     }
 
     static openClipModal(clipId, clipTitle, clipPath) {
-        console.log("openClipModal")
-        console.log(clipId)
-        console.log(clipTitle)
-        console.log(clipPath)
+        console.log("[+] 클립을 재생합니다.")
+        console.log("Clip ID: " + clipId)
+        console.log("Clip TITLE: " + clipTitle)
 
         const modal = new bootstrap.Modal(document.getElementById("clipPreview"));
         const clipPreviewBodyElement = document.getElementById("clip-preview-body");

@@ -11,7 +11,7 @@ export async function setupWebSocket() {
     const SOCKET = new WebSocket(SOCKET_URL);
 
     SOCKET.addEventListener('open', () => {
-        console.log("server02 연결이 열렸습니다.");
+        console.log("[Connect] server02 연결이 열렸습니다.");
     });
 
     SOCKET.addEventListener('message', (message) => {
@@ -20,7 +20,7 @@ export async function setupWebSocket() {
     });
 
     SOCKET.addEventListener('close', () => {
-        console.log("server02 연결이 닫혔습니다.");
+        console.log("[Connect] server02 연결이 닫혔습니다.");
     });
 }
 
@@ -30,10 +30,10 @@ async function getServerURL() {
         if (response.ok) {
             return await response.text();
         } else {
-            console.error('\n' + '서버 URL을 가져오지 못했습니다.');
+            console.error('\n' + '[!] 서버 URL을 가져오지 못했습니다.');
         }
     } catch (error) {
-        console.error('서버 URL을 가져오는 중 에러 발생:', error);
+        console.error('[!] 서버 URL을 가져오는 중 에러 발생:', error);
     }
     return null;
 }

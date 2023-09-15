@@ -1,6 +1,7 @@
 import {setupWebSocket} from "../service/WebSocketService.js";
 import {complete, updateProgress} from "../service/ProgressBar.js";
 import {setupDragAndDrop} from "../service/DragAndDrop.js";
+import {currentFolder} from "../../folder/service/folderService.js";
 
 export class IngestController {
     static async webSocket() {
@@ -43,5 +44,22 @@ export class IngestController {
 
     static dragAndDrop() {
         setupDragAndDrop();
+    }
+
+    static selectFolder(folderAnchorElements) {
+        currentFolder(folderAnchorElements);
+
+        const folderId = folderAnchorElements.id
+        const folderSelects = document.querySelector("#ingestRequest-form select[name='folder']");
+        if (folderSelects) {
+            for (let i = 0; i < folderSelects.length; i++) {
+                const option = folderSelects.options[i];
+                if (option.value === folderId) {
+                    console.log("[Select] 폴더 선택 : " + folderId)
+                    option.selected = true;
+                    break;
+                }
+            }
+        }
     }
 }

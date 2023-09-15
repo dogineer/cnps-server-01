@@ -17,27 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const folderContainerElement = document.querySelectorAll('.folder-node');
     folderContainerElement.forEach((current) => {
         const folderAnchorElements = current.querySelector('.folder-anchor');
+        const folderArrowMenuElement = current.querySelector('.arrow-menu');
+        const folderImgElement = current.querySelector('.folder-img');
 
-        folderAnchorElements.addEventListener('click', () => {
-            FolderController.currentFolder(folderAnchorElements)
-
-            const folderImgElement = {
-                folderOpen: folderAnchorElements.querySelector('img[alt="folder_close"]'),
-                folderClose: folderAnchorElements.querySelector('img[alt="folder_open"]')
-            };
-
-            FolderController.changeFolderImage(folderImgElement.folderOpen, '/img/folder_open.svg', 'folder_open')
-            FolderController.changeFolderImage(folderImgElement.folderClose, '/img/folder_close.svg', 'folder_close')
-
+        folderArrowMenuElement.addEventListener('click', () => {
             const folderId = folderAnchorElements.id
-            console.log("click folder = " + folderId)
-            FolderController.clickFolderToggleSelect(folderId);
+            const action = folderArrowMenuElement.classList.contains("right")
+
+            console.log("[Fetch] 해당 폴더의 자손 폴더를 가져옵니다. folderId = " + folderId)
+            FolderController.changeFolderImageAndArrow(folderArrowMenuElement, folderImgElement, action)
+            FolderController.clickFolderToggleSelect(folderAnchorElements, folderId);
         })
 
-        current.addEventListener('mousedown', (e) => {
-            const folderAnchorElements = current.querySelector('.folder-anchor');
-            const folderId = folderAnchorElements.id
-            FolderController.showCreateFolderForm(e, folderId)
-        });
+        folderAnchorElements.addEventListener('click', () => {
+            IngestController.selectFolder(folderAnchorElements)
+        })
     })
 })

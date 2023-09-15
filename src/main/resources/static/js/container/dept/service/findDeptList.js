@@ -1,3 +1,5 @@
+import {handleException, serverError} from "../../issue/service/IssueService.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const deptButtons = document.querySelectorAll('#dept-high-select');
     fetchDataByMidDeptList();
@@ -17,12 +19,14 @@ function fetchDataByMidDeptList() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
-        .then(function (response) {
-            if (response.ok) {
-                console.log('GET success. fetchDataByMidDeptList');
-                return response.json();
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                res.json().then(errorData => {
+                    handleException(errorData)
+                });
             }
-            throw new Error('GET failed.');
         })
         .then(data => {
             const listItem = document.getElementById('dept-mid-select');
@@ -36,7 +40,7 @@ function fetchDataByMidDeptList() {
             });
         })
         .catch(error => {
-            console.error(error);
+            serverError(error);
         });
 }
 
@@ -54,12 +58,14 @@ function fetchDataByDeptChart() {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
-        .then(function (response) {
-            if (response.ok) {
-                console.log('GET success. deptChartList');
-                return response.json();
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                res.json().then(errorData => {
+                    handleException(errorData)
+                });
             }
-            throw new Error('GET failed.');
         })
         .then(data => {
             const listItem = document.getElementById('deptChartBody');
@@ -81,6 +87,6 @@ function fetchDataByDeptChart() {
             });
         })
         .catch(error => {
-            console.error(error);
+            serverError(error);
         });
 }
