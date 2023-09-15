@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 public class FilterHandleException {
     public static void filterException(CustomException e, HttpServletResponse response, HttpSession session) throws IOException {
         log.error("[!] Error Code : " + e.getErrorCode());
-        log.error("[!] Error Message : " + e.getMessage());
+        log.error("[!] Error Message : " + e.getErrorCode().getMessage());
         System.out.println("");
 
         if (e.getErrorCode() == AuthErrorCode.AUTH_ACCESS_NOT_FOUND){

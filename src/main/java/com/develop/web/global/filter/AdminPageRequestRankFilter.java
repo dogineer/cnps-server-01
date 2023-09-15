@@ -3,6 +3,7 @@ package com.develop.web.global.filter;
 import com.develop.web.global.exception.code.AuthErrorCode;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Slf4j
 @Component
 @WebFilter(urlPatterns = {"/admin/*"})
+@ConditionalOnProperty(name = "authentication.type", havingValue = "session")
 public class AdminPageRequestRankFilter extends OncePerRequestFilter {
 
     @Override
