@@ -1,5 +1,6 @@
 package com.develop.web.domain.service.folder.mapper;
 
+import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.folder.dto.FolderClipDto;
 import com.develop.web.domain.service.folder.dto.FolderDto;
 import com.develop.web.domain.service.folder.dto.GroupFolderDto;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface FolderMapper {
     List<FolderDto> selectFolderRootList();
     List<FolderDto> selectFolderChildrenList(Integer num);
-    List<FolderClipDto> selectFolderClipData(Integer folderId);
+    List<ClipDto> selectFolderClipData(Integer folderId);
 
     void insertNewFolder(FolderDto folderDto);
 

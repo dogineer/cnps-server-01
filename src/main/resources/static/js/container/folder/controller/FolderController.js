@@ -1,43 +1,47 @@
-import {folderToggle, folderToggleSelector} from "../service/ToggleFolder.js";
-import {fetchFolderData} from "../service/fetchFolderData.js";
+import {currentFolder, fetchDataForFolder, folderToggleSelector} from "../service/folderService.js";
+import {fetchFolderDataForClipView} from "../service/fetchFolderData.js";
 import {sandFolderData} from "../service/createFolderService.js";
 
 export class FolderController {
-    static currentFolder(target) {
-        const allAnchorElements = document.querySelectorAll(".folder-anchor")
-        allAnchorElements.forEach((element) => {
-            element.setAttribute('aria-current', 'false')
-        })
-
-        target.setAttribute('aria-current', 'true')
+    static clickFolderArrow(folderAnchorElements, folderId) {
+        currentFolder(folderAnchorElements)
+        fetchDataForFolder(folderId);
     }
 
-    static changeFolderImage(image, src, alt) {
-        if (image) {
-            image.src = src;
-            image.alt = alt;
-        }
-    }
-
-    static clickFolderToggleSelect(folderId) {
+    static clickFolderToggleSelect(folderAnchorElements, folderId) {
+        currentFolder(folderAnchorElements)
         folderToggleSelector(folderId);
     }
 
-    static clickFolderToggle(folderId) {
-        folderToggle(folderId);
-        fetchFolderData(folderId);
+    static clickFolderFetchData(folderAnchorElements, folderId) {
+        currentFolder(folderAnchorElements)
+        fetchFolderDataForClipView(folderId);
     }
 
-    static showCreateFolderForm(e, folderId) {
-        if (e.button === 2) {
-            const folderMenu = document.getElementById('folder_create_input_' + folderId);
+    static changeFolderImageAndArrow(folderArrowMenuElement, folderImgElement, action) {
+        if (action) {
+            folderArrowMenuElement.classList.remove("right")
+            folderArrowMenuElement.classList.add("down")
 
-            if (folderMenu.style.display === 'none' || folderMenu.style.display === '') {
-                folderMenu.style.display = 'block';
-            } else {
-                folderMenu.style.display = 'none';
-            }
+            folderImgElement.classList.remove("f-close")
+            folderImgElement.classList.add("f-open")
+        } else {
+            folderArrowMenuElement.classList.remove("down")
+            folderArrowMenuElement.classList.add("right")
+
+            folderImgElement.classList.remove("f-open")
+            folderImgElement.classList.add("f-close")
         }
+    }
+
+    static showFolderActionMenu(folderId) {
+        const folderActionMenu = document.getElementById('FA_' + folderId);
+
+            if (folderActionMenu.style.display === 'none' || folderActionMenu.style.display === '') {
+                folderActionMenu.style.display = 'block';
+            } else {
+                folderActionMenu.style.display = 'none';
+            }
     }
 
     static createFolder(folderId) {

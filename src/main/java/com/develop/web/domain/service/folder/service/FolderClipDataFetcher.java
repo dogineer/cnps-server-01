@@ -1,5 +1,6 @@
 package com.develop.web.domain.service.folder.service;
 
+import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.folder.dto.FolderClipDto;
 import com.develop.web.domain.service.folder.mapper.FolderMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 public class FolderClipDataFetcher{
     private final FolderMapper folderMapper;
 
-    public List<FolderClipDto> getFolderClipData(Integer folderId){
+    public List<ClipDto> getFolderClipData(Integer folderId){
         return folderMapper.selectFolderClipData(folderId);
     }
 

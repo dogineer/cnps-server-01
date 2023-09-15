@@ -1,5 +1,6 @@
 package com.develop.web.domain.service.folder.controller;
 
+import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.folder.dto.FolderClipDto;
 import com.develop.web.domain.service.folder.dto.FolderDto;
 import com.develop.web.domain.service.folder.service.ChildrenFolderFetcher;
@@ -51,7 +52,7 @@ public class FolderController {
 
   @GetMapping("/select/{folderId}")
   @Operation(summary = "폴더 데이터 조회", description = "그룹 폴더의 클립 데이터를 보여줍니다.")
-  public List<FolderClipDto> clickFolderOpen(@PathVariable Integer folderId, Model model) {
+  public List<ClipDto> clickFolderOpen(@PathVariable Integer folderId, Model model) {
     model.addAttribute("clips", folderClipDataFetcher.getFolderClipData(folderId));
 
     return folderClipDataFetcher.getFolderClipData(folderId);

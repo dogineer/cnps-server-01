@@ -1,5 +1,5 @@
 import {ClipController} from "../../clip/controller/ClipController.js";
-import {handleException} from "../../issue/service/IssueService.js";
+import {handleException, serverError} from "../../issue/service/IssueService.js";
 
 const clearClipTrField = () => {
     const elements = document.getElementById('clipListBody')
@@ -28,13 +28,13 @@ const createClipData = (parentElement, item, index) => {
     tr.setAttribute('data-clip-data', item.ingest_at)
     tr.setAttribute('data-clip-uuid', item.clip_uuid)
     tr.setAttribute('data-clip-path', item.file_path)
-    // tr.setAttribute('onclick', 'import_res(this)')
 
     const count = document.createElement('td')
     const preview = document.createElement('td')
     const teamId = document.createElement('td')
     const teamName = document.createElement('td')
     const folderName = document.createElement('td')
+    const fileUUID = document.createElement('td')
     const fileName = document.createElement('td')
     const filePath = document.createElement('td')
     const fileFormat = document.createElement('td')
@@ -48,6 +48,7 @@ const createClipData = (parentElement, item, index) => {
     tr.appendChild(teamId)
     tr.appendChild(teamName)
     tr.appendChild(folderName)
+    tr.appendChild(fileUUID)
     tr.appendChild(fileName)
     tr.appendChild(filePath)
     tr.appendChild(fileFormat)
@@ -61,8 +62,19 @@ const createClipData = (parentElement, item, index) => {
     previewAtag.setAttribute("type", "button")
     previewAtag.setAttribute("id", "clip-preview-btn")
     previewAtag.addEventListener('click', (e) => {
-        ClipController.showPreview(e);
-    })
+        const trElement = e.target.closest('tr'); // tr 요소 찾기
+        if (trElement) {
+            const clipId = trElement.getAttribute('data-clip-id');
+            const clipPath = trElement.getAttribute('data-clip-path');
+
+            console.log('[+] 클립 프리뷰 버튼 클릭');
+            console.log('클립 ID: ' + clipId);
+            console.log('클립 PATH: ' + clipPath);
+
+            ClipController.showPreview(e);
+        }
+        e.stopPropagation();
+    });
 
     previewAtag.appendChild(previewThumbnail)
     previewThumbnail.setAttribute("class", "thumbnail")
@@ -78,6 +90,9 @@ const createClipData = (parentElement, item, index) => {
     folderName.className = 'clip-folder_name'
     folderName.innerText = item.folder_name
 
+    fileUUID.className = "clip-file-uuid"
+    fileUUID.innerText = item.clip_uuid
+
     fileName.className = 'clip-file_name'
     fileName.innerText = item.file_name
 
@@ -91,23 +106,32 @@ const createClipData = (parentElement, item, index) => {
     fileFormat.innerText = item.format_long_name
 
     fileSize.className = 'clip-file_size'
-    fileSize.innerText = item.size
+    fileSize.innerText = item.size + " MB"
+
+    tr.addEventListener('click', (e) => {
+        console.log("[+] 클립 선택")
+        console.log("클립 ID: " + tr.getAttribute("data-clip-id"))
+        console.log("클립 PATH: " + tr.getAttribute("data-clip-path"))
+
+        ClipController.importPremierPro(tr);
+    })
 }
 
-export const fetchFolderData = (folderId) => {
+export const fetchFolderDataForClipView = (folderId) => {
     fetch('/folder/select/' + folderId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
-        .then(function (response) {
-            if (response.ok) {
-                console.log('GET success. folder id = ', folderId);
-                return response.json()
+        .then(res => {
+            if (res.ok) {
+                return res.json()
+            } else {
+                res.json().then(errorData => {
+                    handleException(errorData)
+                });
             }
-            throw new Error('GET failed.');
         })
         .then(item => {
-            console.log(item)
             const parentElement = clearClipTrField()
 
             item.forEach((item, index) => {
@@ -115,13 +139,6 @@ export const fetchFolderData = (folderId) => {
             })
         })
         .catch(error => {
-            console.log(error, "폴더 정보를 가져오지 못했습니다.")
-
-            const errorData = {
-                errorCode: "SERVER ERROR",
-                errorMessage: "폴더 정보를 가져오지 못했습니다."
-            };
-
-            handleException(errorData)
+            serverError(error);
         });
 }
