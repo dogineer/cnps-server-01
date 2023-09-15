@@ -17,7 +17,7 @@ public interface DeptMapper {
 
     List<DeptDto> selectHighDept();
 
-    List<DeptDto> selectDeptMidList(Integer p_id);
+    List<DeptDto> selectDeptMidList(Integer deptParentId);
 
     List<Member> selectDeptMembers(Integer deptId);
 

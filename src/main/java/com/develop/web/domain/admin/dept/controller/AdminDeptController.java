@@ -86,10 +86,10 @@ public class AdminDeptController {
         return fetcherDeptHigh.getHighDept();
     }
 
-    @GetMapping("/dept/find/type/{p_id}")
+    @GetMapping("/dept/find/type/{deptParentId}")
     @Operation(summary = "부서 유형 찾기", description = "본부의 id 값을 이용해 부서 유형을 찾습니다.")
-    public List<DeptDto> getTypeDeptList(@PathVariable Integer p_id){
-        return fetcherDeptMidList.getMidDept(p_id);
+    public List<DeptDto> getTypeDeptList(@PathVariable Integer deptParentId){
+        return fetcherDeptMidList.getMidDept(deptParentId);
     }
 
     @GetMapping("/dept/find/tree/{deptId}")

@@ -5,14 +5,18 @@
 
 <mapper namespace="com.develop.web.domain.admin.dept.mapper.DeptMapper">
     <select id="selectDeptMidList" parameterType="Integer" resultType="DeptDto">
-        SELECT id, name, p_id
+        SELECT id AS deptId,
+               name AS deptName,
+               p_id AS deptParentId
         FROM dept
-        WHERE p_id = ${p_id}
+        WHERE p_id = ${deptParentId}
           AND id NOT IN (1)
     </select>
 
     <select id="selectDeptList" resultType="DeptDto">
-        SELECT id, name, p_id
+        SELECT id AS deptId,
+               name AS deptName,
+               p_id AS deptParentId
         FROM dept
         WHERE id NOT IN (1)
           AND p_id NOT IN (1, 8, 24)
@@ -30,7 +34,8 @@
     </select>
 
     <select id="selectHighDept" resultType="DeptDto">
-        SELECT id, name
+        SELECT id AS deptId,
+               name AS deptName
         FROM dept
         WHERE p_id = 1
           AND id != 1

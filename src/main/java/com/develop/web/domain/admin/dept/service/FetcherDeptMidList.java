@@ -12,7 +12,7 @@ import java.util.List;
 public class FetcherDeptMidList {
     private final DeptMapper deptMapper;
 
-    public List<DeptDto> getMidDept(Integer p_id){
-        return deptMapper.selectDeptMidList(p_id);
+    public List<DeptDto> getMidDept(Integer deptParentId){
+        return deptMapper.selectDeptMidList(deptParentId);
     }
 }
