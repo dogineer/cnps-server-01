@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class RankDto {
-    private Integer id;
-    private String name;
-    private Integer p_id;
+    private Integer rankId;
+    private String rankName;
+    private Integer rankParentId;
 }

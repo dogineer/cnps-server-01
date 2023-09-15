@@ -28,6 +28,6 @@ public class RankController {
     @GetMapping("/rank/list")
     @Operation(summary = "직급 및 직책 목록", description = "직급 및 직책 목록을 조회합니다.")
     public List<RankDto> getRankList(){
-        return rankListFetcher.getList();
+        return rankListFetcher.getRankList();
     }
 }

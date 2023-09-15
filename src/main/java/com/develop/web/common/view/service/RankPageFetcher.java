@@ -23,6 +23,6 @@ public class RankPageFetcher implements PageFetcher {
 
         model.addAttribute("UserList", memberListFetcher.getMemberList());
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
-        model.addAttribute("RankList", rankListFetcher.getList());
+        model.addAttribute("RankList", rankListFetcher.getRankList());
     }
 }

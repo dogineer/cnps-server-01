@@ -5,11 +5,10 @@
 
 <mapper namespace="com.develop.web.domain.admin.rank.mapper.RankMapper">
     <select id="selectListRank" resultType="RankDto">
-        SELECT * FROM `rank` WHERE p_id = 0 AND id NOT IN (0)
-    </select>
-
-    <select id="selectListRankEmployee" parameterType="Integer">
-        SELECT e.id, e.rank_id, r.name FROM emp e
-        JOIN `rank` r ON r.id = e.rank_id WHERE e.id = {}
+        SELECT id   AS rankId,
+               name AS rankName
+        FROM `rank`
+        WHERE p_id = 0
+          AND id NOT IN (0)
     </select>
 </mapper>

@@ -22,7 +22,7 @@ public class EveryoneController {
     public String index(Model model, HttpSession session) {
         String version = "ALPHA VERSION";
 
-        model.addAttribute("Ranks", rankListFetcher.getList());
+        model.addAttribute("Ranks", rankListFetcher.getRankList());
         model.addAttribute("Depts", findDeptList.getDeptList());
         model.addAttribute("version", version);
 
