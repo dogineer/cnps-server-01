@@ -2,7 +2,9 @@ package com.develop.web.global.config;
 
 import com.develop.web.global.filter.AdminPageRequestRankFilter;
 import com.develop.web.global.filter.PageRequestAuthFilter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +20,21 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Configuration
+@ConditionalOnProperty(name = "authentication.version", havingValue = "session")
 @EnableWebSecurity
-public class WebConfig extends WebSecurityConfigurerAdapter {
+public class WebSessionConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        log.info("[+] SESSION version WebSecurityConfig Setup ");
+
+        http.csrf().disable()
+            .cors().configurationSource(corsConfigurationSource())
+            .and()
+            .headers().frameOptions().disable();
+    }
+
     @Bean
     public FilterRegistrationBean<PageRequestAuthFilter> pageRequestAuthFilterRegistrationBean() {
         FilterRegistrationBean<PageRequestAuthFilter> registrationBean = new FilterRegistrationBean<>();
@@ -49,6 +63,8 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
+        log.info("[+] CorsConfiguration Setup ");
+
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin(mc);
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "DELETE"));
@@ -56,14 +72,5 @@ public class WebConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .cors().configurationSource(corsConfigurationSource()).and()
-            .csrf().disable()        //csrf방지
-            .formLogin().disable()    //기본 로그인 페이지 없애기
-            .headers().frameOptions().disable();
     }
 }
