@@ -74,26 +74,38 @@
     </select>
 
     <select id="selectMemberInfo" resultType="MemberInfo" parameterType="String">
-        SELECT account,
-           e.id,
-           e.name as name,
-           r.id as rankId,
-           r.name as rankName,
-           d.id as deptId,
-           d.name as deptName,
-           t.id as teamId,
-           t.name as teamName,
-           birth,
-           gender,
-           email,
-           phone,
-           joined_at,
-           approved_at
+        WITH RECURSIVE C AS (
+            SELECT e.account, d.id, d.p_id, d.name, CONCAT_WS(' > ', d3.name, d2.name, d.name) AS path
+            FROM dept d
+            INNER JOIN emp e ON d.id = e.dept_id
+            LEFT JOIN dept d2 ON d.p_id = d2.id
+            LEFT JOIN dept d3 ON d2.p_id = d3.id
+        )
+        SELECT
+            e.account,
+            e.id,
+            e.name as name,
+            r.id as rankId,
+            r.name as rankName,
+            d.id as deptId,
+            C.path as deptName,
+            t.id as teamId,
+            t.name as teamName,
+            e.birth,
+            e.gender,
+            e.email,
+            e.phone,
+            e.des,
+            e.access,
+            e.del_fl,
+            e.joined_at,
+            e.approved_at
         FROM emp e
         JOIN `dept` d on d.id = e.dept_id
         JOIN `rank` r on r.id = e.rank_id
         JOIN `team` t on t.id = e.team_id
-        WHERE account = #{account}
+        JOIN C ON e.account = C.account
+        WHERE e.account = #{account}
     </select>
 
     <select id="selectJoinedMember" resultType="AuthMember" parameterType="String">

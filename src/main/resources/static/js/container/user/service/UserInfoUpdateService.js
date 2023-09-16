@@ -15,7 +15,7 @@ function userInfoUpdateService() {
                 console.log(data)
                 console.log('폼 데이터가 성공적으로 전송되었습니다.');
                 alert("정보를 수정했습니다.")
-                location.replace("/");
+                location.reload();
             } else {
                 alert("서버 응답이 실패했습니다.");
                 console.error('서버 응답이 실패했습니다.');

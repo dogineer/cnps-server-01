@@ -9,9 +9,9 @@
         SET account = #{account},
             name    = #{name},
             phone   = #{phone},
-            rank_id    = #{rank},
-            dept_id    = #{dept},
-            team_id    = #{team},
+            rank_id = #{rankId},
+            dept_id = #{deptId},
+            team_id = #{teamId},
             gender  = #{gender},
             email   = #{email}
         WHERE account = #{account};

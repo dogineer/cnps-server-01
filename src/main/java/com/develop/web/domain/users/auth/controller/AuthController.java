@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RestController
-@Tag(name = "인증", description = "로그인 로그아웃")
+@Tag(name = "인증 > 로그인, 로그아웃", description = "세션과 토큰 로그인을 포함하고 있습니다.")
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class AuthController {
@@ -35,11 +35,10 @@ public class AuthController {
      * @description 세션 로그인 서비스
      */
     @PostMapping("/login")
-    @Operation(summary = "로그인", description = "세션 등록")
+    @Operation(summary = "로그인", description = "DB에 있는 유저 정보를 통해 세션을 등록합니다. (디폴트)")
     public void login(@RequestBody LoginRequest request,
                       HttpSession session,
                       HttpServletRequest httpServletRequest) {
-
         login.checkAccount(request);
 
         String account = request.getAccount();
@@ -55,20 +54,20 @@ public class AuthController {
         session.setAttribute("teamId", dbMemberInfoData.getTeamId());
     }
 
-    @PostMapping("/token/login")
-    @Operation(summary = "로그인", description = "세션 등록")
-    public ResponseEntity<JwtToken> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
-        JwtToken token = tokenAuthService.login(loginRequest);
-        clientInfoChecker.clientInfo(loginRequest.getAccount(), request);
-        return ResponseEntity.ok(token);
-    }
-
     /**
      * @description 로그아웃 서비스
      */
     @PostMapping("/logout")
-    @Operation(summary = "로그아웃", description = "세션 삭제")
+    @Operation(summary = "로그아웃", description = "세션을 삭제합니다.")
     public void logout(HttpSession session) {
         session.invalidate();
+    }
+
+    @PostMapping("/token/login")
+    @Operation(summary = "로그인", description = "DB에 있는 유저 정보를 통해 토큰을 발급합니다.")
+    public ResponseEntity<JwtToken> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
+        JwtToken token = tokenAuthService.login(loginRequest);
+        clientInfoChecker.clientInfo(loginRequest.getAccount(), request);
+        return ResponseEntity.ok(token);
     }
 }

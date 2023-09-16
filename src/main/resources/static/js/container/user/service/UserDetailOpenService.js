@@ -1,20 +1,8 @@
 import {User} from "../dto/UserDto.js";
 
 function fetchDataSelectOptions(url, data, targetElement, id) {
-    fetch(url)
+    return fetch(url)
         .then(res => res.json())
-        .then(list => {
-            list.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.id;
-                option.textContent = item.name;
-                targetElement.appendChild(option);
-
-                if (item.id === data[id]) {
-                    option.selected = true;
-                }
-            });
-        })
         .catch((error) => {
             alert("ERROR");
             console.error(error);
@@ -61,9 +49,47 @@ export class UserDetailOpenService {
                         }
                     });
 
-                    fetchDataSelectOptions('/admin/dept/list/all', data, userDept, 'deptId');
-                    fetchDataSelectOptions('/admin/rank/list', data, userRank, 'rankId');
-                    fetchDataSelectOptions('/team/list', data, userTeam, 'teamId');
+                    fetchDataSelectOptions('/admin/dept/list/all')
+                        .then(list => {
+                            list.forEach(item => {
+                                const option = document.createElement('option');
+                                option.value = item.deptId;
+                                option.textContent = item.deptName;
+                                userDept.appendChild(option);
+
+                                if (item.deptId === data.deptId) {
+                                    option.selected = true;
+                                }
+                            });
+                        });
+
+                    fetchDataSelectOptions('/admin/rank/list')
+                        .then(list => {
+                            list.forEach(item => {
+                                const option = document.createElement('option');
+                                option.value = item.rankId;
+                                option.textContent = item.rankName;
+                                userRank.appendChild(option);
+
+                                if (item.rankId === data.rankId) {
+                                    option.selected = true;
+                                }
+                            });
+                        });
+
+                    fetchDataSelectOptions('/team/list')
+                        .then(list => {
+                            list.forEach(item => {
+                                const option = document.createElement('option');
+                                option.value = item.teamId;
+                                option.textContent = item.teamName;
+                                userTeam.appendChild(option);
+
+                                if (item.teamId === data.teamId) {
+                                    option.selected = true;
+                                }
+                            });
+                        });
 
                     userAccount.value = data.account;
                     userName.value = data.name;

@@ -5,14 +5,16 @@
 
 <mapper namespace="com.develop.web.domain.users.team.mapper.TeamMapper">
     <select id="selectBelongTeamList" parameterType="map" resultType="TeamDto">
-        SELECT t.id, t.name
+        SELECT t.id AS teamId,
+               t.name AS teamName
         FROM team t
         WHERE (t.id = ${teamId} AND ${rankId} != 12)
            OR (${rankId} = 12);
     </select>
 
     <select id="selectTeamList" resultType="TeamDto">
-        select id, name
+        select id AS teamId,
+               name AS teamName
         from team
         where p_id != 1
         UNION
@@ -20,14 +22,16 @@
     </select>
 
     <select id="selectTeamTypeList" resultType="TeamDto">
-        select id, name
+        select id AS teamId,
+               name AS teamName
         from team
         where p_id = 1
           and id != 1
     </select>
 
     <select id="selectTeamTypeListForOnlyAdmin" resultType="TeamDto">
-        select id, name
+        select id AS teamId,
+               name AS teamName
         from team
         where id != 1
     </select>

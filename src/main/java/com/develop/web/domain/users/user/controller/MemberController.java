@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RestController
-@Tag(name = "사용자 > 인사 관리", description = "사용자 권한 인사 관리")
+@Tag(name = "인증 > 인사 관리", description = "사용자 권한 인사 관리")
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class MemberController {

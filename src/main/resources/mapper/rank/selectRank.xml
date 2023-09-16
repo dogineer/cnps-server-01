@@ -6,7 +6,8 @@
 <mapper namespace="com.develop.web.domain.admin.rank.mapper.RankMapper">
     <select id="selectListRank" resultType="RankDto">
         SELECT id   AS rankId,
-               name AS rankName
+               name AS rankName,
+               p_id AS rankParentId
         FROM `rank`
         WHERE p_id = 0
           AND id NOT IN (0)

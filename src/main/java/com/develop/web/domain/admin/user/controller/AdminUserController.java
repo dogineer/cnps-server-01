@@ -24,13 +24,13 @@ public class AdminUserController {
     private final UpdateUserInfoService updateUserInfoService;
 
     @GetMapping("/account-info/{account}")
-    @Operation(summary = "개인정보값", description = "재 개발해야할 부분")
+    @Operation(summary = "개인정보값", description = "개인 정보를 조회합니다.")
     public MemberInfo userInfo(@PathVariable String account) {
         return detailMemberFetcher.getMember(account);
     }
 
     @PutMapping("/account-info/update")
-    @Operation(summary = "개인정보값", description = "재 개발해야할 부분")
+    @Operation(summary = "개인 정보 업데이트", description = "개인 정보를 수정해서 업데이트합니다.")
     public void updateUserInfoService(@RequestBody UpdateUserInfoDto userInfo) {
         updateUserInfoService.updateUserInfo(userInfo);
     }
