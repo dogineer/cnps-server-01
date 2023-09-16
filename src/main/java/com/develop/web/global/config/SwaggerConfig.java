@@ -15,9 +15,17 @@ public class SwaggerConfig {
     @Bean
     public GroupedOpenApi commonGroup() {
         return GroupedOpenApi.builder()
+            .group("페이지 공용 API")
+            .pathsToMatch(
+                "/common/**")
+            .build();
+    }
+
+    @Bean
+    public GroupedOpenApi userGroup() {
+        return GroupedOpenApi.builder()
             .group("일반 API")
             .pathsToMatch(
-                "/common/**",
                 "/user/**",
                 "/folder/**",
                 "/team/**",
