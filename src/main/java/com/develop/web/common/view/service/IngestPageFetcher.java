@@ -8,20 +8,16 @@ import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.common.view.dto.PageDto;
 import com.develop.web.domain.service.ingest.mapper.UploadMapper;
 import com.develop.web.domain.admin.notice.service.PostListFetcher;
-import com.develop.web.domain.admin.dept.service.DetailDeptFetcher;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
 import com.develop.web.domain.users.team.service.TeamListFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 
-import javax.servlet.http.HttpSession;
-
 @RequiredArgsConstructor
 @Component("ingestPageFetcher")
 public class IngestPageFetcher implements PageingService{
     private final PostListFetcher postListFetcher;
-    private final DetailDeptFetcher detailDeptFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
     private final TeamListFetcher teamListFetcher;
     private final TeamFolderGroupFetcher teamFolderGroupFetcher;
@@ -44,7 +40,6 @@ public class IngestPageFetcher implements PageingService{
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
         model.addAttribute("folderRootList", rootFolderListFetcher.getFolder());
         model.addAttribute("TeamFolderList", teamFolderGroupFetcher.getTeamFolder(teamId, rankId));
-        model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
         model.addAttribute("IngestRequestList", ingestListFetcher.getIngestRequestList(criteriaDto));
 
         model.addAttribute("pageMaker", pageDto);

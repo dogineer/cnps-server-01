@@ -1,7 +1,6 @@
 package com.develop.web.common.view.service;
 
 import com.develop.web.common.view.dto.AccountDto;
-import com.develop.web.domain.admin.dept.service.DetailDeptFetcher;
 import com.develop.web.domain.admin.dept.service.FindDeptList;
 import com.develop.web.domain.admin.dept.service.FetcherDeptHigh;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 @RequiredArgsConstructor
 @Component("deptPageFetcher")
 public class DeptPageFetcher implements PageFetcher {
-    private final DetailDeptFetcher detailDeptFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
     private final MemberListFetcher memberListFetcher;
     private final FindDeptList findDeptList;
@@ -27,6 +25,5 @@ public class DeptPageFetcher implements PageFetcher {
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
         model.addAttribute("Depts", findDeptList.getDeptList());
         model.addAttribute("TopDepts", fetcherDeptHigh.getHighDept());
-        model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
     }
 }

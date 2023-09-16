@@ -4,7 +4,6 @@ import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.domain.users.auth.mapper.AuthMapper;
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.common.view.dto.PageDto;
-import com.develop.web.domain.admin.dept.service.DetailDeptFetcher;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
 import com.develop.web.domain.users.user.service.MemberListFetcher;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 @RequiredArgsConstructor
 @Component("userPageFetcher")
 public class UserPageFetcher implements PageingService {
-    private final DetailDeptFetcher detailDeptFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
     private final MemberListFetcher memberListFetcher;
     private final AuthMapper authMapper;
@@ -28,7 +26,6 @@ public class UserPageFetcher implements PageingService {
 
         model.addAttribute("UserList", memberListFetcher.getMemberGetList(criteriaDto));
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
-        model.addAttribute("DetailDept", detailDeptFetcher.getDetailDept(account));
         model.addAttribute("pageMaker", pageDto);
     }
 }
