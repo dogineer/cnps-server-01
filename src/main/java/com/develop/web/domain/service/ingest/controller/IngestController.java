@@ -1,5 +1,6 @@
 package com.develop.web.domain.service.ingest.controller;
 
+import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.service.CreateIngestPost;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
@@ -24,7 +25,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Tag(name = "영상 > 인제스트", description = "")
+@Tag(name = "미디어 > 인제스트", description = "등록 -> 컨버팅 -> 완료의 한 집합")
 @Slf4j
 @RequestMapping(value = "/ingest")
 public class IngestController {
@@ -38,7 +39,7 @@ public class IngestController {
 
     @Transactional
     @PostMapping(value = "/add")
-    @Operation(summary = "인제스트", description = "업로드 -> temp 임시 파일 생성 -> 미디어센터 서버로 이동 -> 영상 아카이브 저장 및 변환 -> 컨버팅 저장 -> 완료 )")
+    @Operation(summary = "인제스트 등록", description = "서버2로 데이터 보냅니다.")
     public void ingestRequset(IngestRequestData ingestRequestData, HttpSession session) throws IOException {
         Integer memberId = session.getAttribute("empId").hashCode();
         Integer teamId = session.getAttribute("teamId").hashCode();
@@ -53,7 +54,7 @@ public class IngestController {
 
     @GetMapping(value = "/list")
     @Operation(summary = "인제스트 목록", description = "인제스트 목록 현황을 가져옵니다.")
-    public List<IngestRequestData> ingestList() {
+    public List<IngestListDto> ingestList() {
         CriteriaDto criteriaDto = new CriteriaDto();
         return ingestListFetcher.getIngestRequestList(criteriaDto);
     }

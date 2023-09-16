@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 
 @Data
-public class IngestRequestData {
+public class IngestListDto {
     private Integer id;                 // 인제스트 ID
     private LocalDateTime createAt;     // 생성 날짜
     private Integer memberId;           // 멤버 ID
@@ -18,8 +18,6 @@ public class IngestRequestData {
     private String phone;               // 전화번호
     private Codec codec;                // 요청코덱
     private LocalDateTime successAt;      // 성공 유무
-
-    private MultipartFile files;        // 영상 데이타
 
     public void setMemberId(Integer memberId) {
         this.memberId = memberId;

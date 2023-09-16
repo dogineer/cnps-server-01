@@ -4,45 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.service.clip.mapper.ClipMapper">
-    <select id="selectClipList" resultType="ClipDto">
-        select
-            c.id as clip_id,
-            c.ingest_id,
-            i.title as `ingest_name`,
-            c.team_id,
-            t.name as `team_name`,
-            c.folder_id,
-            f.name as `folder_name`,
-            c.archive_metadata_id,
-            a.* from clip c
-        left join ingest i on i.id = c.ingest_id
-        left join team t on t.id = c.team_id
-        left join folder f on f.id = c.folder_id
-        left join archive_metadata a on a.id = c.archive_metadata_id
-    </select>
-
     <select id="selectClipCount" resultType="int">
         SELECT COUNT(*) FROM clip
     </select>
 
     <select id="selectGetClipList" resultType="ClipDto">
-        select
-            c.id as clip_id,
-            c.ingest_id,
-            i.title as `ingest_name`,
-            c.team_id,
-            t.name as `team_name`,
-            c.folder_id,
-            f.name as `folder_name`,
-            c.convert_metadata_id,
-            DATE(c.ingest_at) as ingest_at,
-            ROUND(a.size / (1024 * 1024), 2) AS size,
-            a.* from clip c
-        left join ingest i on i.id = c.ingest_id
-        left join team t on t.id = c.team_id
-        left join folder f on f.id = c.folder_id
-        left join convert_metadata a on a.id = c.convert_metadata_id
-        ORDER BY create_at DESC
+        SELECT
+                c.id AS clip_id,
+                c.team_id,
+                t.name AS `team_name`,
+                c.folder_id,
+                f.name AS `folder_name`,
+                cm.clip_uuid,
+                cm.file_name,
+                cm.file_ext,
+                cm.file_path,
+                cm.format_long_name,
+                cm.file_duration / 60 AS file_duration,
+                ROUND(cm.file_size / (1024 * 1024), 2) AS file_size,
+                DATE(c.ingest_at) AS ingest_at,
+                DATE(c.end_at) AS end_at,
+                c.del_fl
+              FROM clip c
+                 LEFT JOIN ingest i ON i.id = c.ingest_id
+                 LEFT JOIN team t ON t.id = c.team_id
+                 LEFT JOIN folder f ON f.id = c.folder_id
+                 LEFT JOIN convert_metadata cm ON cm.id = c.convert_metadata_id
+        ORDER BY c.end_at DESC
         LIMIT ${limit} OFFSET ${offset}
     </select>
 </mapper>

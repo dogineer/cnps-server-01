@@ -1,7 +1,6 @@
 package com.develop.web.domain.service.folder.controller;
 
 import com.develop.web.domain.service.clip.dto.ClipDto;
-import com.develop.web.domain.service.folder.dto.FolderClipDto;
 import com.develop.web.domain.service.folder.dto.FolderDto;
 import com.develop.web.domain.service.folder.service.ChildrenFolderFetcher;
 import com.develop.web.domain.service.folder.service.CreateNewFolder;

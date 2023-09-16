@@ -4,26 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.service.ingest.mapper.UploadMapper">
-    <select id="selectIngestList" resultType="IngestRequestData">
-        SELECT id,
-               member_id as memberId,
-               create_at as createAt,
-               title,
-               program,
-               name,
-               phone,
-               codec,
-               del_fl,
-               success
-        FROM ingest
-    </select>
-
     <select id="selectIngestCount" resultType="int">
         SELECT COUNT(*)
         FROM ingest
     </select>
 
-    <select id="selectGetIngestList" resultType="IngestRequestData">
+    <select id="selectGetIngestList" resultType="IngestListDto">
         SELECT i.id,
                member_id as memberId,
                create_at as createAt,
@@ -34,7 +20,7 @@
                e.phone,
                codec,
                i.del_fl,
-               success
+               success AS successAt
         FROM ingest i
                 JOIN emp e ON i.member_id = e.id
                 JOIN team t ON e.team_id = t.id

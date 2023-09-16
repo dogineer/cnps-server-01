@@ -1,5 +1,6 @@
 package com.develop.web.domain.service.ingest.mapper;
 
+import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.service.ingest.dto.Metadata;
@@ -13,7 +14,7 @@ public interface UploadMapper {
 
     void insertMetadata(Metadata data);
 
-    List<IngestRequestData> selectGetIngestList(CriteriaDto cri);
+    List<IngestListDto> selectGetIngestList(CriteriaDto cri);
 
     int selectIngestCount();
 }

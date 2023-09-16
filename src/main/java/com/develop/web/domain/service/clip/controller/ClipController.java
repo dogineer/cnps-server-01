@@ -28,12 +28,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "클립", description = "클립")
+@Tag(name = "미디어 > 클립", description = "클립을 위한 api")
 @RequestMapping(value = "/clip")
 @RestController
 public class ClipController {
