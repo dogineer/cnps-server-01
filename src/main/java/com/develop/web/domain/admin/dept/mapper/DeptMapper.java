@@ -22,6 +22,4 @@ public interface DeptMapper {
     List<Member> selectDeptMembers(Integer deptId);
 
     List<String> selectFindDeptChart(Integer deptId);
-
-    String selectDetailDept(String account);
 }
