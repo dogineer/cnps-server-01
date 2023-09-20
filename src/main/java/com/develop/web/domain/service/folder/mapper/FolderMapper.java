@@ -14,6 +14,7 @@ public interface FolderMapper {
     List<ClipDto> selectFolderClipData(Integer folderId);
 
     void insertNewFolder(FolderDto folderDto);
+    void deleteFolde(Integer folderId);
 
     List<GroupFolderDto> selectTeamFolderList(Integer teamId);
     List<GroupFolderDto> selectTeamFolderListForOnlyAdmin();
