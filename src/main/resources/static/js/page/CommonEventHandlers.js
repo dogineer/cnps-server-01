@@ -3,6 +3,10 @@ import {AuthContoller} from "../container/auth/controller/AuthContoller.js";
 import {DarkMode} from "../container/module/DarkMode.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.oncontextmenu = () => {
+        return false;
+    };
+
     DarkMode.darkModeValidate();
 
     const toggleSwitch = document.getElementById('toggleSwitch');
