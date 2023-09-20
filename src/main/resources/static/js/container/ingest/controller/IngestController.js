@@ -1,7 +1,7 @@
 import {setupWebSocket} from "../service/WebSocketService.js";
 import {complete, updateProgress} from "../service/ProgressBar.js";
 import {setupDragAndDrop} from "../service/DragAndDrop.js";
-import {currentFolder} from "../../folder/service/folderService.js";
+import {currentFolder} from "../../folder/service/FolderService.js";
 
 export class IngestController {
     static async webSocket() {
@@ -55,7 +55,7 @@ export class IngestController {
             for (let i = 0; i < folderSelects.length; i++) {
                 const option = folderSelects.options[i];
                 if (option.value === folderId) {
-                    console.log("[Select] 폴더 선택 : " + folderId)
+                    console.log("[Select] 폴더(F_" + folderId + ") 선택");
                     option.selected = true;
                     break;
                 }
