@@ -1,5 +1,5 @@
-import {ClipController} from "../../clip/controller/ClipController.js";
 import {handleException, serverError} from "../../issue/service/IssueService.js";
+import {clipPreviewButtonEvent, importPremiereEvent} from "../../clip/event/ClipEvent.js";
 
 const clearClipTrField = () => {
     const elements = document.getElementById('clipListBody')
@@ -71,20 +71,6 @@ const createClipData = (parentElement, item, index) => {
     preview.appendChild(previewAtag)
     previewAtag.setAttribute("type", "button")
     previewAtag.setAttribute("id", "clip-preview-btn")
-    previewAtag.addEventListener('click', (e) => {
-        const trElement = e.target.closest('tr'); // tr 요소 찾기
-        if (trElement) {
-            const clipId = trElement.getAttribute('data-clip-id');
-            const clipPath = trElement.getAttribute('data-clip-path');
-
-            console.log('[+] 클립 프리뷰 버튼 클릭');
-            console.log('클립 ID: ' + clipId);
-            console.log('클립 PATH: ' + clipPath);
-
-            ClipController.showPreview(e);
-        }
-        e.stopPropagation();
-    });
 
     previewAtag.appendChild(previewThumbnail)
     previewThumbnail.setAttribute("class", "thumbnail")
@@ -133,13 +119,8 @@ const createClipData = (parentElement, item, index) => {
     fileEndAt.className = 'clip-file_end_at'
     fileEndAt.innerText = item.end_at;
 
-    tr.addEventListener('click', (e) => {
-        console.log("[+] 클립 선택")
-        console.log("클립 ID: " + tr.getAttribute("data-clip-id"))
-        console.log("클립 PATH: " + tr.getAttribute("data-clip-path"))
-
-        ClipController.importPremierPro(tr);
-    })
+    clipPreviewButtonEvent(previewAtag);
+    importPremiereEvent(tr);
 }
 
 export const fetchFolderDataForClipView = (folderId) => {
