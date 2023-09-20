@@ -1,6 +1,6 @@
 import {User} from "../dto/UserDto.js";
 
-function fetchDataSelectOptions(url, data, targetElement, id) {
+function fetchDataSelectOptions(url) {
     return fetch(url)
         .then(res => res.json())
         .catch((error) => {
