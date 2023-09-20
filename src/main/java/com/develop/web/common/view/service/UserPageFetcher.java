@@ -25,6 +25,7 @@ public class UserPageFetcher implements PageingService {
         PageDto pageDto = new PageDto(countTotal, 10, criteriaDto);
 
         model.addAttribute("UserList", memberListFetcher.getMemberGetList(criteriaDto));
+        model.addAttribute("UserDeleteList", memberListFetcher.getMemberGetDeleteList(criteriaDto));
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
         model.addAttribute("pageMaker", pageDto);
     }

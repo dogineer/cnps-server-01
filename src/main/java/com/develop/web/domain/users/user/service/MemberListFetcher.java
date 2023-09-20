@@ -23,4 +23,8 @@ public class MemberListFetcher {
     public List<MemberInfo> getMemberGetList(CriteriaDto cri) {
         return authMapper.selectMemberGetList(cri);
     }
+
+    public List<MemberInfo> getMemberGetDeleteList(CriteriaDto cri) {
+        return authMapper.selectMemberDeleteGetList(cri);
+    }
 }

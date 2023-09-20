@@ -37,6 +37,9 @@ public interface AuthMapper {
     /** @description 직원 리스트 데이터 조회 (직원 리스트 - 가입날짜로 부터) */
     List<MemberInfo> selectMemberGetList(CriteriaDto cri);
 
+    /** @description 직원 탈퇴 리스트 데이터 조회 (직원 리스트 - 가입날짜로 부터) */
+    List<MemberInfo> selectMemberDeleteGetList(CriteriaDto cri);
+
     /** @description 직원 팀 배정 (직원 팀 업데이트,)*/
     void updateMemberTeamId(TeamUpdateParam param);
 
