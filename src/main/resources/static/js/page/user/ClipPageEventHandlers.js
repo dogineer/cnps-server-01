@@ -14,10 +14,12 @@ import {
     importPremiereEvent,
     modalStyleChangeEvent
 } from "../../container/clip/event/ClipEvent.js";
+import {changeCount} from "../../container/module/changeCount.js";
 
 document.addEventListener('DOMContentLoaded', () => {
 
     modalStyleChangeEvent();
+    changeCount();
 
     const clipPreviewButtonElement = document.querySelectorAll('#clip-preview-btn');
     clipPreviewButtonElement.forEach((current) => {

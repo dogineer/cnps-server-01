@@ -1,7 +1,10 @@
 import {IngestController} from "../../container/ingest/controller/IngestController.js";
 import {folderArrowToggleEvent} from "../../container/folder/event/FolderEvent.js";
+import {changeCount} from "../../container/module/changeCount.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    changeCount();
+
     const modalDialogElement = document.querySelector("#IngestRequest .modal-dialog");
     modalDialogElement.classList.add("modal-xl");
 
