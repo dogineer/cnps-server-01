@@ -82,7 +82,7 @@ export class UserDetailOpenService {
                             list.forEach(item => {
                                 const option = document.createElement('option');
                                 option.value = item.teamId;
-                                option.textContent = item.teamName;
+                                option.textContent = item.programName;
                                 userTeam.appendChild(option);
 
                                 if (item.teamId === data.teamId) {
