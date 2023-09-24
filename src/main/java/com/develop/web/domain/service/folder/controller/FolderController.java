@@ -43,15 +43,12 @@ public class FolderController {
     @GetMapping("/show/{num}")
     @Operation(summary = "하위 폴더 조회", description = "상위 폴더 안에 있는 하위 폴더를 조회합니다. 상위 폴더의 코드를 입력해주세요.")
     public List<FolderDto> ShowFolderList(@PathVariable Integer num) {
-
         return childrenFolderFetcher.getChildrenFolder(num);
     }
 
     @GetMapping("/select/{folderId}")
     @Operation(summary = "폴더 데이터 조회", description = "그룹 폴더의 클립 데이터를 보여줍니다.")
     public List<ClipDto> clickFolderOpen(@PathVariable Integer folderId, Model model) {
-        model.addAttribute("clips", folderClipDataFetcher.getFolderClipData(folderId));
-
         return folderClipDataFetcher.getFolderClipData(folderId);
     }
 }

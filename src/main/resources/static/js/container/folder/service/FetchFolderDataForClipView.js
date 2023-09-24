@@ -33,7 +33,7 @@ const createClipData = (parentElement, item, index) => {
     const preview = document.createElement('td')
     const clipId = document.createElement('td')
     const teamId = document.createElement('td')
-    const teamName = document.createElement('td')
+    const programName = document.createElement('td')
     const folderName = document.createElement('td')
     const fileUUID = document.createElement('td')
     const fileName = document.createElement('td')
@@ -52,7 +52,7 @@ const createClipData = (parentElement, item, index) => {
     tr.appendChild(preview)
     tr.appendChild(clipId)
     tr.appendChild(teamId)
-    tr.appendChild(teamName)
+    tr.appendChild(programName)
     tr.appendChild(folderName)
     tr.appendChild(fileUUID)
     tr.appendChild(fileName)
@@ -83,8 +83,8 @@ const createClipData = (parentElement, item, index) => {
     teamId.className = 'clip-team_id'
     teamId.innerText = 'T' + item.team_id;
 
-    teamName.className = 'clip-team_name'
-    teamName.innerText = item.team_name;
+    programName.className = 'clip-team_name'
+    programName.innerText = item.team_name;
 
     folderName.className = 'clip-folder_name'
     folderName.innerText = item.folder_name;

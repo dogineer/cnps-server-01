@@ -7,5 +7,5 @@ public class GroupFolderDto {
     private Integer folderId;
     private String folderName;
     private Integer teamId;
-    private String teamName;
+    private String programName;
 }
