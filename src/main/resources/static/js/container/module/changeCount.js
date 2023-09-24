@@ -1,5 +1,6 @@
 export const changeCount = () => {
-    const limit = 50;
+    const url = new URL(window.location.href);
+    const limit = parseInt(url.searchParams.get('limit')) || 50;
     let currentPage = parseInt(document.getElementById("pageCount").textContent);
     let currentCount = (currentPage - 1) * limit + 1;
 
