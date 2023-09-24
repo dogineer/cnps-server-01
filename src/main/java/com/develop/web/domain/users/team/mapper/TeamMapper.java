@@ -9,5 +9,5 @@ import java.util.List;
 public interface TeamMapper {
     List<TeamDto> selectBelongTeamList(Integer teamId, Integer rankId);
     List<TeamDto> selectTeamList();
-    List<TeamDto> selectTeamTypeList();
+    List<TeamDto> selectProgramTypeList();
 }

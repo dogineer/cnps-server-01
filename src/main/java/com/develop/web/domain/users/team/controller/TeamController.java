@@ -28,8 +28,8 @@ public class TeamController {
     }
 
     @GetMapping("/list/Type")
-    @Operation(summary = "팀 타입 가져오기", description = "팀 타입 정보를 가져옵니다.")
-    public List<TeamDto> fetcherTeamTypeList() {
-        return teamListFetcher.getTeamType();
+    @Operation(summary = "프로그램 타입 가져오기", description = "프로그램 타입을 가져옵니다.")
+    public List<TeamDto> fetcherprogramTypeList() {
+        return teamListFetcher.getProgramType();
     }
 }

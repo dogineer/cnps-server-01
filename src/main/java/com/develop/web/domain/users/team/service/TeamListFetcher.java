@@ -19,7 +19,7 @@ public class TeamListFetcher {
     public List<TeamDto> getTeam() {
         return teamMapper.selectTeamList();
     }
-    public List<TeamDto> getTeamType() {
-        return teamMapper.selectTeamTypeList();
+    public List<TeamDto> getProgramType() {
+        return teamMapper.selectProgramTypeList();
     }
 }
