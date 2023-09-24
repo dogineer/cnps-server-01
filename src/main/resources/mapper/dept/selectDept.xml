@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.admin.dept.mapper.DeptMapper">
+    <select id="selectHighDept" resultType="DeptDto">
+        SELECT id   AS deptId,
+               name AS deptName
+        FROM dept
+        WHERE p_id = 1 AND id != 1
+    </select>
+
     <select id="selectDeptMidList" parameterType="Integer" resultType="DeptDto">
         SELECT id   AS deptId,
                name AS deptName,
@@ -19,15 +26,6 @@
                p_id AS deptParentId
         FROM dept
         WHERE id NOT IN (1)
-          AND p_id NOT IN (1, 8, 24)
-    </select>
-
-    <select id="selectHighDept" resultType="DeptDto">
-        SELECT id   AS deptId,
-               name AS deptName
-        FROM dept
-        WHERE p_id = 1
-          AND id != 1
     </select>
 
     <select id="selectDeptMembers" resultType="Member" parameterType="Integer">
@@ -51,17 +49,18 @@
         WHERE dept_id = ${deptid}
     </select>
 
-    <select id="selectFindDeptChart" resultType="String" parameterType="Integer">
-        WITH RECURSIVE C AS (SELECT d.id, d.p_id, d.name, d.name AS path
-                             FROM dept d
-                             WHERE d.id = ${deptId}
+    <select id="selectFindDeptPath" resultType="DeptPathDto" parameterType="Integer">
+        WITH RECURSIVE C AS (
+            SELECT d.id, d.p_id, d.name, d.name AS path
+            FROM dept d
+            WHERE d.id = ${deptId}
 
-                             UNION ALL
+            UNION ALL
 
-                             SELECT d.id, d.p_id, d.name, CONCAT(C.path, ' > ', d.name)
-                             FROM dept d
-                                      INNER JOIN C ON d.p_id = C.id)
-        SELECT C.path
+            SELECT d.id, d.p_id, d.name, CONCAT(C.path, ' > ', d.name)
+            FROM dept d
+            INNER JOIN C ON d.p_id = C.id)
+        SELECT C.path AS deptPath, C.id AS deptId
         FROM C;
     </select>
 </mapper>

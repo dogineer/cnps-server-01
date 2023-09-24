@@ -1,6 +1,7 @@
 package com.develop.web.domain.admin.dept.mapper;
 
 import com.develop.web.domain.admin.dept.dto.DeptDto;
+import com.develop.web.domain.admin.dept.dto.DeptPathDto;
 import com.develop.web.domain.admin.dept.dto.PdeptDto;
 import com.develop.web.domain.users.user.dto.Member;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,5 +22,5 @@ public interface DeptMapper {
 
     List<Member> selectDeptMembers(Integer deptId);
 
-    List<String> selectFindDeptChart(Integer deptId);
+    List<DeptPathDto> selectFindDeptPath(Integer deptId);
 }
