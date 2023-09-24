@@ -14,7 +14,7 @@ public class MemberInfo {
     private Integer deptId;
     private String deptName;
     private Integer teamId;
-    private String teamName;
+    private String programName;
     private String birth;
     private Byte gender;
     private String phone;
