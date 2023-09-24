@@ -3,6 +3,7 @@ package com.develop.web.common.view.controller;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.*;
 import com.develop.web.common.view.dto.CriteriaDto;
+import com.develop.web.domain.users.auth.service.InitAccountService;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,35 +20,20 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping(value = "/admin/management/*")
 public class AdminController {
+    private final InitAccountService initAccountService;
     private final UserPageFetcher userPageFetcher;
     private final DeptPageFetcher deptPageFetcher;
-    private final TeamPageFetcher teamPageFetcher;
+    private final ProgramPageFetcher programPageFetcher;
     private final RankPageFetcher rankPageFetcher;
-
-    private void initPageService(HttpSession session, Model model, PageFetcher pageFetcher) {
-
-        String account = session.getAttribute("account").toString();
-        Integer teamId = (Integer) session.getAttribute("teamId");
-        Integer rankId = (Integer) session.getAttribute("rankId");
-
-        AccountDto accountDto = new AccountDto(account, teamId, rankId);
-
-        pageFetcher.fetchPage(accountDto, model);
-    }
 
     @GetMapping("user")
     public String userPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
         @RequestParam(value = "limit", defaultValue = "50") int limit,
-        CriteriaDto criteriaDto, HttpSession session, Model model) throws CustomException {
+        HttpSession session, Model model) throws CustomException {
 
-        String account = session.getAttribute("account").toString();
-        Integer teamId = (Integer) session.getAttribute("teamId");
-        Integer rankId = (Integer) session.getAttribute("rankId");
-
-        criteriaDto = new CriteriaDto(page, limit);
-
-        AccountDto accountDto = new AccountDto(account, teamId, rankId);
+        AccountDto accountDto = initAccountService.session(session);
+        CriteriaDto criteriaDto = new CriteriaDto(page, limit);
 
         userPageFetcher.fetchPageing(criteriaDto, accountDto, model);
         return "admin/user/admin_user_page";
@@ -55,20 +41,26 @@ public class AdminController {
 
     @GetMapping("dept")
     public String deptPage(HttpSession session, Model model) throws CustomException {
-        initPageService(session, model, deptPageFetcher);
+        AccountDto accountDto = initAccountService.session(session);
+        deptPageFetcher.fetchPage(accountDto, model);
+
         return "admin/dept/admin_dept_page";
 
     }
 
-    @GetMapping("team")
+    @GetMapping("program")
     public String teamPage(HttpSession session, Model model) throws CustomException {
-        initPageService(session, model, teamPageFetcher);
-        return "admin/team/admin_team_page";
+        AccountDto accountDto = initAccountService.session(session);
+        programPageFetcher.fetchPage(accountDto, model);
+
+        return "admin/team/admin_program_page";
     }
 
     @GetMapping("rank")
     public String rankPage(HttpSession session, Model model) throws CustomException {
-        initPageService(session, model, rankPageFetcher);
+        AccountDto accountDto = initAccountService.session(session);
+        rankPageFetcher.fetchPage(accountDto, model);
+
         return "admin/rank/admin_rank_page";
     }
 }
