@@ -1,17 +1,8 @@
 import {handleException, serverError} from "../../issue/service/IssueService.js";
+import {deptDeleteClickEvent} from "../event/DeptEvent.js";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const deptButtons = document.querySelectorAll('#dept-high-select');
-    fetchDataByMidDeptList();
 
-    deptButtons.forEach(function (button) {
-        button.addEventListener('change', (e) => {
-            fetchDataByMidDeptList();
-        });
-    });
-});
-
-function fetchDataByMidDeptList() {
+const fetchDataByMidDeptList = () => {
     const deptElement = document.getElementById('dept-high-select');
     const deptId = deptElement.value;
 
@@ -35,8 +26,8 @@ function fetchDataByMidDeptList() {
             data.forEach(item => {
                 const itemOptionElement = document.createElement('option');
                 listItem.appendChild(itemOptionElement)
-                itemOptionElement.text = item.name
-                itemOptionElement.value = item.id
+                itemOptionElement.text = item.deptName
+                itemOptionElement.value = item.deptId
             });
         })
         .catch(error => {
@@ -44,16 +35,7 @@ function fetchDataByMidDeptList() {
         });
 }
 
-function deptChartLoad() {
-    const selectElement = document.getElementById('deptChartSelect');
-    selectElement.addEventListener('change', fetchDataByDeptChart);
-    fetchDataByDeptChart();
-}
-
-function fetchDataByDeptChart() {
-    const deptChart = document.getElementById('deptChartSelect');
-    const deptId = deptChart.value;
-
+const fetchDataByDeptChart = (deptId) => {
     fetch('/admin/dept/find/tree/' + deptId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
@@ -73,20 +55,31 @@ function fetchDataByDeptChart() {
 
             data.forEach(item => {
                 const itemTrElement = document.createElement('tr');
-                const itemTd1Element = document.createElement('td');
-                const itemTd2Element = document.createElement('td');
+                const itemDeptIdElement = document.createElement('td');
+                const itemDeptPathElement = document.createElement('td');
+                const itemDeptActionElement = document.createElement('td');
 
                 listItem.appendChild(itemTrElement);
+                itemTrElement.setAttribute("data-dept-id", item.deptId)
+                itemTrElement.setAttribute("data-dept-tree", item.deptPath)
 
-                itemTd1Element.textContent = item;
-                itemTrElement.appendChild(itemTd1Element);
+                itemDeptIdElement.textContent = item.deptId;
+                itemTrElement.appendChild(itemDeptIdElement);
 
-                itemTd2Element.textContent = "삭제";
-                itemTd2Element.id = "delete-dept-button";
-                itemTrElement.appendChild(itemTd2Element);
+                itemDeptPathElement.textContent = item.deptPath;
+                itemTrElement.appendChild(itemDeptPathElement);
+
+                itemDeptActionElement.textContent = "삭제";
+                itemDeptActionElement.id = "delete-dept-button";
+
+                itemTrElement.appendChild(itemDeptActionElement);
             });
+
+            deptDeleteClickEvent();
         })
         .catch(error => {
             serverError(error);
         });
 }
+
+export {fetchDataByMidDeptList, fetchDataByDeptChart}
