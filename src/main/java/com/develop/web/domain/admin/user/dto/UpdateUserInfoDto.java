@@ -11,7 +11,7 @@ public class UpdateUserInfoDto {
     private String phone;
     private Integer rankId;
     private Integer deptId;
-    private Integer teamId;
+    private Integer programId;
     private Byte gender;
     private String email;
 }

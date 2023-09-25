@@ -6,6 +6,6 @@ import lombok.Data;
 public class GroupFolderDto {
     private Integer folderId;
     private String folderName;
-    private Integer teamId;
+    private Integer programId;
     private String programName;
 }

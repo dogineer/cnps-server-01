@@ -2,10 +2,10 @@ package com.develop.web.domain.users.user.controller;
 
 import com.develop.web.domain.users.user.dto.JoinedMember;
 import com.develop.web.domain.users.user.dto.PasswordChangeRequest;
-import com.develop.web.domain.users.user.dto.TeamUpdateParam;
+import com.develop.web.domain.users.user.dto.ProgramUpdateParam;
 import com.develop.web.domain.users.user.service.CreateAccount;
 import com.develop.web.domain.users.user.service.ModifyPassword;
-import com.develop.web.domain.users.user.service.ModifyTeam;
+import com.develop.web.domain.users.user.service.ModifyProgram;
 import com.develop.web.global.exception.exception.CustomException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class MemberController {
     private final CreateAccount createAccount;
     private final ModifyPassword modifyPassword;
-    private final ModifyTeam modifyTeam;
+    private final ModifyProgram modifyProgram;
 
     @PostMapping(value = "/signup")
     @Operation(summary = "회원가입", description = "회원가입에 양식의 데이터를 서버에 저장합니다.")
@@ -33,20 +33,18 @@ public class MemberController {
 
     @PutMapping("/changePassword")
     @Operation(summary = "비밀번호 변경", description = "새로운 비밀번호로 변경합니다.")
-    public void changePassword(PasswordChangeRequest passwordChangeRequest, HttpSession session) throws CustomException {
+    public void changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest, HttpSession session) throws CustomException {
         String account = (String) session.getAttribute("account");
         modifyPassword.change(account, passwordChangeRequest);
         session.invalidate();
     }
 
-    @PutMapping("/member/team/update")
-    @Operation(summary = "처음 사용자 팀 변경", description = "처음 사용자의 팀을 변경합니다.")
-    public void updateTeam(TeamUpdateParam param, HttpSession session) {
+    @PutMapping("/member/program/update")
+    @Operation(summary = "처음 사용자 프로그램 변경", description = "처음 사용자의 프로그램을 변경합니다.")
+    public void updateProgram(@RequestBody ProgramUpdateParam param, HttpSession session) {
         String account = (String) session.getAttribute("account");
         param.setAccount(account);
-        modifyTeam.setTeam(param);
+        modifyProgram.setProgram(param);
         session.invalidate();
     }
-
-
 }

@@ -11,8 +11,8 @@
     <select id="selectGetClipList" resultType="ClipDto">
         SELECT
                 c.id AS clip_id,
-                c.team_id,
-                t.name AS `team_name`,
+                c.program_id,
+                t.name AS `program_name`,
                 c.folder_id,
                 f.name AS `folder_name`,
                 cm.clip_uuid,
@@ -27,7 +27,7 @@
                 c.del_fl
               FROM clip c
                  LEFT JOIN ingest i ON i.id = c.ingest_id
-                 LEFT JOIN team t ON t.id = c.team_id
+                 LEFT JOIN program t ON t.id = c.program_id
                  LEFT JOIN folder f ON f.id = c.folder_id
                  LEFT JOIN convert_metadata cm ON cm.id = c.convert_metadata_id
         ORDER BY c.end_at DESC

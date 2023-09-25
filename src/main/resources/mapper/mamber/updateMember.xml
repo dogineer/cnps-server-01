@@ -8,7 +8,7 @@
         UPDATE emp SET password = #{changePassword} WHERE account = #{account}
     </update>
 
-    <update id="updateMemberTeamId" parameterType="TeamUpdateParam">
-        UPDATE emp SET team_id = #{teamId} WHERE account = #{account}
+    <update id="updateMemberProgramId" parameterType="ProgramUpdateParam">
+        UPDATE emp SET program_id = #{programId} WHERE account = #{account}
     </update>
 </mapper>

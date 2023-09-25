@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const folderAddElement = document.getElementById('folder-add');
     folderAddElement.addEventListener('click', () => {
-        folderRootCreateClickEvent(account_team_id);
+        folderRootCreateClickEvent(account_program_id);
     })
 
     const modalElement = document.getElementById('clipPreview');

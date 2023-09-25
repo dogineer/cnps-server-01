@@ -31,7 +31,7 @@ public class ServerFileUploader {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
         body.add("ingestId", ingestRequestData.getId());
-        body.add("teamId", ingestRequestData.getTeamId());
+        body.add("programId", ingestRequestData.getProgramId());
         body.add("folderId", ingestRequestData.getFolder());
         body.add("ingestAt", LocalDateTime.now());
 

@@ -1,13 +1,10 @@
 import {
-    onLoadProgramTeamChartDataFetch,
+    onLoadProgramChartDataFetch,
     programAddClickEvent, programDeleteClickEvent,
-    teamAddSelectEvent
 } from "../../container/program/event/ProgramEvent.js";
 
 document.addEventListener('DOMContentLoaded', () => {
-    teamAddSelectEvent();
-    onLoadProgramTeamChartDataFetch();
-
+    onLoadProgramChartDataFetch();
     programAddClickEvent();
     programDeleteClickEvent();
 });

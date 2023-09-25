@@ -4,22 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.service.folder.mapper.FolderMapper">
-    <select id="selectTeamFolderList" resultType="GroupFolderDto" parameterType="Integer">
-        SELECT f.id      as folderId,
-               f.name    as folderName,
-               f.team_id as teamId,
-               t.name    as teamName
+    <select id="selectProgramFolderList" resultType="GroupFolderDto" parameterType="Integer">
+        SELECT f.id         as folderId,
+               f.name       as folderName,
+               f.program_id as programId,
+               t.name       as programName
         FROM folder f
-                 LEFT JOIN team t ON f.team_id = t.id
-        WHERE f.team_id = #{teamId};
+                 LEFT JOIN program t ON f.program_id = t.id
+        WHERE f.program_id = #{programId};
     </select>
-    <select id="selectTeamFolderListForOnlyAdmin" resultType="GroupFolderDto">
-        SELECT f.id      as folderId,
-               f.name    as folderName,
-               f.team_id as teamId,
-               t.name    as teamName
+    <select id="selectProgramFolderListForOnlyAdmin" resultType="GroupFolderDto">
+        SELECT f.id         as folderId,
+               f.name       as folderName,
+               f.program_id as programId,
+               t.name       as programName
         FROM folder f
-                 LEFT JOIN team t ON f.team_id = t.id
+                 LEFT JOIN program t ON f.program_id = t.id
         WHERE f.id != 1;
     </select>
 </mapper>

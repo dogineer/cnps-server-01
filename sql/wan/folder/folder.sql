@@ -19,7 +19,7 @@ WITH RECURSIVE C AS
            c.ingest_id,
            i.title  AS `ingest_name`,
            c.team_id,
-           t.name   AS `team_name`,
+           t.name   AS `program_name`,
            c.folder_id,
            f.name   AS `folder_name`,
            c.convert_metadata_id,

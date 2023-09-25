@@ -5,7 +5,7 @@ import com.develop.web.domain.users.token.dto.AuthMember;
 import com.develop.web.domain.users.user.dto.JoinedMember;
 import com.develop.web.domain.users.user.dto.Member;
 import com.develop.web.domain.users.user.dto.MemberInfo;
-import com.develop.web.domain.users.user.dto.TeamUpdateParam;
+import com.develop.web.domain.users.user.dto.ProgramUpdateParam;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -40,8 +40,8 @@ public interface AuthMapper {
     /** @description 직원 탈퇴 리스트 데이터 조회 (직원 리스트 - 가입날짜로 부터) */
     List<MemberInfo> selectMemberDeleteGetList(CriteriaDto cri);
 
-    /** @description 직원 팀 배정 (직원 팀 업데이트,)*/
-    void updateMemberTeamId(TeamUpdateParam param);
+    /** @description 직원 프로그램 배정 (직원 프로그램 업데이트,)*/
+    void updateMemberProgramId(ProgramUpdateParam param);
 
     /** @description JWT를 위한 멤버 데이터 조회 (로그인)*/
     AuthMember selectJoinedMember(String account);

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class DeleteFolder {
     private final FolderMapper folderMapper;
 
-    public void deleteFolder(Integer folderDto) {
-        folderMapper.deleteFolde(folderDto);
+    public void deleteFolder(Integer folderId) {
+        folderMapper.deleteFolder(folderId);
     }
 }

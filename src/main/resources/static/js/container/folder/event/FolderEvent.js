@@ -63,7 +63,7 @@ const folderCreateClickEvent = (nodeElement) => {
 
     const folderDto = {
         folderId: folderAnchorElements.id,
-        folderTeamId: folderAnchorElements.getAttribute("data-team-id")
+        folderProgramId: folderAnchorElements.getAttribute("data-program-id")
     }
 
     const createFolderElement = nodeElement.querySelector('.f-add');
@@ -88,7 +88,7 @@ const folderDeleteClickEvent = (nodeElement) => {
     const folderDto = {
         folderId: folderAnchorElements.id,
         folderName: folderAnchorElements.getAttribute("data-folder-name"),
-        folderTeamId: folderAnchorElements.getAttribute("data-team-id")
+        folderProgramId: folderAnchorElements.getAttribute("data-program-id")
     }
 
     const deleteFolderElement = nodeElement.querySelector('.f-del');
@@ -100,11 +100,11 @@ const folderDeleteClickEvent = (nodeElement) => {
     });
 }
 
-const folderRootCreateClickEvent = (teamId) => {
+const folderRootCreateClickEvent = () => {
 
     const folderDto = {
         folderId: 1,
-        folderTeamId: teamId
+        folderProgramId: programId
     }
 
     const newFolderElement = document.getElementById("newFolder");

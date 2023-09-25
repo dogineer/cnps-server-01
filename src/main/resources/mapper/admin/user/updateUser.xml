@@ -6,14 +6,14 @@
 <mapper namespace="com.develop.web.domain.admin.user.mapper.AdminMapper">
     <update id="updateUserInfo" parameterType="UpdateUserInfoDto">
         UPDATE emp
-        SET account = #{account},
-            name    = #{name},
-            phone   = #{phone},
-            rank_id = #{rankId},
-            dept_id = #{deptId},
-            team_id = #{teamId},
-            gender  = #{gender},
-            email   = #{email}
+        SET account    = #{account},
+            name       = #{name},
+            phone      = #{phone},
+            rank_id    = #{rankId},
+            dept_id    = #{deptId},
+            program_id = #{programId},
+            gender     = #{gender},
+            email      = #{email}
         WHERE account = #{account};
     </update>
 

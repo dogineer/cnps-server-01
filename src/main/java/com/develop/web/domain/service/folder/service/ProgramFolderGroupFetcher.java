@@ -9,13 +9,13 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TeamFolderGroupFetcher {
+public class ProgramFolderGroupFetcher {
         private final FolderMapper folderMapper;
 
-    public List<GroupFolderDto> getTeamFolder(Integer teamId, Integer rankId) {
+    public List<GroupFolderDto> getProgramFolder(Integer programId, Integer rankId) {
         if (rankId == 12){
-            return folderMapper.selectTeamFolderListForOnlyAdmin();
+            return folderMapper.selectProgramFolderListForOnlyAdmin();
         }
-        return folderMapper.selectTeamFolderList(teamId);
+        return folderMapper.selectProgramFolderList(programId);
     }
 }

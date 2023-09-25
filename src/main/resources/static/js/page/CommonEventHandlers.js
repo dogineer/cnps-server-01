@@ -7,6 +7,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     };
 
+    const programUpdateForm = document.getElementById("program-update-form");
+    const programUpdateButton = programUpdateForm.querySelector("#update-button");
+
+    programUpdateButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        AuthContoller.programUpdate(programUpdateForm);
+    });
+
+    const passwordChangeForm = document.getElementById("password-update-form");
+    const passwordUpdateButton = passwordChangeForm.querySelector("#update-button");
+
+    passwordUpdateButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        AuthContoller.passwordUpdate(passwordChangeForm);
+    });
+
     DarkMode.darkModeValidate();
 
     const toggleSwitch = document.getElementById('toggleSwitch');

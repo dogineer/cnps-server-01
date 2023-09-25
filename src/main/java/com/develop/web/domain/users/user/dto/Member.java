@@ -9,7 +9,7 @@ public class Member {
     private Integer id;                 // 유저 PK
     private Integer deptId;             // 부서 ID
     private Integer rankId;             // 직급 ID
-    private Integer teamId;             // 팀 ID
+    private Integer programId;          // 팀 ID
     private String account;             // 유저 아이디
     private String name;                // 이름
     private String birth;               // 생년월일

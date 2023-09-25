@@ -34,7 +34,7 @@ const fetchProgramType = () => {
         });
 }
 
-const fetchDataByProgramTeamChart = (programId) => {
+const fetchDataByProgramChart = (programId) => {
     fetch('/admin/program/find/tree/' + programId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
@@ -81,4 +81,4 @@ const fetchDataByProgramTeamChart = (programId) => {
         });
 }
 
-export {fetchProgramType, fetchDataByProgramTeamChart}
+export {fetchProgramType, fetchDataByProgramChart}

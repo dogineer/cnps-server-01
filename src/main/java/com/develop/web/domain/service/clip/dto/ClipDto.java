@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Data
 public class ClipDto {
     public Integer clip_id;
-    public Integer team_id;
-    public String team_name;
+    public Integer program_id;
+    public String program_name;
     public String folder_name;
 
     public String clip_uuid;

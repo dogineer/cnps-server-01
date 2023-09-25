@@ -1,7 +1,7 @@
 package com.develop.web.domain.admin.program.service;
 
 import com.develop.web.domain.admin.program.dto.ProgramDto;
-import com.develop.web.domain.admin.program.mapper.AdminTeamMapper;
+import com.develop.web.domain.admin.program.mapper.AdminProgramMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FetchTeamTypeList {
-    private final AdminTeamMapper adminTeamMapper;
+public class FetchProgramTypeList {
+    private final AdminProgramMapper adminProgramMapper;
 
     public List<ProgramDto> getTypeList() {
-        return adminTeamMapper.selectProgramTypeList();
+        return adminProgramMapper.selectProgramTypeList();
     }
 }

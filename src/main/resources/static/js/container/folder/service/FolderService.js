@@ -22,7 +22,7 @@ const currentFolder = (target) => {
 const createFolderElements = (parentFolderElement, childrenFolder) => {
     const childrenFolderId = childrenFolder.folderId;
     const childrenFolderName = childrenFolder.folderName;
-    const childrenFolderTeamId = childrenFolder.folderTeamId;
+    const childrenFolderProgramId = childrenFolder.folderProgramId;
 
     const folderNodeElement = document.createElement('div');
     folderNodeElement.className = 'folder-node pd-l-1';
@@ -38,7 +38,7 @@ const createFolderElements = (parentFolderElement, childrenFolder) => {
     folderAnchorElement.className = 'folder-anchor'
     folderAnchorElement.setAttribute("aria-current", "false")
     folderAnchorElement.setAttribute("data-folder-name", childrenFolderName)
-    folderAnchorElement.setAttribute("data-team-id", childrenFolderTeamId)
+    folderAnchorElement.setAttribute("data-program-id", childrenFolderProgramId)
     folderAnchorElement.id = childrenFolderId;
 
     const folderNameElement = document.createElement('span')
@@ -103,7 +103,7 @@ const fetchDataForFolder = (folderId) => {
                         const childrenFolder = {
                             folderId: `${item.id}`,
                             folderName: `${item.name}`,
-                            folderTeamId: `${item.team_id}`
+                            folderProgramId: `${item.program_id}`
                         }
                         console.log("[create] 부모 폴더(" + parentFolderElement.id + ")에 대한 자손 폴더(F_" + childrenFolder.folderId + ")를 생성합니다.")
 
@@ -156,7 +156,7 @@ const folderToggleSelector = (folder) => {
                         const childrenFolder = {
                             folderId: `${item.id}`,
                             folderName: `${item.name}`,
-                            folderTeamId: `${item.team_id}`
+                            folderProgramId: `${item.program_id}`
                         }
 
                         console.log("[create] 부모 폴더(" + parentFolderElement.id + ")에 대한 자손 폴더(F_" + childrenFolder.folderId + ")를 생성합니다.")

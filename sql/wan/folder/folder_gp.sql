@@ -11,7 +11,7 @@ select
     c.ingest_id,
     i.title as `ingest_name`,
     c.team_id,
-    t.name as `team_name`,
+    t.name as `program_name`,
     c.folder_id,
     f.name as `folder_name`,
     c.convert_metadata_id,

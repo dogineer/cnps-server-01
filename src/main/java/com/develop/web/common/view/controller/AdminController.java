@@ -49,11 +49,11 @@ public class AdminController {
     }
 
     @GetMapping("program")
-    public String teamPage(HttpSession session, Model model) throws CustomException {
+    public String programPage(HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initAccountService.session(session);
         programPageFetcher.fetchPage(accountDto, model);
 
-        return "admin/team/admin_program_page";
+        return "admin/program/admin_program_page";
     }
 
     @GetMapping("rank")

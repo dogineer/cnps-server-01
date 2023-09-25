@@ -8,7 +8,7 @@ import com.develop.web.domain.admin.notice.service.PostListFetcher;
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.common.view.dto.PageDto;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
-import com.develop.web.domain.users.team.service.TeamListFetcher;
+import com.develop.web.domain.users.program.service.ProgramListFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
@@ -18,7 +18,7 @@ import org.springframework.ui.Model;
 public class ClipPageFetcher implements PageingService {
     private final PostListFetcher postListFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
-    private final TeamListFetcher teamListFetcher;
+    private final ProgramListFetcher programListFetcher;
     private final RootFolderListFetcher rootFolderListFetcher;
     private final ClipDataListFetcher clipDataListFetcher;
 
@@ -28,13 +28,12 @@ public class ClipPageFetcher implements PageingService {
     public void fetchPageing(CriteriaDto criteriaDto, AccountDto accountDto, Model model) {
 
         String account = accountDto.getAccount();
-        Integer teamId = accountDto.getTeamId();
 
         int countTotal = clipMapper.selectClipCount();
         PageDto pageDto = new PageDto(countTotal, 10, criteriaDto);
 
         model.addAttribute("NoticeList", postListFetcher.getPost());
-        model.addAttribute("TeamList", teamListFetcher.getTeam());
+        model.addAttribute("ProgramList", programListFetcher.getProgram());
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
         model.addAttribute("folderRootList", rootFolderListFetcher.getFolder());
         model.addAttribute("clips", clipDataListFetcher.getClipList(criteriaDto));

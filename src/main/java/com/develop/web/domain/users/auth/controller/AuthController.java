@@ -51,7 +51,7 @@ public class AuthController {
         session.setAttribute("account", dbMemberInfoData.getAccount());
         session.setAttribute("name", dbMemberInfoData.getName());
         session.setAttribute("rankId", dbMemberInfoData.getRankId());
-        session.setAttribute("teamId", dbMemberInfoData.getTeamId());
+        session.setAttribute("programId", dbMemberInfoData.getProgramId());
     }
 
     /**

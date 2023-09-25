@@ -9,11 +9,11 @@ import javax.servlet.http.HttpSession;
 public class InitAccountService implements AuthService {
     public AccountDto session(HttpSession session) {
         String account = session.getAttribute("account").toString();
-        Integer teamId = (Integer) session.getAttribute("teamId");
+        Integer programId = (Integer) session.getAttribute("programId");
         Integer rank = (Integer) session.getAttribute("rankId");
         boolean isAdmin = session.getAttribute("rank") != null && (int) session.getAttribute("rank") == 12;
 
-        return new AccountDto(account, teamId, rank, isAdmin);
+        return new AccountDto(account, programId, rank, isAdmin);
     }
 
     @Override

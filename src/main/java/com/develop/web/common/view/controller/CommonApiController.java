@@ -12,8 +12,8 @@ import com.develop.web.domain.service.folder.dto.FolderDto;
 import com.develop.web.domain.service.folder.service.RootFolderListFetcher;
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
-import com.develop.web.domain.users.team.dto.TeamDto;
-import com.develop.web.domain.users.team.service.TeamListFetcher;
+import com.develop.web.domain.users.program.dto.ProgramUserDto;
+import com.develop.web.domain.users.program.service.ProgramListFetcher;
 import com.develop.web.domain.users.user.dto.MemberInfo;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +32,7 @@ public class CommonApiController {
     private final RootFolderListFetcher rootFolderListFetcher;
     private final ClipDataListFetcher clipDataListFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
-    private final TeamListFetcher teamListFetcher;
+    private final ProgramListFetcher programListFetcher;
     private final FindDeptList findDeptList;
     private final IngestListFetcher ingestListFetcher;
     private final RankListFetcher rankListFetcher;
@@ -62,10 +62,10 @@ public class CommonApiController {
         return detailMemberFetcher.getMember(account);
     }
 
-    @GetMapping("/team-list")
+    @GetMapping("/program-list")
     @Operation(summary = "모든 페이지", description = "전체 팀 리스트를 가져옵니다.")
-    public List<TeamDto> pageCommonTeamInfoData() {
-        return teamListFetcher.getTeam();
+    public List<ProgramUserDto> pageCommonProgramInfoData() {
+        return programListFetcher.getProgram();
     }
 
     @GetMapping("/dept-list")

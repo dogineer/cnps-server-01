@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class ResultRequestData {
     public Integer id;
     public Integer ingest_id;
-    public Integer team_id;
+    public Integer program_id;
     public Integer folder_id;
     public Integer archive_metadata_id;
     public LocalDateTime ingest_at;

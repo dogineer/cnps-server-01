@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.develop.web.domain.users.program.mapper.ProgramMapper">
+    <select id="selectBelongProgramList" parameterType="map" resultType="ProgramUserDto">
+        SELECT t.id AS programId,
+               t.name AS programName
+        FROM program t
+        WHERE (t.id = ${programId} AND ${rankId} != 12)
+           OR (${rankId} = 12);
+    </select>
+
+    <select id="selectProgramList" resultType="ProgramUserDto">
+        select id AS programId,
+               name AS programName
+        from program
+        where p_id != 1
+        UNION
+        SELECT 3, '미배정'
+    </select>
+
+    <select id="selectProgramTypeList" resultType="ProgramUserDto">
+        select id AS programId,
+               name AS programName
+        from program
+        where p_id = 1
+          and id != 1
+    </select>
+</mapper>

@@ -49,12 +49,12 @@ export class FolderController {
         const modal = new bootstrap.Modal(newFolderElement);
 
         const folderId = folderDto.folderId;
-        const folderTeamId = folderDto.folderTeamId
+        const folderProgramId = folderDto.folderProgramId
 
         const currentFolder = newFolderElement.querySelector('#current-folder')
         currentFolder.value = folderId
-        const currentFolderTeam = newFolderElement.querySelector('#team_id')
-        currentFolderTeam.value = folderTeamId;
+        const currentFolderProgram = newFolderElement.querySelector('#program_id')
+        currentFolderProgram.value = folderProgramId;
 
         modal.show();
     }

@@ -3,40 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.develop.web.domain.admin.program.mapper.AdminTeamMapper">
+<mapper namespace="com.develop.web.domain.admin.program.mapper.AdminProgramMapper">
     <select id="selectProgramTypeList" resultType="ProgramDto">
         SELECT id   AS programId,
                name AS programName
-        FROM team
+        FROM program
         WHERE p_id = 1 AND id != 1
     </select>
 
     <select id="selectProgramList" parameterType="Integer" resultType="ProgramDto">
         SELECT id   AS programId,
                name AS programName
-        FROM team
+        FROM program
         WHERE p_id = ${programId}
           AND id NOT IN (1)
     </select>
 
-    <select id="selectProgramTeamAllList" resultType="ProgramTeamDto">
+    <select id="selectProgramRecursionAllList" resultType="ProgramRecursionDto">
         SELECT id   AS programId,
                name AS programName,
                p_id AS programParentId
-        FROM team
+        FROM program
         WHERE id NOT IN (1)
     </select>
 
     <select id="selectPathList" resultType="ProgramPathDto" parameterType="Integer">
         WITH RECURSIVE C AS (
             SELECT t.id, t.p_id, t.name, t.name AS path
-            FROM team t
+            FROM program t
             WHERE t.id = ${programId}
 
             UNION ALL
 
             SELECT t.id, t.p_id, t.name, CONCAT(C.path, ' > ', t.name)
-            FROM team t
+            FROM program t
             INNER JOIN C ON t.p_id = C.id)
         SELECT C.path AS programPath, C.id AS programId
         FROM C;

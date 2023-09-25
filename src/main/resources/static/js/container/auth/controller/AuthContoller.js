@@ -2,6 +2,7 @@ import {loginService} from "../service/loginService.js";
 import {signup} from "../service/signUpService.js";
 import {rememberMeAccountService} from "../service/rememberMeAccount.js";
 import {validateFormData} from "../../module/validateFormData.js";
+import {updateService} from "../service/updateService.js";
 
 export class AuthContoller {
     static login(loginForm) {
@@ -24,4 +25,16 @@ export class AuthContoller {
         }).then(() => location.replace("/"));
     }
 
+    static programUpdate(programUpdateForm){
+        const endPoint = '/auth/member/program/update'
+        const formData = validateFormData(programUpdateForm);
+        console.log(formData)
+        updateService(formData, endPoint);
+    }
+
+    static passwordUpdate(passwordChangeForm) {
+        const endPoint = '/auth/changePassword';
+        const formData = validateFormData(passwordChangeForm);
+        updateService(formData, endPoint);
+    }
 }

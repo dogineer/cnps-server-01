@@ -1,21 +1,17 @@
-import {fetchDataByProgramTeamChart, fetchProgramType} from "../service/programTypeList.js";
+import {fetchDataByProgramChart} from "../service/programTypeList.js";
 import {deleteHandleFormData, postHandleFormData} from "../service/FetchHandleProgramFormData.js";
 
 
 export class ProgramController {
-    static findProgramTypeList() {
-        fetchProgramType();
-    }
-
-    static programTeamChartFetch() {
-        const currentElement = document.getElementById('program-team-select');
+    static programProgramChartFetch() {
+        const currentElement = document.getElementById('program-select');
         const programId = currentElement.value;
-        fetchDataByProgramTeamChart(programId);
+        fetchDataByProgramChart(programId);
 
         currentElement.addEventListener('change', () => {
-            const currentElement = document.getElementById('program-team-select');
+            const currentElement = document.getElementById('program-select');
             const programId = currentElement.value;
-            fetchDataByProgramTeamChart(programId);
+            fetchDataByProgramChart(programId);
         })
     }
 
@@ -29,9 +25,6 @@ export class ProgramController {
                 break;
             case "program-add-form":
                 postHandleFormData(clickedElement, "프로그램")
-                break;
-            case "team-add-form":
-                postHandleFormData(clickedElement, "팀")
                 break;
             default:
                 break;

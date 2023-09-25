@@ -13,7 +13,7 @@ public class MemberInfo {
     private String rankName;
     private Integer deptId;
     private String deptName;
-    private Integer teamId;
+    private Integer programId;
     private String programName;
     private String birth;
     private Byte gender;

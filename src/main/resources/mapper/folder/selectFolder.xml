@@ -8,7 +8,7 @@
         SELECT id,
                name,
                p_id,
-               team_id
+               program_id
         FROM folder
         WHERE id != 1 AND p_id = 1
     </select>
@@ -17,7 +17,7 @@
         SELECT id,
                 name,
                 p_id,
-                team_id
+                program_id
         FROM folder
         WHERE p_id = #{p_id}
     </select>
@@ -32,8 +32,8 @@
             FROM folder f JOIN C rf ON f.p_id = rf.id
             ) SELECT
                 c.id AS clip_id,
-                c.team_id,
-                t.name AS `team_name`,
+                c.program_id,
+                t.name AS `program_name`,
                 c.folder_id,
                 f.name AS `folder_name`,
 
@@ -49,7 +49,7 @@
                 c.del_fl
               FROM clip c
                  LEFT JOIN ingest i ON i.id = c.ingest_id
-                 LEFT JOIN team t ON t.id = c.team_id
+                 LEFT JOIN program t ON t.id = c.program_id
                  LEFT JOIN folder f ON f.id = c.folder_id
                  LEFT JOIN convert_metadata cm ON cm.id = c.convert_metadata_id
         WHERE c.folder_id IN (SELECT id FROM C)

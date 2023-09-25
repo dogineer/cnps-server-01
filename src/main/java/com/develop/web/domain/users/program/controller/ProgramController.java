@@ -1,7 +1,7 @@
-package com.develop.web.domain.users.team.controller;
+package com.develop.web.domain.users.program.controller;
 
-import com.develop.web.domain.users.team.dto.TeamDto;
-import com.develop.web.domain.users.team.service.TeamListFetcher;
+import com.develop.web.domain.users.program.dto.ProgramUserDto;
+import com.develop.web.domain.users.program.service.ProgramListFetcher;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,22 +14,22 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@Tag(name = "팀 관리", description = "Swagger 테스트용 API")
+@Tag(name = "팀", description = "유저 팀 API")
 @RequiredArgsConstructor
-@RequestMapping(value = "/team")
-public class TeamController {
+@RequestMapping(value = "/program")
+public class ProgramController {
 
-    private final TeamListFetcher teamListFetcher;
+    private final ProgramListFetcher programListFetcher;
 
     @GetMapping("/list")
     @Operation(summary = "팀 리스트 가져오기", description = "팀 전체 정보를 가져옵니다.")
-    public List<TeamDto> fetcherTeamList() {
-        return teamListFetcher.getTeam();
+    public List<ProgramUserDto> fetcherProgramList() {
+        return programListFetcher.getProgram();
     }
 
     @GetMapping("/list/Type")
     @Operation(summary = "프로그램 타입 가져오기", description = "프로그램 타입을 가져옵니다.")
-    public List<TeamDto> fetcherprogramTypeList() {
-        return teamListFetcher.getProgramType();
+    public List<ProgramUserDto> fetcherProgramTypeList() {
+        return programListFetcher.getProgramType();
     }
 }

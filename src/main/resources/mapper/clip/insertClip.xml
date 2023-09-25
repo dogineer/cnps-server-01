@@ -6,7 +6,7 @@
 <mapper namespace="com.develop.web.domain.service.clip.mapper.ClipMapper">
     <select id="insertClipData" resultType="ResultRequestData">
         insert
-        into clip(ingest_id, team_id, folder_id, archive_metadata_id)
-        values (#{ingest_id}, #{team_id}, #{folder_id}, #{archive_metadata_id})
+        into clip(ingest_id, program_id, folder_id, archive_metadata_id)
+        values (#{ingest_id}, #{program_id}, #{folder_id}, #{archive_metadata_id})
     </select>
 </mapper>

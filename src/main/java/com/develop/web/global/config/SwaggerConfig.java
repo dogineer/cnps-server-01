@@ -28,7 +28,7 @@ public class SwaggerConfig {
             .pathsToMatch(
                 "/user/**",
                 "/folder/**",
-                "/team/**",
+                "/program/**",
                 "/ingest/**",
                 "/clip/**",
                 "/notice/**",

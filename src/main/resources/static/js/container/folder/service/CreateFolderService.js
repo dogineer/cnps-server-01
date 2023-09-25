@@ -25,7 +25,7 @@ const folderDelete = (folderId) => {
         method: 'DELETE',
     }).then(res => {
             if (res.ok) {
-                console.log("[Fetch] 새로운 폴더 '" + folderId + "'를 삭제합니다.")
+                console.log("[Fetch] 폴더 '" + folderId + "'를 삭제합니다.")
                 location.reload()
             } else {
                 res.json().then(errorData => {

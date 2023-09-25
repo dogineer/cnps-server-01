@@ -1,19 +1,7 @@
 import {ProgramController} from "../controller/ProgramController.js";
 
-const teamAddSelectEvent = () => {
-    const programTypeBtn = document.querySelectorAll('#program-type');
-    ProgramController.findProgramTypeList();
-
-    programTypeBtn.forEach((button) => {
-        button.addEventListener('change', () => {
-            console.log("[Fetch] 유형 선택으로 인한 프로그램 선택에 맞는 데이터를 패치합니다.")
-            ProgramController.findProgramTypeList();
-        });
-    })
-}
-
-const onLoadProgramTeamChartDataFetch = () => {
-    ProgramController.programTeamChartFetch();
+const onLoadProgramChartDataFetch = () => {
+    ProgramController.programProgramChartFetch();
 }
 
 const programAddClickEvent = () => {
@@ -36,4 +24,4 @@ const programDeleteClickEvent = () => {
     })
 }
 
-export {teamAddSelectEvent, onLoadProgramTeamChartDataFetch, programAddClickEvent, programDeleteClickEvent};
+export {onLoadProgramChartDataFetch, programAddClickEvent, programDeleteClickEvent};

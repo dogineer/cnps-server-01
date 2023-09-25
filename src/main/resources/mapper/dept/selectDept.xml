@@ -32,7 +32,7 @@
         SELECT id,
                dept_id AS deptId,
                rank_id AS rankId,
-               team_id AS teamId,
+               program_id AS programId,
                account,
                name,
                birth,

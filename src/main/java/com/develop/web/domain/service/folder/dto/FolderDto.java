@@ -7,5 +7,5 @@ public class FolderDto {
     private Integer id;
     private String name;
     private Integer p_id;
-    private Integer team_id;
+    private Integer program_id;
 }

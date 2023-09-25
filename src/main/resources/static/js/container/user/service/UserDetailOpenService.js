@@ -36,14 +36,14 @@ export class UserDetailOpenService {
                     const userPhone = document.getElementById('user-phone');
                     const userRank = document.getElementById('user-rank');
                     const userDept = document.getElementById('user-dept');
-                    const userTeam = document.getElementById('user-team');
+                    const userProgram = document.getElementById('user-program');
                     const userBirth = document.getElementById('user-birth');
                     const userGender = document.getElementById('user-gender');
                     const userEmail = document.getElementById('user-email');
                     const userJoinedAt = document.getElementById('user-joined_at');
                     const userApprovedAt = document.getElementById('user-approved_at');
 
-                    [userDept, userTeam, userRank].forEach(element => {
+                    [userDept, userProgram, userRank].forEach(element => {
                         while (element.firstChild) {
                             element.removeChild(element.firstChild);
                         }
@@ -77,15 +77,15 @@ export class UserDetailOpenService {
                             });
                         });
 
-                    fetchDataSelectOptions('/team/list')
+                    fetchDataSelectOptions('/program/list')
                         .then(list => {
                             list.forEach(item => {
                                 const option = document.createElement('option');
-                                option.value = item.teamId;
+                                option.value = item.programId;
                                 option.textContent = item.programName;
-                                userTeam.appendChild(option);
+                                userProgram.appendChild(option);
 
-                                if (item.teamId === data.teamId) {
+                                if (item.programId === data.programId) {
                                     option.selected = true;
                                 }
                             });
