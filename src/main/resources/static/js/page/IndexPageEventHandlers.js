@@ -1,7 +1,10 @@
 import {AuthContoller} from "../container/auth/controller/AuthContoller.js";
 import {IssueController} from "../container/issue/controller/IssueController.js";
+import {deptSelectEvent} from "../container/dept/event/DeptEvent.js";
 
 document.addEventListener('DOMContentLoaded', () => {
+    deptSelectEvent();
+
     const signupForm = document.getElementById("signup-form");
     const signUpButton = signupForm.querySelector('#form-button');
 

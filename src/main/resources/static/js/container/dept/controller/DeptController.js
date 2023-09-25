@@ -1,9 +1,23 @@
-import {fetchDataByDeptChart, fetchDataByMidDeptList} from "../service/findDeptList.js";
+import {fetchDataByDeptChart, fetchDataByDeptItemList, fetchDataByMidDeptList} from "../service/findDeptList.js";
 import {postHandleFormData, deleteHandleFormData} from "../service/FetchHandleFormData.js";
 
 export class DeptController {
     static findDeptTypeList() {
         fetchDataByMidDeptList();
+    }
+
+    static findDeptItemAndChange(deptId, deptElementSelect) {
+        return fetchDataByDeptItemList(deptId)
+            .then(data => {
+                deptElementSelect.innerHTML = '';
+
+                data.forEach(item => {
+                    const itemOptionElement = document.createElement('option');
+                    deptElementSelect.appendChild(itemOptionElement)
+                    itemOptionElement.text = item.deptName
+                    itemOptionElement.value = item.deptId
+                });
+            })
     }
 
     static deptChartFetch() {

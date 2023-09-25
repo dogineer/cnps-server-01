@@ -47,4 +47,6 @@ public class MemberController {
         modifyTeam.setTeam(param);
         session.invalidate();
     }
+
+
 }

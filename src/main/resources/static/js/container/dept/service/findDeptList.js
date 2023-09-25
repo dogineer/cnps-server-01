@@ -35,6 +35,24 @@ const fetchDataByMidDeptList = () => {
         });
 }
 
+const fetchDataByDeptItemList = (deptId) => {
+    return fetch('/common/dept-type/' + deptId, {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+    })
+        .then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                res.json().then(errorData => {
+                    handleException(errorData)
+                });
+            }
+        }).catch(error => {
+        serverError(error);
+    });
+}
+
 const fetchDataByDeptChart = (deptId) => {
     fetch('/admin/dept/find/tree/' + deptId, {
         method: 'GET',
@@ -82,4 +100,4 @@ const fetchDataByDeptChart = (deptId) => {
         });
 }
 
-export {fetchDataByMidDeptList, fetchDataByDeptChart}
+export {fetchDataByMidDeptList, fetchDataByDeptItemList, fetchDataByDeptChart}

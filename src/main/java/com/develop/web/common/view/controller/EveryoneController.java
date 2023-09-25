@@ -1,5 +1,6 @@
 package com.develop.web.common.view.controller;
 
+import com.develop.web.domain.admin.dept.service.FetcherDeptHigh;
 import com.develop.web.domain.admin.dept.service.FindDeptList;
 import com.develop.web.domain.admin.rank.service.RankListFetcher;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 public class EveryoneController {
     private final RankListFetcher rankListFetcher;
     private final FindDeptList findDeptList;
+    private final FetcherDeptHigh fetcherDeptHigh;
 
     /**
      * @description 권한 없는 모든 유저가 접근 가능한 페이지
@@ -23,6 +25,7 @@ public class EveryoneController {
         String version = "ALPHA VERSION";
 
         model.addAttribute("Ranks", rankListFetcher.getRankList());
+        model.addAttribute("TopDepts", fetcherDeptHigh.getHighDept());
         model.addAttribute("Depts", findDeptList.getDeptList());
         model.addAttribute("version", version);
 

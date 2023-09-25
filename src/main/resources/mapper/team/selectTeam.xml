@@ -14,7 +14,7 @@
 
     <select id="selectTeamList" resultType="TeamDto">
         select id AS teamId,
-               name AS teamName
+               name AS programName
         from team
         where p_id != 1
         UNION

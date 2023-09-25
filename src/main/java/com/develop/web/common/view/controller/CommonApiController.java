@@ -2,6 +2,7 @@ package com.develop.web.common.view.controller;
 
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.admin.dept.dto.DeptDto;
+import com.develop.web.domain.admin.dept.service.FetcherDeptMidList;
 import com.develop.web.domain.admin.dept.service.FindDeptList;
 import com.develop.web.domain.admin.rank.dto.RankDto;
 import com.develop.web.domain.admin.rank.service.RankListFetcher;
@@ -18,6 +19,7 @@ import com.develop.web.domain.users.user.service.DetailMemberFetcher;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,6 +36,7 @@ public class CommonApiController {
     private final FindDeptList findDeptList;
     private final IngestListFetcher ingestListFetcher;
     private final RankListFetcher rankListFetcher;
+    private final FetcherDeptMidList fetcherDeptMidList;
 
     @GetMapping("/folder-list")
     @Operation(summary = "클립 페이지 > 폴더 데이터", description = "폴더 기초 데이터를 가져옵니다.")
@@ -75,5 +78,11 @@ public class CommonApiController {
     @Operation(summary = "모든 페이지", description = "랭크 리스트를 가져옵니다.")
     public List<RankDto> pageCommonRankData() {
         return rankListFetcher.getRankList();
+    }
+
+    @GetMapping("/dept-type/{deptParentId}")
+    @Operation(summary = "부서 유형 찾기", description = "본부의 id 값을 이용해 부서 유형을 찾습니다.")
+    public List<DeptDto> getTypeDeptList(@PathVariable Integer deptParentId){
+        return fetcherDeptMidList.getMidDept(deptParentId);
     }
 }
