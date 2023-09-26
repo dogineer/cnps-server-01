@@ -12,7 +12,7 @@ import java.util.List;
 public class FetchProgramRecursionList {
     private final AdminProgramMapper adminProgramMapper;
 
-    public List<ProgramRecursionDto> getList() {
+    public List<ProgramRecursionDto> findProgramList() {
         return adminProgramMapper.selectProgramRecursionAllList();
     }
 }

@@ -8,11 +8,11 @@ import com.develop.web.domain.admin.rank.dto.RankDto;
 import com.develop.web.domain.admin.rank.service.RankListFetcher;
 import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.clip.service.ClipDataListFetcher;
-import com.develop.web.domain.service.folder.dto.FolderDto;
-import com.develop.web.domain.service.folder.service.RootFolderListFetcher;
+import com.develop.web.domain.service.folder.dto.ProgramFolderDto;
+import com.develop.web.domain.service.folder.service.FolderRootListFetcherService;
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
-import com.develop.web.domain.users.program.dto.ProgramUserDto;
+import com.develop.web.domain.users.program.dto.ProgramDto;
 import com.develop.web.domain.users.program.service.ProgramListFetcher;
 import com.develop.web.domain.users.user.dto.MemberInfo;
 import com.develop.web.domain.users.user.service.DetailMemberFetcher;
@@ -29,7 +29,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/common")
 public class CommonApiController {
-    private final RootFolderListFetcher rootFolderListFetcher;
+    private final FolderRootListFetcherService folderRootListFetcherService;
     private final ClipDataListFetcher clipDataListFetcher;
     private final DetailMemberFetcher detailMemberFetcher;
     private final ProgramListFetcher programListFetcher;
@@ -40,8 +40,8 @@ public class CommonApiController {
 
     @GetMapping("/folder-list")
     @Operation(summary = "클립 페이지 > 폴더 데이터", description = "폴더 기초 데이터를 가져옵니다.")
-    public List<FolderDto> pageClipFolderDataFetcher(){
-        return rootFolderListFetcher.getFolder();
+    public List<ProgramFolderDto> pageClipFolderDataFetcher(){
+        return folderRootListFetcherService.findFolder();
     }
 
     @GetMapping("/clip-list")
@@ -50,7 +50,7 @@ public class CommonApiController {
         return clipDataListFetcher.getClipList(criteriaDto);
     }
 
-     @GetMapping("/ingest-list")
+    @GetMapping("/ingest-list")
     @Operation(summary = "인제스트 페이지", description = "인제스트 데이터를 가져옵니다.")
     public List<IngestListDto> pageCommonIngestData(CriteriaDto criteriaDto) {
         return ingestListFetcher.getIngestRequestList(criteriaDto);
@@ -64,8 +64,8 @@ public class CommonApiController {
 
     @GetMapping("/program-list")
     @Operation(summary = "모든 페이지", description = "전체 팀 리스트를 가져옵니다.")
-    public List<ProgramUserDto> pageCommonProgramInfoData() {
-        return programListFetcher.getProgram();
+    public List<ProgramDto> pageCommonProgramInfoData() {
+        return programListFetcher.findProgram();
     }
 
     @GetMapping("/dept-list")

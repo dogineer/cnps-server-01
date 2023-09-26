@@ -4,22 +4,54 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.service.folder.mapper.FolderMapper">
-    <select id="selectFolderRootList" resultType="FolderDto">
-        SELECT id,
-               name,
-               p_id,
-               program_id
-        FROM folder
-        WHERE id != 1 AND p_id = 1
+    <select id="selectFolderList" resultType="ProgramFolderDto">
+        SELECT f.id         AS folderId,
+               f.name       AS folderName,
+               f.program_id AS programId,
+               t.name       AS programName
+        FROM folder f
+        LEFT JOIN program t ON f.program_id = t.id
+        WHERE f.id != 1
     </select>
 
-    <select id="selectFolderChildrenList" parameterType="Integer" resultType="FolderDto">
-        SELECT id,
-                name,
-                p_id,
-                program_id
+    <select id="selectSubfolderList" parameterType="Integer" resultType="FolderDetailsDto">
+        SELECT id         AS folderId,
+               name       AS folderName,
+               p_id       AS folderParentId,
+               program_id AS programId
         FROM folder
         WHERE p_id = #{p_id}
+    </select>
+
+    <select id="selectProgramFolderList" resultType="ProgramFolderDto" parameterType="Integer">
+        SELECT f.id         AS folderId,
+               f.name       AS folderName,
+               f.program_id AS programId,
+               t.name       AS programName
+        FROM folder f
+                 LEFT JOIN program t ON f.program_id = t.id
+        WHERE f.program_id = #{programId}
+    </select>
+
+    <select id="selectProgramFolderRootList" resultType="ProgramFolderDto" parameterType="Integer">
+        SELECT f.id         AS folderId,
+               f.name       AS folderName,
+               f.program_id AS programId,
+               t.name       AS programName
+        FROM folder f
+                 LEFT JOIN program t ON f.program_id = t.id
+        WHERE f.program_id = #{programId}
+          AND f.p_id = 1;
+    </select>
+
+    <select id="selectProgramFolderListForOnlyAdmin" resultType="ProgramFolderDto">
+        SELECT f.id         AS folderId,
+               f.name       AS folderName,
+               f.program_id AS programId,
+               t.name       AS programName
+        FROM folder f
+                 LEFT JOIN program t ON f.program_id = t.id
+        WHERE f.id != 1 AND f.p_id = 1;
     </select>
 
     <select id="selectFolderClipData" parameterType="Integer" resultType="ClipDto">

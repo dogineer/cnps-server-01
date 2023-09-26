@@ -27,7 +27,7 @@
         WHERE id NOT IN (1)
     </select>
 
-    <select id="selectPathList" resultType="ProgramPathDto" parameterType="Integer">
+    <select id="selectProgramPathList" resultType="ProgramPathDto" parameterType="Integer">
         WITH RECURSIVE C AS (
             SELECT t.id, t.p_id, t.name, t.name AS path
             FROM program t

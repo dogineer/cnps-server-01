@@ -10,10 +10,9 @@ public class InitAccountService implements AuthService {
     public AccountDto session(HttpSession session) {
         String account = session.getAttribute("account").toString();
         Integer programId = (Integer) session.getAttribute("programId");
-        Integer rank = (Integer) session.getAttribute("rankId");
-        boolean isAdmin = session.getAttribute("rank") != null && (int) session.getAttribute("rank") == 12;
+        boolean isAdmin = session.getAttribute("rankId") != null && (int) session.getAttribute("rankId") == 12;
 
-        return new AccountDto(account, programId, rank, isAdmin);
+        return new AccountDto(account, programId, isAdmin);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.develop.web.domain.users.program.service;
 
 import com.develop.web.domain.users.program.mapper.ProgramMapper;
-import com.develop.web.domain.users.program.dto.ProgramUserDto;
+import com.develop.web.domain.users.program.dto.ProgramDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +13,18 @@ public class ProgramListFetcher {
 
     private final ProgramMapper programMapper;
 
-    public List<ProgramUserDto> getBelongProgram(Integer programId, Integer rankId) {
-        return programMapper.selectBelongProgramList(programId, rankId);
+    public List<ProgramDto> findCurrentProgram(Integer programId, Boolean isAdmin) {
+        if (isAdmin) {
+            return programMapper.selectProgramList();
+        } else
+            return programMapper.selectCurrentProgram(programId);
     }
-    public List<ProgramUserDto> getProgram() {
+
+    public List<ProgramDto> findProgram() {
         return programMapper.selectProgramList();
     }
-    public List<ProgramUserDto> getProgramType() {
+
+    public List<ProgramDto> findProgramType() {
         return programMapper.selectProgramTypeList();
     }
 }

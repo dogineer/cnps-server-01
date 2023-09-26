@@ -104,7 +104,7 @@ const folderRootCreateClickEvent = () => {
 
     const folderDto = {
         folderId: 1,
-        folderProgramId: programId
+        folderProgramId: account_program_id
     }
 
     const newFolderElement = document.getElementById("newFolder");

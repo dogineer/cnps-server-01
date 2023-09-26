@@ -8,6 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class AccountDto {
     private final String account;
     private final Integer programId;
-    private final Integer rankId;
-    private final boolean isAdmin;
+    private final Boolean isAdmin;
 }

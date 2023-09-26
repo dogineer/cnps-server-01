@@ -23,7 +23,7 @@ public class ProgramPageFetcher implements PageFetcher {
 
         model.addAttribute("UserList", memberListFetcher.getMemberList());
         model.addAttribute("MemberInfo", detailMemberFetcher.getMember(account));
-        model.addAttribute("Program", fetchProgramRecursionList.getList());
-        model.addAttribute("ProgramType", fetchProgramTypeList.getTypeList());
+        model.addAttribute("Program", fetchProgramRecursionList.findProgramList());
+        model.addAttribute("ProgramType", fetchProgramTypeList.findProgramTypeList());
     }
 }

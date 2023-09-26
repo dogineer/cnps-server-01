@@ -8,7 +8,8 @@ const folderCreate = (formData) => {
     })
         .then(res => {
             if (res.ok) {
-                console.log("[Fetch] 새로운 폴더 '" + formData.name + "'를 생성합니다.")
+                console.log("[Fetch] 새로운 폴더(F_" + formData.folderName + ")를 생성합니다.")
+                location.reload()
             } else {
                 res.json().then(errorData => {
                     handleException(errorData)
@@ -25,7 +26,7 @@ const folderDelete = (folderId) => {
         method: 'DELETE',
     }).then(res => {
             if (res.ok) {
-                console.log("[Fetch] 폴더 '" + folderId + "'를 삭제합니다.")
+                console.log("[Fetch] 폴더(F_" + folderId + ")를 삭제합니다.")
                 location.reload()
             } else {
                 res.json().then(errorData => {

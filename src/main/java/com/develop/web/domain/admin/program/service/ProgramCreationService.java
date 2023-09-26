@@ -1,15 +1,16 @@
 package com.develop.web.domain.admin.program.service;
 
 import com.develop.web.domain.admin.program.mapper.AdminProgramMapper;
+import com.develop.web.domain.users.program.dto.ProgramDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DeleteProgramService {
+public class ProgramCreationService {
     private final AdminProgramMapper adminProgramMapper;
 
-    public void deleteProgram(Integer programId) {
-        adminProgramMapper.deleteProgram(programId);
+    public void addProgram(ProgramDto programDto) {
+        adminProgramMapper.insertProgram(programDto);
     }
 }

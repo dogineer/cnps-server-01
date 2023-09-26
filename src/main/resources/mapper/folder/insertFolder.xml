@@ -7,6 +7,6 @@
 
     <insert id="insertNewFolder" parameterType="FolderDto">
         INSERT INTO folder(name, p_id, program_id)
-        VALUES (#{name}, #{p_id}, #{program_id})
+        VALUES (#{folderName}, #{folderParentId}, #{programId})
     </insert>
 </mapper>

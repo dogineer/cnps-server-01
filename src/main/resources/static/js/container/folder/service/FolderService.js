@@ -101,10 +101,11 @@ const fetchDataForFolder = (folderId) => {
                 .then(data => {
                     data.forEach(item => {
                         const childrenFolder = {
-                            folderId: `${item.id}`,
-                            folderName: `${item.name}`,
-                            folderProgramId: `${item.program_id}`
+                            folderId: `${item.folderId}`,
+                            folderName: `${item.folderName}`,
+                            folderProgramId: `${item.programId}`
                         }
+
                         console.log("[create] 부모 폴더(" + parentFolderElement.id + ")에 대한 자손 폴더(F_" + childrenFolder.folderId + ")를 생성합니다.")
 
                         const folderNodeElement = createFolderElements(parentFolderElement, childrenFolder);
@@ -154,9 +155,9 @@ const folderToggleSelector = (folder) => {
                 .then(data => {
                     data.forEach(item => {
                         const childrenFolder = {
-                            folderId: `${item.id}`,
-                            folderName: `${item.name}`,
-                            folderProgramId: `${item.program_id}`
+                            folderId: `${item.folderId}`,
+                            folderName: `${item.folderName}`,
+                            folderProgramId: `${item.programId}`
                         }
 
                         console.log("[create] 부모 폴더(" + parentFolderElement.id + ")에 대한 자손 폴더(F_" + childrenFolder.folderId + ")를 생성합니다.")

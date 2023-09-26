@@ -12,7 +12,7 @@ import java.util.List;
 public class FetchProgramPathList {
     private final AdminProgramMapper adminProgramMapper;
 
-    public List<ProgramPathDto> getPathList(Integer programId){
-        return adminProgramMapper.selectPathList(programId);
+    public List<ProgramPathDto> findProgramPathList(Integer programId){
+        return adminProgramMapper.selectProgramPathList(programId);
     }
 }
