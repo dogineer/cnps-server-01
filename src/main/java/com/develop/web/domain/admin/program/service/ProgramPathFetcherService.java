@@ -1,7 +1,7 @@
 package com.develop.web.domain.admin.program.service;
 
+import com.develop.web.domain.admin.program.dto.ProgramPathDto;
 import com.develop.web.domain.admin.program.mapper.AdminProgramMapper;
-import com.develop.web.domain.users.program.dto.ProgramDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FetchProgramTypeList {
+public class ProgramPathFetcherService {
     private final AdminProgramMapper adminProgramMapper;
 
-    public List<ProgramDto> findProgramTypeList() {
-        return adminProgramMapper.selectProgramTypeList();
+    public List<ProgramPathDto> findProgramPathList(Integer programId){
+        return adminProgramMapper.selectProgramPathList(programId);
     }
 }

@@ -9,10 +9,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FindProgramService {
+public class ProgramTypeFetcherService {
     private final AdminProgramMapper adminProgramMapper;
 
-    public List<ProgramDto> findProgram(Integer programId){
-        return adminProgramMapper.selectProgramList(programId);
+    public List<ProgramDto> findProgramTypeList() {
+        return adminProgramMapper.selectProgramTypeList();
     }
 }

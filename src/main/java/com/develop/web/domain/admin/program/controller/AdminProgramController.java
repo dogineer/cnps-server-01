@@ -18,10 +18,10 @@ import java.util.List;
 public class AdminProgramController {
     private final ProgramCreationService programCreationService;
     private final ProgramDeleteionService programDeleteionService;
-    private final FetchProgramRecursionList fetchProgramRecursionList;
-    private final FetchProgramTypeList fetchProgramTypeList;
-    private final FetchProgramPathList fetchProgramPathList;
-    private final FindProgramService findProgramService;
+    private final ProgramRecursionListFetcherService programRecursionListFetcherService;
+    private final ProgramTypeFetcherService programTypeFetcherService;
+    private final ProgramPathFetcherService programPathFetcherService;
+    private final ProgramFetcherService programFetcherService;
 
     @PostMapping("/add")
     @Operation(summary = "프로그램, 유형, 팀 추가하기",
@@ -39,24 +39,24 @@ public class AdminProgramController {
     @GetMapping("/list/all")
     @Operation(summary = "전체 팀 리스트", description = "전체 팀 목록을 조회합니다.")
     public List<ProgramRecursionDto> programList() {
-        return fetchProgramRecursionList.findProgramList();
+        return programRecursionListFetcherService.findProgramList();
     }
 
     @GetMapping("/type/list")
     @Operation(summary = "프로그램 유형 리스트", description = "프로그램 유형을 조회합니다.")
     public List<ProgramDto> programTypeList(){
-        return fetchProgramTypeList.findProgramTypeList();
+        return programTypeFetcherService.findProgramTypeList();
     }
 
     @GetMapping("/find/program/{programId}")
     @Operation(summary = "프로그램 찾기", description = "프로그램을 찾습니다.")
     public List<ProgramDto> programDetails(@PathVariable Integer programId){
-        return findProgramService.findProgram(programId);
+        return programFetcherService.findProgram(programId);
     }
 
     @GetMapping("/find/tree/{programId}")
     @Operation(summary = "프로그램 계층 리스트", description = "프로그램 계층을 조회합니다.")
     public List<ProgramPathDto> programTreeDetails(@PathVariable Integer programId){
-        return fetchProgramPathList.findProgramPathList(programId);
+        return programPathFetcherService.findProgramPathList(programId);
     }
 }
