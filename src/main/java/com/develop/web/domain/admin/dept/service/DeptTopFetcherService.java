@@ -1,20 +1,20 @@
 package com.develop.web.domain.admin.dept.service;
 
-import com.develop.web.domain.admin.dept.dto.DeptDto;
+import com.develop.web.domain.admin.dept.dto.DeptDetailDto;
 import com.develop.web.domain.admin.dept.mapper.DeptMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class FindDeptList {
+public class DeptTopFetcherService {
     private final DeptMapper deptMapper;
 
-    public FindDeptList(DeptMapper deptMapper) {
+    public DeptTopFetcherService(DeptMapper deptMapper) {
         this.deptMapper = deptMapper;
     }
 
-    public List<DeptDto> getDeptList(){
-        return deptMapper.selectDeptList();
+    public List<DeptDetailDto> findTopDept() {
+        return deptMapper.selectTopDept();
     }
 }

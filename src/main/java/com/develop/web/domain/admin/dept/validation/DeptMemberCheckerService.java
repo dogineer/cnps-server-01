@@ -13,11 +13,11 @@ import java.util.List;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class FindDeptMemberChecker {
+public class DeptMemberCheckerService {
     private final DeptMapper deptMapper;
 
-    public void insertDeptId(Integer deptId) {
-        List<Member> joinedMembers = deptMapper.selectDeptMembers(deptId);
+    public void findDeptId(Integer deptId) {
+        List<Member> joinedMembers = deptMapper.selectDeptMember(deptId);
 
         if (!joinedMembers.isEmpty()){
             throw new CustomException(DeptErrorCode.JOIND_MEMEBER);

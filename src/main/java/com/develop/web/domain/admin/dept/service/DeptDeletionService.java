@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class RemoveDeptService {
+public class DeptDeletionService {
     private final DeptMapper deptMapper;
 
     public void deleteDept(Integer deptId) {

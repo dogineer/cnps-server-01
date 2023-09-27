@@ -1,7 +1,7 @@
 package com.develop.web.common.view.controller;
 
-import com.develop.web.domain.admin.dept.service.FetcherDeptHigh;
-import com.develop.web.domain.admin.dept.service.FindDeptList;
+import com.develop.web.domain.admin.dept.service.DeptTopFetcherService;
+import com.develop.web.domain.admin.dept.service.DeptListFetcherService;
 import com.develop.web.domain.admin.rank.service.RankListFetcher;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class EveryoneController {
     private final RankListFetcher rankListFetcher;
-    private final FindDeptList findDeptList;
-    private final FetcherDeptHigh fetcherDeptHigh;
+    private final DeptListFetcherService deptListFetcherService;
+    private final DeptTopFetcherService deptTopFetcherService;
 
     /**
      * @description 권한 없는 모든 유저가 접근 가능한 페이지
@@ -25,8 +25,8 @@ public class EveryoneController {
         String version = "ALPHA VERSION";
 
         model.addAttribute("Ranks", rankListFetcher.getRankList());
-        model.addAttribute("TopDepts", fetcherDeptHigh.getHighDept());
-        model.addAttribute("Depts", findDeptList.getDeptList());
+        model.addAttribute("TopDepts", deptTopFetcherService.findTopDept());
+        model.addAttribute("Depts", deptListFetcherService.findDeptList());
         model.addAttribute("version", version);
 
         boolean isLogin = session.getAttribute("account") != null;

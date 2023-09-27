@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.admin.dept.mapper.DeptMapper">
-    <select id="selectHighDept" resultType="DeptDto">
+    <select id="selectTopDept" resultType="DeptDetailDto">
         SELECT id   AS deptId,
                name AS deptName
         FROM dept
         WHERE p_id = 1 AND id != 1
     </select>
 
-    <select id="selectDeptMidList" parameterType="Integer" resultType="DeptDto">
+    <select id="selectDeptType" parameterType="Integer" resultType="DeptDetailDto">
         SELECT id   AS deptId,
                name AS deptName,
                p_id AS deptParentId
@@ -20,7 +20,7 @@
           AND id NOT IN (1)
     </select>
 
-    <select id="selectDeptList" resultType="DeptDto">
+    <select id="selectDept" resultType="DeptDetailDto">
         SELECT id   AS deptId,
                name AS deptName,
                p_id AS deptParentId
@@ -28,7 +28,7 @@
         WHERE id NOT IN (1)
     </select>
 
-    <select id="selectDeptMembers" resultType="Member" parameterType="Integer">
+    <select id="selectDeptMember" resultType="Member" parameterType="Integer">
         SELECT id,
                dept_id AS deptId,
                rank_id AS rankId,
@@ -49,7 +49,7 @@
         WHERE dept_id = ${deptid}
     </select>
 
-    <select id="selectFindDeptPath" resultType="DeptPathDto" parameterType="Integer">
+    <select id="selectDeptPath" resultType="DeptPathDto" parameterType="Integer">
         WITH RECURSIVE C AS (
             SELECT d.id, d.p_id, d.name, d.name AS path
             FROM dept d
