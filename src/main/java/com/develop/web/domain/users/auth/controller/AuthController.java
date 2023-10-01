@@ -2,7 +2,7 @@ package com.develop.web.domain.users.auth.controller;
 
 import com.develop.web.domain.service.checker.service.ClientInfoChecker;
 import com.develop.web.domain.users.auth.dto.LoginRequest;
-import com.develop.web.domain.users.auth.service.Login;
+import com.develop.web.domain.users.auth.service.LoginService;
 import com.develop.web.domain.users.auth.service.TokenAuthService;
 import com.develop.web.domain.users.token.dto.JwtToken;
 import com.develop.web.domain.users.user.dto.Member;
@@ -26,7 +26,7 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping(value = "/auth")
 public class AuthController {
-    private final Login login;
+    private final LoginService loginService;
     private final AuthMapper authMapper;
     private final ClientInfoChecker clientInfoChecker;
     private final TokenAuthService tokenAuthService;
@@ -39,7 +39,7 @@ public class AuthController {
     public void login(@RequestBody LoginRequest request,
                       HttpSession session,
                       HttpServletRequest httpServletRequest) {
-        login.checkAccount(request);
+        loginService.checkAccount(request);
 
         String account = request.getAccount();
         Member dbMemberInfoData = authMapper.selectMember(account);

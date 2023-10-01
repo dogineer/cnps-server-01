@@ -1,11 +1,11 @@
 package com.develop.web.domain.users.user.controller;
 
-import com.develop.web.domain.users.user.dto.JoinedMember;
+import com.develop.web.domain.users.user.dto.JoinedUser;
 import com.develop.web.domain.users.user.dto.PasswordChangeRequest;
 import com.develop.web.domain.users.user.dto.ProgramUpdateParam;
-import com.develop.web.domain.users.user.service.CreateAccount;
-import com.develop.web.domain.users.user.service.ModifyPassword;
-import com.develop.web.domain.users.user.service.ModifyProgram;
+import com.develop.web.domain.users.user.service.UserNewAccountService;
+import com.develop.web.domain.users.user.service.UserPasswordUpdateService;
+import com.develop.web.domain.users.user.service.UserProgramUpdateService;
 import com.develop.web.global.exception.exception.CustomException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -17,34 +17,34 @@ import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RestController
-@Tag(name = "인증 > 인사 관리", description = "사용자 권한 인사 관리")
+@Tag(name = "유저 > 개인 관리", description = "개인 사용자 인사 관리")
 @RequiredArgsConstructor
-@RequestMapping(value = "/auth")
-public class MemberController {
-    private final CreateAccount createAccount;
-    private final ModifyPassword modifyPassword;
-    private final ModifyProgram modifyProgram;
+@RequestMapping(value = "/user")
+public class UserController {
+    private final UserNewAccountService userNewAccountService;
+    private final UserPasswordUpdateService userPasswordUpdateService;
+    private final UserProgramUpdateService userProgramUpdateService;
 
     @PostMapping(value = "/signup")
     @Operation(summary = "회원가입", description = "회원가입에 양식의 데이터를 서버에 저장합니다.")
-    public void createAccount(@RequestBody JoinedMember member) throws CustomException {
-        createAccount.addMember(member);
+    public void userAccountAdd(@RequestBody JoinedUser member) throws CustomException {
+        userNewAccountService.addUser(member);
     }
 
-    @PutMapping("/changePassword")
+    @PutMapping("/password/update")
     @Operation(summary = "비밀번호 변경", description = "새로운 비밀번호로 변경합니다.")
-    public void changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest, HttpSession session) throws CustomException {
+    public void userPasswordModify(@RequestBody PasswordChangeRequest passwordChangeRequest, HttpSession session) throws CustomException {
         String account = (String) session.getAttribute("account");
-        modifyPassword.change(account, passwordChangeRequest);
+        userPasswordUpdateService.modifyPassword(account, passwordChangeRequest);
         session.invalidate();
     }
 
-    @PutMapping("/member/program/update")
+    @PutMapping("/program/update")
     @Operation(summary = "처음 사용자 프로그램 변경", description = "처음 사용자의 프로그램을 변경합니다.")
-    public void updateProgram(@RequestBody ProgramUpdateParam param, HttpSession session) {
+    public void userProgramModify(@RequestBody ProgramUpdateParam param, HttpSession session) {
         String account = (String) session.getAttribute("account");
         param.setAccount(account);
-        modifyProgram.setProgram(param);
+        userProgramUpdateService.setProgram(param);
         session.invalidate();
     }
 }

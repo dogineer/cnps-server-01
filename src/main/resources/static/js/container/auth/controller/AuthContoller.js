@@ -26,14 +26,14 @@ export class AuthContoller {
     }
 
     static programUpdate(programUpdateForm){
-        const endPoint = '/auth/member/program/update'
+        const endPoint = '/user/program/update'
         const formData = validateFormData(programUpdateForm);
         console.log(formData)
         updateService(formData, endPoint);
     }
 
     static passwordUpdate(passwordChangeForm) {
-        const endPoint = '/auth/changePassword';
+        const endPoint = '/user/password/update';
         const formData = validateFormData(passwordChangeForm);
         updateService(formData, endPoint);
     }

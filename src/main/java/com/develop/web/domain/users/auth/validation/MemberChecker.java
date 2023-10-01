@@ -1,6 +1,6 @@
 package com.develop.web.domain.users.auth.validation;
 
-import com.develop.web.domain.users.token.dto.AuthMember;
+import com.develop.web.domain.users.token.dto.UserAuthDto;
 import com.develop.web.domain.users.user.dto.Member;
 import com.develop.web.domain.users.auth.mapper.AuthMapper;
 import com.develop.web.global.exception.code.AuthErrorCode;
@@ -52,7 +52,7 @@ public class MemberChecker implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
-        AuthMember user = authMapper.selectJoinedMember(account);
+        UserAuthDto user = authMapper.selectJoinedMember(account);
 
         if (user == null) {
             throw new CustomException(AuthErrorCode.ACCOUNT_NOT_FOUND);

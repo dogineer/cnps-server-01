@@ -36,7 +36,7 @@
         WHERE account = #{account}
     </select>
 
-    <select id="selectMemberGetList" resultType="MemberInfo">
+    <select id="selectMemberGetList" resultType="Userinfo">
         SELECT account,
                e.name as name,
                r.name as rankName,
@@ -59,7 +59,7 @@
         OFFSET ${offset}
     </select>
 
-    <select id="selectMemberDeleteGetList" resultType="MemberInfo">
+    <select id="selectMemberDeleteGetList" resultType="Userinfo">
         SELECT account,
                e.name as name,
                r.name as rankName,
@@ -82,7 +82,7 @@
         OFFSET ${offset}
     </select>
 
-    <select id="selectMemberInfoList" resultType="MemberInfo">
+    <select id="selectMemberInfoList" resultType="Userinfo">
         SELECT account,
                e.name as name,
                r.name as rankName,
@@ -102,7 +102,7 @@
         WHERE del_fl = false
     </select>
 
-    <select id="selectMemberInfo" resultType="MemberInfo" parameterType="String">
+    <select id="selectUserinfo" resultType="Userinfo" parameterType="String">
         WITH RECURSIVE C AS (SELECT e.account, d.id, d.p_id, d.name, CONCAT_WS(' > ', d3.name, d2.name, d.name) AS path
                              FROM dept d
                                       INNER JOIN emp e ON d.id = e.dept_id
@@ -134,7 +134,7 @@
         WHERE e.account = #{account}
     </select>
 
-    <select id="selectJoinedMember" resultType="AuthMember" parameterType="String">
+    <select id="selectJoinedMember" resultType="UserAuthDto" parameterType="String">
         SELECT account,
                r.name as role,
                access,

@@ -1,16 +1,16 @@
 package com.develop.web.domain.users.user.service;
 
 import com.develop.web.domain.users.auth.mapper.AuthMapper;
-import com.develop.web.domain.users.user.dto.MemberInfo;
+import com.develop.web.domain.users.user.dto.Userinfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class DetailMemberFetcher {
+public class UserDetailFetcherService {
     private final AuthMapper authMapper;
 
-    public MemberInfo getMember(String account) {
-        return authMapper.selectMemberInfo(account);
+    public Userinfo findMember(String account) {
+        return authMapper.selectUserinfo(account);
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ModifyProgram {
+public class UserProgramUpdateService {
     private final AuthMapper authMapper;
 
     /** @description 프로그램 변경 서비스

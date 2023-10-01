@@ -14,8 +14,8 @@ import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.service.IngestListFetcher;
 import com.develop.web.domain.users.program.dto.ProgramDto;
 import com.develop.web.domain.users.program.service.ProgramListFetcher;
-import com.develop.web.domain.users.user.dto.MemberInfo;
-import com.develop.web.domain.users.user.service.DetailMemberFetcher;
+import com.develop.web.domain.users.user.dto.Userinfo;
+import com.develop.web.domain.users.user.service.UserDetailFetcherService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +31,7 @@ import java.util.List;
 public class CommonApiController {
     private final FolderRootListFetcherService folderRootListFetcherService;
     private final ClipDataListFetcher clipDataListFetcher;
-    private final DetailMemberFetcher detailMemberFetcher;
+    private final UserDetailFetcherService userDetailFetcherService;
     private final ProgramListFetcher programListFetcher;
     private final DeptListFetcherService deptListFetcherService;
     private final IngestListFetcher ingestListFetcher;
@@ -58,8 +58,8 @@ public class CommonApiController {
 
     @GetMapping("/user-info")
     @Operation(summary = "모든 페이지", description = "입력한 유저의 정보를 가져옵니다.")
-    public MemberInfo pageCommonMemberInfoData(String account) {
-        return detailMemberFetcher.getMember(account);
+    public Userinfo pageCommonMemberInfoData(String account) {
+        return userDetailFetcherService.findMember(account);
     }
 
     @GetMapping("/program-list")

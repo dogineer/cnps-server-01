@@ -12,7 +12,7 @@ import java.util.Objects;
 
 @Getter
 @RequiredArgsConstructor
-public class AuthMember implements UserDetails {
+public class UserAuthDto implements UserDetails {
 
 	private String account;
 	private String password;

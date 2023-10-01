@@ -19,13 +19,13 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/user/*")
-public class UserController {
+@RequestMapping(value = "/service")
+public class UserPageController {
     private final ClipPageFetcher clipPageFetcher;
     private final IngestPageFetcher ingestPageFetcher;
     private final InitAccountService initAccountService;
 
-    @GetMapping("ingest")
+    @GetMapping("/ingest")
     public String ingestPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
         @RequestParam(value = "limit", defaultValue = "50") int limit,
@@ -38,7 +38,7 @@ public class UserController {
     }
 
 
-    @GetMapping("clip")
+    @GetMapping("/clip")
     public String editPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
         @RequestParam(value = "limit", defaultValue = "50") int limit,

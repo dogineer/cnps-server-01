@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
-public class EveryoneController {
+public class EveryonePageController {
     private final RankListFetcher rankListFetcher;
     private final DeptListFetcherService deptListFetcherService;
     private final DeptTopFetcherService deptTopFetcherService;
@@ -32,13 +32,7 @@ public class EveryoneController {
         boolean isLogin = session.getAttribute("account") != null;
 
         if (isLogin) {
-            boolean isAdmin = session.getAttribute("rank") != null && (int) session.getAttribute("rank") == 12;
-
-            if (isAdmin) {
-                return "redirect:/admin/management/user";
-            } else {
-                return "redirect:/user/clip";
-            }
+            return "redirect:/service/clip";
         } else {
             return "index";
         }

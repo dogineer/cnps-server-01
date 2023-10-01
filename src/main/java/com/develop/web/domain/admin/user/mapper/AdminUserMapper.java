@@ -4,7 +4,7 @@ import com.develop.web.domain.admin.user.dto.UpdateUserInfoDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface AdminMapper {
+public interface AdminUserMapper {
 
     /** @description 권한 승인 업데이트 (권한 승인 및 승인 날짜 추가)*/
     void updateAccess(String account);

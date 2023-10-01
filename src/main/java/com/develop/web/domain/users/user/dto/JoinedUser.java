@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @RequiredArgsConstructor
 @ToString
-public class JoinedMember {
+public class JoinedUser {
     private final String account;
     private final String name;
     private final Integer gender;

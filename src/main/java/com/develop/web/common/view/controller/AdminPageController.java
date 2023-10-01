@@ -18,15 +18,15 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/admin/management/*")
-public class AdminController {
+@RequestMapping(value = "/admin/management")
+public class AdminPageController {
     private final InitAccountService initAccountService;
     private final UserPageFetcher userPageFetcher;
     private final DeptPageFetcher deptPageFetcher;
     private final ProgramPageFetcher programPageFetcher;
     private final RankPageFetcher rankPageFetcher;
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public String userPage(
         @RequestParam(value = "page", defaultValue = "1") int page,
         @RequestParam(value = "limit", defaultValue = "50") int limit,
@@ -39,7 +39,7 @@ public class AdminController {
         return "admin/user/admin_user_page";
     }
 
-    @GetMapping("dept")
+    @GetMapping("/dept")
     public String deptPage(HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initAccountService.session(session);
         deptPageFetcher.fetchPage(accountDto, model);
@@ -48,7 +48,7 @@ public class AdminController {
 
     }
 
-    @GetMapping("program")
+    @GetMapping("/program")
     public String programPage(HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initAccountService.session(session);
         programPageFetcher.fetchPage(accountDto, model);
@@ -56,7 +56,7 @@ public class AdminController {
         return "admin/program/admin_program_page";
     }
 
-    @GetMapping("rank")
+    @GetMapping("/rank")
     public String rankPage(HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initAccountService.session(session);
         rankPageFetcher.fetchPage(accountDto, model);

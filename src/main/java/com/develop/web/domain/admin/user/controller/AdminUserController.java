@@ -1,11 +1,11 @@
 package com.develop.web.domain.admin.user.controller;
 
 import com.develop.web.domain.admin.user.dto.UpdateUserInfoDto;
-import com.develop.web.domain.admin.user.service.DeleteUser;
-import com.develop.web.domain.admin.user.service.UpdateUserAccess;
-import com.develop.web.domain.admin.user.service.UpdateUserInfoService;
-import com.develop.web.domain.users.user.dto.MemberInfo;
-import com.develop.web.domain.users.user.service.DetailMemberFetcher;
+import com.develop.web.domain.admin.user.service.UserFlagDeleteUpdateService;
+import com.develop.web.domain.admin.user.service.UserAccessUpdateService;
+import com.develop.web.domain.admin.user.service.UserinfoUpdateService;
+import com.develop.web.domain.users.user.dto.Userinfo;
+import com.develop.web.domain.users.user.service.UserDetailFetcherService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,34 +18,33 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping(value = "/admin/user")
 public class AdminUserController {
-    private final UpdateUserAccess updateUserAccess;
-    private final DeleteUser deleteUser;
-    private final DetailMemberFetcher detailMemberFetcher;
-    private final UpdateUserInfoService updateUserInfoService;
+    private final UserAccessUpdateService userAccessUpdateService;
+    private final UserFlagDeleteUpdateService userflagDeleteUpdateService;
+    private final UserDetailFetcherService userDetailFetcherService;
+    private final UserinfoUpdateService userInfoUpdateService;
 
     @GetMapping("/account-info/{account}")
     @Operation(summary = "개인정보값", description = "개인 정보를 조회합니다.")
-    public MemberInfo userInfo(@PathVariable String account) {
-        return detailMemberFetcher.getMember(account);
+    public Userinfo userDetails(@PathVariable String account) {
+        return userDetailFetcherService.findMember(account);
     }
 
     @PutMapping("/account-info/update")
     @Operation(summary = "개인 정보 업데이트", description = "개인 정보를 수정해서 업데이트합니다.")
-    public void updateUserInfoService(@RequestBody UpdateUserInfoDto userInfo) {
-        updateUserInfoService.updateUserInfo(userInfo);
+    public void userInfoModify(@RequestBody UpdateUserInfoDto userInfo) {
+        userInfoUpdateService.modifyUserInfo(userInfo);
     }
 
     @PutMapping("/access/apply/{account}")
     @Operation(summary = "직원 사용자 요청 승인", description = "승인 플래그")
-    public void accessCheck(@PathVariable String account){
-        updateUserAccess.setAccess(account);
+    public void userAccessModify(@PathVariable String account){
+        userAccessUpdateService.modifyAccess(account);
     }
 
     @PutMapping("/delete/{account}")
     @Operation(summary = "직원 사용자 삭제", description = "삭제 플래그")
-    public void userDelete(@PathVariable String account){
-        log.info("직원 삭제 "+ account);
-        deleteUser.updateUserDeleteFlag(account);
+    public void userDeleteFlagModify(@PathVariable String account){
+        userflagDeleteUpdateService.modifyUserDeleteFlag(account);
     }
 
 }

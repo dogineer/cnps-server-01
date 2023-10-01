@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-@WebFilter(urlPatterns = {"/admin/management/*", "/user/*"})
+@WebFilter(urlPatterns = {"/admin/management/*", "/service/*"})
 @ConditionalOnProperty(name = "authentication.type", havingValue = "session")
 public class PageRequestAuthFilter extends OncePerRequestFilter {
 
