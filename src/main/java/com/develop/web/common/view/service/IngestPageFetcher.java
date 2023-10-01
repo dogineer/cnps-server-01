@@ -3,7 +3,7 @@ package com.develop.web.common.view.service;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.domain.service.folder.service.ProgramFolderListFetcherService;
 import com.develop.web.domain.service.folder.service.ProgramFolderFetcherService;
-import com.develop.web.domain.service.ingest.service.IngestListFetcher;
+import com.develop.web.domain.service.ingest.service.IngestListFetcherService;
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.common.view.dto.PageDto;
 import com.develop.web.domain.service.ingest.mapper.UploadMapper;
@@ -21,7 +21,7 @@ public class IngestPageFetcher implements PageingService{
     private final UserDetailFetcherService userDetailFetcherService;
     private final ProgramListFetcher programListFetcher;
     private final ProgramFolderFetcherService programFolderFetcherService;
-    private final IngestListFetcher ingestListFetcher;
+    private final IngestListFetcherService ingestListFetcherService;
     private final ProgramFolderListFetcherService programFolderListFetcherService;
 
     private final UploadMapper uploadMapper;
@@ -40,7 +40,7 @@ public class IngestPageFetcher implements PageingService{
         model.addAttribute("MemberInfo", userDetailFetcherService.findMember(account));
         model.addAttribute("ProgramFolderAllList", programFolderListFetcherService.findProgramFolder(programId, isAdmin));
         model.addAttribute("ProgramFolderRootList", programFolderFetcherService.findProgramFolderRoot(programId, isAdmin));
-        model.addAttribute("IngestRequestList", ingestListFetcher.getIngestRequestList(criteriaDto));
+        model.addAttribute("IngestRequestList", ingestListFetcherService.findIngestRequestList(criteriaDto));
 
         model.addAttribute("pageMaker", pageDto);
 

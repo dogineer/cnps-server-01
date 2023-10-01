@@ -2,11 +2,11 @@ package com.develop.web.domain.service.ingest.controller;
 
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.service.CreateIngestPost;
-import com.develop.web.domain.service.ingest.service.IngestListFetcher;
+import com.develop.web.domain.service.ingest.service.IngestListFetcherService;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
 import com.develop.web.domain.service.ingest.service.CreateFileFromMultipartFileService;
 import com.develop.web.common.view.dto.CriteriaDto;
-import com.develop.web.domain.service.ingest.service.ServerFileUploader;
+import com.develop.web.domain.service.ingest.service.ServerFileUploadService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +29,8 @@ import java.util.List;
 @Slf4j
 @RequestMapping(value = "/ingest")
 public class IngestController {
-    private final IngestListFetcher ingestListFetcher;
-    private final ServerFileUploader serverFileUploader;
+    private final IngestListFetcherService ingestListFetcherService;
+    private final ServerFileUploadService serverFileUploadService;
     private final CreateFileFromMultipartFileService createFileFromMultipartFileService;
     private final CreateIngestPost createIngestPost;
 
@@ -40,7 +40,7 @@ public class IngestController {
     @Transactional
     @PostMapping(value = "/add")
     @Operation(summary = "인제스트 등록", description = "서버2로 데이터 보냅니다.")
-    public void ingestRequset(IngestRequestData ingestRequestData, HttpSession session) throws IOException {
+    public void ingestRequestAdd(IngestRequestData ingestRequestData, HttpSession session) throws IOException {
         Integer memberId = session.getAttribute("empId").hashCode();
         Integer programId = session.getAttribute("programId").hashCode();
 
@@ -49,13 +49,13 @@ public class IngestController {
         createIngestPost.addIngestRequest(ingestRequestData);
 
         Resource mediaFiles = createFileFromMultipartFileService.run(ingestRequestData.getFiles(), TempDir);
-        serverFileUploader.uploadFileAndIngestId(mediaFiles, ingestRequestData);
+        serverFileUploadService.IngestRequestData(mediaFiles, ingestRequestData);
     }
 
     @GetMapping(value = "/list")
     @Operation(summary = "인제스트 목록", description = "인제스트 목록 현황을 가져옵니다.")
     public List<IngestListDto> ingestList() {
         CriteriaDto criteriaDto = new CriteriaDto();
-        return ingestListFetcher.getIngestRequestList(criteriaDto);
+        return ingestListFetcherService.findIngestRequestList(criteriaDto);
     }
 }

@@ -11,7 +11,7 @@ import com.develop.web.domain.service.clip.service.ClipDataFetcherService;
 import com.develop.web.domain.service.folder.dto.ProgramFolderDto;
 import com.develop.web.domain.service.folder.service.FolderRootListFetcherService;
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
-import com.develop.web.domain.service.ingest.service.IngestListFetcher;
+import com.develop.web.domain.service.ingest.service.IngestListFetcherService;
 import com.develop.web.domain.users.program.dto.ProgramDto;
 import com.develop.web.domain.users.program.service.ProgramListFetcher;
 import com.develop.web.domain.users.user.dto.Userinfo;
@@ -34,7 +34,7 @@ public class CommonApiController {
     private final UserDetailFetcherService userDetailFetcherService;
     private final ProgramListFetcher programListFetcher;
     private final DeptListFetcherService deptListFetcherService;
-    private final IngestListFetcher ingestListFetcher;
+    private final IngestListFetcherService ingestListFetcherService;
     private final RankListFetcher rankListFetcher;
     private final DeptTypeListFetcherService deptTypeListFetcherService;
 
@@ -53,7 +53,7 @@ public class CommonApiController {
     @GetMapping("/ingest-list")
     @Operation(summary = "인제스트 페이지", description = "인제스트 데이터를 가져옵니다.")
     public List<IngestListDto> pageCommonIngestData(CriteriaDto criteriaDto) {
-        return ingestListFetcher.getIngestRequestList(criteriaDto);
+        return ingestListFetcherService.findIngestRequestList(criteriaDto);
     }
 
     @GetMapping("/user-info")

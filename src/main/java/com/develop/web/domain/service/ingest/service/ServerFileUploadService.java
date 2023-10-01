@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class ServerFileUploader {
+public class ServerFileUploadService {
 
     @Value("${CNPS.MC.URL}")
     private String mc;
@@ -27,7 +27,7 @@ public class ServerFileUploader {
             .build();
     }
 
-    public void uploadFileAndIngestId(Resource files, IngestRequestData ingestRequestData) {
+    public void IngestRequestData(Resource files, IngestRequestData ingestRequestData) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
         body.add("ingestId", ingestRequestData.getId());
