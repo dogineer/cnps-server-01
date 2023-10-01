@@ -22,7 +22,7 @@ export const import_res = (element) => {
 const checkFileExistence = (filePath) => {
     const result = "/Volumes/mediabuddies.kro.kr" + filePath;
 
-    fetch(`/clip/checkFileExistence?filePath=${encodeURIComponent(filePath)}`)
+    fetch(`/clip/check/file?filePath=${encodeURIComponent(filePath)}`)
         .then(res => res.json())
         .then(data => {
             if (data === true) {

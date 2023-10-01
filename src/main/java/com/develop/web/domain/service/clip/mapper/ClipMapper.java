@@ -10,6 +10,7 @@ import java.util.List;
 @Mapper
 public interface ClipMapper {
     List<ClipDto> selectGetClipList(CriteriaDto cri);
+
     void insertClipData(ResultRequestData requestData);
 
     int selectClipCount();

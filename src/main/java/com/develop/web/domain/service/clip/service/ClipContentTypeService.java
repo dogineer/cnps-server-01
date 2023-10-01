@@ -3,8 +3,8 @@ package com.develop.web.domain.service.clip.service;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FindMediaContentType {
-    public String getMediaFileContentType(String filename) {
+public class ClipContentTypeService {
+    public String findMediaFileContentType(String filename) {
         String extension = filename.substring(filename.lastIndexOf('.') + 1).toLowerCase();
 
         switch (extension) {

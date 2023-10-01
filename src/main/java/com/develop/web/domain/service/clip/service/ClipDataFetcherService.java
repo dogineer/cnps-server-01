@@ -10,10 +10,10 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class ClipDataListFetcher {
+public class ClipDataFetcherService {
     private final ClipMapper clipMapper;
 
-    public List<ClipDto> getClipList(CriteriaDto cri){
+    public List<ClipDto> findClipList(CriteriaDto cri){
         return clipMapper.selectGetClipList(cri);
     }
 }

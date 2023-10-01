@@ -1,9 +1,9 @@
 package com.develop.web.domain.service.clip.controller;
 
 import com.develop.web.domain.service.clip.dto.ClipDto;
-import com.develop.web.domain.service.clip.service.ClipDataListFetcher;
-import com.develop.web.domain.service.clip.service.FindMediaContentType;
-import com.develop.web.domain.service.clip.service.XmlShow;
+import com.develop.web.domain.service.clip.service.ClipDataFetcherService;
+import com.develop.web.domain.service.clip.service.ClipContentTypeService;
+import com.develop.web.domain.service.clip.service.ClipXmlCreateService;
 import com.develop.web.common.view.dto.CriteriaDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -36,9 +36,9 @@ import java.util.List;
 @RequestMapping(value = "/clip")
 @RestController
 public class ClipController {
-    private final ClipDataListFetcher clipDataListFetcher;
-    private final XmlShow xmlShow;
-    private final FindMediaContentType findMediaContentType;
+    private final ClipDataFetcherService clipDataFetcherService;
+    private final ClipXmlCreateService clipXmlCreateService;
+    private final ClipContentTypeService clipContentTypeService;
 
     @Value("${CNPS.MC.URL}")
     private String mc;
@@ -54,12 +54,13 @@ public class ClipController {
 
     @GetMapping("/list")
     @Operation(summary = "클립 리스트 확인", description = "서버에 저장된 클립 데이터 목록 확인")
-    public List<ClipDto> showClipDataList() {
+    public List<ClipDto> clipDataList() {
         CriteriaDto criteriaDto = new CriteriaDto();
-        return clipDataListFetcher.getClipList(criteriaDto);
+
+        return clipDataFetcherService.findClipList(criteriaDto);
     }
 
-    @GetMapping("/checkFileExistence")
+    @GetMapping("/check/file")
     @Operation(summary = "클립 존재 확인", description = "서버에 저장된 클립 메타데이터로 존재 유무 확인합니다.")
     public boolean checkFileExistenceCheck(@RequestParam String filePath) {
         File file = new File(filePath);
@@ -69,13 +70,13 @@ public class ClipController {
     @GetMapping("/xml")
     @Operation(summary = "클립 xml 데이터 확인", description = "테스트중")
     public String showXml(@RequestParam("file") String file) throws ParserConfigurationException, TransformerException {
-        return xmlShow.create("test", file);
+        return clipXmlCreateService.create("test", file);
     }
 
-    @GetMapping("/getMediaType")
-    @Operation(summary = "미디어 타입 찾기", description = "해당 영상의 미디어 타입을 구합니다.")
-    public ResponseEntity<String> getMediaType(@RequestParam("filename") String filename) {
-        String contentType = findMediaContentType.getMediaFileContentType(filename);
+    @GetMapping("/mediaType")
+    @Operation(summary = "미디어 타입 찾기", description = "영상의 미디어 타입을 구합니다.")
+    public ResponseEntity<String> mediaTypeDetails(@RequestParam("filename") String filename) {
+        String contentType = clipContentTypeService.findMediaFileContentType(filename);
 
         return ResponseEntity.ok()
             .body(contentType);
@@ -101,12 +102,12 @@ public class ClipController {
 
     @GetMapping("/streaming")
     @Operation(summary = "스트리밍", description = "로컬에 저장된 클립을 재생합니다.")
-    public ResponseEntity<Resource> preloadClip(@RequestParam("filename") String filename) {
+    public ResponseEntity<Resource> streamingClip(@RequestParam("filename") String filename) {
         try {
             File videoFile = new File(filename);
 
             if (videoFile.exists()) {
-                String contentType = findMediaContentType.getMediaFileContentType(filename);
+                String contentType = clipContentTypeService.findMediaFileContentType(filename);
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.parseMediaType(contentType));

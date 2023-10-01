@@ -3,7 +3,7 @@ package com.develop.web.common.view.service;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.domain.service.folder.service.ProgramFolderFetcherService;
 import com.develop.web.domain.service.clip.mapper.ClipMapper;
-import com.develop.web.domain.service.clip.service.ClipDataListFetcher;
+import com.develop.web.domain.service.clip.service.ClipDataFetcherService;
 import com.develop.web.domain.admin.notice.service.PostListFetcher;
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.common.view.dto.PageDto;
@@ -20,7 +20,7 @@ public class ClipPageFetcher implements PageingService {
     private final UserDetailFetcherService userDetailFetcherService;
     private final ProgramListFetcher programListFetcher;
     private final ProgramFolderFetcherService programFolderFetcherService;
-    private final ClipDataListFetcher clipDataListFetcher;
+    private final ClipDataFetcherService clipDataFetcherService;
 
     private final ClipMapper clipMapper;
 
@@ -38,7 +38,7 @@ public class ClipPageFetcher implements PageingService {
         model.addAttribute("ProgramList", programListFetcher.findProgram());
         model.addAttribute("MemberInfo", userDetailFetcherService.findMember(account));
         model.addAttribute("ProgramRootFolderList", programFolderFetcherService.findProgramFolderRoot(programId, isAdmin));
-        model.addAttribute("ClipList", clipDataListFetcher.getClipList(criteriaDto));
+        model.addAttribute("ClipList", clipDataFetcherService.findClipList(criteriaDto));
 
         model.addAttribute("pageMaker", pageDto);
     }

@@ -7,7 +7,7 @@ import com.develop.web.domain.admin.dept.service.DeptListFetcherService;
 import com.develop.web.domain.admin.rank.dto.RankDto;
 import com.develop.web.domain.admin.rank.service.RankListFetcher;
 import com.develop.web.domain.service.clip.dto.ClipDto;
-import com.develop.web.domain.service.clip.service.ClipDataListFetcher;
+import com.develop.web.domain.service.clip.service.ClipDataFetcherService;
 import com.develop.web.domain.service.folder.dto.ProgramFolderDto;
 import com.develop.web.domain.service.folder.service.FolderRootListFetcherService;
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
@@ -30,7 +30,7 @@ import java.util.List;
 @RequestMapping(value = "/common")
 public class CommonApiController {
     private final FolderRootListFetcherService folderRootListFetcherService;
-    private final ClipDataListFetcher clipDataListFetcher;
+    private final ClipDataFetcherService clipDataFetcherService;
     private final UserDetailFetcherService userDetailFetcherService;
     private final ProgramListFetcher programListFetcher;
     private final DeptListFetcherService deptListFetcherService;
@@ -47,7 +47,7 @@ public class CommonApiController {
     @GetMapping("/clip-list")
     @Operation(summary = "클립 페이지 > 미디어 데이터", description = "미디어 기초 데이터를 가져옵니다.")
     public List<ClipDto> pageClipMediaDataFetcher(CriteriaDto criteriaDto){
-        return clipDataListFetcher.getClipList(criteriaDto);
+        return clipDataFetcherService.findClipList(criteriaDto);
     }
 
     @GetMapping("/ingest-list")

@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 
 @Service
-public class XmlShow {
+public class ClipXmlCreateService {
 
     public String create(String videoName, String filePath) throws ParserConfigurationException, TransformerException {
         // XML document 생성
