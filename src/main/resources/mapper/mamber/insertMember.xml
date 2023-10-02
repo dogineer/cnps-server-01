@@ -12,7 +12,7 @@
                  phone,
                  email,
                  dept_id,
-                 rank_id,
+                 pos_id,
                  des,
                  password)
         VALUES (#{account},
@@ -21,7 +21,7 @@
                 #{phone},
                 #{email},
                 #{deptId},
-                #{rankId},
+                #{posId},
                 #{des},
                 #{password})
     </insert>

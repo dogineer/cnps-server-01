@@ -15,7 +15,7 @@ public class AdminChecker {
      * @description 멤버 권한 체크 서비스
      * */
     public void rankPermissionCheck(HttpSession session){
-        if (!Objects.equals(session.getAttribute("rank").toString(), "12")){
+        if (!Objects.equals(session.getAttribute("pos").toString(), "12")){
             throw new CustomException(AuthErrorCode.NO_ACCESS);
         }
     }

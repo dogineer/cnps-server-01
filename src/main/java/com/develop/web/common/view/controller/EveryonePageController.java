@@ -2,7 +2,7 @@ package com.develop.web.common.view.controller;
 
 import com.develop.web.domain.admin.dept.service.DeptTopFetcherService;
 import com.develop.web.domain.admin.dept.service.DeptListFetcherService;
-import com.develop.web.domain.admin.rank.service.RankListFetcher;
+import com.develop.web.domain.admin.position.service.PosListFetcherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 public class EveryonePageController {
-    private final RankListFetcher rankListFetcher;
+    private final PosListFetcherService posListFetcherService;
     private final DeptListFetcherService deptListFetcherService;
     private final DeptTopFetcherService deptTopFetcherService;
 
@@ -24,7 +24,7 @@ public class EveryonePageController {
     public String index(Model model, HttpSession session) {
         String version = "ALPHA VERSION";
 
-        model.addAttribute("Ranks", rankListFetcher.getRankList());
+        model.addAttribute("posList", posListFetcherService.findPosList());
         model.addAttribute("TopDepts", deptTopFetcherService.findTopDept());
         model.addAttribute("Depts", deptListFetcherService.findDeptList());
         model.addAttribute("version", version);

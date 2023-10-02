@@ -34,7 +34,7 @@ export class UserDetailOpenService {
                     const userAccount = document.getElementById('user-account');
                     const userName = document.getElementById('user-name');
                     const userPhone = document.getElementById('user-phone');
-                    const userRank = document.getElementById('user-rank');
+                    const userPos = document.getElementById('user-position');
                     const userDept = document.getElementById('user-dept');
                     const userProgram = document.getElementById('user-program');
                     const userBirth = document.getElementById('user-birth');
@@ -43,7 +43,7 @@ export class UserDetailOpenService {
                     const userJoinedAt = document.getElementById('user-joined_at');
                     const userApprovedAt = document.getElementById('user-approved_at');
 
-                    [userDept, userProgram, userRank].forEach(element => {
+                    [userDept, userProgram, userPos].forEach(element => {
                         while (element.firstChild) {
                             element.removeChild(element.firstChild);
                         }
@@ -63,15 +63,15 @@ export class UserDetailOpenService {
                             });
                         });
 
-                    fetchDataSelectOptions('/admin/rank/list')
+                    fetchDataSelectOptions('/admin/pos/list')
                         .then(list => {
                             list.forEach(item => {
                                 const option = document.createElement('option');
-                                option.value = item.rankId;
-                                option.textContent = item.rankName;
-                                userRank.appendChild(option);
+                                option.value = item.posId;
+                                option.textContent = item.posName;
+                                userPos.appendChild(option);
 
-                                if (item.rankId === data.rankId) {
+                                if (item.posId === data.posId) {
                                     option.selected = true;
                                 }
                             });

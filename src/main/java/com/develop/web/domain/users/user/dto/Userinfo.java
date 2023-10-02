@@ -9,8 +9,8 @@ public class Userinfo {
     private Integer id;
     private String account;
     private String name;
-    private Integer rankId;
-    private String rankName;
+    private Integer posId;
+    private String posName;
     private Integer deptId;
     private String deptName;
     private Integer programId;

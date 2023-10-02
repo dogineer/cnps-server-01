@@ -18,7 +18,7 @@
     <select id="selectMember" resultType="Member" parameterType="String">
         SELECT id,
                dept_id    AS deptId,
-               rank_id    AS rankId,
+               pos_id    AS posId,
                program_id AS programId,
                account,
                name,
@@ -39,7 +39,7 @@
     <select id="selectMemberGetList" resultType="Userinfo">
         SELECT account,
                e.name as name,
-               r.name as rankName,
+               pos.name as posName,
                d.name as deptName,
                t.name as programName,
                birth,
@@ -51,7 +51,7 @@
                del_fl    WH
         FROM emp e
                  JOIN `dept` d on d.id = e.dept_id
-                 JOIN `rank` r on r.id = e.rank_id
+                 JOIN `position` pos on pos.id = e.pos_id
                  JOIN `program` t on t.id = e.program_id
         WHERE del_fl = false
         ORDER BY joined_at DESC
@@ -62,7 +62,7 @@
     <select id="selectMemberDeleteGetList" resultType="Userinfo">
         SELECT account,
                e.name as name,
-               r.name as rankName,
+               pos.name as posName,
                d.name as deptName,
                t.name as programName,
                birth,
@@ -74,7 +74,7 @@
                del_fl    WH
         FROM emp e
                  JOIN `dept` d on d.id = e.dept_id
-                 JOIN `rank` r on r.id = e.rank_id
+                 JOIN `position` pos on pos.id = e.pos_id
                  JOIN `program` t on t.id = e.program_id
         WHERE del_fl = true
         ORDER BY joined_at DESC
@@ -85,7 +85,7 @@
     <select id="selectMemberInfoList" resultType="Userinfo">
         SELECT account,
                e.name as name,
-               r.name as rankName,
+               pos.name as posName,
                d.name as deptName,
                t.name as programName,
                birth,
@@ -97,7 +97,7 @@
                del_fl
         FROM emp e
                  JOIN `dept` d on d.id = e.dept_id
-                 JOIN `rank` r on r.id = e.rank_id
+                 JOIN `position` pos on pos.id = e.pos_id
                  JOIN `program` t on t.id = e.program_id
         WHERE del_fl = false
     </select>
@@ -111,8 +111,8 @@
         SELECT e.account,
                e.id,
                e.name as name,
-               r.id   as rankId,
-               r.name as rankName,
+               pos.id   as posId,
+               pos.name as posName,
                d.id   as deptId,
                C.path as deptName,
                t.id   as programId,
@@ -128,7 +128,7 @@
                e.approved_at
         FROM emp e
                  JOIN `dept` d on d.id = e.dept_id
-                 JOIN `rank` r on r.id = e.rank_id
+                 JOIN `position` pos on pos.id = e.pos_id
                  JOIN `program` t on t.id = e.program_id
                  JOIN C ON e.account = C.account
         WHERE e.account = #{account}
@@ -136,11 +136,11 @@
 
     <select id="selectJoinedMember" resultType="UserAuthDto" parameterType="String">
         SELECT account,
-               r.name as role,
+               p.name as role,
                access,
                password
         FROM emp e
-                 JOIN `rank` r ON e.rank_id = r.id
+                 JOIN `position` p ON e.pos_id = p.id
         WHERE account = #{account}
     </select>
 </mapper>

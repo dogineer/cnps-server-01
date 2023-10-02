@@ -9,7 +9,7 @@ public class UpdateUserInfoDto {
     private String account;
     private String name;
     private String phone;
-    private Integer rankId;
+    private Integer posId;
     private Integer deptId;
     private Integer programId;
     private Byte gender;

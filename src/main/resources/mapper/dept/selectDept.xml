@@ -31,7 +31,7 @@
     <select id="selectDeptMember" resultType="Member" parameterType="Integer">
         SELECT id,
                dept_id AS deptId,
-               rank_id AS rankId,
+               pos_id AS posId,
                program_id AS programId,
                account,
                name,

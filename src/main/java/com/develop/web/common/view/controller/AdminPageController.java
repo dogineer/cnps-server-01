@@ -24,7 +24,7 @@ public class AdminPageController {
     private final UserPageFetcher userPageFetcher;
     private final DeptPageFetcher deptPageFetcher;
     private final ProgramPageFetcher programPageFetcher;
-    private final RankPageFetcher rankPageFetcher;
+    private final PosPageFetcher posPageFetcher;
 
     @GetMapping("/user")
     public String userPage(
@@ -56,11 +56,11 @@ public class AdminPageController {
         return "admin/program/admin_program_page";
     }
 
-    @GetMapping("/rank")
-    public String rankPage(HttpSession session, Model model) throws CustomException {
+    @GetMapping("/position")
+    public String positionPage(HttpSession session, Model model) throws CustomException {
         AccountDto accountDto = initAccountService.session(session);
-        rankPageFetcher.fetchPage(accountDto, model);
+        posPageFetcher.fetchPage(accountDto, model);
 
-        return "admin/rank/admin_rank_page";
+        return "admin/position/admin_position_page";
     }
 }

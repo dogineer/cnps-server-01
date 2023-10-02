@@ -15,7 +15,7 @@ public class JoinedUser {
     private final String phone;
     private final String email;
     private final Integer deptId;
-    private final Integer rankId;
+    private final Integer posId;
     private final String des;
     private String password;
 

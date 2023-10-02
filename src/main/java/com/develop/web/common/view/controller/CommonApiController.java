@@ -4,8 +4,8 @@ import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.admin.dept.dto.DeptDetailDto;
 import com.develop.web.domain.admin.dept.service.DeptTypeListFetcherService;
 import com.develop.web.domain.admin.dept.service.DeptListFetcherService;
-import com.develop.web.domain.admin.rank.dto.RankDto;
-import com.develop.web.domain.admin.rank.service.RankListFetcher;
+import com.develop.web.domain.admin.position.dto.PosDetailDto;
+import com.develop.web.domain.admin.position.service.PosListFetcherService;
 import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.clip.service.ClipDataFetcherService;
 import com.develop.web.domain.service.folder.dto.ProgramFolderDto;
@@ -35,7 +35,7 @@ public class CommonApiController {
     private final ProgramListFetcher programListFetcher;
     private final DeptListFetcherService deptListFetcherService;
     private final IngestListFetcherService ingestListFetcherService;
-    private final RankListFetcher rankListFetcher;
+    private final PosListFetcherService posListFetcherService;
     private final DeptTypeListFetcherService deptTypeListFetcherService;
 
     @GetMapping("/folder-list")
@@ -74,10 +74,10 @@ public class CommonApiController {
         return deptListFetcherService.findDeptList();
     }
 
-    @GetMapping("/rank-list")
+    @GetMapping("/pos-list")
     @Operation(summary = "모든 페이지", description = "랭크 리스트를 가져옵니다.")
-    public List<RankDto> pageCommonRankData() {
-        return rankListFetcher.getRankList();
+    public List<PosDetailDto> pageCommonPosData() {
+        return posListFetcherService.findPosList();
     }
 
     @GetMapping("/dept-type/{deptParentId}")

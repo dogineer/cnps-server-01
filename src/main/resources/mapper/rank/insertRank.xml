@@ -4,12 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.develop.web.domain.admin.position.mapper.PosMapper">
-    <select id="selectListPos" resultType="PosDetailDto">
-        SELECT id   AS posId,
-               name AS posName,
-               p_id AS posParentId
-        FROM `position`
-        WHERE p_id = 0
-          AND id NOT IN (0)
-    </select>
+    <insert id="insertPos" parameterType="PosDto">
+        INSERT INTO `position`(name, p_id)
+        VALUES (#{posName}, #{posParentId})
+    </insert>
 </mapper>

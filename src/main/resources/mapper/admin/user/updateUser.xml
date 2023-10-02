@@ -9,7 +9,7 @@
         SET account    = #{account},
             name       = #{name},
             phone      = #{phone},
-            rank_id    = #{rankId},
+            pos_id    = #{posId},
             dept_id    = #{deptId},
             program_id = #{programId},
             gender     = #{gender},
