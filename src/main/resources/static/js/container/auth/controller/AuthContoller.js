@@ -20,12 +20,14 @@ export class AuthContoller {
     }
 
     static logout() {
-        fetch("/auth/logout", {
-            method: 'POST'
-        }).then(() => location.replace("/"));
+        if (confirm('로그아웃 하시겠습니까?')) {
+            fetch("/auth/logout", {
+                method: 'POST'
+            }).then(() => location.replace("/"));
+        }
     }
 
-    static programUpdate(programUpdateForm){
+    static programUpdate(programUpdateForm) {
         const endPoint = '/user/program/update'
         const formData = validateFormData(programUpdateForm);
         console.log(formData)

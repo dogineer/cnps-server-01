@@ -14,8 +14,9 @@ export class UserDeleteService {
                 method: 'PUT',
             })
                 .then(data => {
-                    alert("직원을 삭제합니다.");
-                    console.log('관리자 확인.', data);
+                    alert("유저를 삭제합니다.");
+                    console.log('삭제', data);
+                    location.reload();
                 })
                 .catch((error) => {
                     alert("ERROR");

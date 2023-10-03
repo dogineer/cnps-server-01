@@ -20,7 +20,7 @@ public class Userinfo {
     private String phone;
     private String email;
     private String des;
-    private Byte access;
+    private String role;
     private Byte del_fl;
     private LocalDateTime joined_at;
     private LocalDateTime approved_at;

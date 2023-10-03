@@ -18,7 +18,7 @@
     <select id="selectMember" resultType="Member" parameterType="String">
         SELECT id,
                dept_id    AS deptId,
-               pos_id    AS posId,
+               pos_id     AS posId,
                program_id AS programId,
                account,
                name,
@@ -29,7 +29,7 @@
                des,
                joined_at,
                approved_at,
-               access,
+               role,
                del_fl,
                password
         FROM emp
@@ -38,17 +38,17 @@
 
     <select id="selectMemberGetList" resultType="Userinfo">
         SELECT account,
-               e.name as name,
+               e.name   as name,
                pos.name as posName,
-               d.name as deptName,
-               t.name as programName,
+               d.name   as deptName,
+               t.name   as programName,
                birth,
                gender,
                email,
-               access,
+               role,
                joined_at,
                approved_at,
-               del_fl    WH
+               del_fl      WH
         FROM emp e
                  JOIN `dept` d on d.id = e.dept_id
                  JOIN `position` pos on pos.id = e.pos_id
@@ -61,17 +61,17 @@
 
     <select id="selectMemberDeleteGetList" resultType="Userinfo">
         SELECT account,
-               e.name as name,
+               e.name   as name,
                pos.name as posName,
-               d.name as deptName,
-               t.name as programName,
+               d.name   as deptName,
+               t.name   as programName,
                birth,
                gender,
                email,
-               access,
+               role,
                joined_at,
                approved_at,
-               del_fl    WH
+               del_fl      WH
         FROM emp e
                  JOIN `dept` d on d.id = e.dept_id
                  JOIN `position` pos on pos.id = e.pos_id
@@ -84,14 +84,14 @@
 
     <select id="selectMemberInfoList" resultType="Userinfo">
         SELECT account,
-               e.name as name,
+               e.name   as name,
                pos.name as posName,
-               d.name as deptName,
-               t.name as programName,
+               d.name   as deptName,
+               t.name   as programName,
                birth,
                gender,
                email,
-               access,
+               role,
                joined_at,
                approved_at,
                del_fl
@@ -110,19 +110,19 @@
                                       LEFT JOIN dept d3 ON d2.p_id = d3.id)
         SELECT e.account,
                e.id,
-               e.name as name,
+               e.name   as name,
                pos.id   as posId,
                pos.name as posName,
-               d.id   as deptId,
-               C.path as deptName,
-               t.id   as programId,
-               t.name as programName,
+               d.id     as deptId,
+               C.path   as deptName,
+               t.id     as programId,
+               t.name   as programName,
                e.birth,
                e.gender,
                e.email,
                e.phone,
                e.des,
-               e.access,
+               e.role,
                e.del_fl,
                e.joined_at,
                e.approved_at
@@ -136,8 +136,8 @@
 
     <select id="selectJoinedMember" resultType="UserAuthDto" parameterType="String">
         SELECT account,
-               p.name as role,
-               access,
+               p.name as pos,
+               role,
                password
         FROM emp e
                  JOIN `position` p ON e.pos_id = p.id

@@ -1,5 +1,6 @@
-package com.develop.web.domain.users.token.service;
+package com.develop.web.global.filter.token;
 
+import com.develop.web.domain.users.token.service.JwtTokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

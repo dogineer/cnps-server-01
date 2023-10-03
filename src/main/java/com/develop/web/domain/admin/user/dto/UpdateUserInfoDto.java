@@ -10,6 +10,7 @@ public class UpdateUserInfoDto {
     private String name;
     private String phone;
     private Integer posId;
+    private String role;
     private Integer deptId;
     private Integer programId;
     private Byte gender;

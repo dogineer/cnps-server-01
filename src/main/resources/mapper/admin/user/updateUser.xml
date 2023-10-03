@@ -9,7 +9,8 @@
         SET account    = #{account},
             name       = #{name},
             phone      = #{phone},
-            pos_id    = #{posId},
+            pos_id     = #{posId},
+            role       = #{role},
             dept_id    = #{deptId},
             program_id = #{programId},
             gender     = #{gender},
@@ -19,7 +20,7 @@
 
     <update id="updateAccess" parameterType="String">
         UPDATE emp
-        SET access      = 1,
+        SET role        = 'ROLE_USER',
             approved_at = (CURRENT_TIMESTAMP)
         WHERE account = #{account}
     </update>

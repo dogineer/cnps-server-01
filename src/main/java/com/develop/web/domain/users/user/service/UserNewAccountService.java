@@ -25,6 +25,6 @@ public class UserNewAccountService {
         user.encodePassword(passwordEncoder);
         authMapper.insertUser(user);
 
-        log.info("회원가입이 완료되었습니다. {}", user.getAccount());
+        log.info("[+] 회원가입이 완료되었습니다. 신규 계정: " + user.getAccount());
     }
 }

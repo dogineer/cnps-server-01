@@ -35,11 +35,13 @@ export class UserDetailOpenService {
                     const userName = document.getElementById('user-name');
                     const userPhone = document.getElementById('user-phone');
                     const userPos = document.getElementById('user-position');
+                    const userRole = document.getElementById('user-role');
                     const userDept = document.getElementById('user-dept');
                     const userProgram = document.getElementById('user-program');
                     const userBirth = document.getElementById('user-birth');
                     const userGender = document.getElementById('user-gender');
                     const userEmail = document.getElementById('user-email');
+                    const userDes = document.getElementById('user-des');
                     const userJoinedAt = document.getElementById('user-joined_at');
                     const userApprovedAt = document.getElementById('user-approved_at');
 
@@ -94,9 +96,11 @@ export class UserDetailOpenService {
                     userAccount.value = data.account;
                     userName.value = data.name;
                     userPhone.value = data.phone
+                    userRole.value = data.role;
                     userBirth.textContent = data.birth;
                     userGender.value = data.gender;
                     userEmail.value = data.email;
+                    userDes.value = data.des;
                     userJoinedAt.textContent = data.joined_at
                     userApprovedAt.textContent = data.approved_at
 

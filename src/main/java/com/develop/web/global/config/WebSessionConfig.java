@@ -1,7 +1,7 @@
 package com.develop.web.global.config;
 
-import com.develop.web.global.filter.AdminPageRequestRankFilter;
-import com.develop.web.global.filter.PageRequestAuthFilter;
+import com.develop.web.global.filter.session.AdminPageRequestRankFilter;
+import com.develop.web.global.filter.session.PageRequestAuthFilter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -40,7 +40,7 @@ public class WebSessionConfig extends WebSecurityConfigurerAdapter {
         FilterRegistrationBean<PageRequestAuthFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new PageRequestAuthFilter());
         registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
-        registrationBean.addUrlPatterns("/admin/*", "/user/*");
+        registrationBean.addUrlPatterns("/admin/*", "/service/*");
         return registrationBean;
     }
 

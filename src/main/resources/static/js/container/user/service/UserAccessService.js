@@ -14,12 +14,14 @@ export class UserAccessService {
                 method: 'PUT',
             })
                 .then(data => {
+                    alert("유저를 승인합니다.");
                     console.log('승인.', data);
+                    location.reload();
                 })
                 .catch((error) => {
                     alert("ERROR");
                     console.error(error);
-                });
+                });제
         } else {
             alert("취소하였습니다.");
         }

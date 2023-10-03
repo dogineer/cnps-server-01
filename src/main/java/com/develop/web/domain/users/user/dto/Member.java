@@ -1,5 +1,6 @@
 package com.develop.web.domain.users.user.dto;
 
+import com.develop.web.domain.admin.user.dto.Role;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -20,7 +21,7 @@ public class Member {
     private LocalDateTime joined_at;    // 가입 날짜
     private LocalDateTime approved_at;  // 승인 날짜
 
-    private Byte access;                // 가입 승인 요청 플래그
+    private String role;                // 권한
     private Integer del_fl;             // 유저 삭제 플래그
 
     private String password;            // 패스워드

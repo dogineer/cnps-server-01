@@ -1,9 +1,7 @@
 package com.develop.web.domain.users.user.controller;
 
-import com.develop.web.domain.users.user.dto.JoinedUser;
 import com.develop.web.domain.users.user.dto.PasswordChangeRequest;
 import com.develop.web.domain.users.user.dto.ProgramUpdateParam;
-import com.develop.web.domain.users.user.service.UserNewAccountService;
 import com.develop.web.domain.users.user.service.UserPasswordUpdateService;
 import com.develop.web.domain.users.user.service.UserProgramUpdateService;
 import com.develop.web.global.exception.exception.CustomException;
@@ -21,15 +19,8 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping(value = "/user")
 public class UserController {
-    private final UserNewAccountService userNewAccountService;
     private final UserPasswordUpdateService userPasswordUpdateService;
     private final UserProgramUpdateService userProgramUpdateService;
-
-    @PostMapping(value = "/signup")
-    @Operation(summary = "회원가입", description = "회원가입에 양식의 데이터를 서버에 저장합니다.")
-    public void userAccountAdd(@RequestBody JoinedUser member) throws CustomException {
-        userNewAccountService.addUser(member);
-    }
 
     @PutMapping("/password/update")
     @Operation(summary = "비밀번호 변경", description = "새로운 비밀번호로 변경합니다.")

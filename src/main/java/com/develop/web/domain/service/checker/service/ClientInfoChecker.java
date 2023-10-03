@@ -32,7 +32,7 @@ public class ClientInfoChecker {
         log.info("[|] header: " + clientInfo.getHeader());
         log.info("[|] os: " + clientInfo.getOs());
         log.info("[|] browser: " + clientInfo.getBrowser());
-        log.info("[+] ⌞ _ _ _ _ _ _ _ _ _ _ ⌟");
+        log.info("[+] ⌞ _ _ _ _ _ _ _ _ _ _ ⌟\n");
 
         return clientInfo;
     }
