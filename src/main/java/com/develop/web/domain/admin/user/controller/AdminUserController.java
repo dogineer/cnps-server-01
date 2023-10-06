@@ -1,6 +1,7 @@
 package com.develop.web.domain.admin.user.controller;
 
 import com.develop.web.domain.admin.user.dto.UpdateUserInfoDto;
+import com.develop.web.domain.admin.user.service.UserDeleteService;
 import com.develop.web.domain.admin.user.service.UserFlagDeleteUpdateService;
 import com.develop.web.domain.admin.user.service.UserAccessUpdateService;
 import com.develop.web.domain.admin.user.service.UserinfoUpdateService;
@@ -22,6 +23,7 @@ public class AdminUserController {
     private final UserFlagDeleteUpdateService userflagDeleteUpdateService;
     private final UserDetailFetcherService userDetailFetcherService;
     private final UserinfoUpdateService userInfoUpdateService;
+    private final UserDeleteService userDeleteService;
 
     @GetMapping("/account-info/{account}")
     @Operation(summary = "개인정보값", description = "개인 정보를 조회합니다.")
@@ -41,10 +43,16 @@ public class AdminUserController {
         userAccessUpdateService.modifyAccess(account);
     }
 
-    @PutMapping("/delete/{account}")
-    @Operation(summary = "직원 사용자 삭제", description = "삭제 플래그")
+    @PutMapping("/leave/{account}")
+    @Operation(summary = "직원 사용자 탈퇴", description = "삭제 플래그")
     public void userDeleteFlagModify(@PathVariable String account){
         userflagDeleteUpdateService.modifyUserDeleteFlag(account);
+    }
+
+    @PutMapping("/delete/{account}")
+    @Operation(summary = "직원 사용자 삭제", description = "완전 소거")
+    public void userDelete(@PathVariable String account){
+        userDeleteService.deleteUser(account);
     }
 
 }

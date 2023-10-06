@@ -12,5 +12,7 @@ public interface AdminUserMapper {
     /** @description 직원 삭제 (삭제 플래그)*/
     void updateUserDeleteFlag(String account);
 
+    void deleteUser(String account);
+
     void updateUserInfo(UpdateUserInfoDto userInfo);
 }

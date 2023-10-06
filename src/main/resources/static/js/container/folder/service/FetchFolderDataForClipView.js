@@ -38,7 +38,6 @@ const createClipData = (parentElement, item, index) => {
     const fileUUID = document.createElement('td')
     const fileName = document.createElement('td')
     const fileExt = document.createElement('td')
-    const filePath = document.createElement('td')
     const fileFormat = document.createElement('td')
     const fileDuration = document.createElement('td')
     const fileSize = document.createElement('td')
@@ -54,13 +53,12 @@ const createClipData = (parentElement, item, index) => {
     tr.appendChild(programId)
     tr.appendChild(programName)
     tr.appendChild(folderName)
-    tr.appendChild(fileUUID)
     tr.appendChild(fileName)
     tr.appendChild(fileExt)
-    tr.appendChild(filePath)
     tr.appendChild(fileFormat)
     tr.appendChild(fileDuration)
     tr.appendChild(fileSize)
+    tr.appendChild(fileUUID)
     tr.appendChild(fileIngestAt)
     tr.appendChild(fileEndAt)
 
@@ -76,9 +74,6 @@ const createClipData = (parentElement, item, index) => {
     previewThumbnail.setAttribute("class", "thumbnail")
     previewThumbnail.setAttribute("src", generateThumbnailUrl(item.ingest_at, item.clip_uuid))
     previewThumbnail.setAttribute("alt", "thumbnail")
-
-    clipId.className = 'clip-clip_id'
-    clipId.innerText = item.clip_id;
 
     programId.className = 'clip-program_id'
     programId.innerText = 'T' + item.program_id;
@@ -98,12 +93,6 @@ const createClipData = (parentElement, item, index) => {
     fileExt.className = 'clip-file_ext'
     fileExt.innerText = item.file_ext;
 
-    const spanFilePath = document.createElement('span')
-
-    filePath.appendChild(spanFilePath)
-    spanFilePath.className = 'clip-file_path'
-    spanFilePath.innerText = item.file_path;
-
     fileFormat.className = 'clip-file_format'
     fileFormat.innerText = item.format_long_name;
 
@@ -112,6 +101,9 @@ const createClipData = (parentElement, item, index) => {
 
     fileSize.className = 'clip-file_size'
     fileSize.innerText = item.file_size + " MB";
+
+    clipId.className = 'clip-clip_id'
+    clipId.innerText = item.clip_id;
 
     fileIngestAt.className = 'clip-file_ingest_at'
     fileIngestAt.innerText = item.ingest_at;

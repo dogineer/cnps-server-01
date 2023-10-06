@@ -27,7 +27,7 @@
 
     <update id="updateUserDeleteFlag" parameterType="String">
         UPDATE emp
-        SET del_fl = 1
+        SET del_fl = 1, role = 'ROLE_ANONYMOUS'
         WHERE account = #{account}
     </update>
 </mapper>

@@ -22,7 +22,7 @@ public class EveryonePageController {
      */
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
-        String version = "ALPHA VERSION";
+        String version = "BETA 20231004 VERSION";
 
         model.addAttribute("posList", posListFetcherService.findPosList());
         model.addAttribute("TopDepts", deptTopFetcherService.findTopDept());
