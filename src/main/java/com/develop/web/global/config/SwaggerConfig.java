@@ -17,23 +17,16 @@ public class SwaggerConfig {
         return GroupedOpenApi.builder()
             .group("페이지 공용 API")
             .pathsToMatch(
-                "/common/**")
+                "/s1/common/**")
             .build();
     }
 
     @Bean
     public GroupedOpenApi userGroup() {
         return GroupedOpenApi.builder()
-            .group("일반 API")
+            .group("API")
             .pathsToMatch(
-                "/user/**",
-                "/folder/**",
-                "/program/**",
-                "/ingest/**",
-                "/clip/**",
-                "/notice/**",
-                "/check/**",
-                "/auth/**")
+                "/s1/api/**")
             .build();
     }
 
@@ -41,7 +34,7 @@ public class SwaggerConfig {
     public GroupedOpenApi adminGroup() {
         return GroupedOpenApi.builder()
             .group("어드민 API")
-            .pathsToMatch("/admin/**")
+            .pathsToMatch("/s1/api/admin/**")
             .build();
     }
 

@@ -24,7 +24,7 @@ export class UserDetailOpenService {
         }
 
         if (confirm(account + "의 정보를 수정하기 위해 열람하시겠습니까?")) {
-            fetch(`/admin/user/account-info/${account}`, {
+            fetch(`/s1/api/admin/user/account-info/${account}`, {
                 method: 'GET',
             })
                 .then(res => res.json())
@@ -51,7 +51,7 @@ export class UserDetailOpenService {
                         }
                     });
 
-                    fetchDataSelectOptions('/admin/dept/list/all')
+                    fetchDataSelectOptions('/s1/api/admin/dept/list/all')
                         .then(list => {
                             list.forEach(item => {
                                 const option = document.createElement('option');
@@ -65,7 +65,7 @@ export class UserDetailOpenService {
                             });
                         });
 
-                    fetchDataSelectOptions('/admin/pos/list')
+                    fetchDataSelectOptions('/s1/api/admin/pos/list')
                         .then(list => {
                             list.forEach(item => {
                                 const option = document.createElement('option');
@@ -79,7 +79,7 @@ export class UserDetailOpenService {
                             });
                         });
 
-                    fetchDataSelectOptions('/program/list')
+                    fetchDataSelectOptions('/s1/api/program/list')
                         .then(list => {
                             list.forEach(item => {
                                 const option = document.createElement('option');

@@ -5,7 +5,7 @@ const postHandleFormData = (formElement, dataType) => {
     const formData = validateFormData(formElement);
 
     if (confirm(JSON.stringify(formData) + `${dataType}을(를) 추가하시겠습니까?`)) {
-        fetch('/admin/dept/add', {
+        fetch('/s1/api/admin/dept/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const deleteHandleFormData = (dept) => {
     const deptAlart = dept.deptPath + `(` + dept.deptId + `)`;
 
     if (confirm(deptAlart + `)를 삭제 하시겠습니까?`)) {
-        fetch('/admin/dept/delete/' + dept.deptId, {
+        fetch('/s1/api/admin/dept/delete/' + dept.deptId, {
             method: 'DELETE',
         }).then(res => {
             if (res.ok) {

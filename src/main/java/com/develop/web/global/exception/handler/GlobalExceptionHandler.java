@@ -36,8 +36,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public void sessionNullException(CustomException e, HttpServletResponse response, HttpSession session) throws IOException {
-        log.error("[!] Error Code: " + e.getErrorCode());
-        log.error("[!] Error Message: " + e.getMessage());
+        log.error("[Error] Code: " + e.getErrorCode());
+        log.error("[Error] Message: " + e.getMessage());
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

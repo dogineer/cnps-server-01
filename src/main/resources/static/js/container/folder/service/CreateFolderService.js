@@ -1,7 +1,7 @@
 import {handleException, serverError} from "../../issue/service/IssueService.js";
 
 const folderCreate = (formData) => {
-    fetch('/folder/create/' , {
+    fetch('/s1/api/folder/create/' , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData)
@@ -22,7 +22,7 @@ const folderCreate = (formData) => {
 }
 
 const folderDelete = (folderId) => {
-    fetch('/folder/delete/' + folderId, {
+    fetch('/s1/api/folder/delete/' + folderId, {
         method: 'DELETE',
     }).then(res => {
             if (res.ok) {

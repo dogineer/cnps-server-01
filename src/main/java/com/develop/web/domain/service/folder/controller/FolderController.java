@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @Tag(name = "미디어 > 폴더", description = "프로그램 폴더 관리")
-@RequestMapping(value = "/folder")
+@RequestMapping(value = "/s1/api/folder")
 public class FolderController {
     private final FolderCreationService folderCreationService;
     private final SubfolderService subfolderService;

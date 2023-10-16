@@ -39,7 +39,7 @@ public class WebSessionConfig extends WebSecurityConfigurerAdapter {
     public FilterRegistrationBean<PageRequestAuthFilter> pageRequestAuthFilterRegistrationBean() {
         FilterRegistrationBean<PageRequestAuthFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new PageRequestAuthFilter());
-        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        registrationBean.setOrder(Ordered.LOWEST_PRECEDENCE);
         registrationBean.addUrlPatterns("/admin/*", "/service/*");
         return registrationBean;
     }
@@ -66,7 +66,7 @@ public class WebSessionConfig extends WebSecurityConfigurerAdapter {
         log.info("[+] CorsConfiguration Setup ");
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin(mc);
+        configuration.addAllowedOrigin("*");
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "DELETE"));
         configuration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

@@ -1,6 +1,5 @@
 package com.develop.web.domain.users.user.dto;
 
-import com.develop.web.domain.admin.user.dto.Role;
 import lombok.Data;
 
 import java.time.LocalDateTime;

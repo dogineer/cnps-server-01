@@ -1,6 +1,6 @@
 package com.develop.web.domain.users.token.service;
 
-import com.develop.web.domain.users.auth.dto.LoginRequest;
+import com.develop.web.domain.users.auth.dto.LoginDto;
 import com.develop.web.domain.users.auth.validation.MemberChecker;
 import com.develop.web.domain.users.token.dto.JwtToken;
 import com.develop.web.global.exception.exception.CustomException;
@@ -21,7 +21,7 @@ public class AuthService {
     private final JwtTokenProvider jwtTokenProvider;
 
     /** @description 아이디와 비밀번호 검사 후 토큰 발급 */
-    public JwtToken login(LoginRequest request) throws CustomException {
+    public JwtToken login(LoginDto request) throws CustomException {
         String account = request.getAccount();
         String password = request.getPassword();
 

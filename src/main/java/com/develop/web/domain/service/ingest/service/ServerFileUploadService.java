@@ -37,7 +37,7 @@ public class ServerFileUploadService {
 
         webClient()
             .method(HttpMethod.POST)
-            .uri("/api/upload/")
+            .uri("/s2/api/upload")
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.MULTIPART_FORM_DATA)
             .body(BodyInserters.fromMultipartData(body))

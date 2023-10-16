@@ -10,7 +10,7 @@ export class UserAccessService {
         const account = this.getUserAccount(event);
 
         if (confirm(account + " 해당 유저를 승인합니까?")) {
-            fetch(`/admin/user/access/apply/${account}`, {
+            fetch(`/s1/api/admin/user/access/apply/${account}`, {
                 method: 'PUT',
             })
                 .then(data => {

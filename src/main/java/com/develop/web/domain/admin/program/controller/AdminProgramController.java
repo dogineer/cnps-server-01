@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @Tag(name = "어드민 > 프로그램&팀 관리", description = "유형 > 프로그램 > 팀")
 @RequiredArgsConstructor
-@RequestMapping(value = "/admin/program")
+@RequestMapping(value = "/s1/api/admin/program")
 public class AdminProgramController {
     private final ProgramCreationService programCreationService;
     private final ProgramDeleteionService programDeleteionService;

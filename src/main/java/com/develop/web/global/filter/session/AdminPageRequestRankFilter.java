@@ -20,7 +20,10 @@ import java.util.Objects;
 
 @Slf4j
 @Component
-@WebFilter(urlPatterns = {"/admin/*"})
+@WebFilter(urlPatterns = {
+    "/s1/page/management/**",
+    "/s1/api/admin/**"
+})
 @ConditionalOnProperty(name = "authentication.type", havingValue = "session")
 public class AdminPageRequestRankFilter extends OncePerRequestFilter {
 
@@ -42,7 +45,7 @@ public class AdminPageRequestRankFilter extends OncePerRequestFilter {
         boolean isAdmin = Objects.equals(session.getAttribute("role"), Role.ADMIN.getAuthority());
 
         if (!isAdmin) {
-            log.error("[!] 관리자 권한 인증 실패!");
+            log.error("[Issue] 관리자 권한 인증 실패!");
             throw new CustomException(AuthErrorCode.NO_ACCESS);
         }
 

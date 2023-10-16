@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Tag(name = "어드민 > 인사 관리", description = "인사 / 권한 / 역할")
 @Slf4j
-@RequestMapping(value = "/admin/user")
+@RequestMapping(value = "/s1/api/admin/user")
 public class AdminUserController {
     private final UserAccessUpdateService userAccessUpdateService;
     private final UserFlagDeleteUpdateService userflagDeleteUpdateService;

@@ -33,7 +33,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name = "미디어 > 클립", description = "클립을 위한 api")
-@RequestMapping(value = "/clip")
+@RequestMapping(value = "/s1/api/clip")
 @RestController
 public class ClipController {
     private final ClipDataFetcherService clipDataFetcherService;

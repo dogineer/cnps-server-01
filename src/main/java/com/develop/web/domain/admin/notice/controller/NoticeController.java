@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "공지사항", description = "")
-@RequestMapping(value = "/notice")
+@RequestMapping(value = "/s1/api/notice")
 public class NoticeController {
 
     private final PostListFetcher postListFetcher;

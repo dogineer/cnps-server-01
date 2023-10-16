@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/service")
+@RequestMapping(value = "/s1/page")
 public class UserPageController {
     private final ClipPageFetcher clipPageFetcher;
     private final IngestPageFetcher ingestPageFetcher;

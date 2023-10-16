@@ -27,7 +27,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Tag(name = "미디어 > 인제스트", description = "등록 -> 컨버팅 -> 완료의 한 집합")
 @Slf4j
-@RequestMapping(value = "/ingest")
+@RequestMapping(value = "/s1/api/ingest")
 public class IngestController {
     private final IngestListFetcherService ingestListFetcherService;
     private final ServerFileUploadService serverFileUploadService;

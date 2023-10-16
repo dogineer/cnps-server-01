@@ -2,7 +2,7 @@ async function initWebSocket() {
     const currentProtocol = window.location.protocol;
     const websocketProtocol = currentProtocol === "https:" ? "ws" : "ws";
     const serverURL = (await getServerURL()).replace(/^http/, websocketProtocol);
-    return serverURL + '/websocket';
+    return serverURL + '/s2/websocket';
 }
 
 export async function setupWebSocket() {
@@ -26,7 +26,7 @@ export async function setupWebSocket() {
 
 async function getServerURL() {
     try {
-        const response = await fetch('/clip/get-server02-url');
+        const response = await fetch('/s1/api/clip/get-server02-url');
         if (response.ok) {
             return await response.text();
         } else {

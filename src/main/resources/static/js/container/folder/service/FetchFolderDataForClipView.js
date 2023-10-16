@@ -14,7 +14,7 @@ const clearClipTrField = () => {
 const generateThumbnailUrl = (ingestAt, clipUuid) => {
     const currentProtocol = window.location.protocol;
     const filename = ingestAt + '/' + clipUuid + '.jpg';
-    return currentProtocol + '/clip/thumbnail?filename=' + filename;
+    return currentProtocol + '/s1/api/clip/thumbnail?filename=' + filename;
 }
 
 const createClipData = (parentElement, item, index) => {
@@ -116,7 +116,7 @@ const createClipData = (parentElement, item, index) => {
 }
 
 export const fetchFolderDataForClipView = (folderId) => {
-    fetch('/folder/select/' + folderId, {
+    fetch('/s1/api/folder/select/' + folderId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })

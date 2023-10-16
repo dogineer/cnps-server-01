@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/admin/management")
+@RequestMapping(value = "/s1/page/management")
 public class AdminPageController {
     private final InitAccountService initAccountService;
     private final UserPageFetcher userPageFetcher;

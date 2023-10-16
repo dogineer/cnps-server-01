@@ -51,7 +51,7 @@ export class ClipPreviewService {
 
         videojs(document.querySelector('#player'), {
             sources: {
-                src: currentHostWithProtocol + `/clip/streaming?${encodedClipPath}`,
+                src: currentHostWithProtocol + `/s1/api/clip/streaming?${encodedClipPath}`,
                 type: ''
             },
             controls: true,

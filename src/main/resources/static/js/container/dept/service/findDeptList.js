@@ -6,7 +6,7 @@ const fetchDataByMidDeptList = () => {
     const deptElement = document.getElementById('dept-high-select');
     const deptId = deptElement.value;
 
-    fetch('/admin/dept/find/type/' + deptId, {
+    fetch('/s1/api/admin/dept/find/type/' + deptId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
@@ -36,7 +36,7 @@ const fetchDataByMidDeptList = () => {
 }
 
 const fetchDataByDeptItemList = (deptId) => {
-    return fetch('/common/dept-type/' + deptId, {
+    return fetch('/s1/api/common/dept-type/' + deptId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
@@ -54,7 +54,7 @@ const fetchDataByDeptItemList = (deptId) => {
 }
 
 const fetchDataByDeptChart = (deptId) => {
-    fetch('/admin/dept/find/tree/' + deptId, {
+    fetch('/s1/api/admin/dept/find/tree/' + deptId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })

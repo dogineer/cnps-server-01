@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @Tag(name = "어드민 > 직위 관리", description = "직위 관리 api")
 @RequiredArgsConstructor
-@RequestMapping(value = "/admin/pos")
+@RequestMapping(value = "/s1/api/admin/pos")
 public class PositionController {
     private final PosCreationService posCreationService;
     private final PosListFetcherService posListFetcherService;

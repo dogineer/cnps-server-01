@@ -19,7 +19,9 @@ import java.util.Objects;
 
 @Slf4j
 @Component
-@WebFilter(urlPatterns = {"/admin/management/*", "/service/*"})
+@WebFilter(urlPatterns = {
+    "/s1/page/management/**",
+    "/s1/page/**"})
 @ConditionalOnProperty(name = "authentication.type", havingValue = "session")
 public class PageRequestAuthFilter extends OncePerRequestFilter {
 
@@ -28,29 +30,39 @@ public class PageRequestAuthFilter extends OncePerRequestFilter {
         HttpSession session = request.getSession(false);
 
         try {
-            doAuthFilter(session);
+            doSessionAuthFilter(session);
             filterChain.doFilter(request, response);
         } catch (CustomException e) {
             FilterHandleException.filterException(e, response, session);
         }
     }
 
-    private void doAuthFilter(HttpSession session) {
+    private void doSessionAuthFilter(HttpSession session) {
         log.info("[Certification] 사용자 인증 필터 실행");
 
-        if (session == null || session.getAttribute("account") == null) {
-            log.error("[!] 사용자 인증 실패!");
+        if (session == null) {
+            throw new CustomException(AuthErrorCode.SESSION_NOT_FOUND);
+        }
+
+        if (session.getAttribute("account") == null) {
+            sessionInfo(session);
             throw new CustomException(AuthErrorCode.ACCOUNT_NOT_FOUND);
         }
 
         boolean isAnonymous = Objects.equals(session.getAttribute("role"), Role.ANONYMOUS.getAuthority());
 
         if (isAnonymous) {
-            log.error("[!] 사용자 승인 인증 실패!");
+            sessionInfo(session);
             throw new CustomException(AuthErrorCode.AUTH_ACCESS_NOT_FOUND);
         }
 
-        log.info("[Success] 사용자 인증 성공\n");
+        log.info("[Success] 사용자 인증 성공");
+        sessionInfo(session);
+    }
+
+    private void sessionInfo(HttpSession session) {
+        log.info("[Session] 현재 세션 ID: " + session.getId());
+        log.info("[Session] 현재 세션 ACCOUNT: " + session.getAttribute("account") + "\n");
     }
 
     @Override

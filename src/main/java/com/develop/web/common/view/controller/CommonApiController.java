@@ -27,7 +27,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/common")
+@RequestMapping(value = "/s1/api/common")
 public class CommonApiController {
     private final FolderRootListFetcherService folderRootListFetcherService;
     private final ClipDataFetcherService clipDataFetcherService;

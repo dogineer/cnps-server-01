@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @Tag(name = "유저 > 개인 관리", description = "개인 사용자 인사 관리")
 @RequiredArgsConstructor
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/s1/api/user")
 public class UserController {
     private final UserPasswordUpdateService userPasswordUpdateService;
     private final UserProgramUpdateService userProgramUpdateService;

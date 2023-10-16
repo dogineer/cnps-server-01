@@ -5,7 +5,7 @@ const postHandleFormData = (formElement, dataType) => {
     const formData = validateFormData(formElement);
 
     if (confirm(JSON.stringify(formData) + `${dataType}을(를) 추가하시겠습니까?`)) {
-        fetch('/admin/program/add', {
+        fetch('/s1/api/admin/program/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const deleteHandleFormData = (program) => {
     const programAlart = program.programPath + `(` + program.programId + `)`;
 
     if (confirm(programAlart + `)를 삭제 하시겠습니까?`)) {
-        fetch('/admin/program/delete/' + program.programId, {
+        fetch('/s1/api/admin/program/delete/' + program.programId, {
             method: 'DELETE',
         }).then(res => {
             if (res.ok) {

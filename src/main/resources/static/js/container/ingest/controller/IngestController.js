@@ -19,7 +19,7 @@ export class IngestController {
             const formData = new FormData(form);
             const xhr = new XMLHttpRequest();
 
-            xhr.open("POST", "/ingest/add");
+            xhr.open("POST", "/s1/api/ingest/add");
 
             xhr.upload.addEventListener("progress", (e) => {
                 if (e.lengthComputable) {

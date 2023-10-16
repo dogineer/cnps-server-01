@@ -5,7 +5,7 @@ export const signup = () => {
     const form = document.getElementById('signup-form');
     const formData = validateFormData(form)
 
-    fetch('/auth/signup', {
+    fetch('/s1/api/auth/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

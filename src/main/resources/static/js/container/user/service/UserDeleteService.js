@@ -10,7 +10,7 @@ export class UserDeleteService {
         const account = this.getUserAccount(event);
 
         if (confirm(account + " 탈퇴 하시겠습니까?")) {
-            fetch(`/admin/user/leave/${account}`, {
+            fetch(`/s1/api/admin/user/leave/${account}`, {
                 method: 'PUT',
             })
                 .then(data => {
@@ -31,7 +31,7 @@ export class UserDeleteService {
         const account = this.getUserAccount(event);
 
         if (confirm(account + " 삭제 하시겠습니까?")) {
-            fetch(`/admin/user/delete/${account}`, {
+            fetch(`/s1/api/admin/user/delete/${account}`, {
                 method: 'PUT',
             })
                 .then(data => {

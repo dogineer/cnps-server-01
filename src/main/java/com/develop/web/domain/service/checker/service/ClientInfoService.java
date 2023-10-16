@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ClientInfoChecker {
+public class ClientInfoService {
     private final CheckClientBrowser checkClientBrowser;
     private final CheckClientOS checkClientOS;
 
-    public ClientInfoDto clientInfo(String account, HttpServletRequest httpServletRequest) {
+    public ClientInfoDto checkClientInfo(String account, HttpServletRequest httpServletRequest) {
         String ip = httpServletRequest.getHeader("X-Forwarded-For");
         String agent = httpServletRequest.getHeader("USER-AGENT");
         String os = checkClientOS.getClientOS(agent);
@@ -27,7 +27,7 @@ public class ClientInfoChecker {
         ClientInfoDto clientInfo = new ClientInfoDto(agent, os, browser, ip);
 
         log.info("[+] ⌜ ⎺ ⎺ ⎺ ⎺ ⎺ ⎺ ⎺ ⎺ ⎺ ⎺ ⌝");
-        log.info("[|] '" + account + "' 님이 접속했습니다.");
+        log.info("[|] '" + account + "' 으로 접속.");
         log.info("[|] ip: " + clientInfo.getIp());
         log.info("[|] header: " + clientInfo.getHeader());
         log.info("[|] os: " + clientInfo.getOs());

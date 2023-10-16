@@ -1,7 +1,7 @@
 package com.develop.web.domain.service.checker.controller;
 
 import com.develop.web.domain.service.checker.dto.ClientInfoDto;
-import com.develop.web.domain.service.checker.service.ClientInfoChecker;
+import com.develop.web.domain.service.checker.service.ClientInfoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,16 +19,16 @@ import java.io.InputStreamReader;
 @Slf4j
 @RequiredArgsConstructor
 @Tag(name = "체크", description = "Swagger 테스트용 API")
-@RequestMapping(value = "/check")
+@RequestMapping(value = "/s1/api/check")
 public class CheckerController {
-    private final ClientInfoChecker clientInfoChecker;
+    private final ClientInfoService clientInfoService;
 
     @Value("${app.upload.dir:${user.home}}")
     String path;
 
     @GetMapping("/browserInfo")
     public ClientInfoDto browserInfo(HttpServletRequest request) {
-        return clientInfoChecker.clientInfo("test", request);
+        return clientInfoService.checkClientInfo("test", request);
     }
 
     @GetMapping("/disk-usage")

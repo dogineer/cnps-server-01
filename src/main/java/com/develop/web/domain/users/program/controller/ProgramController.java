@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @Tag(name = "팀", description = "유저 팀 API")
 @RequiredArgsConstructor
-@RequestMapping(value = "/program")
+@RequestMapping(value = "/s1/api/program")
 public class ProgramController {
 
     private final ProgramListFetcher programListFetcher;

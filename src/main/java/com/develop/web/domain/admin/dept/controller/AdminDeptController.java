@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 @Tag(name = "어드민 > 부서 관리", description = "어드민 부서 관리 api")
 @RequiredArgsConstructor
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/s1/api/admin")
 public class AdminDeptController {
     private final DeptCreationService deptCreationService;
     private final DeptDeletionService deptDeletionService;

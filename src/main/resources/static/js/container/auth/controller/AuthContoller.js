@@ -21,21 +21,21 @@ export class AuthContoller {
 
     static logout() {
         if (confirm('로그아웃 하시겠습니까?')) {
-            fetch("/auth/logout", {
+            fetch("/s1/api/auth/logout", {
                 method: 'POST'
             }).then(() => location.replace("/"));
         }
     }
 
     static programUpdate(programUpdateForm) {
-        const endPoint = '/user/program/update'
+        const endPoint = '/s1/api/user/program/update'
         const formData = validateFormData(programUpdateForm);
         console.log(formData)
         updateService(formData, endPoint);
     }
 
     static passwordUpdate(passwordChangeForm) {
-        const endPoint = '/user/password/update';
+        const endPoint = '/s1/api/user/password/update';
         const formData = validateFormData(passwordChangeForm);
         updateService(formData, endPoint);
     }

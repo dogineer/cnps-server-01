@@ -20,7 +20,7 @@ public class EveryonePageController {
     /**
      * @description 권한 없는 모든 유저가 접근 가능한 페이지
      */
-    @GetMapping("/")
+    @GetMapping("/s1/login")
     public String index(Model model, HttpSession session) {
         String version = "BETA 20231004 VERSION";
 
@@ -32,9 +32,9 @@ public class EveryonePageController {
         boolean isLogin = session.getAttribute("account") != null;
 
         if (isLogin) {
-            return "redirect:/service/clip";
+            return "redirect:/s1/page/clip";
         } else {
-            return "index";
+            return "user/login";
         }
     }
 }

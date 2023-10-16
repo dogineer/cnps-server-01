@@ -88,7 +88,7 @@ const fetchDataForFolder = (folderId) => {
             parentFolderElement.classList.remove('slide-none');
             parentFolderElement.classList.add('slide-down');
 
-            fetch('/folder/show/' + folderId)
+            fetch('/s1/api/folder/show/' + folderId)
                 .then(res => {
                     if (res.ok) {
                         return res.json();
@@ -142,7 +142,7 @@ const folderToggleSelector = (folder) => {
             parentFolderElement.classList.remove('slide-none');
             parentFolderElement.classList.add('slide-down');
 
-            fetch('/folder/show/' + folder)
+            fetch('/s1/api/folder/show/' + folder)
                 .then(res => {
                     if (res.ok) {
                         return res.json();

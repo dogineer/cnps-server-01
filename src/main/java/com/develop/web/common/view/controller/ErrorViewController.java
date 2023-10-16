@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
-@RequestMapping("/error")
+@RequestMapping("/s1/error")
 public class ErrorViewController {
 
     @GetMapping("/view")

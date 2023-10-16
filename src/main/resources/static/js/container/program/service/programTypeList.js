@@ -5,7 +5,7 @@ const fetchProgramType = () => {
     const programElement = document.getElementById('program-type');
     const programId = programElement.value;
 
-    fetch('/admin/program/find/program/' + programId, {
+    fetch('/s1/api/admin/program/find/program/' + programId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
@@ -35,7 +35,7 @@ const fetchProgramType = () => {
 }
 
 const fetchDataByProgramChart = (programId) => {
-    fetch('/admin/program/find/tree/' + programId, {
+    fetch('/s1/api/admin/program/find/tree/' + programId, {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
     })
