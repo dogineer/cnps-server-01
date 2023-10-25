@@ -2,8 +2,7 @@ package com.develop.web.common.view.controller;
 
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.admin.dept.dto.DeptDetailDto;
-import com.develop.web.domain.admin.dept.service.DeptTypeListFetcherService;
-import com.develop.web.domain.admin.dept.service.DeptListFetcherService;
+import com.develop.web.domain.admin.dept.service.DeptService;
 import com.develop.web.domain.admin.position.dto.PosDetailDto;
 import com.develop.web.domain.admin.position.service.PosListFetcherService;
 import com.develop.web.domain.service.clip.dto.ClipDto;
@@ -33,10 +32,9 @@ public class CommonApiController {
     private final ClipDataFetcherService clipDataFetcherService;
     private final UserDetailFetcherService userDetailFetcherService;
     private final ProgramListFetcher programListFetcher;
-    private final DeptListFetcherService deptListFetcherService;
+    private final DeptService deptService;
     private final IngestListFetcherService ingestListFetcherService;
     private final PosListFetcherService posListFetcherService;
-    private final DeptTypeListFetcherService deptTypeListFetcherService;
 
     @GetMapping("/folder-list")
     @Operation(summary = "클립 페이지 > 폴더 데이터", description = "폴더 기초 데이터를 가져옵니다.")
@@ -71,7 +69,7 @@ public class CommonApiController {
     @GetMapping("/dept-list")
     @Operation(summary = "모든 페이지", description = "전체 부서 리스트를 가져옵니다.")
     public List<DeptDetailDto> pageCommonDeptInfoData() {
-        return deptListFetcherService.findDeptList();
+        return deptService.findDeptList();
     }
 
     @GetMapping("/pos-list")
@@ -83,6 +81,6 @@ public class CommonApiController {
     @GetMapping("/dept-type/{deptParentId}")
     @Operation(summary = "부서 유형 찾기", description = "본부의 id 값을 이용해 부서 유형을 찾습니다.")
     public List<DeptDetailDto> getTypeDeptList(@PathVariable Integer deptParentId){
-        return deptTypeListFetcherService.findDeptType(deptParentId);
+        return deptService.findDeptType(deptParentId);
     }
 }
