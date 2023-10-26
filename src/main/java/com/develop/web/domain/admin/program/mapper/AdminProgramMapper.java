@@ -2,7 +2,7 @@ package com.develop.web.domain.admin.program.mapper;
 
 import com.develop.web.domain.admin.program.dto.ProgramRecursionDto;
 import com.develop.web.domain.admin.program.dto.ProgramPathDto;
-import com.develop.web.domain.users.program.dto.ProgramDto;
+import com.develop.web.domain.member.program.dto.ProgramDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

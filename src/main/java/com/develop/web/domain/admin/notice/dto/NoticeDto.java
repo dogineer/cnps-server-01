@@ -6,7 +6,7 @@ import lombok.Data;
 public class NoticeDto {
 
     private Integer id;         // 게시물고유번호
-    private Integer empId;      // 작성자ID
+    private Integer userId;      // 작성자ID
     private String writer;      // 작성자
     private String title;       // 제목
     private String content;     // 내용

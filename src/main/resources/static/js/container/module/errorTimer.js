@@ -10,7 +10,7 @@ function updateTimer() {
 
       if (time < 0) {
         clearInterval(timerInterval);
-        location.replace("/");
+        location.replace("/s1/login");
       }
     }
 }

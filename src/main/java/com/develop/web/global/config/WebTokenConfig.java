@@ -1,8 +1,8 @@
 package com.develop.web.global.config;
 
-import com.develop.web.domain.users.token.dto.TokenRole;
+import com.develop.web.domain.member.token.dto.TokenRole;
 import com.develop.web.global.filter.token.JwtAuthenticationFilter;
-import com.develop.web.domain.users.token.service.JwtTokenProvider;
+import com.develop.web.domain.member.token.service.JwtTokenProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

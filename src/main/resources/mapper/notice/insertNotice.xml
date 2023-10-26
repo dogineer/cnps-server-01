@@ -6,7 +6,7 @@
 <mapper namespace="com.develop.web.domain.admin.notice.mapper.NoticeMapper">
     <insert id="insertNotice" parameterType="NoticeDto">
         insert
-        into notice(emp_id, writer, title, content)
-        values (#{empId}, #{writer}, #{title}, #{content})
+        into notice(user_id, writer, title, content)
+        values (#{userId}, #{writer}, #{title}, #{content})
     </insert>
 </mapper>

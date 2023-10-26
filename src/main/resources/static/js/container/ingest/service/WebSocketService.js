@@ -11,11 +11,13 @@ export async function setupWebSocket() {
     const SOCKET = new WebSocket(SOCKET_URL);
 
     SOCKET.addEventListener('open', () => {
-        console.log("[Connect] server02 연결이 열렸습니다.");
+        SOCKET.send(userId)
+        console.log("[Connect] server02 연결이 열렸습니다. " + userId);
     });
 
     SOCKET.addEventListener('message', (message) => {
         const {percentage, ingestId} = JSON.parse(message.data);
+        console.log(message.data)
         updateProgress(percentage, ingestId);
     });
 

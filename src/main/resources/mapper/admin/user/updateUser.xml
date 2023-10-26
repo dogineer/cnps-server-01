@@ -5,7 +5,7 @@
 
 <mapper namespace="com.develop.web.domain.admin.user.mapper.AdminUserMapper">
     <update id="updateUserInfo" parameterType="UpdateUserInfoDto">
-        UPDATE emp
+        UPDATE user
         SET account    = #{account},
             name       = #{name},
             phone      = #{phone},
@@ -19,14 +19,14 @@
     </update>
 
     <update id="updateAccess" parameterType="String">
-        UPDATE emp
+        UPDATE user
         SET role        = 'ROLE_USER',
             approved_at = (CURRENT_TIMESTAMP)
         WHERE account = #{account}
     </update>
 
     <update id="updateUserDeleteFlag" parameterType="String">
-        UPDATE emp
+        UPDATE user
         SET del_fl = 1, role = 'ROLE_ANONYMOUS'
         WHERE account = #{account}
     </update>

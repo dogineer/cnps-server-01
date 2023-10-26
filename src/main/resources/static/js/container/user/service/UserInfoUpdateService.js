@@ -3,7 +3,7 @@ function userInfoUpdateService() {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    fetch('/admin/user/account-info/update', {
+    fetch('/s1/api/admin/user/account-info/update', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

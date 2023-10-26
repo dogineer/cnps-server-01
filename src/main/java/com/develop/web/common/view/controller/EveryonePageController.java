@@ -1,7 +1,7 @@
 package com.develop.web.common.view.controller;
 
 import com.develop.web.domain.admin.dept.service.DeptService;
-import com.develop.web.domain.admin.position.service.PosListFetcherService;
+import com.develop.web.domain.admin.position.service.PositionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 public class EveryonePageController {
-    private final PosListFetcherService posListFetcherService;
+    private final PositionService positionService;
     private final DeptService deptService;
 
     /**
@@ -22,7 +22,7 @@ public class EveryonePageController {
     public String index(Model model, HttpSession session) {
         String version = "BETA 20231004 VERSION";
 
-        model.addAttribute("posList", posListFetcherService.findPosList());
+        model.addAttribute("posList", positionService.findPosList());
         model.addAttribute("TopDepts", deptService.findTopDept());
         model.addAttribute("Depts", deptService.findDeptList());
         model.addAttribute("version", version);

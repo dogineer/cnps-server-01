@@ -23,7 +23,7 @@ export class AuthContoller {
         if (confirm('로그아웃 하시겠습니까?')) {
             fetch("/s1/api/auth/logout", {
                 method: 'POST'
-            }).then(() => location.replace("/"));
+            }).then(() => location.replace("/s1/login"));
         }
     }
 

@@ -41,7 +41,7 @@ public class IngestController {
     @PostMapping(value = "/add")
     @Operation(summary = "인제스트 등록", description = "서버2로 데이터 보냅니다.")
     public void ingestRequestAdd(IngestRequestData ingestRequestData, HttpSession session) throws IOException {
-        Integer memberId = session.getAttribute("empId").hashCode();
+        Integer memberId = session.getAttribute("userId").hashCode();
         Integer programId = session.getAttribute("programId").hashCode();
 
         ingestRequestData.setMemberId(memberId);

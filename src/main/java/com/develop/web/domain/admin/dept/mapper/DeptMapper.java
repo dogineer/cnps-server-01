@@ -3,7 +3,7 @@ package com.develop.web.domain.admin.dept.mapper;
 import com.develop.web.domain.admin.dept.dto.DeptDetailDto;
 import com.develop.web.domain.admin.dept.dto.DeptPathDto;
 import com.develop.web.domain.admin.dept.dto.DeptDto;
-import com.develop.web.domain.users.user.dto.Member;
+import com.develop.web.domain.member.user.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface DeptMapper {
 
     List<DeptDetailDto> selectDeptType(Integer deptParentId);
 
-    List<Member> selectDeptMember(Integer deptId);
+    List<UserDto> selectDeptMember(Integer deptId);
 
     List<DeptPathDto> selectDeptPath(Integer deptId);
 }

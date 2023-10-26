@@ -5,7 +5,7 @@
 
 <mapper namespace="com.develop.web.domain.admin.user.mapper.AdminUserMapper">
     <delete id="deleteUser" parameterType="String">
-        DELETE FROM emp
+        DELETE FROM user
         WHERE account = #{account}
     </delete>
 </mapper>

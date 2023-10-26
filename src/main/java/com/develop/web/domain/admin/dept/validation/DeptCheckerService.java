@@ -1,7 +1,7 @@
 package com.develop.web.domain.admin.dept.validation;
 
 import com.develop.web.domain.admin.dept.mapper.DeptMapper;
-import com.develop.web.domain.users.user.dto.Member;
+import com.develop.web.domain.member.user.dto.UserDto;
 import com.develop.web.global.exception.code.DeptErrorCode;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +17,9 @@ public class DeptCheckerService {
     private final DeptMapper deptMapper;
 
     public void findDeptInMember(Integer deptId) {
-        List<Member> joinedMembers = deptMapper.selectDeptMember(deptId);
+        List<UserDto> joinedUserDtos = deptMapper.selectDeptMember(deptId);
 
-        if (!joinedMembers.isEmpty()){
+        if (!joinedUserDtos.isEmpty()){
             throw new CustomException(DeptErrorCode.JOIND_MEMEBER);
         }
     }

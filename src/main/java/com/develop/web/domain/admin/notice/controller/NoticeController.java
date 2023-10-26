@@ -23,8 +23,8 @@ public class NoticeController {
     @PostMapping(value = "/create")
     @Operation(summary = "공지사항 작성", description = "공지사항을 작성합니다.")
     public String createNotice(NoticeDto writer, HttpSession session){
-        Integer empId = session.getAttribute("empId").hashCode();
-        writer.setEmpId(empId);
+        Integer userId = session.getAttribute("userId").hashCode();
+        writer.setUserId(userId);
 
         postListFetcher.setPost(writer);
         return "redirect:/management/employee";

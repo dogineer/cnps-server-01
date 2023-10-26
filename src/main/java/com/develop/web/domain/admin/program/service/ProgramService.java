@@ -3,7 +3,7 @@ package com.develop.web.domain.admin.program.service;
 import com.develop.web.domain.admin.program.dto.ProgramPathDto;
 import com.develop.web.domain.admin.program.dto.ProgramRecursionDto;
 import com.develop.web.domain.admin.program.mapper.AdminProgramMapper;
-import com.develop.web.domain.users.program.dto.ProgramDto;
+import com.develop.web.domain.member.program.dto.ProgramDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

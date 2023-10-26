@@ -3,7 +3,7 @@ package com.develop.web.common.view.controller;
 import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.*;
 import com.develop.web.common.view.dto.CriteriaDto;
-import com.develop.web.domain.users.auth.service.InitAccountService;
+import com.develop.web.domain.member.auth.service.InitAccountService;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

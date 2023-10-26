@@ -4,7 +4,7 @@ import com.develop.web.common.view.dto.AccountDto;
 import com.develop.web.common.view.service.ClipPageFetcher;
 import com.develop.web.common.view.service.IngestPageFetcher;
 import com.develop.web.common.view.dto.CriteriaDto;
-import com.develop.web.domain.users.auth.service.InitAccountService;
+import com.develop.web.domain.member.auth.service.InitAccountService;
 import com.develop.web.global.exception.exception.CustomException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

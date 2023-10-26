@@ -9,10 +9,12 @@ public interface AdminUserMapper {
     /** @description 권한 승인 업데이트 (권한 승인 및 승인 날짜 추가)*/
     void updateAccess(String account);
 
-    /** @description 직원 삭제 (삭제 플래그)*/
+    /** @description 유저 삭제 (삭제 플래그)*/
     void updateUserDeleteFlag(String account);
 
+    /** @description 유저 완전 소거*/
     void deleteUser(String account);
 
+    /** @description 유저 정보 수정*/
     void updateUserInfo(UpdateUserInfoDto userInfo);
 }

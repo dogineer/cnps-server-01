@@ -3,12 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.develop.web.domain.users.auth.mapper.AuthMapper">
-    <update id="updatePassword" parameterType="String">
-        UPDATE emp SET password = #{changePassword} WHERE account = #{account}
+<mapper namespace="com.develop.web.domain.member.user.mapper.UserMapper">
+    <update id="updateUserPassword" parameterType="String">
+        UPDATE user SET password = #{changePassword} WHERE account = #{account}
     </update>
 
-    <update id="updateMemberProgramId" parameterType="ProgramUpdateParam">
-        UPDATE emp SET program_id = #{programId} WHERE account = #{account}
+    <update id="updateUserProgram" parameterType="ProgramUpdateParam">
+        UPDATE user SET program_id = #{programId} WHERE account = #{account}
     </update>
 </mapper>

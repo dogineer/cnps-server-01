@@ -30,6 +30,7 @@ public class ServerFileUploadService {
     public void IngestRequestData(Resource files, IngestRequestData ingestRequestData) {
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
         body.add("files", files);
+        body.add("memberId", ingestRequestData.getMemberId());
         body.add("ingestId", ingestRequestData.getId());
         body.add("programId", ingestRequestData.getProgramId());
         body.add("folderId", ingestRequestData.getFolder());

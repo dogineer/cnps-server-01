@@ -22,7 +22,7 @@
                i.del_fl,
                success AS successAt
         FROM ingest i
-                JOIN emp e ON i.member_id = e.id
+                JOIN user e ON i.member_id = e.id
                 JOIN program t ON e.program_id = t.id
         ORDER BY create_at DESC
             LIMIT ${limit}

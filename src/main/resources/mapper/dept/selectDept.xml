@@ -28,7 +28,7 @@
         WHERE id NOT IN (1)
     </select>
 
-    <select id="selectDeptMember" resultType="Member" parameterType="Integer">
+    <select id="selectDeptMember" resultType="UserDto" parameterType="Integer">
         SELECT id,
                dept_id AS deptId,
                pos_id AS posId,
@@ -45,7 +45,7 @@
                access,
                del_fl,
                password
-        FROM emp
+        FROM user
         WHERE dept_id = ${deptid}
     </select>
 

@@ -4,17 +4,17 @@ import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.admin.dept.dto.DeptDetailDto;
 import com.develop.web.domain.admin.dept.service.DeptService;
 import com.develop.web.domain.admin.position.dto.PosDetailDto;
-import com.develop.web.domain.admin.position.service.PosListFetcherService;
+import com.develop.web.domain.admin.position.service.PositionService;
+import com.develop.web.domain.admin.user.service.UserManagementService;
 import com.develop.web.domain.service.clip.dto.ClipDto;
 import com.develop.web.domain.service.clip.service.ClipDataFetcherService;
 import com.develop.web.domain.service.folder.dto.ProgramFolderDto;
 import com.develop.web.domain.service.folder.service.FolderRootListFetcherService;
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
 import com.develop.web.domain.service.ingest.service.IngestListFetcherService;
-import com.develop.web.domain.users.program.dto.ProgramDto;
-import com.develop.web.domain.users.program.service.ProgramListFetcher;
-import com.develop.web.domain.users.user.dto.Userinfo;
-import com.develop.web.domain.users.user.service.UserDetailFetcherService;
+import com.develop.web.domain.member.program.dto.ProgramDto;
+import com.develop.web.domain.member.program.service.ProgramListFetcher;
+import com.develop.web.domain.member.user.dto.Userinfo;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +30,11 @@ import java.util.List;
 public class CommonApiController {
     private final FolderRootListFetcherService folderRootListFetcherService;
     private final ClipDataFetcherService clipDataFetcherService;
-    private final UserDetailFetcherService userDetailFetcherService;
+    private final UserManagementService userManagementService;
     private final ProgramListFetcher programListFetcher;
     private final DeptService deptService;
     private final IngestListFetcherService ingestListFetcherService;
-    private final PosListFetcherService posListFetcherService;
+    private final PositionService positionService;
 
     @GetMapping("/folder-list")
     @Operation(summary = "클립 페이지 > 폴더 데이터", description = "폴더 기초 데이터를 가져옵니다.")
@@ -57,7 +57,7 @@ public class CommonApiController {
     @GetMapping("/user-info")
     @Operation(summary = "모든 페이지", description = "입력한 유저의 정보를 가져옵니다.")
     public Userinfo pageCommonMemberInfoData(String account) {
-        return userDetailFetcherService.findMember(account);
+        return userManagementService.findMember(account);
     }
 
     @GetMapping("/program-list")
@@ -75,7 +75,7 @@ public class CommonApiController {
     @GetMapping("/pos-list")
     @Operation(summary = "모든 페이지", description = "랭크 리스트를 가져옵니다.")
     public List<PosDetailDto> pageCommonPosData() {
-        return posListFetcherService.findPosList();
+        return positionService.findPosList();
     }
 
     @GetMapping("/dept-type/{deptParentId}")
