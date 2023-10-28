@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProgramFolderFetcherService {
+public class ProgramFolderService {
         private final FolderMapper folderMapper;
 
     public List<ProgramFolderDto> findProgramFolderRoot(Integer programId, Boolean isAdmin) {
@@ -17,5 +17,12 @@ public class ProgramFolderFetcherService {
             return folderMapper.selectProgramFolderListForOnlyAdmin();
         }
         return folderMapper.selectProgramFolderRootList(programId);
+    }
+
+    public List<ProgramFolderDto> findProgramFolder(Integer programId, Boolean isAdmin) {
+        if (isAdmin){
+            return folderMapper.selectFolderList();
+        }
+        return folderMapper.selectProgramFolderList(programId);
     }
 }
