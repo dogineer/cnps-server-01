@@ -1,10 +1,8 @@
 package com.develop.web.domain.service.ingest.controller;
 
 import com.develop.web.domain.service.ingest.dto.IngestListDto;
-import com.develop.web.domain.service.ingest.service.CreateIngestPost;
-import com.develop.web.domain.service.ingest.service.IngestListFetcherService;
+import com.develop.web.domain.service.ingest.service.IngestService;
 import com.develop.web.domain.service.ingest.dto.IngestRequestData;
-import com.develop.web.domain.service.ingest.service.CreateFileFromMultipartFileService;
 import com.develop.web.common.view.dto.CriteriaDto;
 import com.develop.web.domain.service.ingest.service.ServerFileUploadService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,10 +27,8 @@ import java.util.List;
 @Slf4j
 @RequestMapping(value = "/s1/api/ingest")
 public class IngestController {
-    private final IngestListFetcherService ingestListFetcherService;
     private final ServerFileUploadService serverFileUploadService;
-    private final CreateFileFromMultipartFileService createFileFromMultipartFileService;
-    private final CreateIngestPost createIngestPost;
+    private final IngestService ingestService;
 
     @Value("${app.temp.dir:${user.home}/media-buddies/temp/}")
     private String TempDir;
@@ -46,9 +42,9 @@ public class IngestController {
 
         ingestRequestData.setMemberId(memberId);
         ingestRequestData.setProgramId(programId);
-        createIngestPost.addIngestRequest(ingestRequestData);
+        ingestService.addIngestRequest(ingestRequestData);
 
-        Resource mediaFiles = createFileFromMultipartFileService.run(ingestRequestData.getFiles(), TempDir);
+        Resource mediaFiles = ingestService.createTempFile(ingestRequestData.getFiles(), TempDir);
         serverFileUploadService.IngestRequestData(mediaFiles, ingestRequestData);
     }
 
@@ -56,6 +52,6 @@ public class IngestController {
     @Operation(summary = "인제스트 목록", description = "인제스트 목록 현황을 가져옵니다.")
     public List<IngestListDto> ingestList() {
         CriteriaDto criteriaDto = new CriteriaDto();
-        return ingestListFetcherService.findIngestRequestList(criteriaDto);
+        return ingestService.findIngestRequestList(criteriaDto);
     }
 }
