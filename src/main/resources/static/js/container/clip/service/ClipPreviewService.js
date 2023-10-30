@@ -40,7 +40,7 @@ export class ClipPreviewService {
         newClipPreviewElement.setAttribute("id", "player");
         newClipPreviewElement.setAttribute("class", "video-js")
 
-        const queryParams = new URLSearchParams({filename: clipPath});
+        const queryParams = new URLSearchParams({clipPath: clipPath});
         const encodedClipPath = queryParams.toString();
 
         clipPreviewBodyElement.appendChild(newClipPreviewElement);

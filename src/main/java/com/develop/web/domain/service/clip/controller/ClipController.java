@@ -102,12 +102,12 @@ public class ClipController {
 
     @GetMapping("/streaming")
     @Operation(summary = "스트리밍", description = "로컬에 저장된 클립을 재생합니다.")
-    public ResponseEntity<Resource> streamingClip(@RequestParam("filename") String filename) {
+    public ResponseEntity<Resource> streamingClip(@RequestParam("clipPath") String clipPath) {
         try {
-            File videoFile = new File(filename);
+            File videoFile = new File(clipPath);
 
             if (videoFile.exists()) {
-                String contentType = clipContentTypeService.findMediaFileContentType(filename);
+                String contentType = clipContentTypeService.findMediaFileContentType(clipPath);
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.setContentType(MediaType.parseMediaType(contentType));
