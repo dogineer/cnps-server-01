@@ -22,5 +22,5 @@ public interface FolderMapper {
     void insertNewFolder(FolderDto folderDto);
     void deleteFolder(Integer folderId);
 
-
+    boolean selectSubfolderCheck(Integer folderId);
 }

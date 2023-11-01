@@ -5,6 +5,7 @@ import com.develop.web.domain.service.folder.dto.FolderDetailsDto;
 import com.develop.web.domain.service.folder.dto.FolderDto;
 import com.develop.web.domain.service.folder.dto.ProgramFolderDto;
 import com.develop.web.domain.service.folder.service.*;
+import com.develop.web.domain.service.folder.validation.FolderChecker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/s1/api/folder")
 public class FolderController {
     private final FolderService folderService;
+    private final FolderChecker folderChecker;
     private final ProgramFolderService programFolderService;
 
     @PostMapping("/create")
@@ -29,6 +31,7 @@ public class FolderController {
     @DeleteMapping("/delete/{folderId}")
     @Operation(summary = "폴더 삭제", description = "폴더를 삭제합니다. 폴더 id가 등록된 데이터는 삭제되지 않습니다.")
     public void folderRemove(@PathVariable Integer folderId) {
+        folderChecker.subfolderCheck(folderId);
         folderService.removeFolder(folderId);
     }
 
